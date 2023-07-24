@@ -1,0 +1,83 @@
+#ifndef CONTROL_RECORDINGDEFVAR
+#define CONTROL_RECORDINGDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Recording_and_Replay.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Recording_and_Replay {
+
+
+            module Control_Recording {
+
+
+
+              // Version 1.0
+              // Topic type for operation define_recording_set. . Specifies what is to be
+              // recorded
+              struct define_recording_set_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter recording_parameters_list. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::recording_set_type recording_parameters_list;
+              };
+#pragma keylist define_recording_set_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation start_recording. . Starts the recording as specified.
+              // Note that only one recording may be running at a time.
+              struct start_recording_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter id. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::recording_id_type id;
+              };
+#pragma keylist start_recording_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation stop_recording. . Stops the recording
+              struct stop_recording_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist stop_recording_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

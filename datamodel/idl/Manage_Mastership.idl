@@ -1,0 +1,189 @@
+#ifndef MANAGE_MASTERSHIPDEFVAR
+#define MANAGE_MASTERSHIPDEFVAR
+#include "Common_Types.idl"
+
+#include "Subsystem_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Subsystem_Control {
+
+
+            module Manage_Mastership {
+
+
+
+              // Version 1.0
+              // Topic type for operation acquire_mastership. . This method is used by the CMS
+              // to acquire the mastership.
+              struct acquire_mastership_type
+              {
+              	// Field for interface operation parameter count. This parameter is used with
+              	// implementation specific semantics to manage subsystem mastership.
+              	unsigned long count;
+              };
+#pragma keylist acquire_mastership_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation release_mastership. . This method is used by the CMS
+              // to release the mastership.
+              struct release_mastership_type
+              {
+              	// Field for interface operation parameter count. This parameter is used with
+              	// implementation specific semantics to manage subsystem mastership.
+              	unsigned long count;
+              };
+#pragma keylist release_mastership_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation report_mastership_setting. Besides the CMS, the
+              // subsystem may be controlled via other control points, e.g. the subsystem local
+              // control unit. This interface describes how the CMS, as any other actor, shall
+              // handle the exclusive control of the subsystem (mastership). In fact, every
+              // subsystem may be controlled by only one actor at the same time. Only the actor
+              // who has the mastership of a subsystem may have exclusive control of the
+              // subsystem. Exclusive control means that  the subsystem may accept only commands
+              // sent by the actor who has its mastership.
+              //      The subsystem Mastership may be acquired in two ways:
+              // 
+              //      <ol>
+              //      	<li>PERIODIC MASTERSHIP REQUEST: The actor who wants to acquire the
+              // mastership of a subsystem send to it a periodic Mastership request; the
+              // subsystem may accept or deny. Once acquired, the subsystem Mastership is
+              // released giving up the periodic Mastership requests sending. This happens both
+              // in case of intentional decision and critical event as CMS unavailability or
+              // connection loss. As long as CMS wants to maintain the Mastership of the
+              // subsystem, it shall continue the periodic Mastership requests sending. The CMS
+              // is informed about the Mastership control state by receiving a periodic message
+              // sent by the subsystem.</li>
+              //      </ol>
+              // 
+              // 
+              //      <ol>
+              //      	<li>ASYNCHRONOUS MASTERSHIP REQUEST: The actor who wants to acquire the
+              // mastership of a subsystem send to it an asynchronous request. the subsystem may
+              // accept or deny. Once acquired, the mastership is until the mastership owner
+              // decides to intentionally release it or until a critical event, which is
+              // mastership owner unavailability or connection failure, occurs. In case of
+              // intentional mastership release, the CMS shall send an asynchronous mastership
+              // release request. In case of critical event, the mastership of the subsystem is
+              // automatically released. This happens when the subsystem does no longer receive
+              // the CMS heartbeat. The CMS is informed about the Mastership control state by
+              // receiving an asynchronous message sent on change by the subsystem.</li>
+              //      </ol>
+              // 
+              // 
+              //      Mastership management rules
+              //      The subsystem Mastership assignment is controlled by the subsystem itself
+              // according to the following rules:
+              //      <ul>
+              //      	<li>no more than one Master at any time, so the subsystem may not be
+              // commanded by more than one control point</li>
+              //      </ul>
+              //      <ul>
+              //      	<li>the actor which wants to acquire the subsystem Mastership shall ask
+              // the subsystem for it, so no request no assignment</li>
+              //      </ul>
+              //      <ul>
+              //      	<li>subsystem assigns the Mastership to any actor asking for it without
+              // any priority policy, no actor is "more important" than any other.</li>
+              //      </ul>
+              //      <ul>
+              //      	<li>On each request, the mastership may be assigned only if it’s free,
+              // that is not already assigned (unless a Mastership override request is
+              // received)</li>
+              //      </ul>
+              // 
+              //      The Mastership management protocol is managed as follows:
+              //      <ul>
+              //      	<li>actor which wants to acquire the subsystem Mastership shall ask for
+              // it sending to the subsystem the Mastership requests which could be asynchronous
+              // or periodic</li>
+              //      </ul>
+              //      <ul>
+              //      	<li>in case of periodic request for Mastership assignment, as long as the
+              // actual Master wants to maintain the Mastership, it shall continue the periodic
+              // Mastership requests sending</li>
+              //      </ul>
+              //      <ul>
+              //      	<li>if the actual Master wants to release the Mastership in case of
+              // periodic request for Mastership management, it shall give up the periodic
+              // Mastership requests sending, otherwise, in case of asynchronous request, it
+              // shall send an asynchronous request for mastership release</li>
+              //      </ul>
+              //      <ul>
+              //      	<li>subsystem keeps informed about the actual Mastership state and its
+              // changes (if any).</li>
+              //      </ul>
+              // 
+              //      At any time the subsystem Mastership may be either “free”, that is
+              // assigned to none and then available to anybody asks for it, or assigned to
+              // somebody, where this somebody may be CMS or not. At the subsystem power-on the
+              // Mastership is “free”, then:
+              //      <ul>
+              //      	<li>as long as the Mastership state is “free”, the first received
+              // Mastership request shall be satisfied (whether the requestor is CMS or
+              // not)</li>
+              //      </ul>
+              //      <ul>
+              //      	<li>as long as the Mastership is assigned (to CMS or to somebody other
+              // than CMS), the current Master shall maintain the Mastership possession until
+              // the Mastership owner is no longer available or decides to release it</li>
+              //      </ul>
+              //      <ul>
+              //      	<li>as long as the Mastership is assigned (to CMS or to somebody other
+              // than CMS), Mastership requests received from other than the current Master
+              // shall be no satisfied, unless a Mastership Override is received, which shall
+              // force a Mastership switch to another Master</li>
+              //      </ul>
+              // 
+              //      Note that the Mastership possession is required to control the subsystem
+              // (e.g. execute write commands to it), but it is not required to communicate with
+              // subsystem and receive information from it.
+              // 
+              // 
+              // 
+              //      Mastership Override
+              //      The Mastership management protocol could include a Mastership Override to
+              // force a Mastership switch from a Master to another one.. This method is used by
+              // the subsystem to return the mastership state.
+              struct report_mastership_setting_type
+              {
+              	// Field for interface operation parameter control_state. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::mastership_state_type control_state;
+              };
+#pragma keylist report_mastership_setting_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

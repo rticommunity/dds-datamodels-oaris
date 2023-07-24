@@ -1,0 +1,74 @@
+#ifndef CONTROL_FAULT_SCRIPTSDEFVAR
+#define CONTROL_FAULT_SCRIPTSDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Simulation_Support.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Simulation_Support {
+
+
+            module Control_Fault_Scripts {
+
+
+
+              // Version 1.0
+              // Topic type for operation clear_faults. . Clears the faults defined by the given
+              // fault scripts.
+              struct clear_faults_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter fault_scripts. The script ids to be
+              	// cleared
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type fault_scripts;
+              };
+#pragma keylist clear_faults_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation enable_fault_script. . Causes the subsystem to
+              // indicate the faults specified by the given fault scripts when appropriately
+              // stimulated. The faults remain in place until they are cleared either by a call
+              // to clear_fault or by an action on another interface that would clear the
+              // equivalent non-simulated fault.
+              struct enable_fault_script_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter scripts. The script ids to be enabled
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type scripts;
+              };
+#pragma keylist enable_fault_script_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

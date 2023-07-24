@@ -1,0 +1,71 @@
+#ifndef STARTUPDEFVAR
+#define STARTUPDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Subsystem_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Extended_Subsystem_Control {
+
+
+            module Startup {
+
+
+
+              // Version 1.0
+              // Topic type for operation perform_startup. . Interface used by the subsystem to
+              // receive a request from the CMS to execute startup.
+              struct perform_startup_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist perform_startup_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_startup_state. The purpose of this interface
+              // is to cause a normal transition from the STANDBY state to the READY state using
+              // the transitions defined in the Manage Technical State service.. Interface used
+              // by CMS to receive an indication from the subsystem that it has successfully
+              // performed startup.
+              struct receive_startup_state_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter technical_state. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              };
+#pragma keylist receive_startup_state_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

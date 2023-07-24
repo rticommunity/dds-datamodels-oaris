@@ -1,0 +1,105 @@
+#ifndef PERFORM_OFFLINE_TESTDEFVAR
+#define PERFORM_OFFLINE_TESTDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Extended_Subsystem_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Extended_Subsystem_Control {
+
+
+            module Perform_Offline_Test {
+
+
+
+              // Version 1.0
+              // Topic type for operation perform_tests. . Instructs the subsystem to perform
+              // the offline tests.
+              struct perform_tests_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter test_name. Allows a particular test to
+              	// be selected. If null, all tests are performed.
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::offline_test_type test_name;
+              };
+#pragma keylist perform_tests_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_detailed_test_results. This is used to
+              // instruct the subsystem to perform offline test and return the results to the
+              // CMS. The nature of the offline tests is subsystem specific. Provides the CMS
+              // with subsystem specific information concerning offline test failures
+              struct receive_detailed_test_results_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter offline_test_detailed_results. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::offline_test_result_details_type offline_test_detailed_results;
+              };
+#pragma keylist receive_detailed_test_results_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_test_results. This is used to instruct the
+              // subsystem to perform offline test and return the results to the CMS. The nature
+              // of the offline tests is subsystem specific. Informs the CMS whether the offline
+              // tests passed, passed partially, or failed.
+              struct receive_test_results_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter test_results. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::offline_test_result_type test_results;
+              };
+#pragma keylist receive_test_results_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation request_detailed_test_results. . Asks the subsystem to
+              // provide detailed information on the failures.
+              struct request_detailed_test_results_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist request_detailed_test_results_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

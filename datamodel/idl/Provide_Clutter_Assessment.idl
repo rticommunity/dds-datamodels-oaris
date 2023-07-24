@@ -1,0 +1,81 @@
+#ifndef PROVIDE_CLUTTER_ASSESSMENTDEFVAR
+#define PROVIDE_CLUTTER_ASSESSMENTDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Clutter_Reporting.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Sensor_Services {
+
+
+          module Clutter_Reporting {
+
+
+            module Provide_Clutter_Assessment {
+
+
+
+              // Version 1.0
+              // Topic type for operation provide_clutter_assessment. . Interface used by the
+              // subsystem to receive a clutter assessment request from the CMS.
+              struct provide_clutter_assessment_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter clutter_request. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::clutter_assessment_request_type clutter_request;
+              };
+#pragma keylist provide_clutter_assessment_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_clutter_assessment. The radar reports visible
+              // clutter to the combat management system. The report shall include a map
+              // (collection of cells) with information on range, azimuth, elevation and
+              // intensity in platform relative coordinates. Clutter may be classified by type,
+              // Land, Sea, Weather (optional), etc.. Intensity may be indicated by linear
+              // signal-to-noise ratio (SNR), log-linear SNR, linear power received, log-linear
+              // power received (e.g. dBm, dBW), linear Radar Cross Section (square meters), or
+              // log-linear RCS (dbsm).
+              // 
+              //      For radars which report clutter assessment without a CMS request, the CMS
+              // shall begin to receive reports upon registration of the Provide Clutter
+              // Assessment interface.. Interface used by the CMS to receive a requested clutter
+              // assessment report from the subsystem.
+              struct receive_clutter_assessment_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter clutter_report. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::clutter_report_type clutter_report;
+              };
+#pragma keylist receive_clutter_assessment_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

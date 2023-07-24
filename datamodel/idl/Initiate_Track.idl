@@ -1,0 +1,104 @@
+#ifndef INITIATE_TRACKDEFVAR
+#define INITIATE_TRACKDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "System_Track.idl"
+
+#include "Track_Reporting.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Sensor_Services {
+
+
+          module Tracking_Control {
+
+
+            module Initiate_Track {
+
+
+
+              // Version 1.0
+              // Topic type for operation initiate_track. This is the Subsystem interface for
+              // initiating tracks.. Method used by the CMS to send an "externally designated
+              // track initiation request”, specifying a timed position and kinematic.
+              struct initiate_track_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter track_info. 
+              	org::omg::c4i::Domain_Model::Common_Types::System_Track::system_track_type track_info;
+              };
+#pragma keylist initiate_track_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation report_track. The sensor is requested to start
+              // tracking on a new target based on given information, such as positional data
+              // and additionally also kinematic data. Sensor replies indicating the request
+              // acceptance or rejection. If accepted, the initiation of a new track shall be
+              // attempted as required, and the relevant result shall be reported later through
+              // an “externally designated track initiation report” containing the
+              // identification number of the resulting track (if any).
+              // 
+              //      Additional Information
+              // 
+              //      Data reported in the “externally designated track initiation request”
+              //      The provided information depends on the sensor type and its capabilities,
+              // typically they are:
+              //      •	Identification number of the designation (mandatory)
+              //      •	Position and time (mandatory)
+              //      •	Accuracy of the provided positional data (optional)
+              //      •	Velocity and relevant accuracy (optional)
+              //      •	Track characteristics (optional)
+              // 
+              //      Data reported in the “externally designated track initiation report”
+              // 
+              //      The purpose is this report is to inform CMS about the final result of the
+              // track initiation request, i.e. it reports to CMS if the track has been
+              // successfully initiated or not, and (in case of success) the identification
+              // number of the new formed track.
+              //      The provided information depends on the sensor type and its capabilities,
+              // typically they are:
+              //      •	Identification number of the designation (mandatory)
+              //      •	Initiation result (mandatory)
+              //      •	Identification number of the initiated track, if any (mandatory)
+              //      •	other info (optional).. Method used by the sensor to issue an
+              // "externally designated track initiation report” containing data of the
+              // successfully initiated track.
+              struct report_track_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter id_report. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type id_report;
+              };
+#pragma keylist report_track_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

@@ -1,0 +1,89 @@
+#ifndef CONTROL_BATTLE_OVERRIDEDEFVAR
+#define CONTROL_BATTLE_OVERRIDEDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Subsystem_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Subsystem_Control {
+
+
+            module Control_Battle_Override {
+
+
+
+              // Version 1.0
+              // Topic type for operation battle_override_setting. The subsystem is requested to
+              // set/reset the Battle Override. When Battle Override is set the subsystem
+              // disregards warnings on circumstances which may cause damage to own equipment,
+              // typically the overtemperature protections.
+              // 
+              //      It is the CMS's responsibility to initiate the determination of initial
+              // state by making a request for information to the subsystem.
+              // 
+              //      Provision of the Battle Override state
+              //      Subsystem shall keep CMS informed about the current Battle Override state
+              // and its changes (if any).
+              // 
+              //      Lack of mastership
+              //      In the case where CMS does not have mastership of the subsystem, CMS shall
+              // be informed about the current Battle Override state and its changes (if any).
+              // 
+              //      Relationship to the subsystem health state
+              //      As long as the Battle Override is set, the subsystem internal
+              // overtemperature indications shall not result in any heath state set to “NOT
+              // AVAILABLE” (see <i>Provide health state</i>).. This metod is used by the
+              // subsystem to return the current Battle Override state.
+              struct battle_override_setting_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter battle_override_state. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::battle_override_state_type battle_override_state;
+              };
+#pragma keylist battle_override_setting_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation set_battle_override. . This method is used by the CMS
+              // to send a Battle Override set/reset request to the subsystem,
+              struct set_battle_override_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter battle_override_state. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::battle_override_state_type battle_override_state;
+              };
+#pragma keylist set_battle_override_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

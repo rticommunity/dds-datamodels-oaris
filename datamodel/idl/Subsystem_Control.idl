@@ -1,0 +1,857 @@
+#ifndef SUBSYSTEM_CONTROLDEFVAR
+#define SUBSYSTEM_CONTROLDEFVAR
+#include "Common_Types.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Domain_Model {
+
+
+        module Subsystem_Domain {
+
+
+          module Subsystem_Control {
+
+
+
+            // Version 1.0
+            // If the boolean is true the battle override is applied.
+            struct battle_override_state_type
+            {
+            	// Indicates if the battle override is applied or not.
+            	boolean battle_override_applied;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<128> descriptor_parameter_name_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> descriptor_parameter_type_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> descriptor_parameter_unit_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> descriptor_typical_value_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union descriptor_typical_value_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::descriptor_typical_value_string_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> descriptor_parameter_range_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union descriptor_parameter_range_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::descriptor_parameter_range_string_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Type which is used to indicate a technical state.
+            enum technical_state_type
+            {
+            	// Subsystem is running Built-In-Test procedure.  CMS may communicate with
+            	// subsystem, but subsystem shall only respond affirmatively to a limited set of
+            	// commands.  From this state the subsystem may transition to <i>READY</i>,
+            	// <i>FAILED</i>, <i>CALIBRATE</i>, STANDBY (transition may be ordered before
+            	// completion of BIT if Battle Override is enabled), or <i>OFFLINE</i>. 
+            	BIT,
+            	// Subsystem is running calibration procedure. Subsystem shall only respond to a
+            	// limited set of commands from CMS.  From this state the subsystem may transition
+            	// to <i>READY</i>, <i>FAILED</i>, BIT, STANDBY (transition may be ordered before
+            	// completion of calibration if Battle Override is enabled), or <i>OFFLINE</i>.
+            	CALIBRATE,
+            	// Interface between CMS and subsystem may or may not exist. Some power is applied
+            	// to the subsystem and temperature control (e.g. cooling) is active.  From this
+            	// state, the sub-system may transition to FAILED, STANDBY, or OFFLINE.
+            	DORMANT,
+            	// Subsystem is non-operational due to a critical fault such as a primary power
+            	// supply failure. CMS is able to communicate with subsystem to perform
+            	// diagnostics. In the FAILED state, the health state of the sub-system and nearly
+            	// all associated services is NOT AVAILABLE or UNKNOWN (provided via Health State).
+            	// If the health state of the sub-system or some services is DEGRADED, the sub-
+            	// system is not required to enter into this state. From this state the sub-system
+            	// may transition to <i>BIT</i>, <i>STANDBY</i>, <i>READY</i>, CALIBRATE, DORMANT
+            	// or <i>OFFLINE</i>.
+            	FAILED,
+            	// No connection between CMS and Subsystem is open.  Main power is usually not
+            	// applied to subsystem. From OFFLINE, subsystem transitions to FAILED, DORMANT,
+            	// BIT, or STANDBY.
+            	OFFLINE,
+            	// Subsystem is operational and may respond to all requests from CMS. Simulation
+            	// and diagnostics may be allowed in this state. Radiation is allowed in this
+            	// state but must be commanded on via Control Emissions. From this state the
+            	// subsystem may transition to <i>BIT, CALIBRATE, READY, STANDBY, FAILED,
+            	// </i>or<i> OF</i>FLINE.
+            	ONLINE,
+            	// Subsystem is ready for CMS to command full operation.  Simulation may be
+            	// allowed in this state. Ready to transition to <i>ONLINE</i>, self-tests and
+            	// calibration has been performed as necessary. Radiation is not allowed in the
+            	// READY state. From this state the subsystem may transition to <i>STANDBY</i>,
+            	// ONLINE, FAILED, BIT, CALIBRATE, or <i>OFFLINE</i>.
+            	READY,
+            	// Interface between CMS and subsystem is established. Subsystem may not operate
+            	// fully. Maintenance may be performed in this state. From this state the sub-
+            	// system may transition to READY, CALIBRATE, BIT, FAILED, DORMANT, or OFFLINE.
+            	STANDBY
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: unbounded sequence
+            typedef sequence<technical_state_type> descriptor_technical_state_type;
+  
+
+
+
+
+            // Version 1.0
+            // The value should be mapped to the corresponding operational mode. This mapping
+            // is retrieved through the service 'Manage Subsystem Parameters'.
+            typedef unsigned short operational_mode_type;
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: unbounded sequence
+            typedef sequence<operational_mode_type> descriptor_applicable_operational_mode_type;
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<long> descriptor_related_parameter_id_type;
+  
+
+
+
+
+            // Version 1.0
+            // Type for parameter descriptors. 
+            struct descriptor
+            {
+            	// parameter_name values are unique within the scope of a subsystem.
+            	descriptor_parameter_name_string_type parameter_name;
+            	descriptor_parameter_type_string_type parameter_type;
+            	descriptor_parameter_unit_string_type parameter_unit;
+            	// *optional*
+            	descriptor_typical_value_type typical_value;
+            	// *optional*
+            	descriptor_parameter_range_type parameter_range;
+            	// Technical state(s) in which this parameter may be modified.
+            	descriptor_technical_state_type technical_state;
+            	descriptor_applicable_operational_mode_type applicable_operational_mode;
+            	// Refers (by index) into the descriptor_sequence instance of which this instance
+            	// of the descriptor class is a part.
+            	descriptor_related_parameter_id_type related_parameter_id;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<descriptor> descriptor_sequence_element_type;
+  
+
+
+
+
+            // Version 1.0
+            // Sequence of parameter descriptors, used in retrieving parameter descriptors.
+            struct descriptor_sequence
+            {
+            	descriptor_sequence_element_type element;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Name of an entry in the device identification.
+            typedef string<64> device_name_type;
+  
+
+
+
+
+            // Version 1.0
+            // Version of the equipment
+            struct version_type
+            {
+            	// Major version number
+            	unsigned short major_version;
+            	// Minor version number
+            	unsigned short minor_version;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Identification data of the equipment.
+            struct device_identification_type
+            {
+            	// Name of the product. Example TRS3D
+            	device_name_type product;
+            	// Serial number identifying the individual device. 
+            	device_name_type serial_number;
+            	// This describes the general type of the equipment. Example: Air Surveillance
+            	// Radar
+            	device_name_type equipment_type;
+            	// Version of the device.
+            	version_type version;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Type of event
+            enum event_type
+            {
+            	OCCURRENCE,
+            	DISAPPEARANCE
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> fault_fault_name_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> fault_fault_isolation_data_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // Class to represent a subsystem fault
+            struct fault
+            {
+            	fault_fault_name_string_type fault_name;
+            	event_type event;
+            	// Indicates whether this fault is real or simulated/inserted.
+            	boolean simulated;
+            	// Indicates whether this fault is overridden by Battle Override when determining
+            	// the health state.
+            	boolean overridden;
+            	// For instance cabinet id and rack id.
+            	fault_fault_isolation_data_string_type fault_isolation_data;
+            };
+            // Topic type for operation report_fault. The service allows the CMS to monitor
+            // and evaluate the health state of the subsystem. The health state information
+            // describes functional availability of the subsystem and the services it provides.
+            // 
+            // 
+            //      The service may be triggered by several possible situations:
+            //      <ul>
+            //      	<li>Periodic event, for example by internal clock,</li>
+            //      	<li>Actor (CMS) request,</li>
+            //      	<li>Health state change,</li>
+            //      	<li>Initialization (start-up),</li>
+            //      	<li>Recovery of the subsystem after a failure.</li>
+            //      </ul>
+            // 
+            //      In addition to the health state being provided, additional information may
+            // be provided to the CMS. In case of a service, the information may include a
+            // list of detected faults. In case of a subsystem, the information may include
+            // the list of services together with their health state, and for every service
+            // which has health state other than AVAILABLE, a list of detected faults. This
+            // two dimensional structure is called the service availability matrix.
+            // 
+            //      The state NOT AVAILABLE may also describe the situation in which the
+            // service is not implemented. In this case the list of faults shall be empty. In
+            // the state UNKNOWN, the subsystem may provide the reason for not being able to
+            // evaluate health state (e.g. BIT process not running).
+            // 
+            //      The service ends with success when the health state (possibly accompanied
+            // by additional information) is provided to the actor.
+            // 
+            //      Relationship to technical state.
+            //      The reported health state of the services is dependent on the technical
+            // state.
+            //      In the technical state ONLINE, the health state of the services is
+            // determined based on the detected faults (if any).
+            //      In all technical states other than ONLINE (except OFFLINE), the health
+            // state of all services, except the service Subsystem_Control, is NOT AVAILABLE.
+            //      The health state of the service Subsystem_Control shall then be DEGRADED,
+            // since some functions (e.g. Control Battle Override) are not available in those
+            // technical states, and some functions are (e.g. Manage Technical State).
+            //      In the technical state OFFLINE no communication at all is possible with
+            // the CMS so the health state is not reported.
+            // 
+            //      Relationship to battle override.
+            //      When Battle Override is set (see service Control Battle Override), certain
+            // faults are not taken into account when determining the health state. These
+            // overridable faults generally refer to circumstances that may cause damage to
+            // own equipments, but do not prohibit executing the requested task.
+            // 
+            //      Relationship to simulation mode.
+            //      If the subsystem is in Simulation mode (technical state is ONLINE), only
+            // the faults for parts needed for the simulated execution of the service are
+            // taken into account when determining the health state of a service.
+            //      For instance, if the transmitter is defective, the service Track_Reporting
+            // is reported AVAILABLE when in Simulation mode, but is reported NOT AVAILABLE
+            // when not in Simulation mode.
+            //      Faults may also be simulated for training purposes (see service Define
+            // Fault Script). Therefore, irrespective of the Simulation mode, all faults (real
+            // and simulated) are included in the reported list of detected faults, each with
+            // an indication whether the fault is real or simulated.
+            //      If a real system part is simulated, faults of the simulated part should
+            // have a different identification.
+            //      For instance (see previous example) in Simulation mode, a simulated
+            // transmitter could be used, for which the trainer has inserted a simulated fault.
+            // 
+            //      Any faults in the real transmitter would be reported (real fault) as well
+            // as the injected fault in the simulated transmitter (simulated fault). However,
+            // the health state of the service Track_Reporting would be based only on the
+            // status of the simulated transmitter.
+            // 
+            //      Reason for health state
+            //      Each reported health state other than AVAILABLE is accompanied by the
+            // reason(s) for that health. In this way the CMS may for instance derive that
+            // although the technical state of the subsystem is STANDBY (and NOT AVAILABLE for
+            // that reason), there are also faults that would prevent the service to become
+            // AVAILABLE when the technical state would be switched to ONLINE.. Report a fault
+            // to CMS
+#pragma keylist fault 
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<fault> fault_list_element_type;
+  
+
+
+
+
+            // Version 1.0
+            // A list of faults
+            struct fault_list
+            {
+            	fault_list_element_type element;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Reason for the health state
+            struct health_state_reason_type
+            {
+            	boolean caused_by_fault;
+            	boolean caused_by_technical_state;
+            	boolean caused_by_simulation_mode;
+            	boolean caused_by_operational_mode;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Encapsulation of health state
+            enum health_state_type
+            {
+            	// Service: Indicates that the service is available with specified performance.
+            	//      Subsystem: Indicates that all implemented services of the subsystem have
+            	// health state AVAILABLE.
+            	AVAILABLE,
+            	// Service: Indicates that the service may perform its operational task, but
+            	// possibly with less than specified performance.
+            	//      Subsystem: Indicates that at least one of the implemented services of the
+            	// subsystem have health state other than AVAILABLE.
+            	DEGRADED,
+            	// Service: Indicates that the service is not available.
+            	//      Subsystem: Indicates that all implemented services of the subsystem have
+            	// health state NOT_AVAILABLE.
+            	NOT_AVAILABLE,
+            	// Indicates that the subsystem may not determine the health state of the service
+            	// or subsystem (e.g. because BIT is not running).
+            	UNKNOWN
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Name of information
+            enum information_name_type
+            {
+            	AIR_PLOTS,
+            	SURFACE_PLOTS,
+            	LAND_PLOTS,
+            	SPACE_PLOTS,
+            	SENSOR_AIR_TRACKS,
+            	SENSOR_SURFACE_TRACKS,
+            	SENSOR_LAND_TRACKS,
+            	SENSOR_SPACE_TRACKS,
+            	JAMMER_STROBES,
+            	JAMMER_TRACKS,
+            	JAMMING_EFFECT_ASSESSMENTS,
+            	INTERFERENCE_REPORTS
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> interest_quality_of_service_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> interest_recipient_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // Type of registration
+            enum registration_type
+            {
+            	REGISTER,
+            	DEREGISTER
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Encapsulation of interest in service
+            struct interest
+            {
+            	registration_type registration;
+            	// * optional *
+            	interest_quality_of_service_string_type quality_of_service;
+            	// * optional *
+            	interest_recipient_string_type recipient;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence,
+            // which should contain at least one instance.
+            typedef sequence<interest> interest_list_element_type;
+  
+
+
+
+
+            // Version 1.0
+            // A list of interest
+            struct interest_list
+            {
+            	interest_list_element_type element;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // This enumeration represents the state of the mastership.
+            //    The subsystem Mastership may be either “free”, that is assigned to none and
+            // then available to anybody asks for it, or assigned to somebody: CMS or not.
+            enum mastership_state_type
+            {
+            	// Mastership state is “free”, the first received Mastership request shall be
+            	// satisfied.
+            	MASTERSHIP_FREE,
+            	// The Mastership is assigned to somebody other than CMS.
+            	MASTERSHIP_OTHER,
+            	// The Mastership is assigned to CMS.
+            	MASTERSHIP_TO_CMS
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> name_error_pair_error_indication_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<128> name_error_pair_parameter_name_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // Combination of name of parameter (for which a request could not be processed)
+            // and an indication of the error.
+            struct name_error_pair_type
+            {
+            	// parameter_name values are unique within the scope of a subsystem.
+            	name_error_pair_parameter_name_string_type parameter_name;
+            	name_error_pair_error_indication_string_type error_indication;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<name_error_pair_type> name_error_sequence_element_type;
+  
+
+
+
+
+            // Version 1.0
+            // sequence of error reports identifying the parameter names for which the request
+            // could not be processed, including an indication of the error (e.g. unknown
+            // parameter, illegal value).
+            struct name_error_sequence_type
+            {
+            	name_error_sequence_element_type element;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<128> name_value_pair_parameter_name_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> name_value_pair_value_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // A generic struct for (name, value) pairs. Used in multiple situations. 
+            struct name_value_pair_type
+            {
+            	// parameter_name values are unique within the scope of a subsystem.
+            	name_value_pair_parameter_name_string_type parameter_name;
+            	name_value_pair_value_string_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<name_value_pair_type> name_value_sequence_element_type;
+  
+
+
+
+
+            // Version 1.0
+            // Sequence of (name, value) pairs used in retrieving and modifying parameters. 
+            struct name_value_sequence_type
+            {
+            	name_value_sequence_element_type element;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<128> parameter_name_parameter_name_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // Typedef for strings representing names of parameters. 
+            struct parameter_name_type
+            {
+            	// parameter_name values are unique within the scope of a subsystem.
+            	parameter_name_parameter_name_string_type parameter_name;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<parameter_name_type> parameter_name_sequence_element_type;
+  
+
+
+
+
+            // Version 1.0
+            // A sequence of strings (names). Used in request for parameters and parameter
+            // descriptors. If the sequence is empty, the request is for all parameters. 
+            struct parameter_name_sequence_type
+            {
+            	parameter_name_sequence_element_type element;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Response type for retrieving and modifying sequences of parameters.
+            struct parameter_value_response_type
+            {
+            	long request_id;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Enumeration of possible service names. Where a service may be offered at
+            // different compliance levels, multiple names are introduced with _LEVEL_x
+            // postfix to indicate different parts. 
+            enum service_name_type
+            {
+            	AIR_ENGAGEMENT_SUPPORT,
+            	CLUTTER_REPORTING,
+            	ENCYCLOPAEDIC_SUPPORT,
+            	ENGAGEMENT_SUPPORT,
+            	ENVIRONMENT_AND_STABILIZATION_LEVEL_3F,
+            	ENVIRONMENT_AND_STABILIZATION_LEVEL_3G,
+            	EXTENDED_SUBSYSTEM_CONTROL,
+            	JAMMER_REPORTING,
+            	MISSILE_GUIDANCE,
+            	PLOT_REPORTING_LEVEL_1,
+            	PLOT_REPORTING_LEVEL_3C,
+            	PLOT_REPORTING_LEVEL_3E,
+            	RECORDING_AND_REPLAY,
+            	SEARCH,
+            	SENSOR_CONTROL_LEVEL_2,
+            	SENSOR_PERFORMANCE,
+            	SIMULATION_SUPPORT,
+            	SUBSYSTEM_CONTROL_LEVEL_1,
+            	SUBSYSTEM_CONTROL_LEVEL_2,
+            	SURFACE_ENGAGEMENT_SUPPORT,
+            	TRACK_REPORTING_LEVEL_1,
+            	TRACK_REPORTING_LEVEL_3C,
+            	TRACK_REPORTING_LEVEL_3E,
+            	TRACKING_CONTROL_LEVEL_2,
+            	TRACKING_CONTROL_LEVEL_3C,
+            	SENSOR_CONTROL_LEVEL_3A
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Health of service
+            struct service_health_type
+            {
+            	service_name_type service_name;
+            	health_state_type health_state;
+            	health_state_reason_type health_state_reason;
+            	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Indication of a service provided by the subsystem.
+            struct service_indication_type
+            {
+            	// Name of the service.
+            	service_name_type service_name;
+            	// Indication whether the service is registered.
+            	boolean registration_indicator;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<service_indication_type> service_indication_list_service_indication_type;
+  
+
+
+
+
+            // Version 1.0
+            // A list of service indications as used by Provide_Subsystem_Services.
+            struct service_indication_list_type
+            {
+            	service_indication_list_service_indication_type service_indication;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Information about a service
+            struct service_information
+            {
+            	information_name_type information_name;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<service_name_type> service_list_service_indication_type;
+  
+
+
+
+
+            // Version 1.0
+            // A list of service names as used by Provide_Subsystem_Services.
+            struct service_list_type
+            {
+            	service_list_service_indication_type service_indication;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Type of service
+            struct service_type
+            {
+            	// Only registrable services are allowed
+            	service_name_type service_name;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Type describing the health state of a subsystem
+            struct subsystem_health_type
+            {
+            	// Current health state
+            	health_state_type health_state;
+            	// Reason for last change of health state
+            	health_state_reason_type health_state_reason;
+            	device_identification_type subsystem_identification;
+            	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
+            };
+  
+
+
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

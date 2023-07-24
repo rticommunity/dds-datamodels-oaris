@@ -1,0 +1,91 @@
+#ifndef DEFINE_FAULT_SCRIPTSDEFVAR
+#define DEFINE_FAULT_SCRIPTSDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Simulation_Support.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Simulation_Support {
+
+
+            module Define_Fault_Scripts {
+
+
+
+              // Version 1.0
+              // Topic type for operation add_fault_scripts. . Adds the given fault scripts to
+              // the subsystem's simulation.
+              struct add_fault_scripts_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter scripts. The fault scripts to be added
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_scripts_type scripts;
+              };
+#pragma keylist add_fault_scripts_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation fault_script_summary. This enables a maintainer
+              // trainer to script a set of subsystem faults, the effects of which would be
+              // simulated for training purposes. The faults may be scripted in relation to a
+              // specific simulation scenario. Each fault script shall include a unique
+              // identifier.. This provides a list of all fault scripts for a subsystem to the
+              // CMS for confirmation.
+              struct fault_script_summary_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter faults. The list of fault scripts
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_scripts_type faults;
+              };
+#pragma keylist fault_script_summary_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation remove_fault_scripts. . Removes the given fault
+              // scripts from the subsystem's simulation.
+              struct remove_fault_scripts_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter fault_scripts. The ids of the fault
+              	// scripts to be removed
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type fault_scripts;
+              };
+#pragma keylist remove_fault_scripts_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

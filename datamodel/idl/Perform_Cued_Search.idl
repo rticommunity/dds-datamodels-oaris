@@ -1,0 +1,85 @@
+#ifndef PERFORM_CUED_SEARCHDEFVAR
+#define PERFORM_CUED_SEARCHDEFVAR
+#include "Common_Types.idl"
+
+#include "Search.idl"
+
+#include "Requests.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Radar_Services {
+
+
+          module Search {
+
+
+            module Perform_Cued_Search {
+
+
+
+              // Version 1.0
+              // Topic type for operation perform_cued_search. The Subsystem Search Interface..
+              // Request to subsystem to perform a cued search in accordance with the given set
+              // of constraints.
+              struct perform_cued_search_type
+              {
+              	// Field for interface operation parameter constraint. The details of the
+              	// constraints on where the radar is to look for tracks.
+              	org::omg::c4i::Domain_Model::Radar_Domain::Search::cued_search_cue_type constraint;
+              	// Field for interface operation parameter request_id. The unique id for this
+              	// request. The radar includes this in all replies relating to this request.
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist perform_cued_search_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation report_cued_search_result. The CMS Search Interface.
+              //      The subsystem is requested to undertake a cued search in the requested cue
+              // volume. The cue may be 1D (azimuth only), 2D (has an additional elevation
+              // constraint), 3D (has a further range constraint) or 4D (has a further target
+              // velocity constraint). The response of the subsystem is either to reject the
+              // cued search request if it is invalid within the current mode/configuration or
+              // to provide a cue request reply containing data relating to any resulting tracks.
+              // 
+              //      Depending upon the individual radar it may be possible to predefine a cued
+              // search waveform
+              //      The cued search request may contain azimuth, elevation and range data
+              // along with time of the positional data.. Send a report to the CMS containing
+              // the results of a previously cued search.
+              struct report_cued_search_result_type
+              {
+              	// Field for interface operation parameter result_report. The result of the search.
+              	org::omg::c4i::Domain_Model::Radar_Domain::Search::cued_search_report_type result_report;
+              	// Field for interface operation parameter request_id. The unique id relating to
+              	// this cued search request as supplied by the CMS.
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist report_cued_search_result_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

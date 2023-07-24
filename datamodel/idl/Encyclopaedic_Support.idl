@@ -1,0 +1,45 @@
+#ifndef ENCYCLOPAEDIC_SUPPORTDEFVAR
+#define ENCYCLOPAEDIC_SUPPORTDEFVAR
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Domain_Model {
+
+
+        module Subsystem_Domain {
+
+
+          module Encyclopaedic_Support {
+
+
+
+            // Version 1.0
+            // Standard description of the encyclopaedic data set
+            typedef string<60> data_descriptor_type;
+  
+
+
+
+
+            // Version 1.0
+            // Representation of a Uniform Resource Locator see www.w3.org
+            typedef string<255> url_type;
+  
+
+
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

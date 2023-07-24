@@ -1,0 +1,245 @@
+#ifndef PLOT_REPORTINGDEFVAR
+#define PLOT_REPORTINGDEFVAR
+#include "Coordinates_and_Positions.idl"
+
+#include "Common_Types.idl"
+
+#include "Surface_Engagement_Support.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Domain_Model {
+
+
+        module Sensor_Domain {
+
+
+          module Plot_Reporting {
+
+
+
+            // Version 1.0
+            // Identifier for a plot, unique within a given sensor. Such plot ids, should not
+            // be reused between sensor subsystem restarts.
+            typedef unsigned long plot_id_type;
+  
+
+
+
+
+            // Version 1.0
+            // Strength of the plot. The precise semantics of this type are sensor subsystem
+            // specific, but a typical interpretation is as a signal to noise ratio in dB.
+            typedef unsigned short plot_strength_type;
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union sensor_orientation_elevation_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // This class describes the orientation of the sensor at a particular moment in
+            // time. This is useful for plot processing functionality such as track extraction
+            // as it allows instantaneous coverage of the sensor to be estimated.
+            struct sensor_orientation_type
+            {
+            	// The (azimuth) direction of the head of the sensor (e.g. antenna, lens or hydro-
+            	// phone)
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type azimuth;
+            	// The (elevation) direction of the head of the sensor (e.g. antenna, lens or
+            	// hydro-phone). If not supplied either horizontal is assumed or a constant angle
+            	// is defined through the Manage_Subsystem_Parameters use case.
+            	sensor_orientation_elevation_type elevation;
+            	// The time for which is sensor orientation is valid
+            	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_validity;
+            	// This attribute defines the interpretation of azimuth and elevation.
+            	//      Valid enumerates are:
+            	//      NORTH_HORIZONTAL,
+            	//      NORTH_DOWN,
+            	//      STERN_KEEL,
+            	//      STERN_DECK_LEVEL
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type sensor_coordinate_system;
+            };
+            // Topic type for operation write_sensor_orientation. The interface to the CMS for
+            // receiving sensor orientation updates.
+            //      The sensor provides its orientation in the case that it has movement that
+            // is independent of that for the overall platform. It is provided periodically
+            // with a frequency defined using the manage subsystem parameters use case..
+            // Informs the CMS of the orientation of the sensor
+#pragma keylist sensor_orientation_type 
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union sensor_plot_elevation_qualification_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_qualification_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union sensor_plot_plot_id_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Plot_Reporting::plot_id_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union sensor_plot_range_qualification_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_qualification_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union sensor_plot_strength_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Plot_Reporting::plot_strength_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union sensor_plot_splash_spotting_area_id_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // One plot from a sensor.
+            // 
+            //    The additional_info attribute is used for characteristics of the plot that
+            // are specific to certain sensors, and therefore not in the general plot type,
+            // for example  MTI or range rate.
+            struct sensor_plot_type
+            {
+            	// A unique identifier for the plot within the scope of the sensor. This attribute
+            	// is optional as not all sensors need to provide such an identifier for each plot.
+            	sensor_plot_plot_id_type plot_id;
+            	// The position of the plot. This is the mean, central position. Note the
+            	// qualification attributes, which give information on accuracy and spread
+            	// estimates.
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
+            	// This attribute defines the characteristics of the coordinate system used
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type coordinate_specification;
+            	// A measure of the spread and accuracy of the plot in range. This is optional as
+            	// not all sensors measure range.
+            	sensor_plot_range_qualification_type range_qualification;
+            	// A measure of the spread and accuracy of the plot in azimuth.
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_qualification_type azimuth_qualification;
+            	// A measure of the spread and accuracy of the plot in elevation. This is optional
+            	// as not all sensors measure elevation.
+            	sensor_plot_elevation_qualification_type elevation_qualification;
+            	// If true, the plot is simulated. See also simulation support services within
+            	// this standard.
+            	boolean simulation_status;
+            	// The signal strength of the plot. This attribute is optional as not all sensors
+            	// measure a quantity which has
+            	//      equivalence to strength.
+            	sensor_plot_strength_type strength;
+            	// The time at which the plot was measured.
+            	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_plot;
+            	// Potentially classified information about the plot, which may be used in a
+            	// system specific way to distribute information about a plot to other subsystems.
+            	// Further information about this attribute, including layout semantics is outside
+            	// of the scope of this interface standard.
+            	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_info;
+            	// Indicates which splash spotting area the plot refers to - if any  - hence it is
+            	// optional.
+            	sensor_plot_splash_spotting_area_id_type splash_spotting_area_id;
+            	// Indication whether or not a plot is from a source of jamming.
+            	boolean jammer_indication;
+            };
+            // Topic type for operation write_sensor_plot. Interface to the CMS for receiving
+            // plot updates.
+            //      This interface provides sensor plots to the CMS (filterable to air,
+            // surface, land and space environments). The transfer of data is expected to take
+            // place asynchronously, although for certain classes of sensor it may appear
+            // periodic. This method receives a individual plot update from the sensor. It is
+            // expected to be called periodically from the sensor.
+#pragma keylist sensor_plot_type 
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<sensor_plot_type, 5000> sensor_plot_set_plots_type;
+  
+
+
+
+
+            // Version 1.0
+            // Set of one or more sensor plots.
+            struct sensor_plot_set_type
+            {
+            	// The plots in the sensor plot set
+            	sensor_plot_set_plots_type plots;
+            };
+            // Topic type for operation write_sensor_plot_set. Interface to the CMS for
+            // receiving plot updates.
+            //      This interface provides sensor plots to the CMS (filterable to air,
+            // surface, land and space environments). The transfer of data is expected to take
+            // place asynchronously, although for certain classes of sensor it may appear
+            // periodic. This method receives a set of one or more plot updates from the
+            // sensor. It is expected to be called periodically from the sensor.
+#pragma keylist sensor_plot_set_type 
+  
+
+
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

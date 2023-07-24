@@ -1,0 +1,106 @@
+#ifndef TEST_TARGET_FACILITYDEFVAR
+#define TEST_TARGET_FACILITYDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Sensor_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Sensor_Services {
+
+
+          module Sensor_Control {
+
+
+            module Test_Target_Facility {
+
+
+
+              // Version 1.0
+              // Topic type for operation notify_test_target. The sensor is requested to
+              // activate/deactivate the execution of its internal functional test and
+              // stimulation realized by means of test targets generation. A number of Test
+              // Target scenarios may be defined and modified as specified in <i>Define Test
+              // Target Scenario</i>, each scenario is identified by a proper identification. At
+              // any time no more than one Test Target scenario may be active.
+              // 
+              //      Test Target generation mechanism (applicable to some sensors)
+              //      The Test Target generation consists of the injection of proper signals at
+              // different points of the receiver chain in order to produce the relevant
+              // detections in input to the RMC (Radar Management Computer); these Test Target
+              // detections are processed by the RMC as the real ones, so they shall generate
+              // one o more plots (“Test Target” plots) and tracks (“Test Target” tracks).
+              //      Such a generation mechanism is controlled by the RMC driving a devoted
+              // hardware, its purpose is to execute an on-line BITE of the complete receiver
+              // chain.
+              //      Test Target generation is executed while the radar is working in
+              // operational mode, so Test Target detections and real detections live together,
+              // forming “Test Target” plots and tracks at the same time as real plots and
+              // tracks. This implies that CMS shall receive “Test Target” plots and tracks
+              // together with real plots and tracks.
+              // 
+              //      Lack of mastership
+              //      In the case where CMS does not have mastership of the sensor, CMS shall be
+              // informed about the actual state of the Test Target generation and its changes
+              // (if any).
+              // 
+              //      Provision of the Test Target generation state
+              //      Sensor shall keep CMS informed about the actual state of the Test Target
+              // generation and its changes (if any).
+              // 
+              //      Relationship to the subsystem health state
+              //      As long as a Test Target scenario is in generation sensor checks the
+              // relevant returns at different points of the receiver chain, up to form plots in
+              // the same positions where Test Targets have been generated. The relevant results
+              // contribute to the sensor health state.. Method used by the sensor to return the
+              // actual state of the Test Target generation consistent with the request.
+              struct notify_test_target_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter test_target_scenario_state. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_state_type test_target_scenario_state;
+              };
+#pragma keylist notify_test_target_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation set_test_target_facility_state. This is the Subsystem
+              // interface for testing target facilities.. Method used by the CMS to send an
+              // activation request of a specified Test Target scenario.
+              struct set_test_target_facility_state_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter scenario_state. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_state_type scenario_state;
+              };
+#pragma keylist set_test_target_facility_state_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

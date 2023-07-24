@@ -1,0 +1,92 @@
+#ifndef PROVIDE_NOMINAL_PERFORMANCEDEFVAR
+#define PROVIDE_NOMINAL_PERFORMANCEDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Sensor_Performance.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Sensor_Services {
+
+
+          module Sensor_Performance {
+
+
+            module Provide_Nominal_Performance {
+
+
+
+              // Version 1.0
+              // Topic type for operation nominal_performance_request. Subsystem interface for
+              // provision of nominal performance assessment.. The CMS requests nominal
+              // performance of the subsystem in the current environmental conditions. The
+              // aspect of performance requested is a parameter of the request.
+              struct nominal_performance_request_type
+              {
+              	// Field for interface operation parameter request_id. The unique id which
+              	// identifies this request. It is used to mark replies from the sensor relating to
+              	// this request.
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter request. The details of the performance
+              	// request
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::performance_assessment_request_type request;
+              };
+#pragma keylist nominal_performance_request_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation nominal_performance_response. This is incremental to
+              // <i>Register Interest</i>, which deals with the subscription to subsystem
+              // functions. It provides an indication of the expected performance of the
+              // available subsystem services such as those presented in Provide Subsystem
+              // Services, based upon the current environmental conditions (See Receive
+              // Meteorological Data - METOC).
+              //      The subsystem need not be radiating to provide this assessment. This
+              // interface is more targeted towards a subsystem such as the complex MFR than the
+              // 2D surveillance radar. The most basic example of performance would be reporting
+              // of the nominal  coverage, in elevation, azimuth and range, given an assumed
+              // operating regime with no jamming and with default clutter conditions. Other
+              // examples might be that the actor requests the probability of detection for a
+              // specified target type or perhaps the probability of correct automatic
+              // classification of such a target within a specified sector of coverage under
+              // current environmental conditions.. The subsystem responds to the previous
+              // nominal performance request with its determination of the requested aspect of
+              // nominal performance.
+              struct nominal_performance_response_type
+              {
+              	// Field for interface operation parameter request_id. The unique id from the
+              	// request
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter report. The report on nominal
+              	// performance
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::performance_assessment_report_type report;
+              };
+#pragma keylist nominal_performance_response_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

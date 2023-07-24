@@ -1,0 +1,71 @@
+#ifndef EXTENDED_SUBSYSTEM_CONTROLDEFVAR
+#define EXTENDED_SUBSYSTEM_CONTROLDEFVAR
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Domain_Model {
+
+
+        module Subsystem_Domain {
+
+
+          module Extended_Subsystem_Control {
+
+
+
+            // Version 1.0
+            // String which provides a url location for configuration data.
+            typedef string<255> configuration_url_type;
+  
+
+
+
+
+            // Version 1.0
+            // Subsystem specific detailed test results
+            typedef string<4096> offline_test_result_details_type;
+  
+
+
+
+
+            // Version 1.0
+            // Used to return the test results: failed, partial_pass or failed
+            enum offline_test_result_type
+            {
+            	// A number of tests were not successful, such that the subsystem exceeded its
+            	// failure threshold. Detailed information is available upon request.
+            	FAILED,
+            	// A number of tests were not successful, but the subsystem did not exceed its
+            	// failure threshold. Detailed information is available upon request.
+            	PARTIAL_PASS,
+            	// All tests were successful.
+            	PASSED
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A subsystem specific string identifying the required test type.
+            typedef string<255> offline_test_type;
+  
+
+
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

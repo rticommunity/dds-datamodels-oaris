@@ -1,0 +1,93 @@
+#ifndef SYSTEM_TRACKDEFVAR
+#define SYSTEM_TRACKDEFVAR
+#include "Coordinates_and_Positions.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Domain_Model {
+
+
+        module Common_Types {
+
+
+          module System_Track {
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union system_track_max_range_limit_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union system_track_velocity_accuracy_coordinate_system_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union system_track_velocity_accuracy_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_accuracy_coordinate_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // System track information is limited to information required by a subsystem for
+            // missile guidance.
+            struct system_track_type
+            {
+            	org::omg::c4i::Domain_Model::Common_Types::system_track_id_type system_track_number;
+            	boolean simulated;
+            	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_coordinate_system;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type velocity_coordinate_system;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_coordinate_type velocity;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_accuracy_coordinate_system;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_accuracy_coordinate_type position_accuracy;
+            	system_track_velocity_accuracy_coordinate_system_type velocity_accuracy_coordinate_system;
+            	system_track_velocity_accuracy_type velocity_accuracy;
+            	system_track_max_range_limit_type max_range_limit;
+            };
+            // Topic type for operation provide_track. . 
+            // Topic type for operation provide_track. . 
+            // Topic type for operation provide_track. . 
+#pragma keylist system_track_type 
+  
+
+
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

@@ -1,0 +1,111 @@
+#ifndef RECEIVE_ENCYCLOPAEDIC_DATADEFVAR
+#define RECEIVE_ENCYCLOPAEDIC_DATADEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Encyclopaedic_Support.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Encyclopaedic_Support {
+
+
+            module Receive_Encyclopaedic_Data {
+
+
+
+              // Version 1.0
+              // Topic type for operation encyclopaedic_data_loaded. This interface describes
+              // the process whereby the subsystem receives encyclopedic data.Such data is used
+              // by the subsystem to perform self-adaptation to the prevailing environmental
+              // conditions.
+              //      This interface is modelled as a control interaction between the CMS and
+              // the subsystem rather than a data flow interaction. The CMS controls the loading
+              // of subsystem encyclopaedic data by sending the location of the data, rather
+              // than sending the data itself. Of course an implementation may move the
+              // encyclopaedic data around a file system beforehand, but that is outside the
+              // scope of this standard.
+              //      The subsystem is aware of its real-time geographic position and
+              // orientation.
+              //      It is expected that the transfer of this data would be initiated at the
+              // start of the ‘mission of the day’. Updates would only be envisaged when the
+              // current data set became inapplicable to the current mission.
+              //      Specific encyclopedic data might be requested by the subsystem.
+              // Alternatively, a default set of summary data is sent. Such data, which is an
+              // example of ‘reference’ data, would generally be non-sensor in origin and static
+              // i.e. not changing in real-time. In the simplest case this data might simply
+              // define clutter areas and known jammer locations to assist the subsystem in
+              // effecting suitable mitigation for these effects. For a subsystem such as a more
+              // complex multi-function radar this might include relevant extracts from a
+              // commercial shipping database (Lloyd’s etc.), giving shipping lanes or ship
+              // movements or civil airline flight plan data (Civil Aviation Authority etc),
+              // locations of wind-farms, major highways, significant structures and potential
+              // sources of interference, such as other radars, including consorts, cellular
+              // phone masts etc. This data would be used by the subsystem to contribute to the
+              // tactical picture. Alternatively, it could be used within the automatic tracking
+              // function to enable the identification/elimination from the track picture of non-
+              // hostile tracks. Such data could also include, for example, the reference data
+              // types communicated via Link 16 such as hazard areas and other fixed point type
+              // data. Navigational charts might also be a part of such data. The subsystem VOI
+              // (volume of interest) or other filter mechanisms might be supplied in a request
+              // from the actor.. The subsystem responds to the CMS that the encyclopaedic data
+              // previously requested has been loaded.
+              struct encyclopaedic_data_loaded_type
+              {
+              	// Field for interface operation parameter request_id. The unique id for this
+              	// request - corresponds to the parameter in the load_encyclopaedic_data request
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist encyclopaedic_data_loaded_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation load_encyclopaedic_data. . The CMS requests the
+              // subsystem to load encyclopaedic data of a particular type from a particular
+              // location.
+              struct load_encyclopaedic_data_type
+              {
+              	// Field for interface operation parameter request_id. The unique identifier for
+              	// this request
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter url. The location of the file
+              	// containing the encyclopaedic data
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Encyclopaedic_Support::url_type url;
+              	// Field for interface operation parameter data_descriptor. A description of the
+              	// type of encyclopaedic data (e.g. name of the data set). It is expected that
+              	// implementations will specify a list of descriptors known to particular
+              	// subsystems. Such a list may be accessible at run-time through the Manage
+              	// Subsystem Parameters interface.
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Encyclopaedic_Support::data_descriptor_type data_descriptor;
+              };
+#pragma keylist load_encyclopaedic_data_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

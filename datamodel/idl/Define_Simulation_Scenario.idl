@@ -1,0 +1,182 @@
+#ifndef DEFINE_SIMULATION_SCENARIODEFVAR
+#define DEFINE_SIMULATION_SCENARIODEFVAR
+#include "Common_Types.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Simulation_Support {
+
+
+            module Define_Simulation_Scenario {
+
+
+
+              // Version 1.0
+              // Topic type for operation write_emitter_system_data_CMS. This describes how the
+              // contents of a simulation scenario are communicated between the CMS and the
+              // subsystem.
+              //      The CMS provides the subsystem with a simulated environment which consists
+              // of simulated objects of different kinds.
+              //      A subsystem with built-in simulation capability may participate in this
+              // simulation not only by being a consumer of the simulated environment but by
+              // contributing actively to it.
+              //      Radar type subsystems shall typically build simulated plots or tracks from
+              // the simulated environment, while contributing simulated electromagnetic
+              // emissions to it. These simulated emissions may in turn be used and detected by
+              // other (ESM type) simulations.
+              //      Weapon type subsystems when in simulation mode shall typically contribute
+              // simulated objects to the simulation that represent the launch/firing and
+              // movement of own missiles, bullets or torpedoes and their effect on other
+              // simulated objects.
+              //      Thus CMS and subsystem both contribute to the simulated environment.
+              // Together they form a simulation federation.
+              // 
+              //      The actor is the Combat Management System.
+              // 
+              //      Relationship to ‘control simulation’
+              //      The definition of simulation mode and flow of commands to
+              // start/stop/freeze/resume a simulation scenario are defined in ‘control
+              // simulation’.
+              // 
+              //      Relationship to provision of tracks
+              //      A radar type subsystem shall provide tracks based on information from the
+              // simulated environment, as described above. The interfaces that deal with the
+              // provision of tracks indicate whether tracks are simulated or not under
+              // amplifying information. This indication should be set for all tracks that are
+              // reported in the context of this interface.
+              // 
+              //      Relationship to Receive geographic information
+              //      Geographic information is received by using ‘Receive geographic
+              // information’.. Write emitter system data
+              struct write_emitter_system_data_CMS_type
+              {
+              	// Field for interface operation parameter emitter_system_data. 
+              	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type emitter_system_data;
+              };
+#pragma keylist write_emitter_system_data_CMS_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation write_emitter_system_data_Sub. . Write emitter system
+              // data
+              struct write_emitter_system_data_Sub_type
+              {
+              	// Field for interface operation parameter emitter_system_data. 
+              	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type emitter_system_data;
+              };
+#pragma keylist write_emitter_system_data_Sub_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation write_environment_data. . Write environment data
+              struct write_environment_data_type
+              {
+              	// Field for interface operation parameter environmental_entity_data. 
+              	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type environmental_entity_data;
+              };
+#pragma keylist write_environment_data_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation write_jammer_beam_data. . Write jammer beam data
+              struct write_jammer_beam_data_type
+              {
+              	// Field for interface operation parameter jammer_beam_data. 
+              	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type jammer_beam_data;
+              };
+#pragma keylist write_jammer_beam_data_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation write_platform_data. . Write platform data
+              struct write_platform_data_type
+              {
+              	// Field for interface operation parameter platform_data. 
+              	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type platform_data;
+              };
+#pragma keylist write_platform_data_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation write_radar_beam_data. This describes how the contents
+              // of a simulation scenario are communicated between the CMS and the subsystem.
+              //      The CMS provides the subsystem with a simulated environment which consists
+              // of simulated objects of different kinds.
+              //      A subsystem with built-in simulation capability may participate in this
+              // simulation not only by being a consumer of the simulated environment but by
+              // contributing actively to it.
+              //      Radar type subsystems shall typically build simulated plots or tracks from
+              // the simulated environment, while contributing simulated electromagnetic
+              // emissions to it. These simulated emissions may in turn be used and detected by
+              // other (ESM type) simulations.
+              //      Weapon type subsystems when in simulation mode shall typically contribute
+              // simulated objects to the simulation that represent the launch/firing and
+              // movement of own missiles, bullets or torpedoes and their effect on other
+              // simulated objects.
+              //      Thus CMS and subsystem both contribute to the simulated environment.
+              // Together they form a simulation federation.
+              // 
+              //      The actor is the Combat Management System.
+              // 
+              //      Relationship to ‘control simulation’
+              //      The definition of simulation mode and flow of commands to
+              // start/stop/freeze/resume a simulation scenario are defined in ‘control
+              // simulation’.
+              // 
+              //      Relationship to provision of tracks
+              //      A radar type subsystem shall provide tracks based on information from the
+              // simulated environment, as described above. The interfaces that deal with the
+              // provision of tracks indicate whether tracks are simulated or not under
+              // amplifying information. This indication should be set for all tracks that are
+              // reported in the context of this interface.
+              // 
+              //      Relationship to Receive geographic information
+              //      Geographic information is received by using ‘Receive geographic
+              // information’.. Write radar beam data
+              struct write_radar_beam_data_type
+              {
+              	// Field for interface operation parameter radar_beam_data. 
+              	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type radar_beam_data;
+              };
+#pragma keylist write_radar_beam_data_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

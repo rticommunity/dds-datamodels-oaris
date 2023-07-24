@@ -1,0 +1,81 @@
+#ifndef ENGAGEMENT_SUPPORTDEFVAR
+#define ENGAGEMENT_SUPPORTDEFVAR
+#include "Coordinates_and_Positions.idl"
+
+#include "Common_Types.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Domain_Model {
+
+
+        module Radar_Domain {
+
+
+          module Engagement_Support {
+
+
+
+            // Version 1.0
+            // The number/amount of available fire control channels. 
+            typedef unsigned short available_fire_control_channels_type;
+  
+
+
+
+
+            // Version 1.0
+            // The fire control channel ID as assigned by the subsystem.
+            typedef unsigned short fire_control_channel_id_type;
+  
+
+
+
+
+            // Version 1.0
+            // The possible outcomes of a kill assessment.
+            enum kill_assessment_result_type
+            {
+            	// Kill Probability > 50%
+            	PROBABLE_KILL,
+            	// Kill Probability < 50%
+            	PROBABLE_MISS,
+            	// Assessment indeterminate
+            	NO_RESULT
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Target position/kinematics for which a fire control channel is requested to
+            // designate.
+            struct kinematics_type
+            {
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type orientation;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_position_type position;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_origin_type reference_position;
+            	org::omg::c4i::Domain_Model::Common_Types::time_type time_stamp;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_velocity_type velocity;
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_kind_type coordinate_kind;
+            };
+  
+
+
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

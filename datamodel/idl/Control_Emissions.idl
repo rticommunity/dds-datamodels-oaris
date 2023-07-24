@@ -1,0 +1,94 @@
+#ifndef CONTROL_EMISSIONSDEFVAR
+#define CONTROL_EMISSIONSDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Sensor_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Sensor_Services {
+
+
+          module Sensor_Control {
+
+
+            module Control_Emissions {
+
+
+
+              // Version 1.0
+              // Topic type for operation control_emission_setting. The sensor is requested to
+              // inhibit/enable own emissions. In the case where the sensor is a radar, this
+              // shall result in the Radiation on/off command.
+              //      Note that this interface just covers the software managed control of the
+              // emission state. For safety reasons many sensors are supplied with an additional
+              // hardware control of own emission state, such as a pushbutton directly connected
+              // to the transmitter.
+              // 
+              //      Provision of the Emission state
+              //      Sensor shall keep CMS informed about the current state of emissions and
+              // its changes (if any).
+              // 
+              //      It is the CMS's responsibility to initiate the determination of initial
+              // state by making a request for information to the subsystem.
+              // 
+              //      Lack of mastership
+              //      In the case where CMS does not have mastership of the sensor, CMS shall be
+              // informed about the current emissions state and its changes (if any).
+              // 
+              //      Relationship to the Transmission Sectors management
+              //      As long as emissions are on, the sensor shall transmit in the sectors
+              // where transmission is allowed and according to the relevant transmission modes
+              // and parameters, as determined through <i>Manage Transmission Sectors</i>..
+              // Method used by the sensor to return the current state of emissions and its
+              // changes (if any).
+              struct control_emission_setting_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter emission_state. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::control_emission_state_type emission_state;
+              };
+#pragma keylist control_emission_setting_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation set_control_emission. This is the Subsystem interface
+              // for controlling emissions.. Method used by the CMS to send an Emissions on/off
+              // request to the sensor.
+              struct set_control_emission_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter control_emission_state. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::control_emission_state_type control_emission_state;
+              };
+#pragma keylist set_control_emission_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

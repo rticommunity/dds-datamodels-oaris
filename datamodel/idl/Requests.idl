@@ -1,0 +1,155 @@
+#ifndef REQUESTSDEFVAR
+#define REQUESTSDEFVAR
+#include "Common_Types.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Domain_Model {
+
+
+        module Common_Types {
+
+
+          module Requests {
+
+
+
+            // Version 1.0
+            // String which indicates rationale for rejection of the request. Is not valid
+            // when the request has been accepted.
+            typedef string<40> denial_reason_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string which refers to a parameter in a request using an implementation
+            // specific notation.
+            typedef string<64> parameter_reference_type;
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: unbounded sequence
+            typedef sequence<parameter_reference_type> denial_related_parameter_type;
+  
+
+
+
+
+            // Version 1.0
+            // Struct used within the receive_acknowledgement operation to provide information
+            // on (one of the reasons) why a request has been rejected.
+            struct denial_type
+            {
+            	// textual explanation of (one of) the reasons for rejection
+            	denial_reason_type reason;
+            	// A reference to the parameter or parameters that relate to the reason for
+            	// rejection. If no related_parameters are supplied the rejection relates to the
+            	// whole request.
+            	denial_related_parameter_type related_parameter;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A string which gives an indication of the error associated with processing of
+            // the request.
+            typedef string<40> error_reason_type;
+  
+
+
+
+
+            // Version 1.0
+            // The purpose of the request_id is to uniquely relate responses of the subsystem
+            // (server) to requests of the CMS (client). The request_id is set by the client.
+            // It is the responsibility of the client to specify a system-wide unique
+            // request_id (e.g. based on a combination of client id and a sequence number /
+            // time of request).
+            typedef unsigned long long request_id_type;
+  
+
+
+
+
+            // Version 1.0
+            // a simple union type, to represent an optional value
+            union request_ack_rejection_type switch (boolean)
+            {
+            	// the value when present
+            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Requests::denial_type value;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Struct used within the receive_acknowledgement operation to indicate acceptance
+            // or rejection (which includes rationale).
+            struct request_ack_type
+            {
+            	// Attribute to indicate whether a request has been accepted (1) or rejected (0).
+            	boolean accepted;
+            	request_ack_rejection_type rejection;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Topic type for operation receive_acknowledgement. Interface which includes
+            // operations common to all CMS interfaces.. This operation is used by the
+            // subsystem to indicate whether it has accepted or rejected a request from the
+            // CMS.
+            struct receive_acknowledgement_type
+            {
+            	// Field for interface operation parameter request_id. 
+            	request_id_type request_id;
+            	// Field for interface operation parameter request_ack. 
+            	request_ack_type request_ack;
+            };
+#pragma keylist receive_acknowledgement_type 
+  
+
+
+
+
+            // Version 1.0
+            // Topic type for operation receive_error. Interface which includes operations
+            // common to all CMS interfaces.. This operation is used by the subsystem to
+            // indicate an error in processing a request.
+            struct receive_error_type
+            {
+            	// Field for interface operation parameter request_id. 
+            	request_id_type request_id;
+            	// Field for interface operation parameter error_reason. 
+            	error_reason_type error_reason;
+            };
+#pragma keylist receive_error_type 
+  
+
+
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

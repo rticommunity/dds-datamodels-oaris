@@ -1,0 +1,138 @@
+#ifndef MANAGE_TECHNICAL_STATEDEFVAR
+#define MANAGE_TECHNICAL_STATEDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Subsystem_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Subsystem_Control {
+
+
+            module Manage_Technical_State {
+
+
+
+              // Version 1.0
+              // Topic type for operation change_technical_state. . Interface used by the
+              // subsystem to receive requests from the CMS to change its technical state.
+              struct change_technical_state_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter technical_state. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              };
+#pragma keylist change_technical_state_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation provide_technical_state. . Interface used by the
+              // subsystem to receive requests from the CMS to provide its current technical
+              // state.
+              struct provide_technical_state_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist provide_technical_state_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_periodic_technical_state. Manage Technical
+              // State causes the subsystem to provide or change its technical state.
+              // 
+              //      Special Requirements:
+              // 
+              //      Initialization: Upon initialization, reset or power-on, the sub-system
+              // shall transition to a pre-defined state and report the current state to the CMS.
+              // 
+              // 
+              //      Additional Information:
+              // 
+              //      If a critical component of the subsystem becomes NOT AVAILABLE, the
+              // technical state shall transition to FAILED.
+              // 
+              //      All states may transition to OFFLINE, but the subsystem shall only do so
+              // in emergency situations or catastrophic damage, to indicate an uncontrolled
+              // shutdown
+              // 
+              //      <i>Startup</i>, <i>Shutdown</i>, and <i>Restart</i> explain the sequence
+              // of actions for nominal progression through the technical states.. Interface
+              // used by CMS to receive periodic technical state reports from the subsystem.
+              struct receive_periodic_technical_state_type
+              {
+              	// Field for interface operation parameter technical_state. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              };
+#pragma keylist receive_periodic_technical_state_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_technical_state. Manage Technical State causes
+              // the subsystem to provide or change its technical state.
+              // 
+              //      Special Requirements:
+              // 
+              //      Initialization: Upon initialization, reset or power-on, the sub-system
+              // shall transition to a pre-defined state and report the current state to the CMS.
+              // 
+              // 
+              //      Additional Information:
+              // 
+              //      If a critical component of the subsystem becomes NOT AVAILABLE, the
+              // technical state shall transition to FAILED.
+              // 
+              //      All states may transition to OFFLINE, but the subsystem shall only do so
+              // in emergency situations or catastrophic damage, to indicate an uncontrolled
+              // shutdown
+              // 
+              //      <i>Startup</i>, <i>Shutdown</i>, and <i>Restart</i> explain the sequence
+              // of actions for nominal progression through the technical states.. Interface
+              // used by CMS to receive technical state reports from the subsystem which were
+              // the result of a transition request from the CMS.
+              struct receive_technical_state_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter technical_state. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              };
+#pragma keylist receive_technical_state_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

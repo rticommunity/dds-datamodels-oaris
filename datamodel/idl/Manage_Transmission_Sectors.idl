@@ -1,0 +1,119 @@
+#ifndef MANAGE_TRANSMISSION_SECTORSDEFVAR
+#define MANAGE_TRANSMISSION_SECTORSDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Sensor_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Sensor_Services {
+
+
+          module Sensor_Control {
+
+
+            module Manage_Transmission_Sectors {
+
+
+
+              // Version 1.0
+              // Topic type for operation set_transmission_sector. This is the Subsystem
+              // interface for managing transmission sectors.. Method used by the CMS to send a
+              // set/reset transmission sector request to the sensor.
+              struct set_transmission_sector_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter sector. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::transmission_sector_set_type sector;
+              };
+#pragma keylist set_transmission_sector_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation transmission_sector_setting. This determines the
+              // sectors where the sensor is allowed to radiate together with the relevant
+              // transmission modes and parameters. Sectors may be delimited in azimuth only, or
+              // both in azimuth and elevation; for each sector the sensor may be requested
+              // either to no transmit at all or to apply a proper transmission mode. Typical
+              // transmission sectors types are:
+              // 
+              //      <ul>
+              //      	<li>Transmit Inhibit Sectors</li>
+              //      </ul>
+              //      sectors where the sensor is not allowed to radiate. Depending on the
+              // sensor type and its capabilities, such a type of sectors may be delimited in
+              // azimuth only, or both in azimuth and elevation.
+              // 
+              //      <ul>
+              //      	<li>Reduced Radiate Power Sectors</li>
+              //      </ul>
+              //      sectors where the sensor shall radiate at reduced power. Depending on the
+              // sensor type and its capabilities, such a type of sectors may be delimited
+              // either in azimuth only or both in azimuth and elevation.
+              // 
+              //      <ul>
+              //      	<li>Transmission Mode Sectors</li>
+              //      </ul>
+              //      sectors where the sensor is required to apply a devoted transmission mode
+              // (see <i>Manage Frequency Usage</i>). Depending on the sensor type and its
+              // capabilities, such a type of sectors may be delimited either in azimuth only or
+              // both in azimuth and elevation, but they may not overlap each other.
+              // 
+              //      <ul>
+              //      	<li>Blind Arc Sectors</li>
+              //      </ul>
+              //      sectors where the sensor is not allowed to radiate. Such a type of sectors
+              // may be delimited in azimuth only, or both in azimuth and elevation, depending
+              // on the sensor type and its capabilities. (Note: the same as "Transmit Inhibit
+              // Sectors”, with the difference that sectors are defined in Ship’s Reference
+              // System.)
+              // 
+              //      Provision of the sensor transmission sectors setting
+              //      Sensor shall keep CMS informed about the actual setting of the
+              // transmission sectors and its changes (if any).
+              // 
+              //      It is the CMS's responsibility to initiate the determination of initial
+              // state by making a request for information to the subsystem.
+              // 
+              //      Lack of mastership
+              //      In the case where CMS does not have mastership of the sensor, CMS shall be
+              // informed about the actual setting of the transmission sectors and its changes
+              // (if any).. Method used by the sensor to return the actual setting of the
+              // transmission sectors and its changes (if any).
+              struct transmission_sector_setting_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter setting_message. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::transmission_sector_set_type setting_message;
+              };
+#pragma keylist transmission_sector_setting_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

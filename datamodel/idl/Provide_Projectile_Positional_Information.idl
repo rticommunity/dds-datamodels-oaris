@@ -1,0 +1,82 @@
+#ifndef PROVIDE_PROJECTILE_POSITIONAL_INFORMATIONDEFVAR
+#define PROVIDE_PROJECTILE_POSITIONAL_INFORMATIONDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Air_Engagement_Support.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Radar_Services {
+
+
+          module Air_Engagement_Support {
+
+
+            module Provide_Projectile_Positional_Information {
+
+
+
+              // Version 1.0
+              // Topic type for operation report_miss_indication. Fire control radars suitable
+              // for Close-In-Weapon-Systems need the capability to observe the projectiles in
+              // flight, to measure at which distance they pass the target so that related shot
+              // corrections for the gun may be calculated, automatically. The measured distance
+              // in azimuth and elevation is called miss indication in the following.
+              // 
+              //      This capability may be available in a non-close-in-weapon-system
+              // environment, too. It may also be available for phased-array radars.
+              // 
+              //      Mastership of the subsystem must not have any impact upon the miss
+              // indication capability.
+              // 
+              //      See also service 'Process Target Designation'.. Via this message, the
+              // subsystem reports to the CMS the miss indication.
+              struct report_miss_indication_type
+              {
+              	// Field for interface operation parameter MissIndicationData. 
+              	org::omg::c4i::Domain_Model::Radar_Domain::Air_Engagement_Support::miss_indication_data_type MissIndicationData;
+              	// Field for interface operation parameter RequestID. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
+              };
+#pragma keylist report_miss_indication_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation request_miss_indication. . Request the subsystem to
+              // report a miss indication.
+              struct request_miss_indication_type
+              {
+              	// Field for interface operation parameter RequestID. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
+              	// Field for interface operation parameter ExpectedHitData. 
+              	org::omg::c4i::Domain_Model::Radar_Domain::Air_Engagement_Support::expected_hit_data_type ExpectedHitData;
+              };
+#pragma keylist request_miss_indication_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

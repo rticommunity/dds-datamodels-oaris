@@ -1,0 +1,167 @@
+#ifndef CONTROL_REPLAYDEFVAR
+#define CONTROL_REPLAYDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Recording_and_Replay.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Recording_and_Replay {
+
+
+            module Control_Replay {
+
+
+
+              // Version 1.0
+              // Topic type for operation end_of_recording. This interface defines how the CMS
+              // controls the replay of information previously recorded using Control_Recording
+              //      Replay is supported in two modes: REAL-TIME and RAW. REAL-TIME mode is
+              // used to replay in real time, or at a multiple of real-time, data that was
+              // visible on other OARIS interfaces via the interfaces used during recording. RAW
+              // mode is used to replay data that was visible on other OARIS interfaces and/or
+              // internal subsystem data that was not available on other OARIS interfaces. In
+              // this case the data is merely transferred to the CMS as a set of time-tagged
+              // values with no attempt made to reconstruct real-time behaviour.
+              //      One or more recordings must have been made using Control_Recording.
+              //      For simplicity, concurrent recording and replay is not supported.. The
+              // subsystem has reached the end of the recording before a stop command was
+              // received.
+              struct end_of_recording_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist end_of_recording_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_recording. This interface defines how the CMS
+              // controls the replay of information previously recorded using Control_Recording
+              //      Replay is supported in two modes: REAL-TIME and RAW. REAL-TIME mode is
+              // used to replay in real time, or at a multiple of real-time, data that was
+              // visible on other OARIS interfaces via the interfaces used during recording. RAW
+              // mode is used to replay data that was visible on other OARIS interfaces and/or
+              // internal subsystem data that was not available on other OARIS interfaces. In
+              // this case the data is merely transferred to the CMS as a set of time-tagged
+              // values with no attempt made to reconstruct real-time behaviour.
+              //      One or more recordings must have been made using Control_Recording.
+              //      For simplicity, concurrent recording and replay is not supported.. Used to
+              // transfer a raw recording to the CMS
+              struct receive_recording_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter requested_recording. The raw recording
+              	// data.
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::recording_type requested_recording;
+              };
+#pragma keylist receive_recording_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation resume_replay. . Resumes replay following a stop
+              // command
+              struct resume_replay_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter actual_time. The current time (time of
+              	// day) at which playback should start. This allows synchronisation of playback
+              	// from different subsystems.
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::actual_time_type actual_time;
+              	// Field for interface operation parameter replay_speed. Controls the replay speed.
+              	// 1.0 represents real time.
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::replay_speed_type replay_speed;
+              };
+#pragma keylist resume_replay_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation start_replay. . Starts replay as specified
+              struct start_replay_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter replay_parameters_list. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::replay_set_type replay_parameters_list;
+              	// Field for interface operation parameter id. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::recording_id_type id;
+              	// Field for interface operation parameter actual_time. The current time (time of
+              	// day) at which playback should start. This allows synchronisation of playback
+              	// from different subsystems.
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::actual_time_type actual_time;
+              	// Field for interface operation parameter recorded_time. The time in the
+              	// recording at which playback should start.
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::recorded_time_type recorded_time;
+              	// Field for interface operation parameter replay_speed. Controls the replay speed.
+              	// 1.0 represents real time.
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::replay_speed_type replay_speed;
+              };
+#pragma keylist start_replay_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation stop_replay. . Stops replay
+              struct stop_replay_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist stop_replay_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation upload_recording. . Requests transfer of a raw
+              // recording
+              struct upload_recording_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter id. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::recording_id_type id;
+              };
+#pragma keylist upload_recording_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

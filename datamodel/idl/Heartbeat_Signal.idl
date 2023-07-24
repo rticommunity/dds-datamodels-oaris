@@ -1,0 +1,72 @@
+#ifndef HEARTBEAT_SIGNALDEFVAR
+#define HEARTBEAT_SIGNALDEFVAR
+#include "Common_Types.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Subsystem_Control {
+
+
+            module Heartbeat_Signal {
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_cms_heartbeat_signal. . Receive the periodic
+              // heartbeat signal to verify, that the connection is still alive.
+              struct receive_cms_heartbeat_signal_type
+              {
+              	// Field for interface operation parameter count. This parameter is used with
+              	// implementation specific semantics for monitoring interface participant
+              	// liveliness.
+              	unsigned long count;
+              };
+#pragma keylist receive_cms_heartbeat_signal_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_subsystem_heartbeat_signal. The service
+              // describes how the availability of an established communication between CMS and
+              // the subsystem as well as the subsystem itself shall be monitored. The heartbeat
+              // signal is triggered by Control Interface Connection. The basic flow is
+              // asynchronous.
+              // 
+              //      The actor is the Combat Management System. . Receive the periodic
+              // heartbeat signal to verify, that the connection is still alive.
+              struct receive_subsystem_heartbeat_signal_type
+              {
+              	// Field for interface operation parameter count. This parameter is used with
+              	// implementation specific semantics for monitoring interface participant
+              	// liveliness.
+              	unsigned long count;
+              };
+#pragma keylist receive_subsystem_heartbeat_signal_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

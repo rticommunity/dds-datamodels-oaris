@@ -1,0 +1,222 @@
+#ifndef RECORDING_AND_REPLAYDEFVAR
+#define RECORDING_AND_REPLAYDEFVAR
+#include "Common_Types.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Domain_Model {
+
+
+        module Subsystem_Domain {
+
+
+          module Recording_and_Replay {
+
+
+
+            // Version 1.0
+            // The current time (time of day). Used to indicate when playback should start.
+            // This allows synchronisation of playback from different subsystems.
+            typedef Domain_Model::Common_Types::time_type actual_time_type;
+  
+
+
+
+
+            // Version 1.0
+            // The amount by which a parameter shall change in order to be recorded, when
+            // recording on change
+            typedef float change_threshold_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<32> parameter_parameter_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // Identified the parameter to be recorded
+            struct parameter_type
+            {
+            	parameter_parameter_string_type parameter;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Defined the rate at which the parameter is to be recorded for periodic recording
+            typedef float rate_type;
+  
+
+
+
+
+            // Version 1.0
+            // Boolean specifying record on change (true) or periodic (false)
+            typedef boolean record_on_change_type;
+  
+
+
+
+
+            // Version 1.0
+            // A string type
+            typedef string<20> recorded_data_recorded_value_string_type;
+  
+
+
+
+
+            // Version 1.0
+            // Data recorded against the specified parameter
+            struct recorded_data_type
+            {
+            	// This needs to reference allowable values defined by the possible recording
+            	// parameters - see 'recording parameters'.
+            	recorded_data_recorded_value_string_type recorded_value;
+            	org::omg::c4i::Domain_Model::Common_Types::time_type time_stamp;
+            	parameter_type parameter;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // The time in a recording. This is used to indicate the position in the recording
+            // at which playback should start.
+            typedef Domain_Model::Common_Types::time_type recorded_time_type;
+  
+
+
+
+
+            // Version 1.0
+            // Specifies the recording characteristics required for each parameter
+            struct recording_descriptor_type
+            {
+            	// When record_on_change is true, any change greater than the change_threshold
+            	// from the last recorded value shall be recorded. This only applies for numeric
+            	// quantities i.e. not enumerated types, and is ignored otherwise.
+            	change_threshold_type change_threshold;
+            	// Specifies recording rate when record_on_change is false.
+            	rate_type rate;
+            	// Indicates whether to record all changes greater than the change threshold or
+            	// record at the specified rate.
+            	record_on_change_type record_on_change;
+            	parameter_type parameter;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Used to identify a specific recording. The subsystem shall manage a number of
+            // recordings and associate recording ids with them in a subsystem dependent way.
+            // Once associated, it passes that reference through the parameter recording_id to
+            // the CMS so that the CMS may ask for a specific recording later on. Again, the
+            // CMS manages the relationship between the recording_id and the recording it
+            // requested to be made in a system dependent way.
+            // 
+            //    There is no intention to model the method either the subsystem or the CMS
+            // uses to manage the relationship between recording_id and the recordings as this
+            // is transparent to the interface and would unnecessarily restrict the choices
+            // available to the designers.
+            typedef long recording_id_type;
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence,
+            // which should contain at least one instance.
+            typedef sequence<recorded_data_type> recording_recorded_data_type;
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence,
+            // which should contain at least one instance.
+            typedef sequence<recording_descriptor_type> recording_set_recording_descriptor_type;
+  
+
+
+
+
+            // Version 1.0
+            // A set of recording descriptors specifying what is to be recorded
+            struct recording_set_type
+            {
+            	recording_set_recording_descriptor_type recording_descriptor;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A recording: a set of recorded data
+            struct recording_type
+            {
+            	recording_recorded_data_type recorded_data;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence,
+            // which should contain at least one instance.
+            typedef sequence<parameter_type> replay_set_parameter_type;
+  
+
+
+
+
+            // Version 1.0
+            // A set of parameters required to be replayed. These must exist in the associated
+            // recording set to be of any use.
+            struct replay_set_type
+            {
+            	replay_set_parameter_type parameter;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Controls the replay speed. 1.0 represents real time.
+            typedef float replay_speed_type;
+  
+
+
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

@@ -1,0 +1,70 @@
+#ifndef RESTARTDEFVAR
+#define RESTARTDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Subsystem_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Extended_Subsystem_Control {
+
+
+            module Restart {
+
+
+
+              // Version 1.0
+              // Topic type for operation perform_restart. . Interface used by the subsystem to
+              // receive a request from the CMS to execute a restart.
+              struct perform_restart_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist perform_restart_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_restart_state. The purpose of this interface
+              // is to cause a normal transition to STANDBY and then to READY states as defined
+              // by Manage Technical State.. Interface used by CMS to receive an indication from
+              // the subsystem that it has successfully performed restart.
+              struct receive_restart_state_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter technical_state. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              };
+#pragma keylist receive_restart_state_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

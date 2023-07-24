@@ -1,0 +1,129 @@
+#ifndef MANAGE_PHYSICAL_CONFIGURATIONDEFVAR
+#define MANAGE_PHYSICAL_CONFIGURATIONDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Extended_Subsystem_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Extended_Subsystem_Control {
+
+
+            module Manage_Physical_Configuration {
+
+
+
+              // Version 1.0
+              // Topic type for operation change_physical_configuration. . Interface used by the
+              // subsystem to receive requests from the CMS to change its physical configuration
+              // data to align with data located at the url specified in the request.
+              struct change_physical_configuration_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter configuraiton_url. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::configuration_url_type configuraiton_url;
+              };
+#pragma keylist change_physical_configuration_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation provide_physical_configuration. . Interface used by
+              // the subsystem to receive requests from the CMS to provide its current physical
+              // configuration data.
+              struct provide_physical_configuration_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist provide_physical_configuration_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_physical_configuration_success. The purpose of
+              // this interface is to provide a mechanism to exchange a physical configuration
+              // data file between a subsystem and the CMS (potentially xml format). The exact
+              // format of the file is subsystem specific. The purpose of the file is to support
+              // the maintainer with facilities to configure the internal parts of the subsystem;
+              // also to be used as integration support.
+              // 
+              //      Additional Information:
+              // 
+              //      There are at least two cases where the CMS would provide a sub-
+              // system&rsquo;s physical configuration.  Case 1 is when the sub-system was able
+              // to detect a configuration change and the data must be manually entered in sub-
+              // system configuration data (e.g. a servo type and serial number).  Case 2 is
+              // when the sub-system is being developed and changes to the configuration which
+              // cause changes in system behavior are being tested.. Interface used by CMS to
+              // receive an indication from the subsystem that it has successfully changed its
+              // physical configuration data.
+              struct receive_physical_configuration_success_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist receive_physical_configuration_success_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_physical_configuration. The purpose of this
+              // interface is to provide a mechanism to exchange a physical configuration data
+              // file between a subsystem and the CMS (potentially xml format). The exact format
+              // of the file is subsystem specific. The purpose of the file is to support the
+              // maintainer with facilities to configure the internal parts of the subsystem;
+              // also to be used as integration support.
+              // 
+              //      Additional Information:
+              // 
+              //      There are at least two cases where the CMS would provide a sub-
+              // system&rsquo;s physical configuration.  Case 1 is when the sub-system was able
+              // to detect a configuration change and the data must be manually entered in sub-
+              // system configuration data (e.g. a servo type and serial number).  Case 2 is
+              // when the sub-system is being developed and changes to the configuration which
+              // cause changes in system behavior are being tested.. Interface used by CMS to
+              // receive a url to access physical configuration data from the subsystem. 
+              struct receive_physical_configuration_type
+              {
+              	// Field for interface operation parameter configuration_url. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::configuration_url_type configuration_url;
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist receive_physical_configuration_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

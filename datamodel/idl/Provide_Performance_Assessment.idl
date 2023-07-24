@@ -1,0 +1,105 @@
+#ifndef PROVIDE_PERFORMANCE_ASSESSMENTDEFVAR
+#define PROVIDE_PERFORMANCE_ASSESSMENTDEFVAR
+#include "Common_Types.idl"
+
+#include "Sensor_Performance.idl"
+
+#include "Requests.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Sensor_Services {
+
+
+          module Sensor_Performance {
+
+
+            module Provide_Performance_Assessment {
+
+
+
+              // Version 1.0
+              // Topic type for operation performance_assessment_request. Subsystem interface
+              // for provision of current performance assessment.
+              //      Note that the coordinates are always polar for this service and that the
+              // origin is always the sensor reference point as per the coordinates and
+              // positions package.. The CMS requests assessment of actual performance of the
+              // subsystem. The aspect of performance requested is a parameter of the request.
+              struct performance_assessment_request_type
+              {
+              	// Field for interface operation parameter request_id. The unique identifier for
+              	// this assessment. This identifier is contained in all related replies from the
+              	// sensor.
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter request. Details of the assessment
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::performance_assessment_request_type request;
+              };
+#pragma keylist performance_assessment_request_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation performance_assessment_response. This is incremental
+              // to <i>Register Interest</i>, which deals with the subscription to subsystem
+              // functions and <i>Provide Nominal Performance</i> which provides the subsystem
+              // nominal performance. This interface reports the real-time performance of the
+              // available subsystem functions against the goals of the mission. The reported
+              // performance is that currently being attained by the subsystem subject to the
+              // current operating regime and environmental conditions, including any clutter
+              // and jamming and taking account of any mitigation/cancellation of such effects
+              // by the subsystem.
+              //      This interface is aimed at a subsystem such as an MFR radar. Information
+              // is provided to the Command function allowing decisions to be made on the
+              // achieved performance, which is often considerably different to the anticipated
+              // performance level as reported through the Provide Nominal Performance Service.
+              // 
+              //      The most basic example of performance would be reporting of the radar
+              // coverage, in elevation, azimuth and range, for the current operating regime and
+              // environmental conditions. This would take account of any clutter and jamming
+              // present. Other examples might be that the actor requests the probability of
+              // detection for a specified target type or perhaps the probability of correct
+              // automatic classification of such a target within a specified range under
+              // current environmental conditions N.B. if the radar is operating in an
+              // appropriate mode then real-time clutter and/or jamming data might be available
+              // to the radar subsystem. Otherwise the actor would have to supply any known data
+              // to the subsystem for performance assessment (see Receive Encyclopaedic Data and
+              // Receive Geographic Information). If no environmental data is specified then the
+              // design performance would be reported.. The subsystem responds to the previous
+              // performance assessment request with its assessment of the requested aspect of
+              // actual performance.
+              struct performance_assessment_response_type
+              {
+              	// Field for interface operation parameter request_id. The unique identifier for
+              	// this assessment. This identifier is supplied by the CMS when the assessment is
+              	// requested.
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter performance_assessment. The details of
+              	// the assessment
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::performance_assessment_report_type performance_assessment;
+              };
+#pragma keylist performance_assessment_response_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

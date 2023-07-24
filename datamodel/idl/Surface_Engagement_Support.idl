@@ -1,0 +1,93 @@
+#ifndef SURFACE_ENGAGEMENT_SUPPORTDEFVAR
+#define SURFACE_ENGAGEMENT_SUPPORTDEFVAR
+#include "Coordinates_and_Positions.idl"
+
+#include "Shape_Model.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Domain_Model {
+
+
+        module Radar_Domain {
+
+
+          module Surface_Engagement_Support {
+
+
+
+            // Version 1.0
+            // the area ID assigned by the sensor.
+            typedef unsigned short splash_spotting_area_id_type;
+  
+
+
+
+
+            // Version 1.0
+            // The area definition from the User (CMS) when Splash Spotting is defined using
+            // the service "activate splash spotting area by position".  The minimum and
+            // maximum available sizes are defined in "Manage Subsystem Parameters".
+            struct splash_spotting_area_position_type
+            {
+            	// when max is less than min, areas covers the north azimuth
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type azimuth_max;
+            	// when min is less than max, areas covers the north azimuth
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type azimuth_min;
+            	// limited to less than or equal to instrumented range
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type range_max;
+            	// limited to greater than or equal to minimum visible range
+            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type range_min;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // Definition of a single splash spotting area.
+            struct splash_spotting_area_type
+            {
+            	// Shape and size of the splash spotting area 
+            	org::omg::c4i::Domain_Model::Common_Types::Shape_Model::truncated_sector_type shape;
+            	// Area ID of the splash spotting area.
+            	splash_spotting_area_id_type area_id;
+            };
+  
+
+
+
+
+            // Version 1.0
+            // A sequence type, to represent multiple values. Note: variable length sequence.
+            typedef sequence<splash_spotting_area_type, 32> splash_spotting_area_set_splash_spotting_area_descriptor_type;
+  
+
+
+
+
+            // Version 1.0
+            // A set consisting of splash spotting areas.
+            struct splash_spotting_area_set_type
+            {
+            	splash_spotting_area_set_splash_spotting_area_descriptor_type splash_spotting_area_descriptor;
+            };
+  
+
+
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

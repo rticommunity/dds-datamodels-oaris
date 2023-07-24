@@ -1,0 +1,72 @@
+#ifndef SHUTDOWNDEFVAR
+#define SHUTDOWNDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Subsystem_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Extended_Subsystem_Control {
+
+
+            module Shutdown {
+
+
+
+              // Version 1.0
+              // Topic type for operation perform_shutdown. . Interface used by the subsystem to
+              // receive a request from the CMS to execute a shutdown.
+              struct perform_shutdown_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              };
+#pragma keylist perform_shutdown_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation receive_shutdown_state. The purpose of this interface
+              // is to transition the sub-system to the STANDBY state from any other state as
+              // defined by Manage Technical State. Note: this shall cause the Subsystem to
+              // cease radiating if it is in an ONLINE state with emissions enabled.. Interface
+              // used by CMS to receive an indication from the subsystem that it has
+              // successfully performed shutdown.
+              struct receive_shutdown_state_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter technical_state. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              };
+#pragma keylist receive_shutdown_state_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

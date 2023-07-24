@@ -1,0 +1,219 @@
+#ifndef MANAGE_SUBSYSTEM_PARAMETERSDEFVAR
+#define MANAGE_SUBSYSTEM_PARAMETERSDEFVAR
+#include "Common_Types.idl"
+
+#include "Requests.idl"
+
+#include "Subsystem_Control.idl"
+
+
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Subsystem_Services {
+
+
+          module Subsystem_Control {
+
+
+            module Manage_Subsystem_Parameters {
+
+
+
+              // Version 1.0
+              // Topic type for operation modify_parameter_values. . 
+              struct modify_parameter_values_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter the_name_value_set. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_value_sequence_type the_name_value_set;
+              };
+#pragma keylist modify_parameter_values_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation report_parameter_descriptors. The service allows the
+              // actor to obtain and modify the values of parameters of the subsystem. It also
+              // provides the facilities to retrieve the descriptions of parameters available in
+              // a certain subsystem.
+              // 
+              //      The actor of the service is the Combat Management System.
+              // 
+              //      The service starts when the CMS requests one of the following:
+              //      <ul>
+              //      	<li>Parameter value retrieval</li>
+              //      	<li>Parameter value modification</li>
+              //      	<li>Retrieval of parameter descriptor,</li>
+              //      </ul>
+              //      with a list of parameter names (and values in case of modification).
+              //      A parameter value may be structured (e.g. a vector or a table).
+              //      The service ends when the subsystem has provided the requested information
+              // or modified the parameter value.
+              // 
+              //      It is the CMS's responsibility to initiate the determination of initial
+              // state by making a request for information to the subsystem.
+              // 
+              //      Parameter names used by a subsystem are to be unique within the scope of
+              // that subsystem. Requests for parameter descriptions and to get and set current
+              // values are consequently well-defined. Parameter names may be structured using a
+              // namespace scheme to promote uniqueness.
+              // 
+              //      Unknown parameter
+              //      On receipt of a request for parameter value retrieval, parameter value
+              // modification or parameter descriptor retrieval for an unknown parameter name,
+              // the subsystem responds with an indication “unknown parameter”. Other (correctly
+              // identified) parameters in the same request are processed as requested.
+              // 
+              //      Illegal parameter value
+              //      On receipt of a request for parameter value modification with a parameter
+              // value that is outside the allowable range of the specified parameter, the
+              // subsystem responds with an indication “illegal parameter value” and does not
+              // change the parameter value.
+              //      This includes inconsistencies of parameter type (e.g. real where integer
+              // is expected) and structure (e.g. vector of 2 elements, where a vector of 3 is
+              // expected).
+              //      Other parameters with legal values in the same request are modified as
+              // requested.
+              //      In case of an illegal value for an element of a structured parameter, the
+              // entire parameter remains unchanged.
+              //      <b>
+              //      </b>Modification of parameter value
+              //      A parameter value may only be modified in the technical state(s) as
+              // specified in the descriptor of that parameter.
+              // 
+              //      Security
+              //      Access to the service may be restricted to certain parts of the CMS
+              // because of security restrictions. . 
+              struct report_parameter_descriptors_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter the_descriptor_sequence. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::descriptor_sequence the_descriptor_sequence;
+              	// Field for interface operation parameter the_name_error_set. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_error_sequence_type the_name_error_set;
+              };
+#pragma keylist report_parameter_descriptors_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation report_parameter_values. The service allows the actor
+              // to obtain and modify the values of parameters of the subsystem. It also
+              // provides the facilities to retrieve the descriptions of parameters available in
+              // a certain subsystem.
+              // 
+              //      The actor of the service is the Combat Management System.
+              // 
+              //      The service starts when the CMS requests one of the following:
+              //      <ul>
+              //      	<li>Parameter value retrieval</li>
+              //      	<li>Parameter value modification</li>
+              //      	<li>Retrieval of parameter descriptor,</li>
+              //      </ul>
+              //      with a list of parameter names (and values in case of modification).
+              //      A parameter value may be structured (e.g. a vector or a table).
+              //      The service ends when the subsystem has provided the requested information
+              // or modified the parameter value.
+              // 
+              //      It is the CMS's responsibility to initiate the determination of initial
+              // state by making a request for information to the subsystem.
+              // 
+              //      Parameter names used by a subsystem are to be unique within the scope of
+              // that subsystem. Requests for parameter descriptions and to get and set current
+              // values are consequently well-defined. Parameter names may be structured using a
+              // namespace scheme to promote uniqueness.
+              // 
+              //      Unknown parameter
+              //      On receipt of a request for parameter value retrieval, parameter value
+              // modification or parameter descriptor retrieval for an unknown parameter name,
+              // the subsystem responds with an indication “unknown parameter”. Other (correctly
+              // identified) parameters in the same request are processed as requested.
+              // 
+              //      Illegal parameter value
+              //      On receipt of a request for parameter value modification with a parameter
+              // value that is outside the allowable range of the specified parameter, the
+              // subsystem responds with an indication “illegal parameter value” and does not
+              // change the parameter value.
+              //      This includes inconsistencies of parameter type (e.g. real where integer
+              // is expected) and structure (e.g. vector of 2 elements, where a vector of 3 is
+              // expected).
+              //      Other parameters with legal values in the same request are modified as
+              // requested.
+              //      In case of an illegal value for an element of a structured parameter, the
+              // entire parameter remains unchanged.
+              //      <b>
+              //      </b>Modification of parameter value
+              //      A parameter value may only be modified in the technical state(s) as
+              // specified in the descriptor of that parameter.
+              // 
+              //      Security
+              //      Access to the service may be restricted to certain parts of the CMS
+              // because of security restrictions. . 
+              struct report_parameter_values_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter the_name_value_set. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_value_sequence_type the_name_value_set;
+              	// Field for interface operation parameter the_name_error_set. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_error_sequence_type the_name_error_set;
+              };
+#pragma keylist report_parameter_values_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation retrieve_parameter_descriptors. . 
+              struct retrieve_parameter_descriptors_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter the_name_set. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::parameter_name_sequence_type the_name_set;
+              };
+#pragma keylist retrieve_parameter_descriptors_type 
+  
+
+
+
+
+              // Version 1.0
+              // Topic type for operation retrieve_parameter_values. . 
+              struct retrieve_parameter_values_type
+              {
+              	// Field for interface operation parameter request_id. 
+              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              	// Field for interface operation parameter the_name_set. 
+              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::parameter_name_sequence_type the_name_set;
+              };
+#pragma keylist retrieve_parameter_values_type 
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif
