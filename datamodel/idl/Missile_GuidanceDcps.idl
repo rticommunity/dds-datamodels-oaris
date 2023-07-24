@@ -1,0 +1,5 @@
+#ifndef MISSILE_GUIDANCEDCPS_IDL_
+#define MISSILE_GUIDANCEDCPS_IDL_
+#include "dds_dcps.idl"
+#include "Missile_Guidance.idl"
+#endif

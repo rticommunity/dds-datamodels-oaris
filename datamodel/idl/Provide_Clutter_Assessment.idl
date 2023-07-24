@@ -1,12 +1,11 @@
 #ifndef PROVIDE_CLUTTER_ASSESSMENTDEFVAR
 #define PROVIDE_CLUTTER_ASSESSMENTDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Clutter_Reporting.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation provide_clutter_assessment. . Interface used by the
               // subsystem to receive a clutter assessment request from the CMS.
               struct provide_clutter_assessment_type
@@ -38,14 +36,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter clutter_request. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::clutter_assessment_request_type clutter_request;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist provide_clutter_assessment_type 
+#pragma keylist provide_clutter_assessment_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation receive_clutter_assessment. The radar reports visible
               // clutter to the combat management system. The report shall include a map
               // (collection of cells) with information on range, azimuth, elevation and
@@ -65,8 +68,44 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter clutter_report. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::clutter_report_type clutter_report;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_clutter_assessment_type 
+#pragma keylist receive_clutter_assessment_type  subsystem_id
+  
+
+
+
+
+              // Topic type for operation receive_periodic_clutter_assessment. The radar reports
+              // visible clutter to the combat management system. The report shall include a map
+              // (collection of cells) with information on range, azimuth, elevation and
+              // intensity in platform relative coordinates. Clutter may be classified by type,
+              // Land, Sea, Weather (optional), etc.. Intensity may be indicated by linear
+              // signal-to-noise ratio (SNR), log-linear SNR, linear power received, log-linear
+              // power received (e.g. dBm, dBW), linear Radar Cross Section (square meters), or
+              // log-linear RCS (dbsm).
+              // 
+              //      For radars which report clutter assessment without a CMS request, the CMS
+              // shall begin to receive reports upon registration of the Provide Clutter
+              // Assessment interface.. Interface used by CMS to receive periodic clutter
+              // assessment reports from the subystem.
+              struct receive_periodic_clutter_assessment_type
+              {
+              	// Field for interface operation parameter clutter_report. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::clutter_report_type clutter_report;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+              };
+#pragma keylist receive_periodic_clutter_assessment_type  subsystem_id
   
 
 

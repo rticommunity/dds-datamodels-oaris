@@ -1,16 +1,13 @@
 #ifndef SENSOR_PERFORMANCEDEFVAR
 #define SENSOR_PERFORMANCEDEFVAR
 #include "Sensor_Control.idl"
-
 #include "Shape_Model.idl"
-
 #include "Coordinates_and_Positions.idl"
-
 #include "Common_Types.idl"
-
 #include "Subsystem_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -30,7 +27,6 @@ module org {
 
 
 
-            // Version 1.0
             // Target strength (Effective Radiated Power - ERP) of a jammer. The precise
             // semantics of this type are sensor subsystem specific, but a typical
             // interpretation is as a signal to noise ratio in dB.
@@ -40,7 +36,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union interferer_magnitude_type switch (boolean)
             {
@@ -52,7 +47,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: unbounded sequence
             typedef sequence<Domain_Model::Sensor_Domain::Sensor_Control::frequency_band_type> interferer_affected_bands_type;
   
@@ -60,7 +54,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union interferer_position_type switch (boolean)
             {
@@ -72,32 +65,6 @@ module org {
 
 
 
-            // Version 1.0
-            // Enumeration of the types of interferers that are known about.
-            enum interferer_kind
-            {
-            	// Interference from active noise.
-            	ACTIVE_NOISE,
-            	// Interference from clutter.
-            	CLUTTER,
-            	// Interference from a jammer, which is self screening.
-            	SELF_SCREENING_JAMMER,
-            	// Interference from a stand-off jammer
-            	STANDOFF_JAMMER,
-            	// Interference from a strobe jammer.
-            	STROBE,
-            	// The interference source is of a different type to the other declared
-            	// interference kinds
-            	OTHER_TYPE,
-            	// The interference source could not be classified by the sensor subsystem.
-            	NO_STATEMENT
-            };
-  
-
-
-
-
-            // Version 1.0
             // a simple union type, to represent an optional value
             union interferer_affected_volume_type switch (boolean)
             {
@@ -109,7 +76,29 @@ module org {
 
 
 
-            // Version 1.0
+            // Enumeration of the types of interferers that are known about.
+            enum interferer_kind
+            {
+            	// ACTIVE_NOISE
+            	ACTIVE_NOISE,
+            	// CLUTTER
+            	CLUTTER,
+            	// SELF_SCREENING_JAMMER
+            	SELF_SCREENING_JAMMER,
+            	// STANDOFF_JAMMER
+            	STANDOFF_JAMMER,
+            	// STROBE
+            	STROBE,
+            	// OTHER_TYPE
+            	OTHER_TYPE,
+            	// NO_STATEMENT
+            	NO_STATEMENT
+            };
+  
+
+
+
+
             // A single source of interference.
             struct interferer_type
             {
@@ -136,7 +125,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence,
             // which should contain at least one instance.
             typedef sequence<interferer_type> interference_report_interferers_type;
@@ -145,42 +133,17 @@ module org {
 
 
 
-            // Version 1.0
             // Set of interferer objects in a report.
             struct interference_report_type
             {
             	// The interference sources, which are described by the report.
             	interference_report_interferers_type interferers;
             };
-            // Topic type for operation interference_report_periodic. This describes the
-            // process whereby the subsystem provides a set of reports on sources of
-            // interference, including jammers. The data shall, therefore, in general, be non-
-            // real-time but should, where appropriate, be time-tagged and shall be updated
-            // when any observed data changes.
-            //      The sensor need not be radiating but shall at least be receiving. The
-            // subsystem VOI (volume of interest) or other filter mechanisms might be supplied
-            // in a request to the subsystem
-            //      For a nominal effect assessment, the request might contain data on number,
-            // strength/Effective Radiated Power (ERP), type and deployment of jammers and
-            // other interferers affecting radar operations. For example, for each interferer
-            //      <ul>
-            //      	<li>Sensor time-tag</li>
-            //      	<li>Interference type - active noise, self-screening jammer, standoff
-            // jammer etc</li>
-            //      	<li>Strength/Effective Radiated Power</li>
-            //      	<li>Locations - strobes etc.</li>
-            //      </ul>
-            //      <ul>
-            //      	<li>Affected sectors</li>
-            //      	<li>Frequency bands affected</li>
-            //      </ul>. Provides an updated set of interference reports to the CMS.
-#pragma keylist interference_report_type 
   
 
 
 
 
-            // Version 1.0
             // Defined as a signal excess in dB above noise floor for a nominal 0dB target
             // strength, when assessing nominal performance or for the jammer when providing
             // jammer assessment..
@@ -190,7 +153,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union perfomance_bin_value_type switch (boolean)
             {
@@ -202,7 +164,6 @@ module org {
 
 
 
-            // Version 1.0
             // Value of performance in a volume of space. This is given as a signal excess in
             // dB above noise floor for a nominal 0dB target strength.  For a current
             // performance report, this noise floor shall include clutter and jamming. These
@@ -222,7 +183,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence,
             // which should contain at least one instance.
             typedef sequence<perfomance_bin_type> performance_beam_bin_type;
@@ -231,7 +191,6 @@ module org {
 
 
 
-            // Version 1.0
             // Set of performance values for a line of points in space. Each value applies to
             // a volume whose boundaries may be inferred from the numbers of bins and the min
             // and max values in the report.
@@ -249,7 +208,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence,
             // which should contain at least one instance.
             typedef sequence<performance_beam_type> performance_sector_beam_type;
@@ -258,7 +216,6 @@ module org {
 
 
 
-            // Version 1.0
             // A set of performance values for a sector of azimuth [start_azimuth..
             // end_azimuth].
             struct performance_sector_type
@@ -275,7 +232,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence,
             // which should contain at least one instance.
             typedef sequence<performance_sector_type> performance_assessment_report_sector_type;
@@ -284,7 +240,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union performance_assessment_request_start_azimuth_type switch (boolean)
             {
@@ -296,7 +251,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union performance_assessment_request_end_azimuth_type switch (boolean)
             {
@@ -308,7 +262,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union performance_assessment_request_start_elevation_type switch (boolean)
             {
@@ -320,7 +273,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union performance_assessment_request_end_elevation_type switch (boolean)
             {
@@ -332,7 +284,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union performance_assessment_request_min_range_type switch (boolean)
             {
@@ -344,7 +295,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union performance_assessment_request_max_range_type switch (boolean)
             {
@@ -356,7 +306,6 @@ module org {
 
 
 
-            // Version 1.0
             // A performance assessment request consists of an overall volume of interest and
             // a specification of a number of 'bins' into which that volume is to be sub-
             // divided. In response the sensor assess performance for each 'bin'.
@@ -404,17 +353,16 @@ module org {
 
 
 
-            // Version 1.0
             // Contains the results of a performance assessment.
             struct performance_assessment_report_type
             {
             	// The time of validity of the performance assessment.
             	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_report;
+            	// The list of sectors in the performance assessment
+            	performance_assessment_report_sector_type sector;
             	// The actual dimensions of the assessment that is performed are reported with the
             	// result.
             	performance_assessment_request_type assessment_dimensions;
-            	// The list of sectors in the performance assessment
-            	performance_assessment_report_sector_type sector;
             };
   
 

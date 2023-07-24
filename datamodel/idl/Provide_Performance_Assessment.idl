@@ -1,12 +1,11 @@
 #ifndef PROVIDE_PERFORMANCE_ASSESSMENTDEFVAR
 #define PROVIDE_PERFORMANCE_ASSESSMENTDEFVAR
 #include "Common_Types.idl"
-
+#include "Requests.idl"
 #include "Sensor_Performance.idl"
 
-#include "Requests.idl"
 
-
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation performance_assessment_request. Subsystem interface
               // for provision of current performance assessment.
               //      Note that the coordinates are always polar for this service and that the
@@ -44,14 +42,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter request. Details of the assessment
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::performance_assessment_request_type request;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist performance_assessment_request_type 
+#pragma keylist performance_assessment_request_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation performance_assessment_response. This is incremental
               // to <i>Register Interest</i>, which deals with the subscription to subsystem
               // functions and <i>Provide Nominal Performance</i> which provides the subsystem
@@ -89,8 +92,14 @@ module org {
               	// Field for interface operation parameter performance_assessment. The details of
               	// the assessment
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::performance_assessment_report_type performance_assessment;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist performance_assessment_response_type 
+#pragma keylist performance_assessment_response_type  subsystem_id
   
 
 

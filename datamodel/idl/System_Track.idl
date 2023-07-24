@@ -3,6 +3,7 @@
 #include "Coordinates_and_Positions.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -22,7 +23,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union system_track_max_range_limit_type switch (boolean)
             {
@@ -34,7 +34,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union system_track_velocity_accuracy_coordinate_system_type switch (boolean)
             {
@@ -46,7 +45,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union system_track_velocity_accuracy_type switch (boolean)
             {
@@ -58,12 +56,15 @@ module org {
 
 
 
-            // Version 1.0
             // System track information is limited to information required by a subsystem for
             // missile guidance.
             struct system_track_type
             {
+#ifdef DDS_XTYPES
+            	@Key org::omg::c4i::Domain_Model::Common_Types::system_track_id_type system_track_number;
+#else
             	org::omg::c4i::Domain_Model::Common_Types::system_track_id_type system_track_number;
+#endif
             	boolean simulated;
             	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
             	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_coordinate_system;
@@ -75,11 +76,17 @@ module org {
             	system_track_velocity_accuracy_coordinate_system_type velocity_accuracy_coordinate_system;
             	system_track_velocity_accuracy_type velocity_accuracy;
             	system_track_max_range_limit_type max_range_limit;
+            // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+            	@Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+            	org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
             };
             // Topic type for operation provide_track. . 
             // Topic type for operation provide_track. . 
             // Topic type for operation provide_track. . 
-#pragma keylist system_track_type 
+#pragma keylist system_track_type system_track_number subsystem_id
   
 
 

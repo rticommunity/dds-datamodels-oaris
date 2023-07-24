@@ -1,12 +1,11 @@
 #ifndef AIR_ENGAGEMENT_SUPPORTDEFVAR
 #define AIR_ENGAGEMENT_SUPPORTDEFVAR
 #include "Common_Types.idl"
-
 #include "Track_Reporting.idl"
-
 #include "Coordinates_and_Positions.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -26,7 +25,6 @@ module org {
 
 
 
-            // Version 1.0
             // Identifies the kinematics of the projectile that is expected to hit the target.
             struct projectile_kinematics_type
             {
@@ -42,7 +40,6 @@ module org {
 
 
 
-            // Version 1.0
             // Expected hit identifies the target and the time a hit is expected. This data is
             // used to initiate the evaluation of a miss indication within the radar.
             struct expected_hit_data_type
@@ -58,7 +55,6 @@ module org {
 
 
 
-            // Version 1.0
             // Is sent once a hit or miss is noted.
             struct miss_indication_data_type
             {

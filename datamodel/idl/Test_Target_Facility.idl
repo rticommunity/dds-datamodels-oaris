@@ -1,12 +1,11 @@
 #ifndef TEST_TARGET_FACILITYDEFVAR
 #define TEST_TARGET_FACILITYDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Sensor_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation notify_test_target. The sensor is requested to
               // activate/deactivate the execution of its internal functional test and
               // stimulation realized by means of test targets generation. A number of Test
@@ -73,14 +71,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter test_target_scenario_state. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_state_type test_target_scenario_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist notify_test_target_type 
+#pragma keylist notify_test_target_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation set_test_target_facility_state. This is the Subsystem
               // interface for testing target facilities.. Method used by the CMS to send an
               // activation request of a specified Test Target scenario.
@@ -90,8 +93,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter scenario_state. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_state_type scenario_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist set_test_target_facility_state_type 
+#pragma keylist set_test_target_facility_state_type  subsystem_id
   
 
 

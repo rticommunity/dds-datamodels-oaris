@@ -2,6 +2,7 @@
 #define SIMULATION_SUPPORTDEFVAR
 
 
+// Version 1.1
 module org {
 
 
@@ -21,7 +22,6 @@ module org {
 
 
 
-            // Version 1.0
             // A string type
             typedef string<200> fault_script_details_of_fault_string_type;
   
@@ -29,7 +29,6 @@ module org {
 
 
 
-            // Version 1.0
             // Identifies a single fault script.
             typedef string<6> fault_script_id_type;
   
@@ -37,7 +36,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence.
             typedef sequence<fault_script_id_type, 100> fault_script_ids_script_id_type;
   
@@ -45,7 +43,6 @@ module org {
 
 
 
-            // Version 1.0
             // This class represents a set of  references to fault scripts
             struct fault_script_ids_type
             {
@@ -56,7 +53,6 @@ module org {
 
 
 
-            // Version 1.0
             // Definition of a fault script. The exact form of this is not yet defined, this
             // class represents the essential attributes. It would probably be some form of
             // string, perhaps an XML document.
@@ -71,7 +67,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence.
             typedef sequence<fault_script_type, 100> fault_scripts_script_type;
   
@@ -79,7 +74,6 @@ module org {
 
 
 
-            // Version 1.0
             // This class represents a set of fault scripts
             struct fault_scripts_type
             {
@@ -90,7 +84,6 @@ module org {
 
 
 
-            // Version 1.0
             // Whether simulated mode is in operation
             struct sim_mode_status_type
             {
@@ -102,7 +95,6 @@ module org {
 
 
 
-            // Version 1.0
             // A request to change the simulation mode
             struct start_stop_sim_mode_request_type
             {
@@ -114,7 +106,6 @@ module org {
 
 
 
-            // Version 1.0
             // A Simulation Management (SIMAN) request, sent from a Simulation Manager to
             // request that one or more entities either
             //    a) pause their simulation session

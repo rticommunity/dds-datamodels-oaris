@@ -1,0 +1,5 @@
+#ifndef ENCYCLOPAEDIC_SUPPORTDCPS_IDL_
+#define ENCYCLOPAEDIC_SUPPORTDCPS_IDL_
+#include "dds_dcps.idl"
+#include "Encyclopaedic_Support.idl"
+#endif

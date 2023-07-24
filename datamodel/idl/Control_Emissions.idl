@@ -1,12 +1,11 @@
 #ifndef CONTROL_EMISSIONSDEFVAR
 #define CONTROL_EMISSIONSDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Sensor_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation control_emission_setting. The sensor is requested to
               // inhibit/enable own emissions. In the case where the sensor is a radar, this
               // shall result in the Radiation on/off command.
@@ -61,14 +59,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter emission_state. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::control_emission_state_type emission_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist control_emission_setting_type 
+#pragma keylist control_emission_setting_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation set_control_emission. This is the Subsystem interface
               // for controlling emissions.. Method used by the CMS to send an Emissions on/off
               // request to the sensor.
@@ -78,8 +81,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter control_emission_state. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::control_emission_state_type control_emission_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist set_control_emission_type 
+#pragma keylist set_control_emission_type  subsystem_id
   
 
 

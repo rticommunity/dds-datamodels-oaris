@@ -1,0 +1,801 @@
+#ifndef PROVIDE_CLUTTER_ASSESSMENTDCPS_IDL_
+#define PROVIDE_CLUTTER_ASSESSMENTDCPS_IDL_
+
+#include "dds_dcps.idl"
+
+#include "Provide_Clutter_Assessment.idl"
+
+module org {
+
+    module omg {
+
+        module c4i {
+
+            module Service_Interfaces {
+
+                module Sensor_Services {
+
+                    module Clutter_Reporting {
+
+                        module Provide_Clutter_Assessment {
+
+                            typedef sequence<provide_clutter_assessment_type> provide_clutter_assessment_typeSeq;
+
+                            local interface provide_clutter_assessment_typeTypeSupportInterface : ::DDS::TypeSupport { };
+
+                            local interface provide_clutter_assessment_typeDataWriter : ::DDS::DataWriter {
+                                ::DDS::InstanceHandle_t register_instance(
+                                  in provide_clutter_assessment_type instance_data);
+
+                                ::DDS::InstanceHandle_t register_instance_w_timestamp(
+                                  in provide_clutter_assessment_type instance_data,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t unregister_instance(
+                                  in provide_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t unregister_instance_w_timestamp(
+                                  in provide_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t write(
+                                  in provide_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t write_w_timestamp(
+                                  in provide_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t dispose(
+                                  in provide_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t dispose_w_timestamp(
+                                  in provide_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t writedispose(
+                                  in provide_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t writedispose_w_timestamp(
+                                  in provide_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout provide_clutter_assessment_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in provide_clutter_assessment_type instance_data);
+
+                            };
+
+                            local interface provide_clutter_assessment_typeDataReader : ::DDS::DataReader {
+                                ::DDS::ReturnCode_t read(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout provide_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout provide_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout provide_clutter_assessment_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in provide_clutter_assessment_type instance);
+
+                            };
+
+                            local interface provide_clutter_assessment_typeDataReaderView : ::DDS::DataReaderView {
+                                ::DDS::ReturnCode_t read(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout provide_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout provide_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout provide_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout provide_clutter_assessment_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in provide_clutter_assessment_type instance);
+                            };
+                            typedef sequence<receive_clutter_assessment_type> receive_clutter_assessment_typeSeq;
+
+                            local interface receive_clutter_assessment_typeTypeSupportInterface : ::DDS::TypeSupport { };
+
+                            local interface receive_clutter_assessment_typeDataWriter : ::DDS::DataWriter {
+                                ::DDS::InstanceHandle_t register_instance(
+                                  in receive_clutter_assessment_type instance_data);
+
+                                ::DDS::InstanceHandle_t register_instance_w_timestamp(
+                                  in receive_clutter_assessment_type instance_data,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t unregister_instance(
+                                  in receive_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t unregister_instance_w_timestamp(
+                                  in receive_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t write(
+                                  in receive_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t write_w_timestamp(
+                                  in receive_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t dispose(
+                                  in receive_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t dispose_w_timestamp(
+                                  in receive_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t writedispose(
+                                  in receive_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t writedispose_w_timestamp(
+                                  in receive_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout receive_clutter_assessment_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in receive_clutter_assessment_type instance_data);
+
+                            };
+
+                            local interface receive_clutter_assessment_typeDataReader : ::DDS::DataReader {
+                                ::DDS::ReturnCode_t read(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout receive_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout receive_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout receive_clutter_assessment_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in receive_clutter_assessment_type instance);
+
+                            };
+
+                            local interface receive_clutter_assessment_typeDataReaderView : ::DDS::DataReaderView {
+                                ::DDS::ReturnCode_t read(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout receive_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout receive_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout receive_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout receive_clutter_assessment_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in receive_clutter_assessment_type instance);
+                            };
+                            typedef sequence<receive_periodic_clutter_assessment_type> receive_periodic_clutter_assessment_typeSeq;
+
+                            local interface receive_periodic_clutter_assessment_typeTypeSupportInterface : ::DDS::TypeSupport { };
+
+                            local interface receive_periodic_clutter_assessment_typeDataWriter : ::DDS::DataWriter {
+                                ::DDS::InstanceHandle_t register_instance(
+                                  in receive_periodic_clutter_assessment_type instance_data);
+
+                                ::DDS::InstanceHandle_t register_instance_w_timestamp(
+                                  in receive_periodic_clutter_assessment_type instance_data,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t unregister_instance(
+                                  in receive_periodic_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t unregister_instance_w_timestamp(
+                                  in receive_periodic_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t write(
+                                  in receive_periodic_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t write_w_timestamp(
+                                  in receive_periodic_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t dispose(
+                                  in receive_periodic_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t dispose_w_timestamp(
+                                  in receive_periodic_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t writedispose(
+                                  in receive_periodic_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t writedispose_w_timestamp(
+                                  in receive_periodic_clutter_assessment_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout receive_periodic_clutter_assessment_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in receive_periodic_clutter_assessment_type instance_data);
+
+                            };
+
+                            local interface receive_periodic_clutter_assessment_typeDataReader : ::DDS::DataReader {
+                                ::DDS::ReturnCode_t read(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout receive_periodic_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout receive_periodic_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout receive_periodic_clutter_assessment_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in receive_periodic_clutter_assessment_type instance);
+
+                            };
+
+                            local interface receive_periodic_clutter_assessment_typeDataReaderView : ::DDS::DataReaderView {
+                                ::DDS::ReturnCode_t read(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout receive_periodic_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout receive_periodic_clutter_assessment_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout receive_periodic_clutter_assessment_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout receive_periodic_clutter_assessment_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in receive_periodic_clutter_assessment_type instance);
+                            };
+                        };
+
+                    };
+
+                };
+
+            };
+
+        };
+
+    };
+
+};
+
+#endif

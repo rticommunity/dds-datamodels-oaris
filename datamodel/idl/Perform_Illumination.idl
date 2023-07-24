@@ -1,12 +1,12 @@
 #ifndef PERFORM_ILLUMINATIONDEFVAR
 #define PERFORM_ILLUMINATIONDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
+#include "System_Track.idl"
 #include "Missile_Guidance.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +29,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation complete. This service covers the control of target
               // illumination to support a semi-active homing missile engagement.
               // 
@@ -60,54 +59,37 @@ module org {
               {
               	// Field for interface operation parameter request_id. 
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist complete_type 
+#pragma keylist complete_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
-              // Topic type for operation receive_error. This service covers the control of
-              // target illumination to support a semi-active homing missile engagement.
-              // 
-              //      The actor is the Combat Management System.
-              // 
-              //      The service is triggered by the illumination request of the actor.
-              // Typically, illumination takes place during a specific period within the
-              // engagement sequence.
-              //      The actor sends an illumination request to the radar.
-              //      On the requested start time, the radar starts illuminating the target with
-              // specified parameters.
-              //      During the illumination, the actor may provide updates of illumination
-              // parameters, e.g. to change the stop time.
-              //      The service ends at stop time of the illumination.
-              // 
-              //      If the radar may not fulfil the illumination request, this is reported to
-              // the actor and the service stops.
-              // 
-              //      If during the illumination a radar fault takes place that prevents
-              // execution of illumination (e.g. illumination frequency not more available),
-              // the health state of the Missile Guidance service (of which this service is
-              // part) becomes DEGRADED (if the Missile Guidance service is still capable of
-              // performing uplinks and/or downlinks) or NOT AVAILABLE, and the service stops.
-              // 
-              //      If the target track becomes lost during the illumination, the service
-              // stops.. 
-              struct receive_error_type
+              // Topic type for operation provide_track. . 
+              struct provide_track_type
               {
-              	// Field for interface operation parameter request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-              	// Field for interface operation parameter error_reason. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::error_reason_type error_reason;
+              	// Field for interface operation parameter track. 
+              	org::omg::c4i::Domain_Model::Common_Types::System_Track::system_track_type track;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_error_type 
+#pragma keylist provide_track_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation request_illumination. . 
               struct request_illumination_type
               {
@@ -115,8 +97,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter request. 
               	org::omg::c4i::Domain_Model::Radar_Domain::Missile_Guidance::illumination_request_type request;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist request_illumination_type 
+#pragma keylist request_illumination_type  subsystem_id
   
 
 

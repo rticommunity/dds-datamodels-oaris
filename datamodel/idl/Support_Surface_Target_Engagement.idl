@@ -1,14 +1,12 @@
 #ifndef SUPPORT_SURFACE_TARGET_ENGAGEMENTDEFVAR
 #define SUPPORT_SURFACE_TARGET_ENGAGEMENTDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Engagement_Support.idl"
-
 #include "Track_Reporting.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -31,7 +29,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation dedesignate_fire_control_channel. . Request to the
               // subsystem to de-designate a fire control channel.
               struct dedesignate_fire_control_channel_type
@@ -40,14 +37,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
               	// Field for interface operation parameter FireControlChannelID. 
               	org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist dedesignate_fire_control_channel_type 
+#pragma keylist dedesignate_fire_control_channel_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation designate_fire_control_channel. . Request to the
               // subsystem to designate a fire control channel.
               struct designate_fire_control_channel_type
@@ -56,14 +58,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter track_id. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type track_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist designate_fire_control_channel_type 
+#pragma keylist designate_fire_control_channel_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation report_availability_state_of_fire_control_channels.
               // This service is intended for fire control radars, as well as surveillance radar
               // systems that have facilities to perform surface target engagements by means of
@@ -91,14 +98,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
               	// Field for interface operation parameter AvailableFireControlChannels. 
               	org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::available_fire_control_channels_type AvailableFireControlChannels;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist report_availability_state_of_fire_control_channels_type 
+#pragma keylist report_availability_state_of_fire_control_channels_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation report_available_fire_control_channel. This service is
               // intended for fire control radars, as well as surveillance radar systems that
               // have facilities to perform surface target engagements by means of dedicated
@@ -125,14 +137,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
               	// Field for interface operation parameter FireControlChannelID. 
               	org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist report_available_fire_control_channel_type 
+#pragma keylist report_available_fire_control_channel_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation report_selected_fire_control_channel. This service is
               // intended for fire control radars, as well as surveillance radar systems that
               // have facilities to perform surface target engagements by means of dedicated
@@ -161,22 +178,33 @@ module org {
               	org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
               	// Field for interface operation parameter SensorTrackId. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type SensorTrackId;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist report_selected_fire_control_channel_type 
+#pragma keylist report_selected_fire_control_channel_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation request_availability_of_fire_control_channels. .
               // Request to the subsystem to report the available fire control channels.
               struct request_availability_of_fire_control_channels_type
               {
               	// Field for interface operation parameter RequestID. 
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist request_availability_of_fire_control_channels_type 
+#pragma keylist request_availability_of_fire_control_channels_type  subsystem_id
   
 
 

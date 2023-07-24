@@ -1,12 +1,11 @@
 #ifndef MANAGE_PHYSICAL_CONFIGURATIONDEFVAR
 #define MANAGE_PHYSICAL_CONFIGURATIONDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Extended_Subsystem_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation change_physical_configuration. . Interface used by the
               // subsystem to receive requests from the CMS to change its physical configuration
               // data to align with data located at the url specified in the request.
@@ -39,14 +37,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter configuraiton_url. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::configuration_url_type configuraiton_url;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist change_physical_configuration_type 
+#pragma keylist change_physical_configuration_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation provide_physical_configuration. . Interface used by
               // the subsystem to receive requests from the CMS to provide its current physical
               // configuration data.
@@ -54,14 +57,19 @@ module org {
               {
               	// Field for interface operation parameter request_id. 
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist provide_physical_configuration_type 
+#pragma keylist provide_physical_configuration_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation receive_physical_configuration_success. The purpose of
               // this interface is to provide a mechanism to exchange a physical configuration
               // data file between a subsystem and the CMS (potentially xml format). The exact
@@ -83,14 +91,19 @@ module org {
               {
               	// Field for interface operation parameter request_id. 
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_physical_configuration_success_type 
+#pragma keylist receive_physical_configuration_success_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation receive_physical_configuration. The purpose of this
               // interface is to provide a mechanism to exchange a physical configuration data
               // file between a subsystem and the CMS (potentially xml format). The exact format
@@ -113,8 +126,14 @@ module org {
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::configuration_url_type configuration_url;
               	// Field for interface operation parameter request_id. 
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_physical_configuration_type 
+#pragma keylist receive_physical_configuration_type  subsystem_id
   
 
 

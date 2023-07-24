@@ -2,6 +2,7 @@
 #define ENCYCLOPAEDIC_SUPPORTDEFVAR
 
 
+// Version 1.1
 module org {
 
 
@@ -21,7 +22,6 @@ module org {
 
 
 
-            // Version 1.0
             // Standard description of the encyclopaedic data set
             typedef string<60> data_descriptor_type;
   
@@ -29,7 +29,6 @@ module org {
 
 
 
-            // Version 1.0
             // Representation of a Uniform Resource Locator see www.w3.org
             typedef string<255> url_type;
   

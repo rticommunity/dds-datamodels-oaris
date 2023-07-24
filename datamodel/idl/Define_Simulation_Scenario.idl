@@ -3,6 +3,7 @@
 #include "Common_Types.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -25,7 +26,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation write_emitter_system_data_CMS. This describes how the
               // contents of a simulation scenario are communicated between the CMS and the
               // subsystem.
@@ -66,67 +66,92 @@ module org {
               {
               	// Field for interface operation parameter emitter_system_data. 
               	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type emitter_system_data;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist write_emitter_system_data_CMS_type 
+#pragma keylist write_emitter_system_data_CMS_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation write_emitter_system_data_Sub. . Write emitter system
               // data
               struct write_emitter_system_data_Sub_type
               {
               	// Field for interface operation parameter emitter_system_data. 
               	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type emitter_system_data;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist write_emitter_system_data_Sub_type 
+#pragma keylist write_emitter_system_data_Sub_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation write_environment_data. . Write environment data
               struct write_environment_data_type
               {
               	// Field for interface operation parameter environmental_entity_data. 
               	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type environmental_entity_data;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist write_environment_data_type 
+#pragma keylist write_environment_data_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation write_jammer_beam_data. . Write jammer beam data
               struct write_jammer_beam_data_type
               {
               	// Field for interface operation parameter jammer_beam_data. 
               	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type jammer_beam_data;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist write_jammer_beam_data_type 
+#pragma keylist write_jammer_beam_data_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation write_platform_data. . Write platform data
               struct write_platform_data_type
               {
               	// Field for interface operation parameter platform_data. 
               	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type platform_data;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist write_platform_data_type 
+#pragma keylist write_platform_data_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation write_radar_beam_data. This describes how the contents
               // of a simulation scenario are communicated between the CMS and the subsystem.
               //      The CMS provides the subsystem with a simulated environment which consists
@@ -166,8 +191,14 @@ module org {
               {
               	// Field for interface operation parameter radar_beam_data. 
               	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type radar_beam_data;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist write_radar_beam_data_type 
+#pragma keylist write_radar_beam_data_type  subsystem_id
   
 
 

@@ -1,12 +1,11 @@
 #ifndef CONTROL_BATTLE_OVERRIDEDEFVAR
 #define CONTROL_BATTLE_OVERRIDEDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Subsystem_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation battle_override_setting. The subsystem is requested to
               // set/reset the Battle Override. When Battle Override is set the subsystem
               // disregards warnings on circumstances which may cause damage to own equipment,
@@ -57,14 +55,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter battle_override_state. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::battle_override_state_type battle_override_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist battle_override_setting_type 
+#pragma keylist battle_override_setting_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation set_battle_override. . This method is used by the CMS
               // to send a Battle Override set/reset request to the subsystem,
               struct set_battle_override_type
@@ -73,8 +76,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter battle_override_state. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::battle_override_state_type battle_override_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist set_battle_override_type 
+#pragma keylist set_battle_override_type  subsystem_id
   
 
 

@@ -1,12 +1,11 @@
 #ifndef DEFINE_FAULT_SCRIPTSDEFVAR
 #define DEFINE_FAULT_SCRIPTSDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Simulation_Support.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation add_fault_scripts. . Adds the given fault scripts to
               // the subsystem's simulation.
               struct add_fault_scripts_type
@@ -38,14 +36,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter scripts. The fault scripts to be added
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_scripts_type scripts;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist add_fault_scripts_type 
+#pragma keylist add_fault_scripts_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation fault_script_summary. This enables a maintainer
               // trainer to script a set of subsystem faults, the effects of which would be
               // simulated for training purposes. The faults may be scripted in relation to a
@@ -58,14 +61,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter faults. The list of fault scripts
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_scripts_type faults;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist fault_script_summary_type 
+#pragma keylist fault_script_summary_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation remove_fault_scripts. . Removes the given fault
               // scripts from the subsystem's simulation.
               struct remove_fault_scripts_type
@@ -75,8 +83,14 @@ module org {
               	// Field for interface operation parameter fault_scripts. The ids of the fault
               	// scripts to be removed
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type fault_scripts;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist remove_fault_scripts_type 
+#pragma keylist remove_fault_scripts_type  subsystem_id
   
 
 

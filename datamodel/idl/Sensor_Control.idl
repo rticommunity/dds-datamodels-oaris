@@ -1,12 +1,11 @@
 #ifndef SENSOR_CONTROLDEFVAR
 #define SENSOR_CONTROLDEFVAR
 #include "Common_Types.idl"
-
 #include "Shape_Model.idl"
-
 #include "Coordinates_and_Positions.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -26,7 +25,6 @@ module org {
 
 
 
-            // Version 1.0
             // An index indicating a particular frequency channel or band. The actual
             // frequency is typically not of concern to the command team. A band refers to a
             // discrete frequency or a range of frequencies; such bands may overlap.
@@ -36,7 +34,6 @@ module org {
 
 
 
-            // Version 1.0
             // reported frequency state
             struct reported_frequency_state_type
             {
@@ -52,7 +49,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence.
             typedef sequence<reported_frequency_state_type> all_frequencies_state_reported_frequencies_type;
   
@@ -60,92 +56,17 @@ module org {
 
 
 
-            // Version 1.0
             // This struct contains zero to many "available" or "not available" frequencies
             // which may be enabled/disabled by the CMS
             struct all_frequencies_state_type
             {
             	all_frequencies_state_reported_frequencies_type reported_frequencies;
             };
-            // Topic type for operation report_frequencies_state. This controls the sensor
-            // behaviour with respect to the transmission frequency management. Basing on a
-            // discrete set of transmission frequencies offered by the sensor, CMS may
-            // disable/enable the use of a subset of them. As well CMS may select the sensor
-            // transmission mode, i.e. how the sensor shall select the transmission
-            // frequencies, among the set of transmission modes supported by the sensor.
-            // 
-            //      The transmission mode defines how the sensor selects the transmission
-            // frequencies, which may be:
-            //      <ul>
-            //      	<li>Fixed Frequency: sensor always uses the same pre-selected
-            // frequency</li>
-            //      </ul>
-            //      <ul>
-            //      	<li>Frequency Diversity: at each transmission sensor selects the
-            // frequency to be used inside a pre-selected subset of frequencies</li>
-            //      </ul>
-            //      <ul>
-            //      	<li>Automatic Frequency Selection: at each transmission sensor selects
-            // the frequency to be used among the least jammed frequencies</li>
-            //      </ul>
-            //      <ul>
-            //      	<li>Random Agility: at each transmission sensor random selects the
-            // frequency to be used.</li>
-            //      </ul>
-            // 
-            //      The availability of each of the above listed transmission modes depends on
-            // the sensor type and its capabilities (not all the sensor types support all
-            // them). Besides a transmission mode supported by the sensor may be “selectable”
-            // or “not selectable” according to the specific sensor rules and the state of
-            // transmission frequencies.
-            // 
-            //      Both the set of transmission frequencies offered by the sensor and the
-            // supported transmission modes (names and characteristics) differ from sensor to
-            // sensor, so they shall be handled as configuration parameters. The sensor
-            // reports all supported frequencies whether or not currently available or enabled.
-            // 
-            //      Sensors cannot enable/disable the setting of the frequency usage at its
-            // own initiative, but at any time a transmission frequency could become not
-            // available because of a fault (e.g. fault of the relevant oscillator), and this
-            // could affect the effective availability of one or more sensor supported
-            // transmission modes.
-            // 
-            //      Provision of the frequency usage state
-            //      Sensor shall keep CMS informed about the current availability of the
-            // frequency usage and its changes (if any).
-            // 
-            //      Provision of the transmission mode
-            //      Sensor shall keep CMS informed about the currently selected transmission
-            // mode, with the relevant parameters, and its changes (if any).
-            // 
-            //      It is the CMS's responsibility to initiate the determination of initial
-            // state by making a request for information to the subsystem.
-            // 
-            //      Lack of mastership
-            //      In the case where CMS does not have mastership of the sensor, CMS shall be
-            // informed about both the actual setting of the frequency usage and the actual
-            // transmission mode, with its changes (if any).
-            // 
-            //      State of transmission frequencies
-            //      With respect to its operational use each sensor transmission frequency may
-            // be “enabled” or “disabled”, according to the relevant setting. On the other
-            // hand, with respect to its health status, each transmission frequency may be
-            // “available” or “not available” according to the presence of faults.
-            //      Note that a transmission frequency may be effectively selectable for the
-            // sensor transmission if it is both “enabled” and not in fault.
-            // 
-            //      Relationship to <i>Manage Transmission Sectors</i>
-            //      As well as the overall transmission mode, here specified, CMS may define
-            // sectors where a devoted transmission mode is to be applied (see<i> Manage
-            // Transmission Sectors</i>).. Method used by the sensor to return the current
-            // availability of the frequency usage and its changes (if any).
-#pragma keylist all_frequencies_state_type 
   
 
 
 
 
-            // Version 1.0
             // Emission state
             struct control_emission_state_type
             {
@@ -157,11 +78,12 @@ module org {
 
 
 
-            // Version 1.0
             // This enumeration specifies the sectors reference systems.
             enum sector_reference_type
             {
+            	// NORTH_RELATED
             	NORTH_RELATED,
+            	// SHIP_RELATED
             	SHIP_RELATED
             };
   
@@ -169,7 +91,6 @@ module org {
 
 
 
-            // Version 1.0
             // State of frequency transmission
             struct transmission_frequency_state_type
             {
@@ -183,7 +104,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence.
             typedef sequence<transmission_frequency_state_type> selected_frequency_list_selected_frequencies_type;
   
@@ -191,7 +111,6 @@ module org {
 
 
 
-            // Version 1.0
             // This struct contains zero to many frequencies which may be enabled/disabled by
             // the CMS
             struct selected_frequency_list_type
@@ -203,7 +122,6 @@ module org {
 
 
 
-            // Version 1.0
             // Test target with its scenario
             struct test_target_plus_scenario_type
             {
@@ -221,7 +139,6 @@ module org {
 
 
 
-            // Version 1.0
             // This typedef is used to identify a specific test target scenario.
             typedef long test_target_scenario_id_type;
   
@@ -229,7 +146,6 @@ module org {
 
 
 
-            // Version 1.0
             // The scenario is defined by a number of targets distributed in a defined
             // area/volume and having the same common parameters.
             struct test_target_scenario_common_parameter_target_type
@@ -253,7 +169,6 @@ module org {
 
 
 
-            // Version 1.0
             // Encapsulation of a test target (simulated target to enable technical testing of
             // a sensor)
             struct test_target_type
@@ -276,7 +191,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence.
             typedef sequence<test_target_type> test_target_scenario_independent_target_targets_type;
   
@@ -284,7 +198,6 @@ module org {
 
 
 
-            // Version 1.0
             // The scenario is defined by a number of independent targets, with each target
             // having own characteristic parameters.
             struct test_target_scenario_independent_target_type
@@ -303,7 +216,6 @@ module org {
 
 
 
-            // Version 1.0
             // scenario state
             struct test_target_scenario_state_type
             {
@@ -318,7 +230,6 @@ module org {
 
 
 
-            // Version 1.0
             // Switch enumeration type for union test_target_scenario_type
             enum test_target_scenario_switch_type
             {
@@ -334,7 +245,6 @@ module org {
 
 
 
-            // Version 1.0
             // Scenario for test targets
             union test_target_scenario_type switch (test_target_scenario_switch_type)
             {
@@ -351,19 +261,16 @@ module org {
 
 
 
-            // Version 1.0
             // The mode
             enum transmission_frequency_mode_type
             {
-            	// The sensor always uses the same pre-selected frequency
+            	// AUTOMATIC_FREQUENCY_SELECTION
             	AUTOMATIC_FREQUENCY_SELECTION,
-            	// At each transmission sensor selects the frequency to be used inside a pre-
-            	// selected subset of frequencies
+            	// FIXED_FREQUENCY
             	FIXED_FREQUENCY,
-            	// At each transmission sensor selects the frequency to be used among the least
-            	// jammed frequencies
+            	// FREQUENCY_DIVERSITY
             	FREQUENCY_DIVERSITY,
-            	// At each transmission sensor random selects the frequency to be used.
+            	// RANDOM_AGILITY
             	RANDOM_AGILITY
             };
   
@@ -371,13 +278,15 @@ module org {
 
 
 
-            // Version 1.0
             // This enumeration allows specification of a CMS commanded power level for a
             // sector.
             enum transmission_sector_power_level_type
             {
+            	// FULL_RADIATE_POWER
             	FULL_RADIATE_POWER,
+            	// INHIBIT
             	INHIBIT,
+            	// REDUCED_RADIATE_POWER
             	REDUCED_RADIATE_POWER
             };
   
@@ -385,7 +294,6 @@ module org {
 
 
 
-            // Version 1.0
             // Sector for transmission
             struct transmission_sector_type
             {
@@ -408,7 +316,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence.
             typedef sequence<transmission_sector_type> transmission_sector_set_sector_type;
   
@@ -416,7 +323,6 @@ module org {
 
 
 
-            // Version 1.0
             // This struct contains zero to many transmission sectors which must be set/reset
             // by the CMS.
             struct transmission_sector_set_type

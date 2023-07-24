@@ -1,0 +1,5 @@
+#ifndef EXTENDED_SUBSYSTEM_CONTROLDCPS_IDL_
+#define EXTENDED_SUBSYSTEM_CONTROLDCPS_IDL_
+#include "dds_dcps.idl"
+#include "Extended_Subsystem_Control.idl"
+#endif

@@ -1,14 +1,12 @@
 #ifndef SUPPORT_KILL_ASSESSMENTDEFVAR
 #define SUPPORT_KILL_ASSESSMENTDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Engagement_Support.idl"
-
 #include "Air_Engagement_Support.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -31,7 +29,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation report_kill_assessment_result. With this service the
               // subsystem provides of kill assessment information to the CMS. The information
               // relates to an above water engagement primarily against an air target.
@@ -54,14 +51,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
               	// Field for interface operation parameter KillAssessmentReport. 
               	org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::kill_assessment_result_type KillAssessmentReport;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist report_kill_assessment_result_type 
+#pragma keylist report_kill_assessment_result_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation request_kill_assessment. . The subsystem is requested
               // to evaluate and report a kill assessment.
               struct request_kill_assessment_type
@@ -70,8 +72,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
               	// Field for interface operation parameter KillAssessmentData. 
               	org::omg::c4i::Domain_Model::Radar_Domain::Air_Engagement_Support::expected_hit_data_type KillAssessmentData;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist request_kill_assessment_type 
+#pragma keylist request_kill_assessment_type  subsystem_id
   
 
 

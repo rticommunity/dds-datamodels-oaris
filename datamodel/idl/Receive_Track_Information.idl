@@ -1,14 +1,12 @@
 #ifndef RECEIVE_TRACK_INFORMATIONDEFVAR
 #define RECEIVE_TRACK_INFORMATIONDEFVAR
 #include "Common_Types.idl"
-
+#include "Requests.idl"
+#include "Track_Reporting.idl"
 #include "Tracking_Control.idl"
 
-#include "Requests.idl"
 
-#include "Track_Reporting.idl"
-
-
+// Version 1.1
 module org {
 
 
@@ -31,7 +29,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation insert_info_track. This is the Subsystem interface for
               // receiving track information.. Method used by the CMS to send a receive track
               // information request, specifying the track identification number and related
@@ -44,8 +41,14 @@ module org {
               	org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type trackId;
               	// Field for interface operation parameter trackInfo. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Tracking_Control::track_info trackInfo;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist insert_info_track_type 
+#pragma keylist insert_info_track_type  subsystem_id
   
 
 

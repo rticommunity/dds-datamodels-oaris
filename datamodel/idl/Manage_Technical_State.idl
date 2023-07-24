@@ -1,12 +1,11 @@
 #ifndef MANAGE_TECHNICAL_STATEDEFVAR
 #define MANAGE_TECHNICAL_STATEDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Subsystem_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation change_technical_state. . Interface used by the
               // subsystem to receive requests from the CMS to change its technical state.
               struct change_technical_state_type
@@ -38,14 +36,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter technical_state. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist change_technical_state_type 
+#pragma keylist change_technical_state_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation provide_technical_state. . Interface used by the
               // subsystem to receive requests from the CMS to provide its current technical
               // state.
@@ -53,14 +56,19 @@ module org {
               {
               	// Field for interface operation parameter request_id. 
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist provide_technical_state_type 
+#pragma keylist provide_technical_state_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation receive_periodic_technical_state. Manage Technical
               // State causes the subsystem to provide or change its technical state.
               // 
@@ -86,14 +94,19 @@ module org {
               {
               	// Field for interface operation parameter technical_state. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_periodic_technical_state_type 
+#pragma keylist receive_periodic_technical_state_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation receive_technical_state. Manage Technical State causes
               // the subsystem to provide or change its technical state.
               // 
@@ -122,8 +135,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter technical_state. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_technical_state_type 
+#pragma keylist receive_technical_state_type  subsystem_id
   
 
 

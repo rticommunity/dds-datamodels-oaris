@@ -1,12 +1,11 @@
 #ifndef SEARCHDEFVAR
 #define SEARCHDEFVAR
 #include "Coordinates_and_Positions.idl"
-
 #include "Shape_Model.idl"
-
 #include "Track_Reporting.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -26,7 +25,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union cued_search_cue_speed_interval_type switch (boolean)
             {
@@ -38,7 +36,6 @@ module org {
 
 
 
-            // Version 1.0
             // Type used for specifying the constraints on a cued search.
             struct cued_search_cue_type
             {
@@ -57,7 +54,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union cued_search_report_found_track_id_type switch (boolean)
             {
@@ -69,7 +65,6 @@ module org {
 
 
 
-            // Version 1.0
             // Data returned to the CMS to indicate the results of a cued search.
             struct cued_search_report_type
             {

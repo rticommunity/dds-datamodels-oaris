@@ -1,10 +1,10 @@
 #ifndef ENGAGEMENT_SUPPORTDEFVAR
 #define ENGAGEMENT_SUPPORTDEFVAR
 #include "Coordinates_and_Positions.idl"
-
 #include "Common_Types.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -24,7 +24,6 @@ module org {
 
 
 
-            // Version 1.0
             // The number/amount of available fire control channels. 
             typedef unsigned short available_fire_control_channels_type;
   
@@ -32,7 +31,6 @@ module org {
 
 
 
-            // Version 1.0
             // The fire control channel ID as assigned by the subsystem.
             typedef unsigned short fire_control_channel_id_type;
   
@@ -40,15 +38,14 @@ module org {
 
 
 
-            // Version 1.0
             // The possible outcomes of a kill assessment.
             enum kill_assessment_result_type
             {
-            	// Kill Probability > 50%
+            	// PROBABLE_KILL
             	PROBABLE_KILL,
-            	// Kill Probability < 50%
+            	// PROBABLE_MISS
             	PROBABLE_MISS,
-            	// Assessment indeterminate
+            	// NO_RESULT
             	NO_RESULT
             };
   
@@ -56,7 +53,6 @@ module org {
 
 
 
-            // Version 1.0
             // Target position/kinematics for which a fire control channel is requested to
             // designate.
             struct kinematics_type

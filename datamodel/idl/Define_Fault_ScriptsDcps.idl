@@ -1,0 +1,801 @@
+#ifndef DEFINE_FAULT_SCRIPTSDCPS_IDL_
+#define DEFINE_FAULT_SCRIPTSDCPS_IDL_
+
+#include "dds_dcps.idl"
+
+#include "Define_Fault_Scripts.idl"
+
+module org {
+
+    module omg {
+
+        module c4i {
+
+            module Service_Interfaces {
+
+                module Subsystem_Services {
+
+                    module Simulation_Support {
+
+                        module Define_Fault_Scripts {
+
+                            typedef sequence<add_fault_scripts_type> add_fault_scripts_typeSeq;
+
+                            local interface add_fault_scripts_typeTypeSupportInterface : ::DDS::TypeSupport { };
+
+                            local interface add_fault_scripts_typeDataWriter : ::DDS::DataWriter {
+                                ::DDS::InstanceHandle_t register_instance(
+                                  in add_fault_scripts_type instance_data);
+
+                                ::DDS::InstanceHandle_t register_instance_w_timestamp(
+                                  in add_fault_scripts_type instance_data,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t unregister_instance(
+                                  in add_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t unregister_instance_w_timestamp(
+                                  in add_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t write(
+                                  in add_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t write_w_timestamp(
+                                  in add_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t dispose(
+                                  in add_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t dispose_w_timestamp(
+                                  in add_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t writedispose(
+                                  in add_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t writedispose_w_timestamp(
+                                  in add_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout add_fault_scripts_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in add_fault_scripts_type instance_data);
+
+                            };
+
+                            local interface add_fault_scripts_typeDataReader : ::DDS::DataReader {
+                                ::DDS::ReturnCode_t read(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout add_fault_scripts_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout add_fault_scripts_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout add_fault_scripts_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in add_fault_scripts_type instance);
+
+                            };
+
+                            local interface add_fault_scripts_typeDataReaderView : ::DDS::DataReaderView {
+                                ::DDS::ReturnCode_t read(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout add_fault_scripts_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout add_fault_scripts_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout add_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout add_fault_scripts_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in add_fault_scripts_type instance);
+                            };
+                            typedef sequence<fault_script_summary_type> fault_script_summary_typeSeq;
+
+                            local interface fault_script_summary_typeTypeSupportInterface : ::DDS::TypeSupport { };
+
+                            local interface fault_script_summary_typeDataWriter : ::DDS::DataWriter {
+                                ::DDS::InstanceHandle_t register_instance(
+                                  in fault_script_summary_type instance_data);
+
+                                ::DDS::InstanceHandle_t register_instance_w_timestamp(
+                                  in fault_script_summary_type instance_data,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t unregister_instance(
+                                  in fault_script_summary_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t unregister_instance_w_timestamp(
+                                  in fault_script_summary_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t write(
+                                  in fault_script_summary_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t write_w_timestamp(
+                                  in fault_script_summary_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t dispose(
+                                  in fault_script_summary_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t dispose_w_timestamp(
+                                  in fault_script_summary_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t writedispose(
+                                  in fault_script_summary_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t writedispose_w_timestamp(
+                                  in fault_script_summary_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout fault_script_summary_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in fault_script_summary_type instance_data);
+
+                            };
+
+                            local interface fault_script_summary_typeDataReader : ::DDS::DataReader {
+                                ::DDS::ReturnCode_t read(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout fault_script_summary_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout fault_script_summary_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout fault_script_summary_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in fault_script_summary_type instance);
+
+                            };
+
+                            local interface fault_script_summary_typeDataReaderView : ::DDS::DataReaderView {
+                                ::DDS::ReturnCode_t read(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout fault_script_summary_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout fault_script_summary_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout fault_script_summary_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout fault_script_summary_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in fault_script_summary_type instance);
+                            };
+                            typedef sequence<remove_fault_scripts_type> remove_fault_scripts_typeSeq;
+
+                            local interface remove_fault_scripts_typeTypeSupportInterface : ::DDS::TypeSupport { };
+
+                            local interface remove_fault_scripts_typeDataWriter : ::DDS::DataWriter {
+                                ::DDS::InstanceHandle_t register_instance(
+                                  in remove_fault_scripts_type instance_data);
+
+                                ::DDS::InstanceHandle_t register_instance_w_timestamp(
+                                  in remove_fault_scripts_type instance_data,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t unregister_instance(
+                                  in remove_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t unregister_instance_w_timestamp(
+                                  in remove_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t write(
+                                  in remove_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t write_w_timestamp(
+                                  in remove_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t dispose(
+                                  in remove_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t dispose_w_timestamp(
+                                  in remove_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t writedispose(
+                                  in remove_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::ReturnCode_t writedispose_w_timestamp(
+                                  in remove_fault_scripts_type instance_data,
+                                  in ::DDS::InstanceHandle_t handle,
+                                  in ::DDS::Time_t source_timestamp);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout remove_fault_scripts_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in remove_fault_scripts_type instance_data);
+
+                            };
+
+                            local interface remove_fault_scripts_typeDataReader : ::DDS::DataReader {
+                                ::DDS::ReturnCode_t read(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout remove_fault_scripts_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout remove_fault_scripts_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout remove_fault_scripts_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in remove_fault_scripts_type instance);
+
+                            };
+
+                            local interface remove_fault_scripts_typeDataReaderView : ::DDS::DataReaderView {
+                                ::DDS::ReturnCode_t read(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_w_condition(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_w_condition(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t read_next_sample(
+                                  inout remove_fault_scripts_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t take_next_sample(
+                                  inout remove_fault_scripts_type received_data,
+                                  inout ::DDS::SampleInfo sample_info);
+
+                                ::DDS::ReturnCode_t read_instance(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_instance(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t take_next_instance(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::SampleStateMask sample_states,
+                                  in ::DDS::ViewStateMask view_states,
+                                  in ::DDS::InstanceStateMask instance_states);
+
+                                ::DDS::ReturnCode_t read_next_instance_w_condition(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t take_next_instance_w_condition(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq,
+                                  in long max_samples,
+                                  in ::DDS::InstanceHandle_t a_handle,
+                                  in ::DDS::ReadCondition a_condition);
+
+                                ::DDS::ReturnCode_t return_loan(
+                                  inout remove_fault_scripts_typeSeq received_data,
+                                  inout ::DDS::SampleInfoSeq info_seq);
+
+                                ::DDS::ReturnCode_t get_key_value(
+                                  inout remove_fault_scripts_type key_holder,
+                                  in ::DDS::InstanceHandle_t handle);
+
+                                ::DDS::InstanceHandle_t lookup_instance(
+                                  in remove_fault_scripts_type instance);
+                            };
+                        };
+
+                    };
+
+                };
+
+            };
+
+        };
+
+    };
+
+};
+
+#endif

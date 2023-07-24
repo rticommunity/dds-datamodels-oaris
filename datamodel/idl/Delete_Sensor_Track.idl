@@ -1,12 +1,11 @@
 #ifndef DELETE_SENSOR_TRACKDEFVAR
 #define DELETE_SENSOR_TRACKDEFVAR
 #include "Common_Types.idl"
-
 #include "Track_Reporting.idl"
-
 #include "Requests.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation delete_track. This is the Subsystem interface for
               // deleting sensor tracks.. Method used by the CMS to send a track deletion
               // request, specifying the identification number of the track to be deleted.
@@ -39,8 +37,14 @@ module org {
               	org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type trackId;
               	// Field for interface operation parameter request_id. 
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist delete_track_type 
+#pragma keylist delete_track_type  subsystem_id
   
 
 

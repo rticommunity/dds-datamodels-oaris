@@ -1,12 +1,11 @@
 #ifndef MANAGE_SUBSYSTEM_PARAMETERSDEFVAR
 #define MANAGE_SUBSYSTEM_PARAMETERSDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Subsystem_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation modify_parameter_values. . 
               struct modify_parameter_values_type
               {
@@ -37,14 +35,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter the_name_value_set. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_value_sequence_type the_name_value_set;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist modify_parameter_values_type 
+#pragma keylist modify_parameter_values_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation report_parameter_descriptors. The service allows the
               // actor to obtain and modify the values of parameters of the subsystem. It also
               // provides the facilities to retrieve the descriptions of parameters available in
@@ -105,14 +108,19 @@ module org {
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::descriptor_sequence the_descriptor_sequence;
               	// Field for interface operation parameter the_name_error_set. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_error_sequence_type the_name_error_set;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist report_parameter_descriptors_type 
+#pragma keylist report_parameter_descriptors_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation report_parameter_values. The service allows the actor
               // to obtain and modify the values of parameters of the subsystem. It also
               // provides the facilities to retrieve the descriptions of parameters available in
@@ -173,14 +181,19 @@ module org {
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_value_sequence_type the_name_value_set;
               	// Field for interface operation parameter the_name_error_set. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_error_sequence_type the_name_error_set;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist report_parameter_values_type 
+#pragma keylist report_parameter_values_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation retrieve_parameter_descriptors. . 
               struct retrieve_parameter_descriptors_type
               {
@@ -188,14 +201,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter the_name_set. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::parameter_name_sequence_type the_name_set;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist retrieve_parameter_descriptors_type 
+#pragma keylist retrieve_parameter_descriptors_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation retrieve_parameter_values. . 
               struct retrieve_parameter_values_type
               {
@@ -203,8 +221,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter the_name_set. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::parameter_name_sequence_type the_name_set;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist retrieve_parameter_values_type 
+#pragma keylist retrieve_parameter_values_type  subsystem_id
   
 
 

@@ -1,0 +1,5 @@
+#ifndef SENSOR_PERFORMANCEDCPS_IDL_
+#define SENSOR_PERFORMANCEDCPS_IDL_
+#include "dds_dcps.idl"
+#include "Sensor_Performance.idl"
+#endif

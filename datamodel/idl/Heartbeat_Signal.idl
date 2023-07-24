@@ -3,6 +3,7 @@
 #include "Common_Types.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -25,7 +26,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation receive_cms_heartbeat_signal. . Receive the periodic
               // heartbeat signal to verify, that the connection is still alive.
               struct receive_cms_heartbeat_signal_type
@@ -34,14 +34,19 @@ module org {
               	// implementation specific semantics for monitoring interface participant
               	// liveliness.
               	unsigned long count;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_cms_heartbeat_signal_type 
+#pragma keylist receive_cms_heartbeat_signal_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation receive_subsystem_heartbeat_signal. The service
               // describes how the availability of an established communication between CMS and
               // the subsystem as well as the subsystem itself shall be monitored. The heartbeat
@@ -56,8 +61,14 @@ module org {
               	// implementation specific semantics for monitoring interface participant
               	// liveliness.
               	unsigned long count;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_subsystem_heartbeat_signal_type 
+#pragma keylist receive_subsystem_heartbeat_signal_type  subsystem_id
   
 
 

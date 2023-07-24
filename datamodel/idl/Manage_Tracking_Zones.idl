@@ -1,12 +1,11 @@
 #ifndef MANAGE_TRACKING_ZONESDEFVAR
 #define MANAGE_TRACKING_ZONESDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Tracking_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation set_tracking_zone. This is the Subsystem interface for
               // managing tracking zones.. Method used by the sensor to return the actual
               // setting of the tracking zones modified according to the request.
@@ -39,14 +37,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter zone. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Tracking_Control::tracking_zone_set zone;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist set_tracking_zone_type 
+#pragma keylist set_tracking_zone_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation tracking_zone_setting. This controls the sensor
               // tracking behaviour in selected zones, which may be 1D (delimited in azimuth
               // only), 2D (have additional elevation bounds) or 3D (have further range bounds).
@@ -98,8 +101,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter setting_message. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Tracking_Control::tracking_zone_set setting_message;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist tracking_zone_setting_type 
+#pragma keylist tracking_zone_setting_type  subsystem_id
   
 
 

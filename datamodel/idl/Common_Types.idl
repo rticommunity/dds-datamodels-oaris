@@ -3,6 +3,7 @@
 #include "TimeBase.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -19,7 +20,6 @@ module org {
 
 
 
-          // Version 1.0
           // Representation for a general binary type
           typedef sequence<octet, 1024> anonymous_blob_type;
   
@@ -27,16 +27,22 @@ module org {
 
 
 
-          // Version 1.0
           // Identity according to STANAG 5516.
           enum identity_type
           {
+          	// PENDING
           	PENDING,
+          	// UNKNOWN
           	UNKNOWN,
+          	// ASSUMED_FRIEND
           	ASSUMED_FRIEND,
+          	// FRIEND
           	FRIEND,
+          	// NEUTRAL
           	NEUTRAL,
+          	// SUSPECT
           	SUSPECT,
+          	// HOSTILE
           	HOSTILE
           };
   
@@ -44,7 +50,6 @@ module org {
 
 
 
-          // Version 1.0
           // This type provides a unique id for different subsystems. Subsystem ids shall be
           // allocated by the platform integrator. Subsystem id equal to zero is reserved to
           // imply applicability to all and any subsystem.
@@ -54,7 +59,6 @@ module org {
 
 
 
-          // Version 1.0
           // System Track Identification
           typedef unsigned long system_track_id_type;
   
@@ -62,7 +66,6 @@ module org {
 
 
 
-          // Version 1.0
           // based on start of Gregorian calendar (1582-10-15T 00:00UTC)
           //  unit: 100 nano seconds
           //  i.a.w CORBA Time Service Time T

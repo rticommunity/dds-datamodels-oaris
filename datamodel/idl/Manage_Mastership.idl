@@ -1,10 +1,10 @@
 #ifndef MANAGE_MASTERSHIPDEFVAR
 #define MANAGE_MASTERSHIPDEFVAR
 #include "Common_Types.idl"
-
 #include "Subsystem_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -27,7 +27,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation acquire_mastership. . This method is used by the CMS
               // to acquire the mastership.
               struct acquire_mastership_type
@@ -35,14 +34,19 @@ module org {
               	// Field for interface operation parameter count. This parameter is used with
               	// implementation specific semantics to manage subsystem mastership.
               	unsigned long count;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist acquire_mastership_type 
+#pragma keylist acquire_mastership_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation release_mastership. . This method is used by the CMS
               // to release the mastership.
               struct release_mastership_type
@@ -50,14 +54,19 @@ module org {
               	// Field for interface operation parameter count. This parameter is used with
               	// implementation specific semantics to manage subsystem mastership.
               	unsigned long count;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist release_mastership_type 
+#pragma keylist release_mastership_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation report_mastership_setting. Besides the CMS, the
               // subsystem may be controlled via other control points, e.g. the subsystem local
               // control unit. This interface describes how the CMS, as any other actor, shall
@@ -173,8 +182,14 @@ module org {
               {
               	// Field for interface operation parameter control_state. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::mastership_state_type control_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist report_mastership_setting_type 
+#pragma keylist report_mastership_setting_type  subsystem_id
   
 
 

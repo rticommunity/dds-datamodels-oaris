@@ -1,10 +1,10 @@
 #ifndef TRACK_REPORTINGDEFVAR
 #define TRACK_REPORTINGDEFVAR
 #include "Coordinates_and_Positions.idl"
-
 #include "Common_Types.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -24,14 +24,18 @@ module org {
 
 
 
-            // Version 1.0
             // The sensor tracking environment
             enum environment_type
             {
+            	// AIR
             	AIR,
+            	// LAND
             	LAND,
+            	// SURFACE
             	SURFACE,
+            	// SUBSURFACE
             	SUBSURFACE,
+            	// SPACE
             	SPACE
             };
   
@@ -39,13 +43,12 @@ module org {
 
 
 
-            // Version 1.0
             // Type of track initiation
             enum initiation_mode_type
             {
-            	// Automatic track initiation mode
+            	// AUTOMATIC
             	AUTOMATIC,
-            	// Track initation on external request (e.g. from CMS)
+            	// EXTERNAL_REQUEST
             	EXTERNAL_REQUEST
             };
   
@@ -53,26 +56,23 @@ module org {
 
 
 
-            // Version 1.0
-            // The recognition_type indicates the type of the tracked object.
-            //    The type of the recognition_type is 'short'. This short number is mapped to
-            // a recognition_type. 
+            // The recognition type indicates the type of the real-world physical object being
+            // tracked.
+            //    The numeric value is used to map to a system or implementation specific
+            // taxonomy of real-world physical objects that are of tactical interest.
             typedef unsigned short recognition_type;
   
 
 
 
 
-            // Version 1.0
-            // A sequence type, to represent multiple values. Note: variable length sequence,
-            // which should contain at least one instance.
+            // A sequence type, to represent multiple values. Note: variable length sequence.
             typedef sequence<long, 256> sensor_track_based_on_id_type;
   
 
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_covariance_matrix_type switch (boolean)
             {
@@ -84,7 +84,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_environment_type switch (boolean)
             {
@@ -96,7 +95,6 @@ module org {
 
 
 
-            // Version 1.0
             // Sensor Track Identification
             typedef unsigned long sensor_track_id_type;
   
@@ -104,7 +102,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_initiation_mode_type switch (boolean)
             {
@@ -116,7 +113,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_max_range_limit_type switch (boolean)
             {
@@ -128,7 +124,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_position_accuracy_coordinate_system_type switch (boolean)
             {
@@ -140,7 +135,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_position_accuracy_type switch (boolean)
             {
@@ -152,7 +146,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_sensor_track_pre_identification_type switch (boolean)
             {
@@ -164,7 +157,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_sensor_track_pre_recognition_type switch (boolean)
             {
@@ -176,25 +168,6 @@ module org {
 
 
 
-            // Version 1.0
-            // The detection lifecycle phase of the track
-            enum track_phase_type
-            {
-            	// Track provided based on extrapolated position (dead-reckoned)
-            	DEAD_RECKONED,
-            	// Track has been deleted. 
-            	DELETED,
-            	// Track has been lost
-            	LOST,
-            	// Regular update of new and existing track
-            	TRACKED
-            };
-  
-
-
-
-
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_velocity_accuracy_type switch (boolean)
             {
@@ -206,7 +179,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sensor_track_velocity_accuracy_coordinate_system_type switch (boolean)
             {
@@ -218,14 +190,31 @@ module org {
 
 
 
-            // Version 1.0
+            // The detection lifecycle phase of the track
+            enum track_phase_type
+            {
+            	// DEAD_RECKONED
+            	DEAD_RECKONED,
+            	// Delete enumeration not used for DDS; dispose topic instance instead.
+            	NOT_USED,
+            	// LOST
+            	LOST,
+            	// TRACKED
+            	TRACKED
+            };
+  
+
+
+
+
             // Encapsulation of a sensor track
             struct sensor_track_type
             {
             	// Additional, vendor-specific information
             	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_information;
-            	// * optional *
-            	//      The number of elements in the covariance matrix is dependent on the sensor.
+            	// The number of elements in the covariance matrix is dependent on the sensor.
+            	// When present, the position_accuracy and velocity_accuracy attributes should not
+            	// be present.
             	sensor_track_covariance_matrix_type covariance_matrix;
             	// Environment of the track (air, surface etc)
             	sensor_track_environment_type environment;
@@ -235,12 +224,19 @@ module org {
             	boolean jammer_indication;
             	// Maximal range for a bearing track
             	sensor_track_max_range_limit_type max_range_limit;
+            	// The location of the track as calculated in the sensor's chosen coordinate
+            	// system at the stated time.
             	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
-            	// * optional *
+            	// The sensor's stated accuracy for its calculated position.
+            	//      When present, the covariance_matrix attribute should not be present.
             	sensor_track_position_accuracy_type position_accuracy;
-            	// * optional *
+            	// The coordinate system chosen by the sensor for reporting accuracy.
             	sensor_track_position_accuracy_coordinate_system_type position_accuracy_coordinate_system;
+            	// The coordinate system chosen by the sensor.
             	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_coordinate_system;
+            	// The sensor's unique identifying reference for the track. Sensors may reuse
+            	// identifiers after they have deleted the corresponding track. The scheme used
+            	// for identifier reallocation is system dependent.
 #ifdef DDS_XTYPES
             	@Key sensor_track_id_type sensor_track_id;
 #else
@@ -250,18 +246,33 @@ module org {
             	sensor_track_sensor_track_pre_identification_type sensor_track_pre_identification;
             	// Recognition information for the sensor track (if available)
             	sensor_track_sensor_track_pre_recognition_type sensor_track_pre_recognition;
+            	// Whether the CMS should process the track as having been synthetically generated
+            	// as opposed to corresponding to an actual detection in the real world.
             	boolean simulated;
+            	// The time at which the information in this object is valid, in particular its
+            	// position.
             	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
+            	// The time at which the sensor first determined the existence of this track.
             	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_initiation;
             	// Track phase (e.g. TRACKED, DELETED, LOST)
             	track_phase_type track_phase;
+            	// The velocity of the track as calculated in the sensor's chosen coordinate
+            	// system at the stated time.
             	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_coordinate_type velocity;
-            	// * optional *
+            	// The sensor's stated accuracy for its calculated velocity.
+            	//      When present, the covariance_matrix attribute should not be present.
             	sensor_track_velocity_accuracy_type velocity_accuracy;
-            	// * optional *
+            	// The coordinate system chosen by the sensor for reporting accuracy.
             	sensor_track_velocity_accuracy_coordinate_system_type velocity_accuracy_coordinate_system;
+            	// The coordinate system chosen by the sensor.
             	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type velocity_coordinate_system;
             	sensor_track_based_on_id_type based_on_id;
+            // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+            @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+            org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
             };
             // Topic type for operation write_sensor_track. This service allows the CMS to
             // obtain an overview of (real and/or simulated) air / land / space / surface
@@ -323,13 +334,12 @@ module org {
             //      </ul>. The method represents a write of a single sensor track (air, land,
             // space or surface) to the CMS.
             //      The write may be periodic or not.
-#pragma keylist sensor_track_type sensor_track_id
+#pragma keylist sensor_track_type sensor_track_id subsystem_id
   
 
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: variable length sequence.
             typedef sequence<sensor_track_type, 1000> sensor_track_set_element_type;
   
@@ -337,11 +347,16 @@ module org {
 
 
 
-            // Version 1.0
             // A set of sensor tracks (to enable batch reporting)
             struct sensor_track_set_type
             {
             	sensor_track_set_element_type element;
+            // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+            @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+            org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
             };
             // Topic type for operation write_sensor_track_set. This service allows the CMS to
             // obtain an overview of (real and/or simulated) air / land / space / surface
@@ -406,7 +421,7 @@ module org {
             //      - include all tracks observed during a sensor scan
             //      - be an update of just one track (a set of 1) if this is how the sensor
             // works
-#pragma keylist sensor_track_set_type 
+#pragma keylist sensor_track_set_type  subsystem_id
   
 
 

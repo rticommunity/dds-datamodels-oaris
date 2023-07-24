@@ -1,12 +1,11 @@
 #ifndef DEFINE_TEST_TARGET_SCENARIODEFVAR
 #define DEFINE_TEST_TARGET_SCENARIODEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Sensor_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation read_test_target_scenario. This is the Subsystem
               // interface for defining test target scenarios.. Method used by the CMS to send
               // to the sensor a read request of a specified Test Target scenario.
@@ -39,14 +37,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter test_target_scenario_id. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_id_type test_target_scenario_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist read_test_target_scenario_type 
+#pragma keylist read_test_target_scenario_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation test_target_scenario_setting_all_feature. This
               // specifies the interactions for defining and modifying a test target scenario. A
               // Test Target scenario consists of a number of Test Targets to be generated
@@ -110,14 +113,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter test_target_features. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_type test_target_features;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist test_target_scenario_setting_all_feature_type 
+#pragma keylist test_target_scenario_setting_all_feature_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation test_target_scenario_setting. This specifies the
               // interactions for defining and modifying a test target scenario. A Test Target
               // scenario consists of a number of Test Targets to be generated according to
@@ -181,14 +189,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter test_target_scenario_id. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_id_type test_target_scenario_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist test_target_scenario_setting_type 
+#pragma keylist test_target_scenario_setting_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation write_test_target_scenario. This is the Subsystem
               // interface for defining test target scenarios.. Method used by the CMS to send
               // to the sensor a write request of a specified Test Target scenario.
@@ -198,8 +211,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter test_target_scenario. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_type test_target_scenario;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist write_test_target_scenario_type 
+#pragma keylist write_test_target_scenario_type  subsystem_id
   
 
 

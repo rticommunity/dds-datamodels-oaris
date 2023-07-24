@@ -1,12 +1,11 @@
 #ifndef CONTROL_SIMULATIONDEFVAR
 #define CONTROL_SIMULATIONDEFVAR
 #include "Common_Types.idl"
-
+#include "Requests.idl"
 #include "Simulation_Support.idl"
 
-#include "Requests.idl"
 
-
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation sim_mode_status. This service controls the simulation
               // mode of a subsystem. This simulation mode is independent of the operational
               // mode of the subsystem. Simulation mode is either ON or OFF. “ON” has different
@@ -97,14 +95,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter the_status. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::sim_mode_status_type the_status;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist sim_mode_status_type 
+#pragma keylist sim_mode_status_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation start_resume_session. . This request  shall be
               // initiated on demand of the CMS. If the subsystem is in simulation mode it shall
               // start/resume its simulation session and acknowledges the request.
@@ -112,14 +115,19 @@ module org {
               {
               	// Field for interface operation parameter request_id. 
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist start_resume_session_type 
+#pragma keylist start_resume_session_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation start_stop_sim_mode. . This request  shall be
               // initiated on demand of the CMS to activate/deactivate the simulation mode of
               // the subsystem. The subsystem needs to acknowledge the request.
@@ -129,14 +137,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter the_request. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::start_stop_sim_mode_request_type the_request;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist start_stop_sim_mode_type 
+#pragma keylist start_stop_sim_mode_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation stop_freeze_session. . This request  shall be
               // initiated on demand of the CMS. If the subsystem is in simulation mode and the
               // session state is running the subsystem needs to stop/freeze its session and
@@ -147,8 +160,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter the_request. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::stop_freeze_session_request_type the_request;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist stop_freeze_session_type 
+#pragma keylist stop_freeze_session_type  subsystem_id
   
 
 

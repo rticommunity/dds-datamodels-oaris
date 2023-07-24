@@ -3,6 +3,7 @@
 #include "Coordinates_and_Positions.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -22,7 +23,6 @@ module org {
 
 
 
-            // Version 1.0
             // A figure_ref_point specifies a reference point for a figure.
             //    This reference point is a mathematically meaningful point of the figure. For
             // a circle it is the centre of the circle, for a polygon it is the centre of
@@ -43,7 +43,6 @@ module org {
 
 
 
-            // Version 1.0
             // Switch enumeration type for union general_polar_volume_type
             enum general_polar_volume_switch_type
             {
@@ -62,7 +61,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union sector_origin_type switch (boolean)
             {
@@ -74,7 +72,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sector specifies a 2D area in a horizontal plane by means of its origin, its
             // centre bearing with its bearing delta, that together define the sector.
             //    The origin is the figure reference point of the sector.
@@ -97,7 +94,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union polar_volume_origin_type switch (boolean)
             {
@@ -109,7 +105,6 @@ module org {
 
 
 
-            // Version 1.0
             // A polar_volume specifies a 3D volume based on a horizontal plane by means of
             // its origin, its centre bearing and centre elevation, its bearing delta and
             // elevation delta.
@@ -136,7 +131,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union truncated_sector_origin_type switch (boolean)
             {
@@ -148,7 +142,6 @@ module org {
 
 
 
-            // Version 1.0
             // A truncated_sector specifies a 2D area in a horizontal plane by means of its
             // origin, its centre bearing with its bearing delta, and its inner range and
             // outer range, that together define the truncated sector.
@@ -179,7 +172,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union truncated_polar_volume_origin_type switch (boolean)
             {
@@ -191,7 +183,6 @@ module org {
 
 
 
-            // Version 1.0
             // A truncated_polar_volume specifies a 3D volume based on a horizontal plane by
             // means of its origin, its centre bearing and centre elevation, its bearing delta
             // and elevation delta, its inner range and outer range
@@ -223,7 +214,6 @@ module org {
 
 
 
-            // Version 1.0
             // This class allow definition of a volume in space, bounded by standard polar
             // coordinates (azimuth, elevation and range). The different options allow the
             // dimension of either range, elevation or both to be omitted.

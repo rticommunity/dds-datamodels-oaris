@@ -1,12 +1,11 @@
 #ifndef RECEIVE_ENCYCLOPAEDIC_DATADEFVAR
 #define RECEIVE_ENCYCLOPAEDIC_DATADEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Encyclopaedic_Support.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation encyclopaedic_data_loaded. This interface describes
               // the process whereby the subsystem receives encyclopedic data.Such data is used
               // by the subsystem to perform self-adaptation to the prevailing environmental
@@ -70,14 +68,19 @@ module org {
               	// Field for interface operation parameter request_id. The unique id for this
               	// request - corresponds to the parameter in the load_encyclopaedic_data request
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist encyclopaedic_data_loaded_type 
+#pragma keylist encyclopaedic_data_loaded_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation load_encyclopaedic_data. . The CMS requests the
               // subsystem to load encyclopaedic data of a particular type from a particular
               // location.
@@ -95,8 +98,14 @@ module org {
               	// subsystems. Such a list may be accessible at run-time through the Manage
               	// Subsystem Parameters interface.
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Encyclopaedic_Support::data_descriptor_type data_descriptor;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist load_encyclopaedic_data_type 
+#pragma keylist load_encyclopaedic_data_type  subsystem_id
   
 
 

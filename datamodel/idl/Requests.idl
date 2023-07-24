@@ -3,6 +3,7 @@
 #include "Common_Types.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -22,7 +23,6 @@ module org {
 
 
 
-            // Version 1.0
             // String which indicates rationale for rejection of the request. Is not valid
             // when the request has been accepted.
             typedef string<40> denial_reason_type;
@@ -31,7 +31,6 @@ module org {
 
 
 
-            // Version 1.0
             // A string which refers to a parameter in a request using an implementation
             // specific notation.
             typedef string<64> parameter_reference_type;
@@ -40,7 +39,6 @@ module org {
 
 
 
-            // Version 1.0
             // A sequence type, to represent multiple values. Note: unbounded sequence
             typedef sequence<parameter_reference_type> denial_related_parameter_type;
   
@@ -48,7 +46,6 @@ module org {
 
 
 
-            // Version 1.0
             // Struct used within the receive_acknowledgement operation to provide information
             // on (one of the reasons) why a request has been rejected.
             struct denial_type
@@ -65,7 +62,6 @@ module org {
 
 
 
-            // Version 1.0
             // A string which gives an indication of the error associated with processing of
             // the request.
             typedef string<40> error_reason_type;
@@ -74,7 +70,6 @@ module org {
 
 
 
-            // Version 1.0
             // The purpose of the request_id is to uniquely relate responses of the subsystem
             // (server) to requests of the CMS (client). The request_id is set by the client.
             // It is the responsibility of the client to specify a system-wide unique
@@ -86,7 +81,6 @@ module org {
 
 
 
-            // Version 1.0
             // a simple union type, to represent an optional value
             union request_ack_rejection_type switch (boolean)
             {
@@ -98,7 +92,6 @@ module org {
 
 
 
-            // Version 1.0
             // Struct used within the receive_acknowledgement operation to indicate acceptance
             // or rejection (which includes rationale).
             struct request_ack_type
@@ -112,7 +105,6 @@ module org {
 
 
 
-            // Version 1.0
             // Topic type for operation receive_acknowledgement. Interface which includes
             // operations common to all CMS interfaces.. This operation is used by the
             // subsystem to indicate whether it has accepted or rejected a request from the
@@ -123,14 +115,19 @@ module org {
             	request_id_type request_id;
             	// Field for interface operation parameter request_ack. 
             	request_ack_type request_ack;
+            // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+            @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+            org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
             };
-#pragma keylist receive_acknowledgement_type 
+#pragma keylist receive_acknowledgement_type  subsystem_id
   
 
 
 
 
-            // Version 1.0
             // Topic type for operation receive_error. Interface which includes operations
             // common to all CMS interfaces.. This operation is used by the subsystem to
             // indicate an error in processing a request.
@@ -140,8 +137,14 @@ module org {
             	request_id_type request_id;
             	// Field for interface operation parameter error_reason. 
             	error_reason_type error_reason;
+            // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+            @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+            org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
             };
-#pragma keylist receive_error_type 
+#pragma keylist receive_error_type  subsystem_id
   
 
 

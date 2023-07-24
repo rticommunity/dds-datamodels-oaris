@@ -1,12 +1,11 @@
 #ifndef PROVIDE_AREA_WITH_PLOT_CONCENTRATIONDEFVAR
 #define PROVIDE_AREA_WITH_PLOT_CONCENTRATIONDEFVAR
 #include "Common_Types.idl"
-
+#include "Requests.idl"
 #include "Clutter_Reporting.idl"
 
-#include "Requests.idl"
 
-
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation provide_plot_concentration. . Interface used by the
               // subsystem to receive a plot concentration request from the CMS.
               struct provide_plot_concentration_type
@@ -38,14 +36,57 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter plot_request. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::plot_concentration_request_data_type plot_request;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist provide_plot_concentration_type 
+#pragma keylist provide_plot_concentration_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
+              // Topic type for operation receive_periodic_plot_concentration. The Radar
+              // provides the combat management system with the number of plots in a specific
+              // sector.  The sector information consists of range, azimuth, and elevation.  The
+              // number of plots observed in the region may provide an indication of high
+              // clutter.
+              // 
+              //      Additional Information:
+              // 
+              //      The information may be developed when requested or based on scan histories.
+              // The choice of methods depends upon radar design.  The timestamp should indicate
+              // the oldest data used to create the report to allow the CMS or an operator to
+              // determine the validity of the report (i.e. day old data mixed with recent is
+              // still only as good as day old data).
+              // 
+              //      Sector Information must consist of a measurement time stamp, range extents,
+              // azimuth extents, and elevation extents in platform coordinates.
+              // 
+              //      For radars which report plot concentration without a CMS request, the CMS
+              // shall begin to receive reports upon registration of the Provide Plot
+              // Concentration interface.. Interface used by CMS to receive periodic plot
+              // concentration reports from the subsystem.
+              struct receive_periodic_plot_concentration_type
+              {
+              	// Field for interface operation parameter plot_concentration_report. 
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::plot_concentration_report_type plot_concentration_report;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+              };
+#pragma keylist receive_periodic_plot_concentration_type  subsystem_id
+  
+
+
+
+
               // Topic type for operation receive_plot_concentration. The Radar provides the
               // combat management system with the number of plots in a specific sector.  The
               // sector information consists of range, azimuth, and elevation.  The number of
@@ -72,8 +113,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter plot_concentratrion. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::plot_concentration_report_type plot_concentratrion;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_plot_concentration_type 
+#pragma keylist receive_plot_concentration_type  subsystem_id
   
 
 

@@ -1,12 +1,11 @@
 #ifndef MANAGE_TRANSMISSION_SECTORSDEFVAR
 #define MANAGE_TRANSMISSION_SECTORSDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Sensor_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation set_transmission_sector. This is the Subsystem
               // interface for managing transmission sectors.. Method used by the CMS to send a
               // set/reset transmission sector request to the sensor.
@@ -39,14 +37,19 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter sector. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::transmission_sector_set_type sector;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist set_transmission_sector_type 
+#pragma keylist set_transmission_sector_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation transmission_sector_setting. This determines the
               // sectors where the sensor is allowed to radiate together with the relevant
               // transmission modes and parameters. Sectors may be delimited in azimuth only, or
@@ -103,8 +106,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter setting_message. 
               	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::transmission_sector_set_type setting_message;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist transmission_sector_setting_type 
+#pragma keylist transmission_sector_setting_type  subsystem_id
   
 
 

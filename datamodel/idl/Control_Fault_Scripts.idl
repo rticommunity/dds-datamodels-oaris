@@ -1,12 +1,11 @@
 #ifndef CONTROL_FAULT_SCRIPTSDEFVAR
 #define CONTROL_FAULT_SCRIPTSDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Simulation_Support.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,7 +28,6 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation clear_faults. . Clears the faults defined by the given
               // fault scripts.
               struct clear_faults_type
@@ -39,14 +37,19 @@ module org {
               	// Field for interface operation parameter fault_scripts. The script ids to be
               	// cleared
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type fault_scripts;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist clear_faults_type 
+#pragma keylist clear_faults_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation enable_fault_script. . Causes the subsystem to
               // indicate the faults specified by the given fault scripts when appropriately
               // stimulated. The faults remain in place until they are cleared either by a call
@@ -58,8 +61,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter scripts. The script ids to be enabled
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type scripts;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist enable_fault_script_type 
+#pragma keylist enable_fault_script_type  subsystem_id
   
 
 

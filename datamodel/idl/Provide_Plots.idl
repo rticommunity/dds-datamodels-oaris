@@ -1,0 +1,84 @@
+#ifndef PROVIDE_PLOTSDEFVAR
+#define PROVIDE_PLOTSDEFVAR
+#include "Common_Types.idl"
+#include "Plot_Reporting.idl"
+
+
+// Version 1.1
+module org {
+
+
+  module omg {
+
+
+    module c4i {
+
+
+      module Service_Interfaces {
+
+
+        module Sensor_Services {
+
+
+          module Plot_Reporting {
+
+
+            module Provide_Plots {
+
+
+
+              // Topic type for operation write_sensor_plot_set. Interface to the CMS for
+              // receiving plot updates.
+              //      This interface provides sensor plots to the CMS (filterable to air,
+              // surface, land and space environments). The transfer of data is expected to take
+              // place asynchronously, although for certain classes of sensor it may appear
+              // periodic. This method receives a set of one or more plot updates from the
+              // sensor. It is expected to be called periodically from the sensor.
+              struct write_sensor_plot_set_type
+              {
+              	// Field for interface operation parameter plots. The set of plots
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Plot_Reporting::sensor_plot_set_type plots;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+              };
+#pragma keylist write_sensor_plot_set_type  subsystem_id
+  
+
+
+
+
+              // Topic type for operation write_sensor_plot. Interface to the CMS for receiving
+              // plot updates.
+              //      This interface provides sensor plots to the CMS (filterable to air,
+              // surface, land and space environments). The transfer of data is expected to take
+              // place asynchronously, although for certain classes of sensor it may appear
+              // periodic. This method receives a individual plot update from the sensor. It is
+              // expected to be called periodically from the sensor.
+              struct write_sensor_plot_type
+              {
+              	// Field for interface operation parameter plots. The set of plots
+              	org::omg::c4i::Domain_Model::Sensor_Domain::Plot_Reporting::sensor_plot_type plots;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+              };
+#pragma keylist write_sensor_plot_type  subsystem_id
+  
+
+
+
+            };
+          };
+        };
+      };
+    };
+  };
+};
+#endif

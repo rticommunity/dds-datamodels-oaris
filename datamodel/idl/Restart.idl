@@ -1,12 +1,11 @@
 #ifndef RESTARTDEFVAR
 #define RESTARTDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Subsystem_Control.idl"
 
 
+// Version 1.1
 module org {
 
 
@@ -29,21 +28,25 @@ module org {
 
 
 
-              // Version 1.0
               // Topic type for operation perform_restart. . Interface used by the subsystem to
               // receive a request from the CMS to execute a restart.
               struct perform_restart_type
               {
               	// Field for interface operation parameter request_id. 
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist perform_restart_type 
+#pragma keylist perform_restart_type  subsystem_id
   
 
 
 
 
-              // Version 1.0
               // Topic type for operation receive_restart_state. The purpose of this interface
               // is to cause a normal transition to STANDBY and then to READY states as defined
               // by Manage Technical State.. Interface used by CMS to receive an indication from
@@ -54,8 +57,14 @@ module org {
               	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               	// Field for interface operation parameter technical_state. 
               	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
+              // Indicates which subsystem published the data or is intended to read it as a subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist receive_restart_state_type 
+#pragma keylist receive_restart_state_type  subsystem_id
   
 
 

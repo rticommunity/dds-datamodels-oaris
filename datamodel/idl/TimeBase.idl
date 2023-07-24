@@ -2,11 +2,11 @@
 #define TIMEBASEDEFVAR
 
 
+// Version 1.1
 module TimeBase {
 
 
 
-  // Version 1.0
   // Time units100 nanoseconds (10-7 seconds)
   // Base time15 October 1582 00:00:00.
   // Approximate range AD 30,000
