@@ -1,236 +1,221 @@
-#ifndef SHAPE_MODELDEFVAR
-#define SHAPE_MODELDEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4IDOMAIN_MODELCOMMON_TYPESSHAPE_MODELDEFVAR
+#define ORGOMGC4IDOMAIN_MODELCOMMON_TYPESSHAPE_MODELDEFVAR
 #include "Coordinates_and_Positions.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Domain_Model
+      {
 
+        module Common_Types
+        {
 
-    module c4i {
+          module Shape_Model
+          {
 
-
-      module Domain_Model {
-
-
-        module Common_Types {
-
-
-          module Shape_Model {
-
-
+            enum area_2d_switch_type
+            {
+              area_2d_type_sector_kind,
+              area_2d_type_rectangle_kind,
+              area_2d_type_polygon_kind,
+              area_2d_type_truncated_sector_kind
+            };
 
             // A figure_ref_point specifies a reference point for a figure.
-            //    This reference point is a mathematically meaningful point of the figure. For
-            // a circle it is the centre of the circle, for a polygon it is the centre of
-            // gravity of the polygon, etc.
-            // 
-            //    When rotating the figure, the figure_ref_point acts as the rotation point.
-            // 
-            //    When a figure is not slaved to a track its figure_ref_point shall be mapped
-            // on a (moving) geo point.
-            //    When the figure is slaved to an object (track, point) its figure_ref_point
-            // shall be mapped on an offset position which is relative to the master object.
-            struct figure_ref_point
+            // This reference point is a mathematically meaningful point of the figure. For a
+            // circle it is the centre of the circle, for a polygon it is the centre of gravity
+            // of the polygon, etc. 
+            // When rotating the figure, the figure_ref_point acts as the rotation point.
+            // When a figure is not slaved to a track its figure_ref_point shall be mapped on a
+            // (moving) geo point.
+            // When the figure is slaved to an object (track, point) its figure_ref_point shall
+            // be mapped on an offset position which is relative to the master object.
+            struct figure_ref_point_type
             {
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
             };
-  
 
-
-
-
-            // Switch enumeration type for union general_polar_volume_type
             enum general_polar_volume_switch_type
             {
-            	// The general_polar_volume_type union contains a value of sector_type
-            	general_polar_volume_type_sector_kind,
-            	// The general_polar_volume_type union contains a value of polar_volume_type
-            	general_polar_volume_type_polar_volume_kind,
-            	// The general_polar_volume_type union contains a value of truncated_sector_type
-            	general_polar_volume_type_truncated_sector_kind,
-            	// The general_polar_volume_type union contains a value of
-            	// truncated_polar_volume_type
-            	general_polar_volume_type_truncated_polar_volume_kind
+              general_polar_volume_type_sector_kind,
+              general_polar_volume_type_polar_volume_kind,
+              general_polar_volume_type_truncated_sector_kind,
+              general_polar_volume_type_truncated_polar_volume_kind
             };
-  
 
-
-
-
-            // a simple union type, to represent an optional value
-            union sector_origin_type switch (boolean)
+            // A geographically defined rectangle in the environment
+            struct rectangle_type
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::figure_ref_point value;
+              // distance along angle of orientation from the ref point to the next corner
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type length;
+              // distance perpendicular to angle of orientation (clockwise) from ref point to the
+              // next corner
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type width;
+              // angle of azimuth of the length sides of the rectangle
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type orientation;
+              figure_ref_point_type ref_point;
             };
-  
 
-
-
-
-            // A sector specifies a 2D area in a horizontal plane by means of its origin, its
-            // centre bearing with its bearing delta, that together define the sector.
-            //    The origin is the figure reference point of the sector.
-            //    In case the sector is north oriented, the centre bearing is specified with
-            // respect to true north; otherwise it is specified with respect to the object's
-            // (own ship/other track, point) heading/course.
-            struct sector_type
-            {
-            	// This attribute specifies the horizontal angle measured clockwise between the Y-
-            	// axis of the relevant coordinate system (true north, heading/course) and the
-            	// centre bearing line of the sector.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
-            	// This attribute specifies the bearing delta on each side of a specified centre
-            	// bearing line. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
-            	sector_origin_type origin;
-            };
-  
-
-
-
+            // A sequence type, to represent multiple values.
+            typedef sequence<org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type, 12> polygon_point_type;
 
             // a simple union type, to represent an optional value
             union polar_volume_origin_type switch (boolean)
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::figure_ref_point value;
+              // the value when present
+              case TRUE : figure_ref_point_type value;
             };
-  
-
-
-
-
-            // A polar_volume specifies a 3D volume based on a horizontal plane by means of
-            // its origin, its centre bearing and centre elevation, its bearing delta and
-            // elevation delta.
-            //    The origin is the figure reference point of the Polar Volume.
-            struct polar_volume_type
-            {
-            	// This attribute specifies the horizontal angle measured clockwise between the Y-
-            	// axis of the relevant coordinate system (true north, heading/course) and the
-            	// centre bearing line of the volume. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
-            	// This attribute specifies the bearing delta on each side of a specified centre
-            	// bearing line. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
-            	// This attribute specifies the vertical angle measured counterclockwise between
-            	// the horizontal plane and the centre elevation line of the volume. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type centre_elevation;
-            	// This attribute specifies the elevation delta on each side of a specified centre
-            	// elevation line. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type delta_elevation;
-            	polar_volume_origin_type origin;
-            };
-  
-
-
-
 
             // a simple union type, to represent an optional value
-            union truncated_sector_origin_type switch (boolean)
+            union sector_origin_type switch (boolean)
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::figure_ref_point value;
+              // the value when present
+              case TRUE : figure_ref_point_type value;
             };
-  
-
-
-
-
-            // A truncated_sector specifies a 2D area in a horizontal plane by means of its
-            // origin, its centre bearing with its bearing delta, and its inner range and
-            // outer range, that together define the truncated sector.
-            //    The origin is the figure reference point of the truncated sector.
-            //    In case the truncated sector is north oriented, the centre bearing is
-            // specified with respect to true north; otherwise (object oriented) it is
-            // specified with respect to the object's (own ship/other track, point)
-            // heading/course.
-            struct truncated_sector_type
-            {
-            	// This attribute specifies the horizontal angle measured clockwise between the Y-
-            	// axis of the relevant coordinate system (true north, heading/course) and the
-            	// centre bearing line of the truncated sector. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
-            	// This attribute specifies the bearing delta on each side of a centre bearing
-            	// line. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
-            	// This attribute specifies the range that limits a truncated sector; i.e. the
-            	// minimum distance from the truncated sector's origin. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type inner_range;
-            	// This attribute specifies the range that limits a truncated sector; i.e. the
-            	// maximum distance from the truncated sector's origin.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type outer_range;
-            	truncated_sector_origin_type origin;
-            };
-  
-
-
-
 
             // a simple union type, to represent an optional value
             union truncated_polar_volume_origin_type switch (boolean)
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::figure_ref_point value;
+              // the value when present
+              case TRUE : figure_ref_point_type value;
             };
-  
 
+            // a simple union type, to represent an optional value
+            union truncated_sector_origin_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : figure_ref_point_type value;
+            };
 
+            // A geographically defined general area
+            struct polygon_type
+            {
+              polygon_point_type point;
+            };
 
+            // A polar_volume specifies a 3D volume based on a horizontal plane by means of its
+            // origin, its centre bearing and centre elevation, its bearing delta and elevation
+            // delta.
+            // The origin is the figure reference point of the Polar Volume.
+            struct polar_volume_type
+            {
+              // This attribute specifies the horizontal angle measured clockwise between the
+              // Y-axis of the relevant coordinate system (true north, heading/course) and the
+              // centre bearing line of the volume. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
+              // This attribute specifies the bearing delta on each side of a specified centre
+              // bearing line. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
+              // This attribute specifies the vertical angle measured counterclockwise between the
+              // horizontal plane and the centre elevation line of the volume. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type centre_elevation;
+              // This attribute specifies the elevation delta on each side of a specified centre
+              // elevation line. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type delta_elevation;
+              polar_volume_origin_type origin;
+            };
+
+            // A sector specifies a 2D area in a horizontal plane by means of its origin, its
+            // centre bearing with its bearing delta, that together define the sector.
+            // The origin is the figure reference point of the sector.
+            // In case the sector is north oriented, the centre bearing is specified with
+            // respect to true north; otherwise it is specified with respect to the object's
+            // (own ship/other track, point) heading/course.
+            struct sector_type
+            {
+              // This attribute specifies the horizontal angle measured clockwise between the
+              // Y-axis of the relevant coordinate system (true north, heading/course) and the
+              // centre bearing line of the sector.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
+              // This attribute specifies the bearing delta on each side of a specified centre
+              // bearing line. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
+              sector_origin_type origin;
+            };
 
             // A truncated_polar_volume specifies a 3D volume based on a horizontal plane by
             // means of its origin, its centre bearing and centre elevation, its bearing delta
             // and elevation delta, its inner range and outer range
             struct truncated_polar_volume_type
             {
-            	// This attribute specifies the horizontal angle measured clockwise between the Y-
-            	// axis of the relevant coordinate system (true north, heading/course) and the
-            	// centre bearing line of the volume. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
-            	// This attribute specifies the bearing delta on each side of a specified centre
-            	// bearing line. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
-            	// This attribute specifies the vertical angle measured counterclockwise between
-            	// the horizontal plane and the centre elevation line of the volume.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type centre_elevation;
-            	// This attribute specifies the elevation delta on each side of a specified centre
-            	// elevation line. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type delta_elevation;
-            	// This attribute specifies the range that limits a volume; i.e. the minimum
-            	// distance from the volume's origin.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type inner_range;
-            	// This attribute specifies the range that limits a volume; i.e. the maximum
-            	// distance from the volume's origin. 
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type outer_range;
-            	truncated_polar_volume_origin_type origin;
+              // This attribute specifies the horizontal angle measured clockwise between the
+              // Y-axis of the relevant coordinate system (true north, heading/course) and the
+              // centre bearing line of the volume. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
+              // This attribute specifies the bearing delta on each side of a specified centre
+              // bearing line. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
+              // This attribute specifies the vertical angle measured counterclockwise between the
+              // horizontal plane and the centre elevation line of the volume.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type centre_elevation;
+              // This attribute specifies the elevation delta on each side of a specified centre
+              // elevation line. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type delta_elevation;
+              // This attribute specifies the range that limits a volume; i.e. the minimum
+              // distance from the volume's origin.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type inner_range;
+              // This attribute specifies the range that limits a volume; i.e. the maximum
+              // distance from the volume's origin. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type outer_range;
+              truncated_polar_volume_origin_type origin;
             };
-  
 
+            // A truncated_sector specifies a 2D area in a horizontal plane by means of its
+            // origin, its centre bearing with its bearing delta, and its inner range and outer
+            // range, that together define the truncated sector.
+            // The origin is the figure reference point of the truncated sector.
+            // In case the truncated sector is north oriented, the centre bearing is specified
+            // with respect to true north; otherwise (object oriented) it is specified with
+            // respect to the object's (own ship/other track, point) heading/course.
+            struct truncated_sector_type
+            {
+              // This attribute specifies the horizontal angle measured clockwise between the
+              // Y-axis of the relevant coordinate system (true north, heading/course) and the
+              // centre bearing line of the truncated sector. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
+              // This attribute specifies the bearing delta on each side of a centre bearing line.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
+              // This attribute specifies the range that limits a truncated sector; i.e. the
+              // minimum distance from the truncated sector's origin. 
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type inner_range;
+              // This attribute specifies the range that limits a truncated sector; i.e. the
+              // maximum distance from the truncated sector's origin.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type outer_range;
+              truncated_sector_origin_type origin;
+            };
 
-
+            // An area for the sensor to keep under surveillance
+            union area_2d_type switch (area_2d_switch_type)
+            {
+              case area_2d_type_sector_kind : sector_type sector;
+              case area_2d_type_rectangle_kind : rectangle_type rectangle;
+              case area_2d_type_polygon_kind : polygon_type polygon;
+              case area_2d_type_truncated_sector_kind : truncated_sector_type truncated_sector;
+            };
 
             // This class allow definition of a volume in space, bounded by standard polar
             // coordinates (azimuth, elevation and range). The different options allow the
             // dimension of either range, elevation or both to be omitted.
             union general_polar_volume_type switch (general_polar_volume_switch_type)
             {
-            	// The general polar volume is a sector
-            	case general_polar_volume_type_sector_kind : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::sector_type sector;
-            	// The general polar volume is a polar volume
-            	case general_polar_volume_type_polar_volume_kind : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::polar_volume_type polar_volume;
-            	// The general polar volume is a truncated sector
-            	case general_polar_volume_type_truncated_sector_kind : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::truncated_sector_type truncated_sector;
-            	// The general polar volume is a truncated polar volume.
-            	case general_polar_volume_type_truncated_polar_volume_kind : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::truncated_polar_volume_type truncated_polar_volume;
+              // The general polar volume is a sector
+              case general_polar_volume_type_sector_kind : sector_type sector;
+              // The general polar volume is a polar volume
+              case general_polar_volume_type_polar_volume_kind : polar_volume_type polar_volume;
+              // The general polar volume is a truncated sector
+              case general_polar_volume_type_truncated_sector_kind : truncated_sector_type truncated_sector;
+              // The general polar volume is a truncated polar volume.
+              case general_polar_volume_type_truncated_polar_volume_kind : truncated_polar_volume_type truncated_polar_volume;
             };
-  
-
-
 
           };
         };

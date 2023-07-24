@@ -1,79 +1,154 @@
-#ifndef SEARCHDEFVAR
-#define SEARCHDEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINSEARCHDEFVAR
+#define ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINSEARCHDEFVAR
+#include "Common_Types.idl"
 #include "Coordinates_and_Positions.idl"
 #include "Shape_Model.idl"
 #include "Track_Reporting.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Domain_Model
+      {
 
+        module Sensor_Domain
+        {
 
-    module c4i {
+          module Search
+          {
 
+            // The types of search pattern that can be employed for search and surveillance
+            // tasks
+            enum search_pattern_type
+            {
+              // Coverage by alternating traversal of the area length-wise. Valid for rectangular
+              // areas.
+              LAWNMOWER_BY_LENGTH,
+              // Coverage by alternating traversal of the area width-wise. Valid for rectangular
+              // areas.
+              LAWNMOWER_BY_WIDTH,
+              // Coverage by traversing the perimeter and then progressively smaller traversals of
+              // the interior towards the center..
+              SPIRAL_IN,
+              // Coverage by starting at the center and traversing through the interior on a path
+              // that is (approximately) tangential to the center and parallel to the perimeter
+              // until the perimeter has been traversed.
+              SPIRAL_OUT,
+              // Search by sensing subsets of the area selected at random.
+              RANDOM_SAMPLE,
+              // No search pattern is specified.
+              UNSPECIFIED_PATTERN
+            };
 
-      module Domain_Model {
-
-
-        module Radar_Domain {
-
-
-          module Search {
-
-
+            // Defines the search behavior on repeat / subsequent searches
+            enum search_repeat_type
+            {
+              // Complete a single search pattern.
+              ONCE_ONLY,
+              // Repeat the task indefinitely.
+              REPEAT,
+              // Repeat the task once.
+              REPEAT_ONCE,
+              // Repeat the task in reverse indefinitely.
+              REVERSE,
+              // Repeat the task in reverse once.
+              REVERSE_ONCE,
+              // Randomly repeat the elements of the task indefinitely.
+              RANDOM_REPEAT,
+              // No repeat specified.
+              UNSPECIFIED_REPEAT
+            };
 
             // a simple union type, to represent an optional value
             union cued_search_cue_speed_interval_type switch (boolean)
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::speed_interval_type value;
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::speed_interval_type value;
             };
-  
-
-
-
-
-            // Type used for specifying the constraints on a cued search.
-            struct cued_search_cue_type
-            {
-            	// The range of track-speed to search for from the cue.
-            	cued_search_cue_speed_interval_type speed_interval;
-            	// The region in the environment, in which the cue to search for tracks is to be
-            	// performed.
-            	org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type volume;
-            	// The orientation of the polar coordinates used in this class. Note that the
-            	// origin is always the sensor reference point and that the coordinate system is
-            	// always polar.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type coordinate_orientation;
-            };
-  
-
-
-
 
             // a simple union type, to represent an optional value
             union cued_search_report_found_track_id_type switch (boolean)
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type value;
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type value;
             };
-  
 
+            // a simple union type, to represent an optional value
+            union surveillance_search_frequency_band_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::frequency_band_type value;
+            };
 
+            // Type used for specifying the constraints on a cued search.
+            struct cued_search_cue_type
+            {
+              // The range of track-speed to search for from the cue.
+              cued_search_cue_speed_interval_type speed_interval;
+              // The region in the environment, in which the cue to search for tracks is to be
+              // performed.
+              org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type volume;
+              // The orientation of the polar coordinates used in this class. Note that the origin
+              // is always the sensor reference point and that the coordinate system is always
+              // polar.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type coordinate_orientation;
+            };
 
+            // A sequence type, to represent multiple values.
+            typedef sequence<org::omg::c4i::Domain_Model::Common_Types::system_track_id_type, 100> surveillance_task_system_track_type;
 
             // Data returned to the CMS to indicate the results of a cued search.
             struct cued_search_report_type
             {
-            	cued_search_report_found_track_id_type found_track_id;
-            	long original_cue_id;
+              cued_search_report_found_track_id_type found_track_id;
+              long original_cue_id;
             };
-  
 
+            // A 2D area that is included in a surveillance task
+            struct surveillance_area_type
+            {
+              // The pattern to apply to the area
+              search_pattern_type pattern;
+              // The area to be kept under surveillance.
+              org::omg::c4i::Domain_Model::Common_Types::Shape_Model::area_2d_type area;
+              search_repeat_type repeat;
+            };
 
+            // The parameters with which to task a sensor to concentrate its surveillance
+            // efforts within a spatial and / or frequency band.
+            struct surveillance_search_type
+            {
+              // The region of surveillance in the environment to be searched for tracks.
+              org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type volume;
+              // The orientation of the polar coordinates used in this class. Note that the origin
+              // is always the sensor reference point and that the coordinate system is always
+              // polar.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type coordinate_orientation;
+              // The frequency band to be searched.
+              surveillance_search_frequency_band_type frequency_band;
+            };
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<surveillance_area_type, 20> surveillance_task_area_type;
+
+            // The information for a CMS request to the subsystem (as appropriate to be a
+            // directional sensor that can be steered) to undertake a surveillance task.
+            struct surveillance_task_type
+            {
+              // The system tracks to keep under surveillance. The information regarding the
+              // system tracks is published using another interface standard, such as the TACSIT
+              // Data Exchange specification (TEX), the choice of which may be system specific.
+              surveillance_task_system_track_type system_track;
+              surveillance_task_area_type area;
+            };
 
           };
         };

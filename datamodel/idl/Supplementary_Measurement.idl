@@ -1,0 +1,868 @@
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINSUPPLEMENTARY_MEASUREMENTDEFVAR
+#define ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINSUPPLEMENTARY_MEASUREMENTDEFVAR
+#include "Common_Types.idl"
+#include "Plot_Reporting.idl"
+
+module org
+{
+
+  module omg
+  {
+
+    module c4i
+    {
+
+      module Domain_Model
+      {
+
+        module Sensor_Domain
+        {
+
+          // This package provides a data model to describe supplementary parameters that a
+          // sensor can provide about a sensor track. The approach is to be agnostic to any
+          // specific type of measurement that a sensor may make. Rather, classes are provided
+          // that allow the sensor to describe the parameters that it supports and then to
+          // describe the measurements that it has made of those parameters. Measurement can
+          // be treated as a single instance, a continuous range or a discrete set; the
+          // quantity can be scalar, vector, discrete or qualitative; and confidence values
+          // can be supplied where appropriate as can accuracy estimates.
+          module Supplementary_Measurement
+          {
+
+            // Enumeration of specialisations options for union class continuous_measurement_type.
+            enum continuous_measurement_kind_type
+            {
+              // measurement_interval_type option for continuous_measurement_type
+              MEASUREMENT_INTERVAL_KIND,
+              // modulation_type option for continuous_measurement_type
+              MODULATION_KIND,
+              // multi_modal_measurement_type option for continuous_measurement_type
+              MULTI_MODAL_MEASUREMENT_KIND,
+              // pdf_measurement_type option for continuous_measurement_type
+              PDF_MEASUREMENT_KIND
+            };
+
+            // The ordering semantics of a set of measurements of a parameter.
+            enum discrete_order_type
+            {
+              // The measurements are ordered by increasing value such that the smallest value is
+              // first and the largest value is last.
+              ORDER_INCREASING_BY_VALUE,
+              // The measurements are ordered by decreasing value such that the smallest value is
+              // last and the largest value is first.
+              ORDER_DECREASING_BY_VALUE,
+              // The measurements are ordered by age such that the value received first is first
+              // and the latest value is last.
+              ORDER_OLDEST_FIRST,
+              // The measurements are ordered by age such that the value received first is last
+              // and the latest value is first.
+              ORDER_MOST_RECENT_FIRST,
+              // The ordering is not specified as it is not semantically meaningful.
+              ORDER_NOT_SPECIFIED
+            };
+
+            // A string type
+            // The name of a sensor defined probability density function.
+            typedef string<20> distribution_parameter_name_type;
+
+            // The unique identifier for describing kinds of measurements
+            typedef long measurement_kind_id_type;
+
+            // A string type
+            // The name or label for a kind of measurement
+            typedef string<20> measurement_name_type;
+
+            // A string type
+            // Names of sets of parameters for sensor tracks
+            typedef string<32> measurement_parameter_set_name_type;
+
+            // The measurement status of the parameter
+            enum measurement_parameter_status_type
+            {
+              // The parameter is currently subject to measurement for this sensor track
+              CURRENT,
+              // The parameter temporarily cannot be measured  for this sensor track
+              MISSING,
+              // The parameter can no longer be measured for this sensor track
+              NOT_PRESENT,
+              // No statement is available regarding the parameter's measurement status for this
+              // sensor track
+              NO_PARAMETER_STATUS
+            };
+
+            // The units used to quantify the measurement values and accuracies
+            enum measurement_unit_type
+            {
+              // There are no units as the quantity is a dimensionless value
+              DIMENSIONLESS,
+              // units are in decibels to measure amplitudes
+              DECIBEL,
+              // units are in decibels per second to measure change in amplitude with time.
+              DECIBELS_PER_SECOND,
+              // units are in Hertz to measure frequencies
+              HERTZ,
+              // Units are in Hertz per second to measure change in frequency with time
+              HERTZ_PER_SECOND,
+              // Units are meters 
+              METER,
+              // Units are in meters per second to measure speeds
+              METERS_PER_SECOND,
+              // Another unit is used to quantify the measurements and accuracies
+              OTHER_UNIT,
+              // Units are in radians to measure angles
+              RADIAN,
+              // Units are in radians per seconds to measure the change in angles with time
+              RADIANS_PER_SECOND,
+              // Units are in seconds to measure time or intervals.
+              SECOND,
+              // Units are in seconds per second to measure the change in regular intervals over
+              // time.
+              SECONDS_PER_SECOND
+            };
+
+            // A qualitative description of change in a parameter measurement value over time
+            // within a distribution. The characteristic quantitative values of the variation
+            // pattern can be represented by other related measurement parameters.
+            enum measurement_variation_kind_type
+            {
+              // The value is decreasing monotonically; a minimum value is not yet determined
+              DECREASING,
+              // The value is decreasing monotonically towards an asymptotic minimum value
+              DECREASING_ASYMPTOTICALLY,
+              // The value decreases monotonically until it reaches a minimum value at which point
+              // it wraps or resets to a maximum value.
+              DECREASING_WITH_WRAP,
+              // The drift behavior is not specified
+              DRIFT_NOT_SPECIFIED,
+              // The is increasing monotonically; a maximum value is not yet determined
+              INCREASING,
+              // The is increasing monotonically towards a maximum asymptotic value.
+              INCREASING_ASYMPTOTICALLY,
+              // The value increases monotonically until it reaches a maximum value at which point
+              // it wraps or resets to a minimum value.
+              INCREASING_WITH_WRAP,
+              // The value alternately increases monotonically until it reaches a maximum value
+              // and decreases monotonically until it reaches a minimum value.
+              LINEAR_ALTERNATING,
+              // The change in value over time is considered to be random
+              RANDOM_VARIATION,
+              // The value of the measurement parameter value is sinusoidal over time. 
+              SINE_WAVE_VARIATION,
+              // The value of the measurement parameter alternates discontinuously between minimum
+              // and maximum values over time. 
+              SQUARE_WAVE_VARIATION,
+              // The drift pattern is unknown to (not recognized by) the sensor.
+              UNKNOWN_VARIATION
+            };
+
+            // Enumeration of specialisations options for union class parameter_distribution_type.
+            enum parameter_distribution_kind_type
+            {
+              // continuous_measurement_type option for parameter_distribution_type
+              CONTINUOUS_MEASUREMENT_KIND,
+              // discrete_set_measurement_type option for parameter_distribution_type
+              DISCRETE_SET_MEASUREMENT_KIND,
+              // single_measurement_type option for parameter_distribution_type
+              SINGLE_MEASUREMENT_KIND
+            };
+
+            // The unique identifier for a measurement parameter.
+            typedef long parameter_id_type;
+
+            // Enumeration of specialisations options for union class pdf_measurement_type.
+            enum pdf_measurement_kind_type
+            {
+              // normal_measurement_type option for pdf_measurement_type
+              NORMAL_MEASUREMENT_KIND,
+              // poisson_measurement_type option for pdf_measurement_type
+              POISSON_MEASUREMENT_KIND,
+              // sensor_defined_pdf_measurement_type option for pdf_measurement_type
+              SENSOR_DEFINED_PDF_MEASUREMENT_KIND
+            };
+
+            // A string type
+            // The name of a sensor defined probability density function.
+            typedef string<20> pdf_name_type;
+
+            // struct holding keys for class measurement_parameter_kind_type.
+            struct measurement_parameter_kind_key_type
+            {
+              // The unique identifier for this kind of parameter.
+              measurement_kind_id_type id;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            // The inclusive range of samples sensed that contribute to the measurement value
+            struct sample_range_type
+            {
+              // The minimum value of a sample for the measurement
+              double min_value;
+              // The maximum value of a sample for the measurement
+              double max_value;
+            };
+
+            // A string type
+            // To name a sequence
+            typedef string<32> sequence_name_type;
+
+            // Enumeration of specialisations options for union class single_measurement_type.
+            enum single_measurement_kind_type
+            {
+              // discrete_measurement_type option for single_measurement_type
+              DISCRETE_MEASUREMENT_KIND,
+              // qualitative_measurement_type option for single_measurement_type
+              QUALITATIVE_MEASUREMENT_KIND,
+              // scalar_measurement_type option for single_measurement_type
+              SCALAR_MEASUREMENT_KIND,
+              // vector_measurement_type option for single_measurement_type
+              VECTOR_MEASUREMENT_KIND
+            };
+
+            // struct holding keys for class track_measurement_parameter_type.
+            struct track_measurement_parameter_key_type
+            {
+              // The sensor track to which the measurement parameter relates.
+              long sensor_track_id;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            // a simple union type, to represent an optional value
+            union discrete_set_measurement_repeating_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : boolean value;
+            };
+
+            // a simple union type, to represent an optional value
+            union discrete_set_measurement_known_set_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : boolean value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_drift_confidence_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_drift_fit_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : double value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_element_count_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : short value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_element_total_count_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : long value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_parameter_confidence_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_parameter_continuous_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : boolean value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_parameter_count_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : long value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_parameter_intentional_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : boolean value;
+            };
+
+            // a simple union type, to represent an optional value
+            union scalar_measurement_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : double value;
+            };
+
+            // a simple union type, to represent an optional value
+            union single_measurement_confidence_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
+            };
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<double, 21> vector_measurement_covariance_type;
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<double, 6> vector_measurement_value_type;
+
+            // struct holding keys for class plot_measurement_parameter_set_type.
+            struct plot_measurement_parameter_set_key_type
+            {
+              // The name of the set of parameters
+              measurement_parameter_set_name_type name;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            // struct holding keys for class track_measurement_parameter_set_type.
+            struct track_measurement_parameter_set_key_type
+            {
+              // The name of the set of parameters
+              measurement_parameter_set_name_type name;
+              long sensor_track_id;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            // A kind of parameter supported by the sensor
+            // The configuration of measurement parameters allows integrated systems to specify
+            // the set of measurement types for which the installed equipment has a measurement
+            // capability and semantics associated with these measurement types.
+            // Measurement types have the potential to be classified and also the set of
+            // measurement types can be expected to grow as technology advances. Therefore the
+            // meaning of the associated identifiers are systems specific and determined from
+            // configuration data.
+            // Describes a kind of measurement parameters in terms of its meta-data (the
+            // information that applies to all measurement_parameter_type instances)
+            struct measurement_parameter_kind_type
+            {
+              // The name or label for the measurement.
+              measurement_name_type name;
+              // The unique identifier for this kind of parameter.
+#ifdef DDS_XTYPES
+              @Key measurement_kind_id_type id;
+#else
+              measurement_kind_id_type id;
+#endif
+              // The units of the measurement.
+              measurement_unit_type units;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+            };
+#ifndef DDS_XTYPES
+#pragma keylist measurement_parameter_kind_type id subsystem_id
+#endif
+
+            // a simple union type, to represent an optional value
+            union measurement_parameter_sample_range_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : sample_range_type value;
+            };
+
+            // Struct of base attributes defined for class single_measurement_type.
+            struct single_measurement_base_type
+            {
+              // The confidence in the parameter measurement value; this is the probability that
+              // the value and accuracy represent the true distribution of the physical effect
+              // they are labelled as measuring in the real world.
+              single_measurement_confidence_type confidence;
+            };
+
+            // This represents a parameter which takes discrete values.
+            struct discrete_measurement_type
+            {
+              // Base attribute containing attributes from generalisation single_measurement_type
+              single_measurement_base_type base;
+              // The discrete value of the measurement
+              long value;
+            };
+
+            // This describes a qualitative measure
+            struct qualitative_measurement_type
+            {
+              // Base attribute containing attributes from generalisation single_measurement_type
+              single_measurement_base_type base;
+              // The descriptor for the qualitative measurement
+              unsigned short descriptor;
+            };
+
+            // This class represents individual scalar measurements of parameter values.
+            struct scalar_measurement_type
+            {
+              // Base attribute containing attributes from generalisation single_measurement_type
+              single_measurement_base_type base;
+              // The accuracy of the measurement value (one standard deviation)
+              scalar_measurement_accuracy_type accuracy;
+              // The value of the parameter measurement
+              double value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_drift_repetition_period_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : scalar_measurement_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_drift_max_rate_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : scalar_measurement_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_drift_min_rate_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : scalar_measurement_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_interval_standard_deviation_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : scalar_measurement_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union modulation_modulation_amplitude_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : scalar_measurement_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union modulation_modulation_frequency_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : scalar_measurement_type value;
+            };
+
+            // This class represents individual vector measurements of parameter values.
+            struct vector_measurement_type
+            {
+              // Base attribute containing attributes from generalisation single_measurement_type
+              single_measurement_base_type base;
+              // The covariance between the elements of the vector value in a 1-dimensional
+              // representation of the triangular matrix. The i,j element (i &gt;= j) of a
+              // covariance matrix for a vector of size N is at position sum(k=0..j-1, N - k) + (i
+              // - j). The covariance is zero length if not specified.
+              vector_measurement_covariance_type covariance;
+              // The vector values
+              vector_measurement_value_type value;
+            };
+
+            // The representation of parameter measurement values that are distributed within a
+            // bounded interval
+            struct modulation_type
+            {
+              // The qualitative measure of the kind of modulation detected.
+              measurement_variation_kind_type kind;
+              // The mean value of the measurement that is subject to modulation.
+              scalar_measurement_type mean_value;
+              // The amplitude of the modulation of the parameter being measured.
+              modulation_modulation_amplitude_type modulation_amplitude;
+              // The frequency of the modulation of the parameter being measured.
+              modulation_modulation_frequency_type modulation_frequency;
+            };
+
+            // Union of the specialisations for class single_measurement_type.
+            // A single discrete representation of a parameter measurement value.
+            union single_measurement_type switch (single_measurement_kind_type)
+            {
+              // discrete_measurement_type option for single_measurement_type
+              case DISCRETE_MEASUREMENT_KIND : discrete_measurement_type discrete_measurement;
+              // qualitative_measurement_type option for single_measurement_type
+              case QUALITATIVE_MEASUREMENT_KIND : qualitative_measurement_type qualitative_measurement;
+              // scalar_measurement_type option for single_measurement_type
+              case SCALAR_MEASUREMENT_KIND : scalar_measurement_type scalar_measurement;
+              // vector_measurement_type option for single_measurement_type
+              case VECTOR_MEASUREMENT_KIND : vector_measurement_type vector_measurement;
+            };
+
+            // The measurement estimation of a (sensor defined) parameter describing a
+            // measurement parameter's distribution
+            struct distribution_parameter_measurement_type
+            {
+              // The name of a parameter describing a distribution
+              distribution_parameter_name_type name;
+              // The measured value for a parameter describing a distribution.
+              single_measurement_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union pdf_measurement_standard_deviation_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : single_measurement_type value;
+            };
+
+            // The representation of an element within a discrete distribution
+            struct measurement_element_type
+            {
+              // The number of times the parameter measured has corresponded to this element in a
+              // row. That is since another element was measured.
+              measurement_element_count_type count;
+              // The total number of times this element has been measured with the discrete
+              // distribution for this parameter value for the sensor track.
+              measurement_element_total_count_type total_count;
+              // The measurement of the element within the discrete distribution.
+              single_measurement_type measurement;
+            };
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<measurement_element_type, 50> discrete_set_measurement_element_type;
+
+            // The values of the measurement parameter follow a discrete distribution
+            struct discrete_set_measurement_type
+            {
+              // Whether the elements within the discrete distribution repeat (in the same order)
+              discrete_set_measurement_repeating_type repeating;
+              // The semantics of the ordering of the elements of the discrete distribution
+              discrete_order_type order;
+              // Whether the elements within the discrete distribution correspond to a known set
+              // of measurement values
+              discrete_set_measurement_known_set_type known_set;
+              // A discrete element within the discrete distribution
+              discrete_set_measurement_element_type element;
+            };
+
+            // Describes how a measurement varies with time (on a time-scale longer than that
+            // described by modulation measurements).
+            struct measurement_drift_type
+            {
+              // The qualitative measure of the kind of drift detected.
+              measurement_variation_kind_type kind;
+              // The sensor's confidence in identifying the kind of drift.
+              measurement_drift_confidence_type confidence;
+              // Sample size independent measure of the closeness by which the measurement sample
+              // fit the model of the identified kind of drift.
+              measurement_drift_fit_type fit;
+              // The time for the drift behavior to repeat itself.
+              measurement_drift_repetition_period_type repetition_period;
+              // The maximum rate of change of the measurement detected (in the units of the
+              // measurement's kind per second).
+              measurement_drift_max_rate_type max_rate;
+              // The mean rate of change of the measurement detected (in the units of the
+              // measurement's kind per second).
+              scalar_measurement_type mean_rate;
+              // The minimum rate of change of the measurement detected (in the units of the
+              // measurement's kind per second).
+              measurement_drift_min_rate_type min_rate;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_interval_drift_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : measurement_drift_type value;
+            };
+
+            // Struct of base attributes defined for class pdf_measurement_type.
+            struct pdf_measurement_base_type
+            {
+              // The mean (expected) value of the probability density function.
+              single_measurement_type mean;
+              // The standard deviation of values from the probability density function.
+              pdf_measurement_standard_deviation_type standard_deviation;
+            };
+
+            // The representation of a measurement parameter that is normally distributed
+            struct normal_measurement_type
+            {
+              // Base attribute containing attributes from generalisation pdf_measurement_type
+              pdf_measurement_base_type base;
+            };
+
+            // The parameter measurement follows a Poisson distribution
+            struct poisson_measurement_type
+            {
+              // Base attribute containing attributes from generalisation pdf_measurement_type
+              pdf_measurement_base_type base;
+            };
+
+            // The representation of parameter measurement values that are distributed within a
+            // bounded interval
+            struct measurement_interval_type
+            {
+              // The measurement values are uniformly distributed within the bounded interval
+              boolean uniform;
+              // The lower bound of the parameter measurements, which may be extrapolated from
+              // actual sample measurements received or processed.
+              scalar_measurement_type min_value;
+              // The upper bound of the parameter measurements, which may be extrapolated from
+              // actual sample measurements received or processed.
+              scalar_measurement_type max_value;
+              // A qualitative description of how the parameter measurement changes over time
+              measurement_interval_drift_type drift;
+              // The standard deviation of the measurement within the interval.
+              measurement_interval_standard_deviation_type standard_deviation;
+              // The mean value of the measurement within the interval.
+              scalar_measurement_type mean_value;
+            };
+
+            // The representation of a measurement of generalised probability density function
+            // whose definition can be instantiated by a sensor for extensibility.
+            struct sensor_defined_pdf_measurement_type
+            {
+              // Base attribute containing attributes from generalisation pdf_measurement_type
+              pdf_measurement_base_type base;
+              // The name of the probability density function
+              pdf_name_type name;
+              // The list of additional parameters required to describe the sensor defined
+              // probability density function
+              distribution_parameter_measurement_type parameter;
+            };
+
+            // Union of the specialisations for class pdf_measurement_type.
+            // The values of the parameter measurement are distributed according to a
+            // probability density function.
+            union pdf_measurement_type switch (pdf_measurement_kind_type)
+            {
+              // normal_measurement_type option for pdf_measurement_type
+              case NORMAL_MEASUREMENT_KIND : pdf_measurement_base_type normal_measurement;
+              // poisson_measurement_type option for pdf_measurement_type
+              case POISSON_MEASUREMENT_KIND : pdf_measurement_base_type poisson_measurement;
+              // sensor_defined_pdf_measurement_type option for pdf_measurement_type
+              case SENSOR_DEFINED_PDF_MEASUREMENT_KIND : sensor_defined_pdf_measurement_type sensor_defined_pdf_measurement;
+            };
+
+            // The distribution of one mode independently contributing to a multi-modal
+            // distribution.
+            struct distribution_mode_type
+            {
+              // The proportion that this mode contributes to the overall distribution. The sum of
+              // all the modes equals 1.
+              float proportion;
+              // The distribution for this mode.
+              pdf_measurement_type distribution;
+            };
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<distribution_mode_type> multi_modal_measurement_mode_type;
+
+            // The representation of parameter measurement values that have a multi-modal
+            // distribution
+            struct multi_modal_measurement_type
+            {
+              // A mode within a multi-mode distribution for the parameter measurement
+              multi_modal_measurement_mode_type mode;
+            };
+
+            // Union of the specialisations for class continuous_measurement_type.
+            // A continuous representation of a parameter measurement value.
+            union continuous_measurement_type switch (continuous_measurement_kind_type)
+            {
+              // measurement_interval_type option for continuous_measurement_type
+              case MEASUREMENT_INTERVAL_KIND : measurement_interval_type measurement_interval;
+              // modulation_type option for continuous_measurement_type
+              case MODULATION_KIND : modulation_type modulation;
+              // multi_modal_measurement_type option for continuous_measurement_type
+              case MULTI_MODAL_MEASUREMENT_KIND : multi_modal_measurement_type multi_modal_measurement;
+              // pdf_measurement_type option for continuous_measurement_type
+              case PDF_MEASUREMENT_KIND : pdf_measurement_type pdf_measurement;
+            };
+
+            // Union of the specialisations for class parameter_distribution_type.
+            // A representation of the statistical distribution of a parameter.
+            union parameter_distribution_type switch (parameter_distribution_kind_type)
+            {
+              // continuous_measurement_type option for parameter_distribution_type
+              case CONTINUOUS_MEASUREMENT_KIND : continuous_measurement_type continuous_measurement;
+              // discrete_set_measurement_type option for parameter_distribution_type
+              case DISCRETE_SET_MEASUREMENT_KIND : discrete_set_measurement_type discrete_set_measurement;
+              // single_measurement_type option for parameter_distribution_type
+              case SINGLE_MEASUREMENT_KIND : single_measurement_type single_measurement;
+            };
+
+            // a simple union type, to represent an optional value
+            union measurement_parameter_distribution_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : parameter_distribution_type value;
+            };
+
+            // A measurement of a parameter by a sensor for a sensor track.
+            struct measurement_parameter_type
+            {
+              // The probability that the measurement corresponds to measure labelled for the
+              // sensor track.
+              measurement_parameter_confidence_type confidence;
+              // Indicates that the phenomenon being measured is in an enduring steady state and
+              // hence that complementary/orthogonal measurements of more detailed time-varying
+              // characteristics/phenomena are not present for this track.
+              measurement_parameter_continuous_type continuous;
+              // The number of coherent discrete measurements of this quantity.If the sensor
+              // detects a qualitative change then the count is reset. 
+              measurement_parameter_count_type count;
+              // The measurement status of the parameter
+              measurement_parameter_status_type status;
+              // The time at which the parameter was measured
+              org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
+              // Whether or not the phenomenon being measured by this parameter is considered to
+              // be design feature of the equipment causing the phenomenon.
+              measurement_parameter_intentional_type intentional;
+              // The description of the parameter and the unique identifier (within the scope of a
+              // sensor track) of a measurement parameter instance.
+#ifdef DDS_XTYPES
+              @Key long kind_id;
+#else
+              long kind_id;
+#endif
+              // The range in which samples contributing to the measurement have occurred.
+              measurement_parameter_sample_range_type sample_range;
+              // The representation of the statistical distribution of the measurement parameter.
+              measurement_parameter_distribution_type distribution;
+            };
+
+            // The sensor's measurement of a parameter
+            // For the sensor to report on the measurement of an individual parameter defined by
+            // configuration data.
+            // Interface for a sensor to provide its supplementary parametric data with respect
+            // to tracks to the CMS. A sensor can pass measurements to the CMS individually or
+            // as a set (relating to the same track).
+            // Sensors report a track to the CMS using the Track Reporting use case before
+            // reporting any of its supplementary measurements. Supplementary measurements are
+            // only reported for tracks whilst the sensor track is in the TRACKED track state.
+            // To represent parameter measurements for a sensor track reported individually
+            struct track_measurement_parameter_type
+            {
+              // The sensor track to which the measurement parameter relates.
+#ifdef DDS_XTYPES
+              @Key long sensor_track_id;
+#else
+              long sensor_track_id;
+#endif
+              // The individual parameter
+              measurement_parameter_type parameter;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+            };
+#ifndef DDS_XTYPES
+#pragma keylist track_measurement_parameter_type sensor_track_id subsystem_id
+#endif
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<measurement_parameter_type, 50> plot_measurement_parameter_set_parameter_type;
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<measurement_parameter_type, 50> track_measurement_parameter_set_parameter_type;
+
+            // The sensor's measurement of a set of parameters
+            // For the sensor to report on the measurement of a set of parameters with a plot
+            // defined by configuration data.
+            // Interface for a sensor to provide its supplementary parametric data with respect
+            // to plots to the CMS. A sensor can pass a set of measurements with plot data when
+            // reporting to the CMS.
+            // A set of the measurement parameters relating to a sensor track. Subsystems form
+            // measurement parameters into sets for efficient information transfer to the CMS. A
+            // subsystem may chose the number and composition of these sets. A subsystem may
+            // place all measurements into a single set per track, create multiple sets or
+            // create no sets and report measurement parameters individually instead.
+            // For a particular sensor track, measurement parameter names shall be unique across
+            // all measurement parameter set instances - i.e. sets shall be non-overlapping.
+            struct plot_measurement_parameter_set_type
+            {
+              // The name of the set of parameters
+#ifdef DDS_XTYPES
+              @Key measurement_parameter_set_name_type name;
+#else
+              measurement_parameter_set_name_type name;
+#endif
+              // The plot associated with the set of parameter measurements
+              org::omg::c4i::Domain_Model::Sensor_Domain::Plot_Reporting::sensor_plot_type plot;
+              // The set of measurement parameters associated with the plot
+              plot_measurement_parameter_set_parameter_type parameter;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+            };
+#ifndef DDS_XTYPES
+#pragma keylist plot_measurement_parameter_set_type name subsystem_id
+#endif
+
+            // The sensor's measurement of a set of parameters
+            // For the sensor to report on the measurement of a set of parameters for a track
+            // defined by configuration data.
+            // Interface for a sensor to provide its supplementary parametric data with respect
+            // to tracks to the CMS. A sensor can pass measurements to the CMS individually or
+            // as a set (relating to the same track).
+            // Sensors report a track to the CMS using the Track Reporting use case before
+            // reporting any of its supplementary measurements. Supplementary measurements are
+            // only reported for tracks whilst the sensor track is in the TRACKED track state.
+            // A set of the measurement parameters relating to a sensor track. Subsystems form
+            // measurement parameters into sets for efficient information transfer to the CMS. A
+            // subsystem may chose the number and composition of these sets. A subsystem may
+            // place all measurements into a single set per track, create multiple sets or
+            // create no sets and report measurement parameters individually instead.
+            // For a particular sensor track, measurement parameter names shall be unique across
+            // all measurement parameter set instances - i.e. sets shall be non-overlapping.
+            struct track_measurement_parameter_set_type
+            {
+              // The name of the set of parameters
+#ifdef DDS_XTYPES
+              @Key measurement_parameter_set_name_type name;
+#else
+              measurement_parameter_set_name_type name;
+#endif
+#ifdef DDS_XTYPES
+              @Key long sensor_track_id;
+#else
+              long sensor_track_id;
+#endif
+              // The parameter measurement for the element
+              track_measurement_parameter_set_parameter_type parameter;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+            };
+#ifndef DDS_XTYPES
+#pragma keylist track_measurement_parameter_set_type name sensor_track_id subsystem_id
+#endif
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

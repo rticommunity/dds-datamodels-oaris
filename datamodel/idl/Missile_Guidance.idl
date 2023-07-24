@@ -1,177 +1,123 @@
-#ifndef MISSILE_GUIDANCEDEFVAR
-#define MISSILE_GUIDANCEDEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4IDOMAIN_MODELRADAR_DOMAINMISSILE_GUIDANCEDEFVAR
+#define ORGOMGC4IDOMAIN_MODELRADAR_DOMAINMISSILE_GUIDANCEDEFVAR
 #include "Common_Types.idl"
+#include "Coordinates_and_Positions.idl"
 #include "Track_Reporting.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Domain_Model
+      {
 
+        module Radar_Domain
+        {
 
-    module c4i {
-
-
-      module Domain_Model {
-
-
-        module Radar_Domain {
-
-
-          module Missile_Guidance {
-
-
-
-            // Switch enumeration type for union track_id_type
-            enum track_id_switch_type
-            {
-            	// The track_id_type union contains a value of sensor_track_id_type
-            	track_id_type_sensor_track_id_kind,
-            	// The track_id_type union contains a value of system_track_id_type
-            	track_id_type_system_track_id_kind
-            };
-  
-
-
-
-
-            // The track referred to by a missile guidance command may either be a system
-            // track (provided by the CMS) or a sensor track (if the object is already tracked
-            // by the sensor). Therefore, the track_id(s) in the missile guidance command may
-            // be a sensor_track_id or a missile_track_id.
-            union track_id_type switch (track_id_switch_type)
-            {
-            	case track_id_type_sensor_track_id_kind : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type sensor_track_id;
-            	case track_id_type_system_track_id_kind : org::omg::c4i::Domain_Model::Common_Types::system_track_id_type system_track_id;
-            };
-  
-
-
-
-
-            // Information downlinked by the missile to the radar.
-            struct downlink_report
-            {
-            	track_id_type own_missile_track_id;
-            	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_receipt;
-            	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type downlink_content;
-            };
-  
-
-
-
+          module Missile_Guidance
+          {
 
             // A frequency channel identifies a specific radar frequency.
             typedef unsigned short frequency_channel_type;
-  
 
-
-
-
-            // a simple union type, to represent an optional value
-            union downlink_request_frequency_channel_type switch (boolean)
+            enum track_id_switch_type
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Radar_Domain::Missile_Guidance::frequency_channel_type value;
+              track_id_type_sensor_track_id_kind,
+              track_id_type_system_track_id_kind
             };
-  
 
-
-
-
-            // request to downlink
-            struct downlink_request
+            // The track referred to by a missile guidance command may either be a system track
+            // (provided by the CMS) or a sensor track (if the object is already tracked by the
+            // sensor). Therefore, the track_id(s) in the missile guidance command may be a
+            // sensor_track_id or a missile_track_id.
+            union track_id_type switch (track_id_switch_type)
             {
-            	track_id_type own_missile_track_id;
-            	// Start of period during which downlinks shall be received
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::absolute_duration_type listening_period;
-            	downlink_request_frequency_channel_type frequency_channel;
-            	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_parameters;
+              case track_id_type_sensor_track_id_kind : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type sensor_track_id;
+              case track_id_type_system_track_id_kind : org::omg::c4i::Domain_Model::Common_Types::system_track_id_type system_track_id;
             };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union illumination_request_frequency_channel_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Radar_Domain::Missile_Guidance::frequency_channel_type value;
-            };
-  
-
-
-
-
-            // A sequence type, to represent multiple values. Note: unbounded sequence
-            typedef sequence<track_id_type> illumination_request_own_missile_track_id_type;
-  
-
-
-
-
-            // semantics of selects association is implementation specific. 
-            struct illumination_request_type
-            {
-            	track_id_type target_track_id;
-            	illumination_request_own_missile_track_id_type own_missile_track_id;
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::absolute_duration_type illumination_period;
-            	illumination_request_frequency_channel_type frequency_channel;
-            	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_parameters;
-            };
-  
-
-
-
 
             // a simple union type, to represent an optional value
             union uplink_report_uplink_info_type switch (boolean)
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type value;
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type value;
             };
-  
 
-
-
-
-            // a report from uplink
-            struct uplink_report_type
+            // Information downlinked by the missile to the radar.
+            struct downlink_report_type
             {
-            	track_id_type own_missile_track_id;
-            	// * optional *
-            	uplink_report_uplink_info_type uplink_info;
+              track_id_type own_missile_track_id;
+              org::omg::c4i::Domain_Model::Common_Types::time_type time_of_receipt;
+              org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type downlink_content;
             };
-  
 
+            // a simple union type, to represent an optional value
+            union downlink_request_frequency_channel_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : frequency_channel_type value;
+            };
 
-
+            // a simple union type, to represent an optional value
+            union illumination_request_frequency_channel_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : frequency_channel_type value;
+            };
 
             // a simple union type, to represent an optional value
             union uplink_request_frequency_channel_type switch (boolean)
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Radar_Domain::Missile_Guidance::frequency_channel_type value;
+              // the value when present
+              case TRUE : frequency_channel_type value;
             };
-  
 
+            // A sequence type, to represent multiple values.
+            typedef sequence<track_id_type> illumination_request_own_missile_track_id_type;
 
+            // request to downlink
+            struct downlink_request_type
+            {
+              track_id_type own_missile_track_id;
+              // Start of period during which downlinks shall be received
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::absolute_duration_type listening_period;
+              downlink_request_frequency_channel_type frequency_channel;
+              org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_parameters;
+            };
 
+            // a report from uplink
+            struct uplink_report_type
+            {
+              track_id_type own_missile_track_id;
+              // * optional *
+              uplink_report_uplink_info_type uplink_info;
+            };
 
             // a request to downlink
             struct uplink_request_type
             {
-            	track_id_type own_missile_track_id;
-            	// * optional *
-            	uplink_request_frequency_channel_type frequency_channel;
-            	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type request_info;
+              track_id_type own_missile_track_id;
+              // * optional *
+              uplink_request_frequency_channel_type frequency_channel;
+              org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type request_info;
             };
-  
 
-
+            // semantics of selects association is implementation specific. 
+            struct illumination_request_type
+            {
+              track_id_type target_track_id;
+              illumination_request_own_missile_track_id_type own_missile_track_id;
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::absolute_duration_type illumination_period;
+              illumination_request_frequency_channel_type frequency_channel;
+              org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_parameters;
+            };
 
           };
         };

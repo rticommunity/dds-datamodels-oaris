@@ -1,0 +1,123 @@
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINMEDIA_STREAMINGDEFVAR
+#define ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINMEDIA_STREAMINGDEFVAR
+#include "Common_Types.idl"
+#include "Track_Reporting.idl"
+#include "Encyclopaedic_Support.idl"
+
+module org
+{
+
+  module omg
+  {
+
+    module c4i
+    {
+
+      module Domain_Model
+      {
+
+        module Sensor_Domain
+        {
+
+          // This package provides a data model for describing the metadata associated with a
+          // sensor's media streams.
+          module Media_Streaming
+          {
+
+            // A string type
+            // The representation of the codec associated with the stream
+            typedef string<20> codec_type;
+
+            // The high-level categorisation of types of media
+            enum media_kind_type
+            {
+              // Audio media stream
+              AUDIO,
+              // Video media stream
+              VIDEO,
+              // Another media stream
+              OTHER_MEDIA
+            };
+
+            // A string type
+            // The representation for the identifying name of a media stream
+            typedef string<32> media_name_type;
+
+            // The representation for the unique identifier for the media stream
+            typedef long media_stream_id_type;
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type> media_allocation_sensor_track_id_type;
+
+            // struct holding keys for class media_stream_metadata_type.
+            struct media_stream_metadata_key_type
+            {
+              media_stream_id_type media_id;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            // The allocation of sensor tracks to a media stream
+            // For a sensor to report on the allocation of tracks to one of its media streams
+            // This service allows the CMS to receive the allocation of sensor tracks to media
+            // streams
+            // To represent the allocation of sensor tracks to media streams.
+            struct media_allocation_type
+            {
+              // The sensor tracks that are present in the media stream
+              media_allocation_sensor_track_id_type sensor_track_id;
+              // The media stream relating to this allocation of tracks
+              media_stream_metadata_key_type media_stream_id;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+            };
+#ifndef DDS_XTYPES
+#pragma keylist media_allocation_type subsystem_id
+#endif
+
+            // The metadata for the stream
+            // This service allows the CMS to be informed about the configuration of media
+            // streams provided by the sensor.
+            // The representation of a media stream such as video or audio
+            struct media_stream_metadata_type
+            {
+              // The kind of media associated with the stream
+              media_kind_type media_kind;
+              // The code  identifier for the string
+              codec_type codec;
+              // The source (end point) of the stream.
+              org::omg::c4i::Domain_Model::Subsystem_Domain::Encyclopaedic_Support::url_type uri;
+              // The identifying name for the media stream
+              media_name_type media_name;
+#ifdef DDS_XTYPES
+              @Key media_stream_id_type media_id;
+#else
+              media_stream_id_type media_id;
+#endif
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+            };
+#ifndef DDS_XTYPES
+#pragma keylist media_stream_metadata_type media_id subsystem_id
+#endif
+
+          };
+        };
+      };
+    };
+  };
+};
+#endif

@@ -1,379 +1,459 @@
-#ifndef PERFORM_SPLASH_SPOTTINGDEFVAR
-#define PERFORM_SPLASH_SPOTTINGDEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4ISERVICE_INTERFACESRADAR_SERVICESSURFACE_ENGAGEMENT_SUPPORTPERFORM_SPLASH_SPOTTINGDEFVAR
+#define ORGOMGC4ISERVICE_INTERFACESRADAR_SERVICESSURFACE_ENGAGEMENT_SUPPORTPERFORM_SPLASH_SPOTTINGDEFVAR
 #include "Common_Types.idl"
 #include "Requests.idl"
 #include "Surface_Engagement_Support.idl"
 #include "Track_Reporting.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Service_Interfaces
+      {
 
+        module Radar_Services
+        {
 
-    module c4i {
+          module Surface_Engagement_Support
+          {
 
+            module Perform_Splash_Spotting
+            {
 
-      module Service_Interfaces {
-
-
-        module Radar_Services {
-
-
-          module Surface_Engagement_Support {
-
-
-            module Perform_Splash_Spotting {
-
-
-
-              // Topic type for operation activate_splash_spotting_area_by_position. . Requests
-              // the subsystem to activate a new splash spotting area based on a area/position.
-              struct activate_splash_spotting_area_by_position_type
+              // struct holding keys for class confirm_reposition_splash_splotting_area_type.
+              struct confirm_reposition_splash_splotting_area_key_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter SplashSpottingAreaPosition. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_position_type SplashSpottingAreaPosition;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
-#pragma keylist activate_splash_spotting_area_by_position_type  subsystem_id
-  
 
-
-
-
-              // Topic type for operation activate_splash_spotting_area_by_track. . Requests the
-              // subsystem to activate a new splash spotting area based on a sensor track.
-              struct activate_splash_spotting_area_by_track_type
-              {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter TrackID. 
-              	org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type TrackID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-              };
-#pragma keylist activate_splash_spotting_area_by_track_type  subsystem_id
-  
-
-
-
-
-              // Topic type for operation confirm_reposition_splash_splotting_area. Surveillance
-              // radar systems may support engagements against surface targets by means of a
-              // splash spotting video or measured splash positions. In the vicinity of the
-              // target a signal processing is applied which is optimized to observe splashes of
-              // the shells hitting the sea surface.
-              // 
-              //      The splash spotting information may be used to achieve shot corrections
-              // for a running engagement. The engagement may use a fire control channel of the
-              // radar but also of another device like fire control radar. The CMS requests the
-              // radar to localize a splash spotting area at a defined position derived from the
-              // target kinematics.
-              // 
-              //      The use of splash spotting areas may be limited to fire control channels
-              // of the radar. Then, only the localization of a splash spotting area may be done
-              // in accordance with this service. Normally, it shall be localized at the
-              // predicted hitting point.
-              // 
-              //      These splash spotting areas shall not differ in terms of function and
-              // performance so that the selection of the area to be applied to an engagement
-              // may be done by the radar, automatically.  The CMS just indicates where to
-              // localize it.
-              // 
-              //      If mastership is lost during execution in any of the flows the services
-              // are terminated.. Via this method, the request for the repositioning of a splash
-              // spotting area is confirmed by the subsystem.
+              // Via this method, the request for the repositioning of a splash spotting area is
+              // confirmed by the subsystem.
+              // Surveillance radar systems may support engagements against surface targets by
+              // means of a splash spotting video or measured splash positions. In the vicinity of
+              // the target a signal processing is applied which is optimized to observe splashes
+              // of the shells hitting the sea surface.
+              // The splash spotting information may be used to achieve shot corrections for a
+              // running engagement. The engagement may use a fire control channel of the radar
+              // but also of another device like fire control radar. The CMS requests the radar to
+              // localize a splash spotting area at a defined position derived from the target
+              // kinematics.
+              // The use of splash spotting areas may be limited to fire control channels of the
+              // radar. Then, only the localization of a splash spotting area may be done in
+              // accordance with this service. Normally, it shall be localized at the predicted
+              // hitting point.
+              // These splash spotting areas shall not differ in terms of function and performance
+              // so that the selection of the area to be applied to an engagement may be done by
+              // the radar, automatically.  The CMS just indicates where to localize it.
+              // If mastership is lost during execution in any of the flows the services are
+              // terminated.
               struct confirm_reposition_splash_splotting_area_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter SplashSpottingAreaID. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
               };
-#pragma keylist confirm_reposition_splash_splotting_area_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist confirm_reposition_splash_splotting_area_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class confirm_splash_spotting_area_deactivation_type.
+              struct confirm_splash_spotting_area_deactivation_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-
-
-              // Topic type for operation confirm_splash_spotting_area_deactivation.
+              // Via this method, the request for the deactivation of a splash spotting area is
+              // confirmed by the subsystem.
               // Surveillance radar systems may support engagements against surface targets by
-              // means of a splash spotting video or measured splash positions. In the vicinity
-              // of the target a signal processing is applied which is optimized to observe
-              // splashes of the shells hitting the sea surface.
-              // 
-              //      The splash spotting information may be used to achieve shot corrections
-              // for a running engagement. The engagement may use a fire control channel of the
-              // radar but also of another device like fire control radar. The CMS requests the
-              // radar to localize a splash spotting area at a defined position derived from the
-              // target kinematics.
-              // 
-              //      The use of splash spotting areas may be limited to fire control channels
-              // of the radar. Then, only the localization of a splash spotting area may be done
-              // in accordance with this service. Normally, it shall be localized at the
-              // predicted hitting point.
-              // 
-              //      These splash spotting areas shall not differ in terms of function and
-              // performance so that the selection of the area to be applied to an engagement
-              // may be done by the radar, automatically.  The CMS just indicates where to
-              // localize it.
-              // 
-              //      If mastership is lost during execution in any of the flows the services
-              // are terminated.. Via this method, the request for the deactivation of a splash
-              // spotting area is confirmed by the subsystem.
+              // means of a splash spotting video or measured splash positions. In the vicinity of
+              // the target a signal processing is applied which is optimized to observe splashes
+              // of the shells hitting the sea surface.
+              // The splash spotting information may be used to achieve shot corrections for a
+              // running engagement. The engagement may use a fire control channel of the radar
+              // but also of another device like fire control radar. The CMS requests the radar to
+              // localize a splash spotting area at a defined position derived from the target
+              // kinematics.
+              // The use of splash spotting areas may be limited to fire control channels of the
+              // radar. Then, only the localization of a splash spotting area may be done in
+              // accordance with this service. Normally, it shall be localized at the predicted
+              // hitting point.
+              // These splash spotting areas shall not differ in terms of function and performance
+              // so that the selection of the area to be applied to an engagement may be done by
+              // the radar, automatically.  The CMS just indicates where to localize it.
+              // If mastership is lost during execution in any of the flows the services are
+              // terminated.
               struct confirm_splash_spotting_area_deactivation_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter SplashSpottingAreaId. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaId;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaId;
               };
-#pragma keylist confirm_splash_spotting_area_deactivation_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist confirm_splash_spotting_area_deactivation_type request_id subsystem_id
+#endif
 
-
-
-
-              // Topic type for operation deactivate_splash_spotting_area. . Requests the
-              // subsystem to de-activate a splash spotting area.
-              struct deactivate_splash_spotting_area_type
+              // struct holding keys for class receive_splash_splotting_area_position_type.
+              struct receive_splash_splotting_area_position_key_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter SplashSpottingAreaID. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
-#pragma keylist deactivate_splash_spotting_area_type  subsystem_id
-  
 
-
-
-
-              // Topic type for operation receive_splash_splotting_area_position. Surveillance
-              // radar systems may support engagements against surface targets by means of a
-              // splash spotting video or measured splash positions. In the vicinity of the
-              // target a signal processing is applied which is optimized to observe splashes of
-              // the shells hitting the sea surface.
-              // 
-              //      The splash spotting information may be used to achieve shot corrections
-              // for a running engagement. The engagement may use a fire control channel of the
-              // radar but also of another device like fire control radar. The CMS requests the
-              // radar to localize a splash spotting area at a defined position derived from the
-              // target kinematics.
-              // 
-              //      The use of splash spotting areas may be limited to fire control channels
-              // of the radar. Then, only the localization of a splash spotting area may be done
-              // in accordance with this service. Normally, it shall be localized at the
-              // predicted hitting point.
-              // 
-              //      These splash spotting areas shall not differ in terms of function and
-              // performance so that the selection of the area to be applied to an engagement
-              // may be done by the radar, automatically.  The CMS just indicates where to
-              // localize it.
-              // 
-              //      If mastership is lost during execution in any of the flows the services
-              // are terminated.. Via this method, the request for a new splash spotting area
-              // based on a position is confirmed by the subsystem.
+              // Via this method, the request for a new splash spotting area based on a position
+              // is confirmed by the subsystem.
+              // Surveillance radar systems may support engagements against surface targets by
+              // means of a splash spotting video or measured splash positions. In the vicinity of
+              // the target a signal processing is applied which is optimized to observe splashes
+              // of the shells hitting the sea surface.
+              // The splash spotting information may be used to achieve shot corrections for a
+              // running engagement. The engagement may use a fire control channel of the radar
+              // but also of another device like fire control radar. The CMS requests the radar to
+              // localize a splash spotting area at a defined position derived from the target
+              // kinematics.
+              // The use of splash spotting areas may be limited to fire control channels of the
+              // radar. Then, only the localization of a splash spotting area may be done in
+              // accordance with this service. Normally, it shall be localized at the predicted
+              // hitting point.
+              // These splash spotting areas shall not differ in terms of function and performance
+              // so that the selection of the area to be applied to an engagement may be done by
+              // the radar, automatically.  The CMS just indicates where to localize it.
+              // If mastership is lost during execution in any of the flows the services are
+              // terminated.
               struct receive_splash_splotting_area_position_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter SplashSpottingAreaID. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
               };
-#pragma keylist receive_splash_splotting_area_position_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist receive_splash_splotting_area_position_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class receive_splash_splotting_area_track_type.
+              struct receive_splash_splotting_area_track_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-
-
-              // Topic type for operation receive_splash_splotting_area_track. Surveillance
-              // radar systems may support engagements against surface targets by means of a
-              // splash spotting video or measured splash positions. In the vicinity of the
-              // target a signal processing is applied which is optimized to observe splashes of
-              // the shells hitting the sea surface.
-              // 
-              //      The splash spotting information may be used to achieve shot corrections
-              // for a running engagement. The engagement may use a fire control channel of the
-              // radar but also of another device like fire control radar. The CMS requests the
-              // radar to localize a splash spotting area at a defined position derived from the
-              // target kinematics.
-              // 
-              //      The use of splash spotting areas may be limited to fire control channels
-              // of the radar. Then, only the localization of a splash spotting area may be done
-              // in accordance with this service. Normally, it shall be localized at the
-              // predicted hitting point.
-              // 
-              //      These splash spotting areas shall not differ in terms of function and
-              // performance so that the selection of the area to be applied to an engagement
-              // may be done by the radar, automatically.  The CMS just indicates where to
-              // localize it.
-              // 
-              //      If mastership is lost during execution in any of the flows the services
-              // are terminated.. Via this method, the request for a new splash spotting area
-              // based on a track is confirmed by the subsystem.
+              // Via this method, the request for a new splash spotting area based on a track is
+              // confirmed by the subsystem.
+              // Surveillance radar systems may support engagements against surface targets by
+              // means of a splash spotting video or measured splash positions. In the vicinity of
+              // the target a signal processing is applied which is optimized to observe splashes
+              // of the shells hitting the sea surface.
+              // The splash spotting information may be used to achieve shot corrections for a
+              // running engagement. The engagement may use a fire control channel of the radar
+              // but also of another device like fire control radar. The CMS requests the radar to
+              // localize a splash spotting area at a defined position derived from the target
+              // kinematics.
+              // The use of splash spotting areas may be limited to fire control channels of the
+              // radar. Then, only the localization of a splash spotting area may be done in
+              // accordance with this service. Normally, it shall be localized at the predicted
+              // hitting point.
+              // These splash spotting areas shall not differ in terms of function and performance
+              // so that the selection of the area to be applied to an engagement may be done by
+              // the radar, automatically.  The CMS just indicates where to localize it.
+              // If mastership is lost during execution in any of the flows the services are
+              // terminated.
               struct receive_splash_splotting_area_track_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter SplashSpottingAreaID. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
               };
-#pragma keylist receive_splash_splotting_area_track_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist receive_splash_splotting_area_track_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class report_splash_spotting_area_activation_state_type.
+              struct report_splash_spotting_area_activation_state_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-
-
-              // Topic type for operation report_splash_spotting_area_activation_state.
+              // Via this interface, the splash spotting areas are reported to the CMS.
               // Surveillance radar systems may support engagements against surface targets by
-              // means of a splash spotting video or measured splash positions. In the vicinity
-              // of the target a signal processing is applied which is optimized to observe
-              // splashes of the shells hitting the sea surface.
-              // 
-              //      The splash spotting information may be used to achieve shot corrections
-              // for a running engagement. The engagement may use a fire control channel of the
-              // radar but also of another device like fire control radar. The CMS requests the
-              // radar to localize a splash spotting area at a defined position derived from the
-              // target kinematics.
-              // 
-              //      The use of splash spotting areas may be limited to fire control channels
-              // of the radar. Then, only the localization of a splash spotting area may be done
-              // in accordance with this service. Normally, it shall be localized at the
-              // predicted hitting point.
-              // 
-              //      These splash spotting areas shall not differ in terms of function and
-              // performance so that the selection of the area to be applied to an engagement
-              // may be done by the radar, automatically.  The CMS just indicates where to
-              // localize it.
-              // 
-              //      If mastership is lost during execution in any of the flows the services
-              // are terminated.. Via this interface, the splash spotting areas are reported to
-              // the CMS.
+              // means of a splash spotting video or measured splash positions. In the vicinity of
+              // the target a signal processing is applied which is optimized to observe splashes
+              // of the shells hitting the sea surface.
+              // The splash spotting information may be used to achieve shot corrections for a
+              // running engagement. The engagement may use a fire control channel of the radar
+              // but also of another device like fire control radar. The CMS requests the radar to
+              // localize a splash spotting area at a defined position derived from the target
+              // kinematics.
+              // The use of splash spotting areas may be limited to fire control channels of the
+              // radar. Then, only the localization of a splash spotting area may be done in
+              // accordance with this service. Normally, it shall be localized at the predicted
+              // hitting point.
+              // These splash spotting areas shall not differ in terms of function and performance
+              // so that the selection of the area to be applied to an engagement may be done by
+              // the radar, automatically.  The CMS just indicates where to localize it.
+              // If mastership is lost during execution in any of the flows the services are
+              // terminated.
               struct report_splash_spotting_area_activation_state_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter SplashSpottingAreaSet. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_set_type SplashSpottingAreaSet;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_set_type SplashSpottingAreaSet;
               };
-#pragma keylist report_splash_spotting_area_activation_state_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist report_splash_spotting_area_activation_state_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class activate_splash_spotting_area_by_position_type.
+              struct activate_splash_spotting_area_by_position_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
+              // Requests the subsystem to activate a new splash spotting area based on a
+              // area/position.
+              struct activate_splash_spotting_area_by_position_type
+              {
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_position_type SplashSpottingAreaPosition;
+              };
+#ifndef DDS_XTYPES
+#pragma keylist activate_splash_spotting_area_by_position_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class activate_splash_spotting_area_by_track_type.
+              struct activate_splash_spotting_area_by_track_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-              // Topic type for operation report_splash_spotting_information. . Requests the
-              // subsystem to report splash spotting information/splash positions for an
-              // existing splash spotting area.
+              // Requests the subsystem to activate a new splash spotting area based on a sensor
+              // track.
+              struct activate_splash_spotting_area_by_track_type
+              {
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type TrackID;
+              };
+#ifndef DDS_XTYPES
+#pragma keylist activate_splash_spotting_area_by_track_type request_id subsystem_id
+#endif
+
+              // struct holding keys for class deactivate_splash_spotting_area_type.
+              struct deactivate_splash_spotting_area_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
+
+              // Requests the subsystem to de-activate a splash spotting area.
+              struct deactivate_splash_spotting_area_type
+              {
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
+              };
+#ifndef DDS_XTYPES
+#pragma keylist deactivate_splash_spotting_area_type request_id subsystem_id
+#endif
+
+              // struct holding keys for class report_splash_spotting_information_type.
+              struct report_splash_spotting_information_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
+
+              // Requests the subsystem to report splash spotting information/splash positions for
+              // an existing splash spotting area.
               struct report_splash_spotting_information_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter SplashSpottingAreaID. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
               };
-#pragma keylist report_splash_spotting_information_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist report_splash_spotting_information_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class reposition_splash_spotting_area_type.
+              struct reposition_splash_spotting_area_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-
-
-              // Topic type for operation reposition_splash_spotting_area. . Requests the
-              // subsystem to reposition a existing splash spotting area.
+              // Requests the subsystem to reposition a existing splash spotting area.
               struct reposition_splash_spotting_area_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter SplashSpottingAreaID. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
-              	// Field for interface operation parameter SplashSpottingAreaPosition. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_position_type SplashSpottingAreaPosition;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type SplashSpottingAreaID;
+                org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_position_type SplashSpottingAreaPosition;
               };
-#pragma keylist reposition_splash_spotting_area_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist reposition_splash_spotting_area_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class request_splash_spotting_areas_type.
+              struct request_splash_spotting_areas_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-
-
-              // Topic type for operation request_splash_spotting_areas. . Request the subsystem
-              // to report the splash spotting areas to the CMS.
+              // Request the subsystem to report the splash spotting areas to the CMS.
               struct request_splash_spotting_areas_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 #endif
               };
-#pragma keylist request_splash_spotting_areas_type  subsystem_id
-  
-
-
+#ifndef DDS_XTYPES
+#pragma keylist request_splash_spotting_areas_type request_id subsystem_id
+#endif
 
             };
           };

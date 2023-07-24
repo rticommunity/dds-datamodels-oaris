@@ -1,92 +1,82 @@
-#ifndef PROVIDE_SUBSYSTEM_IDENTIFICATIONDEFVAR
-#define PROVIDE_SUBSYSTEM_IDENTIFICATIONDEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4ISERVICE_INTERFACESSUBSYSTEM_SERVICESSUBSYSTEM_CONTROLPROVIDE_SUBSYSTEM_IDENTIFICATIONDEFVAR
+#define ORGOMGC4ISERVICE_INTERFACESSUBSYSTEM_SERVICESSUBSYSTEM_CONTROLPROVIDE_SUBSYSTEM_IDENTIFICATIONDEFVAR
 #include "Common_Types.idl"
-#include "Subsystem_Control.idl"
 #include "Requests.idl"
+#include "Subsystem_Control.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Service_Interfaces
+      {
 
+        module Subsystem_Services
+        {
 
-    module c4i {
+          module Subsystem_Control
+          {
 
+            module Provide_Subsystem_Identification
+            {
 
-      module Service_Interfaces {
-
-
-        module Subsystem_Services {
-
-
-          module Subsystem_Control {
-
-
-            module Provide_Subsystem_Identification {
-
-
-
-              // Topic type for operation receive_cms_identification_data. . Receive the
-              // identification data from the CMS.
-              struct receive_cms_identification_data_type
-              {
-              	// Field for interface operation parameter identification. 
-              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::device_identification_type identification;
-              	// Field for interface operation parameter the_request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type the_request_id;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-              };
-#pragma keylist receive_cms_identification_data_type  subsystem_id
-  
-
-
-
-
-              // Topic type for operation receive_sub_identification_data. In order to enable
-              // two interface partners to connect to each other and to open mutual
-              // communication, one partner shall initiate and the other to answer. The
+              // Receive the identification data from the subsystem.
+              // In order to enable two interface partners to connect to each other and to open
+              // mutual communication, one partner shall initiate and the other to answer. The
               // intention is to let the subsystem initiate the communication.
-              //      Consequently, the subsystem introduces itself to the CMS identifying e.g.
-              // the type of subsystem, the product and its version. That allows the CMS to
-              // decide whether it may work with that subsystem.
-              // 
-              //      The actor is the Combat Management System.
-              // 
-              //      The possibility that CMS and subsystem are connected without being capable
-              // to work with each other is a consequence of a plug-&-play concept.
-              //      Although the interface is standardized the CMS may need a setup process to
+              // Consequently, the subsystem introduces itself to the CMS identifying e.g. the
+              // type of subsystem, the product and its version. That allows the CMS to decide
+              // whether it may work with that subsystem. 
+              // The actor is the Combat Management System. 
+              // The possibility that CMS and subsystem are connected without being capable to
+              // work with each other is a consequence of a plug-&amp;-play concept. 
+              // Although the interface is standardized the CMS may need a setup process to
               // prepare it for a subsystem. This process shall introduce the information
               // necessary to configure functions of that particular CMS with respect to the
-              // subsystem.
-              //      This may also be necessary on side of the subsystem.
-              //      The preparation for a subsystem may be done by means of system
-              // configuration data which are implemented on installation of the combat system.
-              // It does not address security information.. Receive the identification data from
-              // the subsystem.
+              // subsystem. 
+              // This may also be necessary on side of the subsystem.
+              // The preparation for a subsystem may be done by means of system configuration data
+              // which are implemented on installation of the combat system. It does not address
+              // security information.
               struct receive_sub_identification_data_type
               {
-              	// Field for interface operation parameter identification. 
-              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::device_identification_type identification;
-              	// Field for interface operation parameter the_request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type the_request_id;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
+                org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::device_identification_type identification;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 #endif
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type the_request_id;
               };
-#pragma keylist receive_sub_identification_data_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist receive_sub_identification_data_type subsystem_id
+#endif
 
-
+              // Receive the identification data from the CMS.
+              struct receive_cms_identification_data_type
+              {
+                org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::device_identification_type identification;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type the_request_id;
+              };
+#ifndef DDS_XTYPES
+#pragma keylist receive_cms_identification_data_type subsystem_id
+#endif
 
             };
           };

@@ -1,253 +1,286 @@
-#ifndef PROCESS_TARGET_DESIGNATIONDEFVAR
-#define PROCESS_TARGET_DESIGNATIONDEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4ISERVICE_INTERFACESRADAR_SERVICESENGAGEMENT_SUPPORTPROCESS_TARGET_DESIGNATIONDEFVAR
+#define ORGOMGC4ISERVICE_INTERFACESRADAR_SERVICESENGAGEMENT_SUPPORTPROCESS_TARGET_DESIGNATIONDEFVAR
 #include "Common_Types.idl"
 #include "Requests.idl"
 #include "Engagement_Support.idl"
 #include "Track_Reporting.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Service_Interfaces
+      {
 
+        module Radar_Services
+        {
 
-    module c4i {
+          module Engagement_Support
+          {
 
+            module Process_Target_Designation
+            {
 
-      module Service_Interfaces {
-
-
-        module Radar_Services {
-
-
-          module Engagement_Support {
-
-
-            module Process_Target_Designation {
-
-
-
-              // Topic type for operation dedesignate_target. . The subsystem is requested to de-
-              // designate a fire control channel.
-              struct dedesignate_target_type
+              // struct holding keys for class receive_fire_control_channel_released_type.
+              struct receive_fire_control_channel_released_key_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter FireControlChannelID. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
-#pragma keylist dedesignate_target_type  subsystem_id
-  
 
-
-
-
-              // Topic type for operation designate_target_by_position. . The subsystem is
-              // requested to designate a fire control channel based on a position/kinematics.
-              struct designate_target_by_position_type
-              {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter PositionVelocity. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::kinematics_type PositionVelocity;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-              };
-#pragma keylist designate_target_by_position_type  subsystem_id
-  
-
-
-
-
-              // Topic type for operation designate_target_by_track. . The subsystem is
-              // requested to designate a fire control channel based on a track.
-              struct designate_target_by_track_type
-              {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter TrackID. 
-              	org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type TrackID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-              };
-#pragma keylist designate_target_by_track_type  subsystem_id
-  
-
-
-
-
-              // Topic type for operation receive_fire_control_channel_released. Fire control
-              // radars are designed to perform one target engagement at a time with respect to
-              // an air, surface or land target and provide the necessary information for a fire
-              // control solution regarding that target.
-              // 
-              //      The CMS selects a track and requests the fire control radar to acquire and
-              // track the target behind that track. If the acquisition is successful the radar
-              // starts tracking the target and reporting fire control information.
-              // 
-              //      Some fire control radars provide information about one or more other
-              // targets appearing in its field of view and may even provide associated sensor
-              // tracks. This is, however, not within the scope of this service interface but
-              // covered by "Provide sensor tracks".
-              // 
-              //      The fire control information may be plots and/or tracks, depending on the
+              // Via this message, the subsystem confirms the release of a target acquisition.
+              // Fire control radars are designed to perform one target engagement at a time with
+              // respect to an air, surface or land target and provide the necessary information
+              // for a fire control solution regarding that target. 
+              // The CMS selects a track and requests the fire control radar to acquire and track
+              // the target behind that track. If the acquisition is successful the radar starts
+              // tracking the target and reporting fire control information.
+              // Some fire control radars provide information about one or more other targets
+              // appearing in its field of view and may even provide associated sensor tracks.
+              // This is, however, not within the scope of this service interface but covered by
+              // "Provide sensor tracks".
+              // The fire control information may be plots and/or tracks, depending on the
               // product.
-              // 
-              //      On receiving the de-designation request the fire control radar stops
-              // following the target and stops providing fire control information.
-              // 
-              //      Phased array radars may include fire control capabilities as well. If they
-              // do, they provide a number of ‘virtual fire control radars’. To the extent that
-              // these virtual fire control radars are comparable in function and performance,
-              // there may be no need for the CMS to select a specific fire control channel to
-              // be used for a particular engagement.
-              // 
-              //      In the case where the CMS looses or releases mastership of the subsystem,
-              // the subsystems ceases all fire control activities.
-              // 
-              //      A target designation to a weapon with its own fire control capabilities
-              // may be done in an analogous way. In that sense, the service (interface) may
-              // also be employed by weapon systems.. Via this message, the subsystem confirms
-              // the release of a target acquisition.
+              // On receiving the de-designation request the fire control radar stops following
+              // the target and stops providing fire control information.
+              // Phased array radars may include fire control capabilities as well. If they do,
+              // they provide a number of â€˜virtual fire control radarsâ€™. To the extent that these
+              // virtual fire control radars are comparable in function and performance, there may
+              // be no need for the CMS to select a specific fire control channel to be used for a
+              // particular engagement.
+              // In the case where the CMS looses or releases mastership of the subsystem, the
+              // subsystems ceases all fire control activities.
+              // A target designation to a weapon with its own fire control capabilities may be
+              // done in an analogous way. In that sense, the service (interface) may also be
+              // employed by weapon systems.
               struct receive_fire_control_channel_released_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter FireControlChannelID. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
               };
-#pragma keylist receive_fire_control_channel_released_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist receive_fire_control_channel_released_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class receive_target_acquired_type.
+              struct receive_target_acquired_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-
-
-              // Topic type for operation receive_target_acquired. Fire control radars are
-              // designed to perform one target engagement at a time with respect to an air,
-              // surface or land target and provide the necessary information for a fire control
-              // solution regarding that target.
-              // 
-              //      The CMS selects a track and requests the fire control radar to acquire and
-              // track the target behind that track. If the acquisition is successful the radar
-              // starts tracking the target and reporting fire control information.
-              // 
-              //      Some fire control radars provide information about one or more other
-              // targets appearing in its field of view and may even provide associated sensor
-              // tracks. This is, however, not within the scope of this service interface but
-              // covered by "Provide sensor tracks".
-              // 
-              //      The fire control information may be plots and/or tracks, depending on the
+              // Via this message, the subsystem confirms the target acquisition.
+              // Fire control radars are designed to perform one target engagement at a time with
+              // respect to an air, surface or land target and provide the necessary information
+              // for a fire control solution regarding that target. 
+              // The CMS selects a track and requests the fire control radar to acquire and track
+              // the target behind that track. If the acquisition is successful the radar starts
+              // tracking the target and reporting fire control information.
+              // Some fire control radars provide information about one or more other targets
+              // appearing in its field of view and may even provide associated sensor tracks.
+              // This is, however, not within the scope of this service interface but covered by
+              // "Provide sensor tracks".
+              // The fire control information may be plots and/or tracks, depending on the
               // product.
-              // 
-              //      On receiving the de-designation request the fire control radar stops
-              // following the target and stops providing fire control information.
-              // 
-              //      Phased array radars may include fire control capabilities as well. If they
-              // do, they provide a number of ‘virtual fire control radars’. To the extent that
-              // these virtual fire control radars are comparable in function and performance,
-              // there may be no need for the CMS to select a specific fire control channel to
-              // be used for a particular engagement.
-              // 
-              //      In the case where the CMS looses or releases mastership of the subsystem,
-              // the subsystems ceases all fire control activities.
-              // 
-              //      A target designation to a weapon with its own fire control capabilities
-              // may be done in an analogous way. In that sense, the service (interface) may
-              // also be employed by weapon systems.. Via this message, the subsystem confirms
-              // the target acquisition.
+              // On receiving the de-designation request the fire control radar stops following
+              // the target and stops providing fire control information.
+              // Phased array radars may include fire control capabilities as well. If they do,
+              // they provide a number of â€˜virtual fire control radarsâ€™. To the extent that these
+              // virtual fire control radars are comparable in function and performance, there may
+              // be no need for the CMS to select a specific fire control channel to be used for a
+              // particular engagement.
+              // In the case where the CMS looses or releases mastership of the subsystem, the
+              // subsystems ceases all fire control activities.
+              // A target designation to a weapon with its own fire control capabilities may be
+              // done in an analogous way. In that sense, the service (interface) may also be
+              // employed by weapon systems.
               struct receive_target_acquired_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter TrackID. 
-              	org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type TrackID;
-              	// Field for interface operation parameter FireControlChannelID. 
-              	org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type TrackID;
+                org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
               };
-#pragma keylist receive_target_acquired_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist receive_target_acquired_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class receive_target_dedesignation_type.
+              struct receive_target_dedesignation_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-
-
-              // Topic type for operation receive_target_dedesignation. Fire control radars are
-              // designed to perform one target engagement at a time with respect to an air,
-              // surface or land target and provide the necessary information for a fire control
-              // solution regarding that target.
-              // 
-              //      The CMS selects a track and requests the fire control radar to acquire and
-              // track the target behind that track. If the acquisition is successful the radar
-              // starts tracking the target and reporting fire control information.
-              // 
-              //      Some fire control radars provide information about one or more other
-              // targets appearing in its field of view and may even provide associated sensor
-              // tracks. This is, however, not within the scope of this service interface but
-              // covered by "Provide sensor tracks".
-              // 
-              //      The fire control information may be plots and/or tracks, depending on the
+              // Via this message, the subsystem reports the de-designation of a target.
+              // Fire control radars are designed to perform one target engagement at a time with
+              // respect to an air, surface or land target and provide the necessary information
+              // for a fire control solution regarding that target. 
+              // The CMS selects a track and requests the fire control radar to acquire and track
+              // the target behind that track. If the acquisition is successful the radar starts
+              // tracking the target and reporting fire control information.
+              // Some fire control radars provide information about one or more other targets
+              // appearing in its field of view and may even provide associated sensor tracks.
+              // This is, however, not within the scope of this service interface but covered by
+              // "Provide sensor tracks".
+              // The fire control information may be plots and/or tracks, depending on the
               // product.
-              // 
-              //      On receiving the de-designation request the fire control radar stops
-              // following the target and stops providing fire control information.
-              // 
-              //      Phased array radars may include fire control capabilities as well. If they
-              // do, they provide a number of ‘virtual fire control radars’. To the extent that
-              // these virtual fire control radars are comparable in function and performance,
-              // there may be no need for the CMS to select a specific fire control channel to
-              // be used for a particular engagement.
-              // 
-              //      In the case where the CMS looses or releases mastership of the subsystem,
-              // the subsystems ceases all fire control activities.
-              // 
-              //      A target designation to a weapon with its own fire control capabilities
-              // may be done in an analogous way. In that sense, the service (interface) may
-              // also be employed by weapon systems.. Via this message, the subsystem reports
-              // the de-designation of a target.
+              // On receiving the de-designation request the fire control radar stops following
+              // the target and stops providing fire control information.
+              // Phased array radars may include fire control capabilities as well. If they do,
+              // they provide a number of â€˜virtual fire control radarsâ€™. To the extent that these
+              // virtual fire control radars are comparable in function and performance, there may
+              // be no need for the CMS to select a specific fire control channel to be used for a
+              // particular engagement.
+              // In the case where the CMS looses or releases mastership of the subsystem, the
+              // subsystems ceases all fire control activities.
+              // A target designation to a weapon with its own fire control capabilities may be
+              // done in an analogous way. In that sense, the service (interface) may also be
+              // employed by weapon systems.
               struct receive_target_dedesignation_type
               {
-              	// Field for interface operation parameter RequestID. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type RequestID;
-              	// Field for interface operation parameter TrackID. 
-              	org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type TrackID;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type TrackID;
               };
-#pragma keylist receive_target_dedesignation_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist receive_target_dedesignation_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class dedesignate_target_type.
+              struct dedesignate_target_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
+              // The subsystem is requested to de-designate a fire control channel.
+              struct dedesignate_target_type
+              {
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
+              };
+#ifndef DDS_XTYPES
+#pragma keylist dedesignate_target_type request_id subsystem_id
+#endif
+
+              // struct holding keys for class designate_target_by_position_type.
+              struct designate_target_by_position_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
+
+              // The subsystem is requested to designate a fire control channel based on a
+              // position/kinematics.
+              struct designate_target_by_position_type
+              {
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::kinematics_type PositionVelocity;
+              };
+#ifndef DDS_XTYPES
+#pragma keylist designate_target_by_position_type request_id subsystem_id
+#endif
+
+              // struct holding keys for class designate_target_by_track_type.
+              struct designate_target_by_track_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
+
+              // The subsystem is requested to designate a fire control channel based on a track.
+              struct designate_target_by_track_type
+              {
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type TrackID;
+              };
+#ifndef DDS_XTYPES
+#pragma keylist designate_target_by_track_type request_id subsystem_id
+#endif
 
             };
           };

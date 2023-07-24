@@ -1,999 +1,710 @@
-#ifndef COORDINATES_AND_POSITIONSDEFVAR
-#define COORDINATES_AND_POSITIONSDEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4IDOMAIN_MODELCOMMON_TYPESCOORDINATES_AND_POSITIONSDEFVAR
+#define ORGOMGC4IDOMAIN_MODELCOMMON_TYPESCOORDINATES_AND_POSITIONSDEFVAR
 #include "Common_Types.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Domain_Model
+      {
 
+        module Common_Types
+        {
 
-    module c4i {
-
-
-      module Domain_Model {
-
-
-        module Common_Types {
-
-
-          module Coordinates_and_Positions {
-
-
+          // Definitions of types to describe positions, in accordance with the ISO 19111
+          // abstract model.
+          module Coordinates_and_Positions
+          {
 
             // This class represents a duration fixed to an absolute point in time.
             struct absolute_duration_type
             {
-            	org::omg::c4i::Domain_Model::Common_Types::time_type start;
-            	org::omg::c4i::Domain_Model::Common_Types::time_type stop;
+              org::omg::c4i::Domain_Model::Common_Types::time_type start;
+              org::omg::c4i::Domain_Model::Common_Types::time_type stop;
             };
-  
 
-
-
-
-            // For positive values, height above coordinate system ellipsoid, for negative
-            // values, depth below; measured in metres.
-            //    See diagram note on choice of SI units
-            typedef double altitude_coordinate_type;
-  
-
-
-
-
-            // The angle representing the direction of travel relative to the horizontal. Up
-            // is positive.
+            // The angle representing the direction of travel relative to the horizontal. Up is
+            // positive.
             typedef double angle_of_climb_type;
-  
-
-
-
 
             // Axis in the azimuth direction, i.e. horizontal angle from the associated
             // coordinate system reference. Radians, positive clockwise from above.
-            //    See diagram note on choice of SI units
+            // See diagram note on choice of SI units
             typedef double azimuth_coordinate_type;
-  
-
-
-
-
-            struct azimuth_interval_type
-            {
-            	azimuth_coordinate_type start;
-            	azimuth_coordinate_type stop;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union azimuth_qualification_spread_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type value;
-            };
-  
-
-
-
-
-            // Qualifies a measurement with attributes of accuracy and, if possible,
-            // variability.
-            struct azimuth_qualification_type
-            {
-            	// The spread of the measurement. The combined measures of spread should encompass
-            	// the full extent of the plot.
-            	//      This attribute is optional. Not all sensors are capable of measuring it.
-            	azimuth_qualification_spread_type spread;
-            	// The accuracy of the measurement; equal to one standard deviation of uncertainty.
-            	azimuth_coordinate_type accuracy;
-            };
-  
-
-
-
 
             // radians per second
             typedef double azimuth_rate_type;
-  
-
-
-
 
             // See diagram note on choice of SI units
             typedef double cartesian_coordinate_type;
-  
 
-
-
-
-            struct cartesian_interval_type
+            struct azimuth_interval_type
             {
-            	cartesian_coordinate_type start;
-            	cartesian_coordinate_type stop;
+              azimuth_coordinate_type start;
+              azimuth_coordinate_type stop;
             };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union cartesian_position_accuracy_z_coordinate_accuracy_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_coordinate_type value;
-            };
-  
-
-
-
-
-            // The accuracy of the components of Cartesian position
-            struct cartesian_position_accuracy_type
-            {
-            	cartesian_coordinate_type x_coordinate_accuracy;
-            	cartesian_coordinate_type y_coordinate_accuracy;
-            	// Optional as some sensors are 2D (horizontal plane or no elevation information)
-            	cartesian_position_accuracy_z_coordinate_accuracy_type z_coordinate_accuracy;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union cartesian_position_z_coordinate_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_coordinate_type value;
-            };
-  
-
-
-
-
-            // Coordinates in a Cartesian reference frame as described by a coordinate
-            // specification object 
-            struct cartesian_position_type
-            {
-            	cartesian_coordinate_type x_coordinate;
-            	// Optional as some sensors are 2D (horizontal plane or no elevation information)
-            	cartesian_position_z_coordinate_type z_coordinate;
-            	cartesian_coordinate_type y_coordinate;
-            };
-  
-
-
-
 
             typedef double cartesian_velocity_component_type;
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union cartesian_velocity_accuracy_z_dot_accuracy_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_velocity_component_type value;
-            };
-  
-
-
-
-
-            // The accuracy of the components of Cartesian velocity
-            struct cartesian_velocity_accuracy_type
-            {
-            	cartesian_velocity_component_type x_dot_accuracy;
-            	cartesian_velocity_component_type y_dot_accuracy;
-            	// Optional as some sensors are 2D (horizontal plane or no elevation information)
-            	cartesian_velocity_accuracy_z_dot_accuracy_type z_dot_accuracy;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union cartesian_velocity_z_dot_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_velocity_component_type value;
-            };
-  
-
-
-
-
-            struct cartesian_velocity_type
-            {
-            	cartesian_velocity_component_type x_dot;
-            	cartesian_velocity_component_type y_dot;
-            	cartesian_velocity_z_dot_type z_dot;
-            };
-  
-
-
-
 
             enum coordinate_kind_type
             {
-            	CARTESIAN,
-            	POLAR,
-            	WGS84
+              CARTESIAN,
+              POLAR,
+              WGS84
             };
-  
-
-
-
 
             // This enumeration defines the set of coordinate systems, which compliant
-            // implementations may use. A compliant implementation may not fully support all
-            // of these coordinate systems.
+            // implementations may use. A compliant implementation may not fully support all of
+            // these coordinate systems.
             enum coordinate_orientation_type
             {
-            	// Valid for Polar Coordinate Kind
-            	//      Azimuth has origin (0.0) at North, positive clockwise, measured in the
-            	// horizontal plane
-            	//      Elevation has origin (0.0) at the Horizontal, positive up, measured in the
-            	// vertical plane.
-            	NORTH_HORIZONTAL,
-            	// Valid for Polar Coordinate Kind
-            	//      Azimuth has origin (0.0) at North, clockwise positive, measured in the
-            	// horizontal plane
-            	//      Elevation has origin (0.0) when pointing directly down, and 180.0 degrees
-            	// when pointing directly up, measured in the vertical plane.
-            	NORTH_DOWN,
-            	// Valid for Cartesian coordinate type
-            	//      x is positive to the East
-            	//      y is positive to the North
-            	//      z is positive up
-            	EAST_NORTH_UP,
-            	// Valid for Cartesian coordinate type
-            	//      x is positive to the East
-            	//      y is positive to the North
-            	//      z is positive down
-            	EAST_NORTH_DOWN,
-            	// Valid for Cartesian coordinate type
-            	//      x is positive to the North
-            	//      y is positive to the East
-            	//      z is positive up
-            	NORTH_EAST_UP,
-            	// Valid for Cartesian coordinate type
-            	//      x is positive to the North
-            	//      y is positive to the East
-            	//      z is positive down
-            	NORTH_EAST_DOWN,
-            	// Cartesian system with origin at centre of the Earth (absolute reference point)
-            	//      x positive through Greenwich meridian
-            	//      y positive through 90 degrees east (of Greenwich meridian)
-            	//      z positive through north pole
-            	//      x & y are in the equatorial plane
-            	EARTH_CENTRED,
-            	// WGS84 has unique well-defined orientation (NIMA Technical Report TR8350.2)
-            	LAT_LONG_HEIGHT,
-            	// Valid for Polar Coordinate Kind
-            	//      This is a platform orientation relative frame
-            	//      Azimuth has origin (0.0) in line with the ship's stern (heading), measured
-            	// anti-clockwise
-            	//      Elevation has origin (0.0) when pointing directly down to the keel
-            	// (perpendicular to the current inclination of the deck-level, not necessarily to
-            	// the Earth's surface)
-            	STERN_KEEL,
-            	// Valid for Polar Coordinate Kind
-            	//      This is a platform orientation relative frame
-            	//      Azimuth has origin (0.0) in line with the ship's stern (heading), measured
-            	// anti-clockwise
-            	//      Elevation has origin (0.0) when pointing parallel to the deck-level (not
-            	// necessarily parallel to the Earth's surface)
-            	STERN_DECK_LEVEL,
-            	// Valid for Cartesian coordinate type
-            	//      This is a platform orientation relative frame
-            	//      x is positive towards the stern (negative to bow)
-            	//      y is positive to starboard (negative to port)
-            	//      z is positive towards the mast (negative to keel)
-            	STERN_STARBOARD_MAST,
-            	// Valid for Cartesian coordinate type
-            	//      This is a platform orientation relative frame
-            	//      x is positive towards the stern (negative to bow)
-            	//      y is positive to starboard (negative to port)
-            	//      z is positive towards the keel (negative to mast)
-            	STERN_STARBOARD_KEEL
+              // Valid for Polar Coordinate Kind
+              // Azimuth has origin (0.0) at North, positive clockwise, measured in the horizontal
+              // plane
+              // Elevation has origin (0.0) at the Horizontal, positive up, measured in the
+              // vertical plane.
+              NORTH_HORIZONTAL,
+              // Valid for Polar Coordinate Kind
+              // Azimuth has origin (0.0) at North, clockwise positive, measured in the horizontal
+              // plane
+              // Elevation has origin (0.0) when pointing directly down, and 180.0 degrees when
+              // pointing directly up, measured in the vertical plane.
+              NORTH_DOWN,
+              // Valid for Cartesian coordinate type
+              // x is positive to the East
+              // y is positive to the North
+              // z is positive up
+              EAST_NORTH_UP,
+              // Valid for Cartesian coordinate type
+              // x is positive to the East
+              // y is positive to the North
+              // z is positive down
+              EAST_NORTH_DOWN,
+              // Valid for Cartesian coordinate type
+              // x is positive to the North
+              // y is positive to the East
+              // z is positive up
+              NORTH_EAST_UP,
+              // Valid for Cartesian coordinate type
+              // x is positive to the North
+              // y is positive to the East
+              // z is positive down
+              NORTH_EAST_DOWN,
+              // Cartesian system with origin at centre of the Earth (absolute reference point)
+              // x positive through Greenwich meridian
+              // y positive through 90 degrees east (of Greenwich meridian)
+              // z positive through north pole
+              // x &amp; y are in the equatorial plane
+              EARTH_CENTRED,
+              // WGS84 has unique well-defined orientation (NIMA Technical Report TR8350.2)
+              LAT_LONG_HEIGHT,
+              // Valid for Polar Coordinate Kind
+              // This is a platform orientation relative frame
+              // Azimuth has origin (0.0) in line with the ship's stern (heading), measured
+              // anti-clockwise
+              // Elevation has origin (0.0) when pointing directly down to the keel (perpendicular
+              // to the current inclination of the deck-level, not necessarily to the Earth's
+              // surface)
+              STERN_KEEL,
+              // Valid for Polar Coordinate Kind
+              // This is a platform orientation relative frame
+              // Azimuth has origin (0.0) in line with the ship's stern (heading), measured
+              // anti-clockwise
+              // Elevation has origin (0.0) when pointing parallel to the deck-level (not
+              // necessarily parallel to the Earth's surface)
+              STERN_DECK_LEVEL,
+              // Valid for Cartesian coordinate type
+              // This is a platform orientation relative frame
+              // x is positive towards the stern (negative to bow)
+              // y is positive to starboard (negative to port)
+              // z is positive towards the mast (negative to keel)
+              STERN_STARBOARD_MAST,
+              // Valid for Cartesian coordinate type
+              // This is a platform orientation relative frame
+              // x is positive towards the stern (negative to bow)
+              // y is positive to starboard (negative to port)
+              // z is positive towards the keel (negative to mast)
+              STERN_STARBOARD_KEEL
             };
-  
-
-
-
 
             enum coordinate_origin_type
             {
-            	// The origin of the coordinate system is 'well known' reference point for the
-            	// platform (on which the CMS and subsystem reside)
-            	PLATFORM_REFERENCE_POINT,
-            	// The origin for the coordinate system is the 'well known' reference/datum point
-            	// for the sensor, which is interacting using the interface.
-            	SENSOR_REFERENCE_POINT,
-            	// The origin for the coordinate system is a fixed point in Earth (WGS84)
-            	// coordinates. This point is known to the CMS and Subsystems using the interface
-            	// by means beyond the scope of the interface.
-            	ABSOLUTE_REFERENCE_POINT,
-            	// This value signifies that the origin for the coordinate system is well-defined
-            	// with respect to the Earth by the coordinate system. E.g. centre of the Earth
-            	// for Earth-Centred Earth-Fixed or the WGS84 spheroid for WGS84
-            	EARTH_REFERENCED,
-            	// This value signifies that the origin is explicitly specified within the data
-            	// model by the producer of the data.
-            	EXPLICITLY_SPECIFIED
+              // The origin of the coordinate system is 'well known' reference point for the
+              // platform (on which the CMS and subsystem reside)
+              PLATFORM_REFERENCE_POINT,
+              // The origin for the coordinate system is the 'well known' reference/datum point
+              // for the sensor, which is interacting using the interface.
+              SENSOR_REFERENCE_POINT,
+              // The origin for the coordinate system is a fixed point in Earth (WGS84)
+              // coordinates. This point is known to the CMS and Subsystems using the interface by
+              // means beyond the scope of the interface.
+              ABSOLUTE_REFERENCE_POINT,
+              // This value signifies that the origin for the coordinate system is well-defined
+              // with respect to the Earth by the coordinate system. E.g. centre of the Earth for
+              // Earth-Centred Earth-Fixed or the WGS84 spheroid for WGS84
+              EARTH_REFERENCED,
+              // This value signifies that the origin is explicitly specified within the data
+              // model by the producer of the data.
+              EXPLICITLY_SPECIFIED
             };
-  
 
+            // The angle representing the direction of travel relative to North in the
+            // horizontal plane. Clockwise (facing down) is positive.
+            typedef double course_type;
 
+            enum covariance_matrix_switch_type
+            {
+              covariance_matrix_type_diagonal_covariance_matrix_kind,
+              covariance_matrix_type_full_covariance_matrix_kind,
+              covariance_matrix_type_full_2d_covariance_matrix_kind
+            };
 
+            // Covariance of just the diagonal elements (i.e. the variance of the coordinate
+            // estimates).
+            struct diagonal_covariance_matrix_type
+            {
+              float xx_variance;
+              float yy_variance;
+              float zz_variance;
+              float vxvx_variance;
+              float vyvy_variance;
+              float vzvz_variance;
+            };
+
+            // The length of a time interval (not fixed to an absolute point in time).
+            // unit: 100 nano seconds
+            typedef unsigned long long duration_type;
+
+            // Axis in the direction of elevation, i.e. vertical angle from the associated
+            // coordinate system datum, radians, positive up.
+            // See diagram note on choice of SI units
+            typedef double elevation_coordinate_type;
+
+            struct cartesian_interval_type
+            {
+              cartesian_coordinate_type start;
+              cartesian_coordinate_type stop;
+            };
+
+            // radians per second
+            typedef double elevation_rate_type;
+
+            // The full covariance terms (in triangular form as necessarily a symmetric matrix)
+            // for reports in just the x and y dimensions.
+            struct full_2d_covariance_matrix_type
+            {
+              float xx_variance;
+              float xy_variance;
+              float xvx_variance;
+              float xvy_variance;
+              float yy_variance;
+              float yvx_variance;
+              float yvy_variance;
+              float vxvx_variance;
+              float vxvy_variance;
+              float vyvy_variance;
+            };
+
+            // Triangular representation of a full covariance matrix (which is by definition
+            // symmetric).
+            struct full_covariance_matrix_type
+            {
+              float xx_variance;
+              float xy_variance;
+              float xz_variance;
+              float xvx_variance;
+              float xvy_variance;
+              float xvz_variance;
+              float yy_variance;
+              float yz_variance;
+              float yvx_variance;
+              float yvy_variance;
+              float yvz_variance;
+              float zz_variance;
+              float zvx_variance;
+              float zvy_variance;
+              float zvz_variance;
+              float vxvx_variance;
+              float vxvy_variance;
+              float vxvz_variance;
+              float vyvy_variance;
+              float vyvz_variance;
+              float vzvz_variance;
+            };
+
+            // For positive values, height above coordinate system ellipsoid, for negative
+            // values, depth below; measured in meters. This quantity is height as a measured
+            // distance rather than an inference from (for instance) barometric pressure.
+            // See diagram note on choice of SI units
+            typedef double height_coordinate_type;
+
+            // Degrees north (positive), south (negative) relative to coordinate system datum.
+            // See diagram note on choice of SI units
+            typedef double latitude_coordinate_type;
+
+            // Degrees east (positive), west (negative) relative to coordinate system datum.
+            // See diagram note on choice of SI units
+            typedef double longitude_coordinate_type;
+
+            enum position_accuracy_coordinate_switch_type
+            {
+              position_accuracy_coordinate_type_cartesian_position_accuracy_kind,
+              position_accuracy_coordinate_type_polar_position_accuracy_kind,
+              position_accuracy_coordinate_type_wgs84_position_accuracy_kind
+            };
+
+            // Axis in range, i.e. linear distance from the coordinate system datum. Metres.
+            // See diagram note on choice of SI units
+            typedef double range_coordinate_type;
+
+            // metres per second
+            typedef double range_rate_type;
+
+            // metres per second
+            typedef double speed_type;
+
+            enum velocity_accuracy_coordinate_switch_type
+            {
+              velocity_accuracy_coordinate_type_cartesian_velocity_accuracy_kind,
+              velocity_accuracy_coordinate_type_polar_velocity_accuracy_kind,
+              velocity_accuracy_coordinate_type_wgs84_velocity_accuracy_kind
+            };
 
             // Specifies the interpretation of position_coordinate_type and
             // velocity_coordinate_type.
             struct coordinate_specification_type
             {
-            	coordinate_kind_type kind;
-            	coordinate_orientation_type orientation;
-            	coordinate_origin_type origin;
+              coordinate_kind_type kind;
+              coordinate_orientation_type orientation;
+              coordinate_origin_type origin;
             };
-  
 
-
-
-
-            // The angle representing the direction of travel relative to North in the
-            // horizontal plane. Clockwise (facing down) is positive.
-            typedef double course_type;
-  
-
-
-
-
-            // Switch enumeration type for union covariance_matrix_type
-            enum covariance_matrix_switch_type
+            // a simple union type, to represent an optional value
+            union azimuth_qualification_spread_type switch (boolean)
             {
-            	// The covariance_matrix_type union contains a value of
-            	// diagonal_covariance_matrix_type
-            	covariance_matrix_type_diagonal_covariance_matrix_kind,
-            	// The covariance_matrix_type union contains a value of full_covariance_matrix_type
-            	covariance_matrix_type_full_covariance_matrix_kind
+              // the value when present
+              case TRUE : azimuth_coordinate_type value;
             };
-  
 
-
-
-
-            struct diagonal_covariance_matrix_type
+            // a simple union type, to represent an optional value
+            union wgs84_velocity_angle_of_climb_type switch (boolean)
             {
-            	float xx_variance;
-            	float yy_variance;
-            	float zz_variance;
-            	float vxvx_variance;
-            	float vyvy_variance;
-            	float vzvz_variance;
+              // the value when present
+              case TRUE : angle_of_climb_type value;
             };
-  
 
-
-
-
-            // Full covariance matrix
-            struct full_covariance_matrix_type
+            // a simple union type, to represent an optional value
+            union cartesian_position_z_coordinate_type switch (boolean)
             {
-            	float xx_variance;
-            	float xy_variance;
-            	float xz_variance;
-            	float xvx_variance;
-            	float xvy_variance;
-            	float xvz_variance;
-            	float yy_variance;
-            	float yz_variance;
-            	float yvx_variance;
-            	float yvy_variance;
-            	float yvz_variance;
-            	float zz_variance;
-            	float zvx_variance;
-            	float zvy_variance;
-            	float zvz_variance;
-            	float vxvx_variance;
-            	float vxvy_variance;
-            	float vxvz_variance;
-            	float vyvy_variance;
-            	float vyvz_variance;
-            	float vzvz_variance;
+              // the value when present
+              case TRUE : cartesian_coordinate_type value;
             };
-  
-
-
-
-
-            union covariance_matrix_type switch (covariance_matrix_switch_type)
-            {
-            	case covariance_matrix_type_diagonal_covariance_matrix_kind : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::diagonal_covariance_matrix_type diagonal_covariance_matrix;
-            	case covariance_matrix_type_full_covariance_matrix_kind : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::full_covariance_matrix_type full_covariance_matrix;
-            };
-  
-
-
-
-
-            // The length of a time interval (not fixed to an absolute point in time).
-            //    unit: 100 nano seconds
-            typedef unsigned long long duration_type;
-  
-
-
-
-
-            // Axis in the direction of elevation, i.e. vertical angle from the associated
-            // coordinate system datum, radians, positive up.
-            //    See diagram note on choice of SI units
-            typedef double elevation_coordinate_type;
-  
-
-
-
 
             struct elevation_interval_type
             {
-            	elevation_coordinate_type start;
-            	elevation_coordinate_type stop;
+              elevation_coordinate_type start;
+              elevation_coordinate_type stop;
             };
-  
 
+            // a simple union type, to represent an optional value
+            union wgs84_velocity_accuracy_angle_of_climb_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : angle_of_climb_type value;
+            };
 
+            // a simple union type, to represent an optional value
+            union cartesian_velocity_z_dot_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : cartesian_velocity_component_type value;
+            };
 
+            // Qualifies a measurement with attributes of accuracy and, if possible,
+            // variability.
+            struct azimuth_qualification_type
+            {
+              // The spread of the measurement. The combined measures of spread should encompass
+              // the full extent of the plot.
+              // This attribute is optional. Not all sensors are capable of measuring it.
+              azimuth_qualification_spread_type spread;
+              // The accuracy of the measurement; equal to one standard deviation of uncertainty.
+              azimuth_coordinate_type accuracy;
+            };
+
+            // a simple union type, to represent an optional value
+            union cartesian_position_accuracy_z_coordinate_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : cartesian_coordinate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union cartesian_velocity_accuracy_z_dot_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : cartesian_velocity_component_type value;
+            };
 
             // a simple union type, to represent an optional value
             union elevation_qualification_spread_type switch (boolean)
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type value;
+              // the value when present
+              case TRUE : elevation_coordinate_type value;
             };
-  
 
+            // a simple union type, to represent an optional value
+            union polar_position_elevation_coordinate_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : elevation_coordinate_type value;
+            };
 
+            // a simple union type, to represent an optional value
+            union polar_position_accuracy_elevation_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : elevation_coordinate_type value;
+            };
 
+            // a simple union type, to represent an optional value
+            union polar_velocity_elevation_rate_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : elevation_rate_type value;
+            };
+
+            struct height_interval_type
+            {
+              height_coordinate_type start;
+              height_coordinate_type stop;
+            };
+
+            // a simple union type, to represent an optional value
+            union polar_velocity_accuracy_elevation_rate_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : elevation_rate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union wgs84_position_height_coordinate_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : height_coordinate_type value;
+            };
+
+            // Coordinates in a Cartesian reference frame as described by a coordinate
+            // specification object 
+            struct cartesian_position_type
+            {
+              cartesian_coordinate_type x_coordinate;
+              // Optional as some sensors are 2D (horizontal plane or no elevation information)
+              cartesian_position_z_coordinate_type z_coordinate;
+              cartesian_coordinate_type y_coordinate;
+            };
+
+            // a simple union type, to represent an optional value
+            union wgs84_position_accuracy_height_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : height_coordinate_type value;
+            };
+
+            struct latitude_interval_type
+            {
+              latitude_coordinate_type start;
+              latitude_coordinate_type stop;
+            };
+
+            // a simple union type, to represent an optional value
+            union polar_position_range_coordinate_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : range_coordinate_type value;
+            };
+
+            struct longitude_interval_type
+            {
+              longitude_coordinate_type start;
+              longitude_coordinate_type stop;
+            };
+
+            // a simple union type, to represent an optional value
+            union range_qualification_spread_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : range_coordinate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union polar_position_accuracy_range_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : range_coordinate_type value;
+            };
+
+            struct cartesian_velocity_type
+            {
+              cartesian_velocity_component_type x_dot;
+              cartesian_velocity_component_type y_dot;
+              cartesian_velocity_z_dot_type z_dot;
+            };
+
+            // a simple union type, to represent an optional value
+            union polar_velocity_range_rate_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : range_rate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union polar_velocity_accuracy_range_rate_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : range_rate_type value;
+            };
+
+            // This class represents a covariance matrix for coordinate estimates and their time
+            // derivatives through a choice of formats.
+            union covariance_matrix_type switch (covariance_matrix_switch_type)
+            {
+              case covariance_matrix_type_diagonal_covariance_matrix_kind : diagonal_covariance_matrix_type diagonal_covariance_matrix;
+              case covariance_matrix_type_full_covariance_matrix_kind : full_covariance_matrix_type full_covariance_matrix;
+              case covariance_matrix_type_full_2d_covariance_matrix_kind : full_2d_covariance_matrix_type full_2d_covariance_matrix;
+            };
+
+            struct range_interval_type
+            {
+              range_coordinate_type start;
+              range_coordinate_type stop;
+            };
 
             // Qualifies a measurement with attributes of accuracy and, if possible,
             // variability.
             struct elevation_qualification_type
             {
-            	// The spread of the measurement. The combined measures of spread should encompass
-            	// the full extent of the plot.
-            	//      This attribute is optional. Not all sensors are capable of measuring it.
-            	elevation_qualification_spread_type spread;
-            	// The accuracy of the measurement; equal to one standard deviation of uncertainty.
-            	elevation_coordinate_type accuracy;
+              // The spread of the measurement. The combined measures of spread should encompass
+              // the full extent of the plot.
+              // This attribute is optional. Not all sensors are capable of measuring it.
+              elevation_qualification_spread_type spread;
+              // The accuracy of the measurement; equal to one standard deviation of uncertainty.
+              elevation_coordinate_type accuracy;
             };
-  
-
-
-
-
-            // radians per second
-            typedef double elevation_rate_type;
-  
-
-
-
-
-            struct height_interval_type
-            {
-            	altitude_coordinate_type start;
-            	altitude_coordinate_type stop;
-            };
-  
-
-
-
-
-            // Degrees north (positive), south (negative) relative to coordinate system datum.
-            // 
-            //    See diagram note on choice of SI units
-            typedef double latitude_coordinate_type;
-  
-
-
-
-
-            struct latitude_interval_type
-            {
-            	latitude_coordinate_type start;
-            	latitude_coordinate_type stop;
-            };
-  
-
-
-
-
-            // Degrees east (positive), west (negative) relative to coordinate system datum.
-            //    See diagram note on choice of SI units
-            typedef double longitude_coordinate_type;
-  
-
-
-
-
-            struct longitude_interval_type
-            {
-            	longitude_coordinate_type start;
-            	longitude_coordinate_type stop;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_position_accuracy_elevation_accuracy_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union wgs84_position_accuracy_altitude_accuracy_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::altitude_coordinate_type value;
-            };
-  
-
-
-
-
-            // The accuracy of the components of a WGS84 position
-            struct wgs84_position_accuracy_type
-            {
-            	// Optional as some sensors as 2D (work in horizontal plane) and some other
-            	// functions do not supply or require this information either.
-            	wgs84_position_accuracy_altitude_accuracy_type altitude_accuracy;
-            	latitude_coordinate_type latitude_accuracy;
-            	longitude_coordinate_type longitude_accuracy;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_position_accuracy_origin_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::wgs84_position_accuracy_type value;
-            };
-  
-
-
-
-
-            // Axis in range, i.e. linear distance from the coordinate system datum. Metres.
-            //    See diagram note on choice of SI units
-            typedef double range_coordinate_type;
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_position_accuracy_range_accuracy_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
-            };
-  
-
-
-
-
-            // The accuracy of the components of polar position
-            struct polar_position_accuracy_type
-            {
-            	azimuth_coordinate_type azimuth_accuracy;
-            	// Optional as some sensors provide no elevation information
-            	polar_position_accuracy_elevation_accuracy_type elevation_accuracy;
-            	// Optional as some sensor provide no range information (e.g. most passive sensors)
-            	polar_position_accuracy_range_accuracy_type range_accuracy;
-            	// Specifies the accuracy of the origin from which to interpret the polar position.
-            	// This attribute is optional as the origin can be implicitly specified according
-            	// to the value of the applicable coordinate specification enumeration.
-            	polar_position_accuracy_origin_type origin;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_position_elevation_coordinate_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union wgs84_position_altitude_coordinate_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::altitude_coordinate_type value;
-            };
-  
-
-
-
-
-            // Coordinate in the WGS84 reference system.
-            struct wgs84_position_type
-            {
-            	// Optional as some sensors as 2D (work in horizontal plane) and some other
-            	// functions do not supply or require this information either.
-            	wgs84_position_altitude_coordinate_type altitude_coordinate;
-            	latitude_coordinate_type latitude_coordinate;
-            	longitude_coordinate_type longitude_coordinate;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_position_origin_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::wgs84_position_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_position_range_coordinate_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
-            };
-  
-
-
-
-
-            // Coordinates in a polar reference frame as a described by a coordinate
-            // specification object
-            struct polar_position_type
-            {
-            	azimuth_coordinate_type azimuth_coordinate;
-            	// Optional as some sensors provide no elevation information
-            	polar_position_elevation_coordinate_type elevation_coordinate;
-            	// Optional as some sensor provide no range information (e.g. most passive sensors)
-            	polar_position_range_coordinate_type range_coordinate;
-            	// Specifies the origin from which to interpret the polar position. This attribute
-            	// is optional as the origin can be implicitly specified according to the value of
-            	// the applicable coordinate specification enumeration.
-            	polar_position_origin_type origin;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_velocity_accuracy_elevation_rate_accuracy_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_rate_type value;
-            };
-  
-
-
-
-
-            // metres per second
-            typedef double range_rate_type;
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_velocity_accuracy_range_rate_accuracy_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_rate_type value;
-            };
-  
-
-
-
-
-            // The accuracy of the components of polar velocity
-            struct polar_velocity_accuracy_type
-            {
-            	azimuth_rate_type azimuth_rate_accuracy;
-            	// Optional as some sensors provide no elevation information
-            	polar_velocity_accuracy_elevation_rate_accuracy_type elevation_rate_accuracy;
-            	// Optional as some sensor provide no range information (e.g. most passive sensors)
-            	polar_velocity_accuracy_range_rate_accuracy_type range_rate_accuracy;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_velocity_elevation_rate_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_rate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union polar_velocity_range_rate_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_rate_type value;
-            };
-  
-
-
-
-
-            // Velocity defined in a polar reference frame as a described by a coordinate
-            // specification object
-            struct polar_velocity_type
-            {
-            	azimuth_rate_type azimuth_rate;
-            	// Optional as some sensors provide no elevation information
-            	polar_velocity_elevation_rate_type elevation_rate;
-            	// Optional as some sensor provide no range information (e.g. most passive sensors)
-            	polar_velocity_range_rate_type range_rate;
-            };
-  
-
-
-
-
-            // Switch enumeration type for union position_accuracy_coordinate_type
-            enum position_accuracy_coordinate_switch_type
-            {
-            	// The position_accuracy_coordinate_type union contains a value of
-            	// cartesian_position_accuracy_type
-            	position_accuracy_coordinate_type_cartesian_position_accuracy_kind,
-            	// The position_accuracy_coordinate_type union contains a value of
-            	// polar_position_accuracy_type
-            	position_accuracy_coordinate_type_polar_position_accuracy_kind,
-            	// The position_accuracy_coordinate_type union contains a value of
-            	// wgs84_position_accuracy_type
-            	position_accuracy_coordinate_type_wgs84_position_accuracy_kind
-            };
-  
-
-
-
-
-            // To offer flexibility, three variants of coordinate system representation are
-            // supported - corresponding to the coordinate_kind_type enumerate. An
-            // implementation should support one kind for each relevant interface as defined
-            // by the coordinate_specification_type value, and it should only send data of
-            // that variant and it should check that all data received is of that variant. It
-            // should not implement conversion of data in an unexpected variant. Receipt of
-            // such data constitutes an error in the operation of the interface.
-            union position_accuracy_coordinate_type switch (position_accuracy_coordinate_switch_type)
-            {
-            	case position_accuracy_coordinate_type_cartesian_position_accuracy_kind : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_position_accuracy_type cartesian_position_accuracy;
-            	case position_accuracy_coordinate_type_polar_position_accuracy_kind : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::polar_position_accuracy_type polar_position_accuracy;
-            	case position_accuracy_coordinate_type_wgs84_position_accuracy_kind : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::wgs84_position_accuracy_type wgs84_position_accuracy;
-            };
-  
-
-
-
-
-            // To offer flexibility, three variants of coordinate system representation are
-            // supported - corresponding to the coordinate_kind_type enumerate. An
-            // implementation should support one kind for each relevant interface as defined
-            // by the coordinate_specification_type value, and it should only send data of
-            // that variant and it should check that all data received is of that variant. It
-            // should not implement conversion of data in an unexpected variant. Receipt of
-            // such data constitutes an error in the operation of the interface.
-            union position_coordinate_type switch (coordinate_kind_type)
-            {
-            	case CARTESIAN : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_position_type cartesian_position;
-            	case POLAR : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::polar_position_type polar_position;
-            	case WGS84 : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::wgs84_position_type wgs84_position;
-            };
-  
-
-
-
-
-            struct range_interval_type
-            {
-            	range_coordinate_type start;
-            	range_coordinate_type stop;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union range_qualification_spread_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
-            };
-  
-
-
-
-
-            // Qualifies a measurement with attributes of accuracy and, if possible,
-            // variability.
-            struct range_qualification_type
-            {
-            	// The spread of the measurement. The combined measures of spread should encompass
-            	// the full extent of the plot.
-            	//      This attribute is optional. Not all sensors are capable of measuring it.
-            	range_qualification_spread_type spread;
-            	// The accuracy of the measurement; equal to one standard deviation of uncertainty.
-            	range_coordinate_type accuracy;
-            };
-  
-
-
-
-
-            // metres per second
-            typedef double speed_type;
-  
-
-
-
 
             // This class represents a range of speeds.
             struct speed_interval_type
             {
-            	// The minimum speed.
-            	speed_type min;
-            	// The maximum speed.
-            	speed_type max;
+              // The minimum speed.
+              speed_type min;
+              // The maximum speed.
+              speed_type max;
             };
-  
 
-
-
-
-            // Switch enumeration type for union velocity_accuracy_coordinate_type
-            enum velocity_accuracy_coordinate_switch_type
+            // The accuracy of the components of Cartesian position
+            struct cartesian_position_accuracy_type
             {
-            	// The velocity_accuracy_coordinate_type union contains a value of
-            	// cartesian_velocity_accuracy_type
-            	velocity_accuracy_coordinate_type_cartesian_velocity_accuracy_kind,
-            	// The velocity_accuracy_coordinate_type union contains a value of
-            	// polar_velocity_accuracy_type
-            	velocity_accuracy_coordinate_type_polar_velocity_accuracy_kind,
-            	// The velocity_accuracy_coordinate_type union contains a value of
-            	// wgs84_velocity_accuracy_type
-            	velocity_accuracy_coordinate_type_wgs84_velocity_accuracy_kind
+              cartesian_coordinate_type x_coordinate_accuracy;
+              cartesian_coordinate_type y_coordinate_accuracy;
+              // Optional as some sensors are 2D (horizontal plane or no elevation information)
+              cartesian_position_accuracy_z_coordinate_accuracy_type z_coordinate_accuracy;
             };
-  
 
-
-
-
-            // a simple union type, to represent an optional value
-            union wgs84_velocity_accuracy_angle_of_climb_accuracy_type switch (boolean)
+            // The accuracy of the components of Cartesian velocity
+            struct cartesian_velocity_accuracy_type
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::angle_of_climb_type value;
+              cartesian_velocity_component_type x_dot_accuracy;
+              cartesian_velocity_component_type y_dot_accuracy;
+              // Optional as some sensors are 2D (horizontal plane or no elevation information)
+              cartesian_velocity_accuracy_z_dot_accuracy_type z_dot_accuracy;
             };
-  
-
-
-
-
-            // The accuracy of the components of a WGS84 velocity
-            struct wgs84_velocity_accuracy_type
-            {
-            	course_type course_accuracy;
-            	// Optional as some sensors as 2D (work in horizontal plane) and some other
-            	// functions do not supply or require this information either.
-            	wgs84_velocity_accuracy_angle_of_climb_accuracy_type angle_of_climb_accuracy;
-            	speed_type speed_accuracy;
-            };
-  
-
-
-
-
-            // To offer flexibility, three variants of coordinate system representation are
-            // supported - corresponding to the coordinate_kind_type enumerate. An
-            // implementation should support one kind for each relevant interface as defined
-            // by the coordinate_specification_type value, and it should only send data of
-            // that variant and it should check that all data received is of that variant. It
-            // should not implement conversion of data in an unexpected variant. Receipt of
-            // such data constitutes an error in the operation of the interface.
-            union velocity_accuracy_coordinate_type switch (velocity_accuracy_coordinate_switch_type)
-            {
-            	case velocity_accuracy_coordinate_type_cartesian_velocity_accuracy_kind : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_velocity_accuracy_type cartesian_velocity_accuracy;
-            	case velocity_accuracy_coordinate_type_polar_velocity_accuracy_kind : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::polar_velocity_accuracy_type polar_velocity_accuracy;
-            	case velocity_accuracy_coordinate_type_wgs84_velocity_accuracy_kind : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::wgs84_velocity_accuracy_type wgs84_velocity_accuracy;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union wgs84_velocity_angle_of_climb_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::angle_of_climb_type value;
-            };
-  
-
-
-
 
             // Velocity defined in the WGS84 grid system from the viewpoint of the object in
             // terms of course and speed with optional angle of climb for changes in height.
             struct wgs84_velocity_type
             {
-            	// Relative to North in the WGS84 spheroid.
-            	course_type course;
-            	// Optional as some sensors as 2D (work in horizontal plane) and some other
-            	// functions do not supply or require this information either.
-            	wgs84_velocity_angle_of_climb_type angle_of_climb;
-            	// The total speed within the WGS84 spheroid (not speed over ground) in the
-            	// direction of travel including angle of climb when present.
-            	speed_type speed;
+              // Relative to North in the WGS84 spheroid.
+              course_type course;
+              // Optional as some sensors as 2D (work in horizontal plane) and some other
+              // functions do not supply or require this information either.
+              wgs84_velocity_angle_of_climb_type angle_of_climb;
+              // The total speed within the WGS84 spheroid (not speed over ground) in the
+              // direction of travel including angle of climb when present.
+              speed_type speed;
             };
-  
 
+            // Qualifies a measurement with attributes of accuracy and, if possible,
+            // variability.
+            struct range_qualification_type
+            {
+              // The spread of the measurement. The combined measures of spread should encompass
+              // the full extent of the plot.
+              // This attribute is optional. Not all sensors are capable of measuring it.
+              range_qualification_spread_type spread;
+              // The accuracy of the measurement; equal to one standard deviation of uncertainty.
+              range_coordinate_type accuracy;
+            };
 
+            // The accuracy of the components of a WGS84 velocity
+            struct wgs84_velocity_accuracy_type
+            {
+              course_type course_accuracy;
+              // Optional as some sensors as 2D (work in horizontal plane) and some other
+              // functions do not supply or require this information either.
+              wgs84_velocity_accuracy_angle_of_climb_accuracy_type angle_of_climb_accuracy;
+              speed_type speed_accuracy;
+            };
 
+            // Coordinate in the WGS84 reference system.
+            struct wgs84_position_type
+            {
+              // Optional as some sensors as 2D (work in horizontal plane) and some other
+              // functions do not supply or require this information either.
+              wgs84_position_height_coordinate_type height_coordinate;
+              latitude_coordinate_type latitude_coordinate;
+              longitude_coordinate_type longitude_coordinate;
+            };
+
+            // The accuracy of the components of a WGS84 position
+            struct wgs84_position_accuracy_type
+            {
+              // Optional as some sensors as 2D (work in horizontal plane) and some other
+              // functions do not supply or require this information either.
+              wgs84_position_accuracy_height_accuracy_type height_accuracy;
+              latitude_coordinate_type latitude_accuracy;
+              longitude_coordinate_type longitude_accuracy;
+            };
+
+            // Velocity defined in a polar reference frame as a described by a coordinate
+            // specification object
+            struct polar_velocity_type
+            {
+              azimuth_rate_type azimuth_rate;
+              // Optional as some sensors provide no elevation information
+              polar_velocity_elevation_rate_type elevation_rate;
+              // Optional as some sensor provide no range information (e.g. most passive sensors)
+              polar_velocity_range_rate_type range_rate;
+            };
+
+            // The accuracy of the components of polar velocity
+            struct polar_velocity_accuracy_type
+            {
+              azimuth_rate_type azimuth_rate_accuracy;
+              // Optional as some sensors provide no elevation information
+              polar_velocity_accuracy_elevation_rate_accuracy_type elevation_rate_accuracy;
+              // Optional as some sensor provide no range information (e.g. most passive sensors)
+              polar_velocity_accuracy_range_rate_accuracy_type range_rate_accuracy;
+            };
+
+            // a simple union type, to represent an optional value
+            union polar_position_origin_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : wgs84_position_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union polar_position_accuracy_origin_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : wgs84_position_accuracy_type value;
+            };
+
+            // Coordinates in a polar reference frame as a described by a coordinate
+            // specification object
+            struct polar_position_type
+            {
+              azimuth_coordinate_type azimuth_coordinate;
+              // Optional as some sensors provide no elevation information
+              polar_position_elevation_coordinate_type elevation_coordinate;
+              // Optional as some sensor provide no range information (e.g. most passive sensors)
+              polar_position_range_coordinate_type range_coordinate;
+              // Specifies the origin from which to interpret the polar position. This attribute
+              // is optional as the origin can be implicitly specified according to the value of
+              // the applicable coordinate specification enumeration.
+              polar_position_origin_type origin;
+            };
+
+            // The accuracy of the components of polar position
+            struct polar_position_accuracy_type
+            {
+              azimuth_coordinate_type azimuth_accuracy;
+              // Optional as some sensors provide no elevation information
+              polar_position_accuracy_elevation_accuracy_type elevation_accuracy;
+              // Optional as some sensor provide no range information (e.g. most passive sensors)
+              polar_position_accuracy_range_accuracy_type range_accuracy;
+              // Specifies the accuracy of the origin from which to interpret the polar position.
+              // This attribute is optional as the origin can be implicitly specified according to
+              // the value of the applicable coordinate specification enumeration.
+              polar_position_accuracy_origin_type origin;
+            };
 
             // To offer flexibility, three variants of coordinate system representation are
             // supported - corresponding to the coordinate_kind_type enumerate. An
             // implementation should support one kind for each relevant service as defined by
             // the coordinate_specification_type value, and it should only send data of that
-            // variant and it should check that all data received is of that variant. It
-            // should not implement conversion of data in an unexpected variant. Receipt of
-            // such data constitutes an error in the operation of the interface. Three
-            // representations are supported: time derivatives within a Cartesian coordinate
-            // system; time derivatives of a polar coordinate system (range rate, bearing rate
-            // etc.); course and speed relative to the WGS84 spheroid.
+            // variant and it should check that all data received is of that variant. It should
+            // not implement conversion of data in an unexpected variant. Receipt of such data
+            // constitutes an error in the operation of the interface. Three representations are
+            // supported: time derivatives within a Cartesian coordinate system; time
+            // derivatives of a polar coordinate system (range rate, bearing rate etc.); course
+            // and speed relative to the WGS84 spheroid.
             union velocity_coordinate_type switch (coordinate_kind_type)
             {
-            	case CARTESIAN : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::cartesian_velocity_type cartesian_velocity;
-            	case POLAR : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::polar_velocity_type polar_velocity;
-            	case WGS84 : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::wgs84_velocity_type wgs84_velocity;
+              case CARTESIAN : cartesian_velocity_type cartesian_velocity;
+              case POLAR : polar_velocity_type polar_velocity;
+              case WGS84 : wgs84_velocity_type wgs84_velocity;
             };
-  
 
+            // To offer flexibility, three variants of coordinate system representation are
+            // supported - corresponding to the coordinate_kind_type enumerate. An
+            // implementation should support one kind for each relevant interface as defined by
+            // the coordinate_specification_type value, and it should only send data of that
+            // variant and it should check that all data received is of that variant. It should
+            // not implement conversion of data in an unexpected variant. Receipt of such data
+            // constitutes an error in the operation of the interface.
+            union velocity_accuracy_coordinate_type switch (velocity_accuracy_coordinate_switch_type)
+            {
+              case velocity_accuracy_coordinate_type_cartesian_velocity_accuracy_kind : cartesian_velocity_accuracy_type cartesian_velocity_accuracy;
+              case velocity_accuracy_coordinate_type_polar_velocity_accuracy_kind : polar_velocity_accuracy_type polar_velocity_accuracy;
+              case velocity_accuracy_coordinate_type_wgs84_velocity_accuracy_kind : wgs84_velocity_accuracy_type wgs84_velocity_accuracy;
+            };
 
+            // To offer flexibility, three variants of coordinate system representation are
+            // supported - corresponding to the coordinate_kind_type enumerate. An
+            // implementation should support one kind for each relevant interface as defined by
+            // the coordinate_specification_type value, and it should only send data of that
+            // variant and it should check that all data received is of that variant. It should
+            // not implement conversion of data in an unexpected variant. Receipt of such data
+            // constitutes an error in the operation of the interface.
+            union position_coordinate_type switch (coordinate_kind_type)
+            {
+              case CARTESIAN : cartesian_position_type cartesian_position;
+              case POLAR : polar_position_type polar_position;
+              case WGS84 : wgs84_position_type wgs84_position;
+            };
+
+            // To offer flexibility, three variants of coordinate system representation are
+            // supported - corresponding to the coordinate_kind_type enumerate. An
+            // implementation should support one kind for each relevant interface as defined by
+            // the coordinate_specification_type value, and it should only send data of that
+            // variant and it should check that all data received is of that variant. It should
+            // not implement conversion of data in an unexpected variant. Receipt of such data
+            // constitutes an error in the operation of the interface.
+            union position_accuracy_coordinate_type switch (position_accuracy_coordinate_switch_type)
+            {
+              case position_accuracy_coordinate_type_cartesian_position_accuracy_kind : cartesian_position_accuracy_type cartesian_position_accuracy;
+              case position_accuracy_coordinate_type_polar_position_accuracy_kind : polar_position_accuracy_type polar_position_accuracy;
+              case position_accuracy_coordinate_type_wgs84_position_accuracy_kind : wgs84_position_accuracy_type wgs84_position_accuracy;
+            };
 
           };
         };

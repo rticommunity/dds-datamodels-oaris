@@ -1,372 +1,326 @@
-#ifndef SENSOR_PERFORMANCEDEFVAR
-#define SENSOR_PERFORMANCEDEFVAR
-#include "Sensor_Control.idl"
-#include "Shape_Model.idl"
-#include "Coordinates_and_Positions.idl"
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINSENSOR_PERFORMANCEDEFVAR
+#define ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINSENSOR_PERFORMANCEDEFVAR
 #include "Common_Types.idl"
+#include "Coordinates_and_Positions.idl"
+#include "Shape_Model.idl"
 #include "Subsystem_Control.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Domain_Model
+      {
 
+        module Sensor_Domain
+        {
 
-    module c4i {
+          module Sensor_Performance
+          {
 
-
-      module Domain_Model {
-
-
-        module Sensor_Domain {
-
-
-          module Sensor_Performance {
-
-
+            // Enumeration of the types of interferers that are known about.
+            enum interferer_kind
+            {
+              // Interference from active noise.
+              ACTIVE_NOISE,
+              // Interference from clutter.
+              CLUTTER,
+              // Interference from a jammer, which is self screening.
+              SELF_SCREENING_JAMMER,
+              // Interference from a stand-off jammer
+              STANDOFF_JAMMER,
+              // Interference from a strobe jammer.
+              STROBE,
+              // The interference source is of a different type to the other declared interference
+              // kinds
+              OTHER_TYPE,
+              // The interference source could not be classified by the sensor subsystem.
+              NO_STATEMENT
+            };
 
             // Target strength (Effective Radiated Power - ERP) of a jammer. The precise
             // semantics of this type are sensor subsystem specific, but a typical
             // interpretation is as a signal to noise ratio in dB.
             typedef unsigned short jamming_magnitude_type;
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union interferer_magnitude_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::jamming_magnitude_type value;
-            };
-  
-
-
-
-
-            // A sequence type, to represent multiple values. Note: unbounded sequence
-            typedef sequence<Domain_Model::Sensor_Domain::Sensor_Control::frequency_band_type> interferer_affected_bands_type;
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union interferer_position_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union interferer_affected_volume_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type value;
-            };
-  
-
-
-
-
-            // Enumeration of the types of interferers that are known about.
-            enum interferer_kind
-            {
-            	// ACTIVE_NOISE
-            	ACTIVE_NOISE,
-            	// CLUTTER
-            	CLUTTER,
-            	// SELF_SCREENING_JAMMER
-            	SELF_SCREENING_JAMMER,
-            	// STANDOFF_JAMMER
-            	STANDOFF_JAMMER,
-            	// STROBE
-            	STROBE,
-            	// OTHER_TYPE
-            	OTHER_TYPE,
-            	// NO_STATEMENT
-            	NO_STATEMENT
-            };
-  
-
-
-
-
-            // A single source of interference.
-            struct interferer_type
-            {
-            	// Time to which the performance report applies.
-            	org::omg::c4i::Domain_Model::Common_Types::time_type timestamp;
-            	// The Effective Radiated Power (ERP) of the source of interference. This is an
-            	// optional attribute, which may not all sensors may be able to calculate.
-            	interferer_magnitude_type magnitude;
-            	// A list of frequency bands which are effected by the source of interference.
-            	interferer_affected_bands_type affected_bands;
-            	// The source position of the interference. This is an optional attribute that not
-            	// all sensors may be able to calculate.
-            	interferer_position_type position;
-            	// A classification of the interference source.
-            	interferer_kind kind;
-            	// The volume in space, which the interference source is affecting. This is an
-            	// optional attribute, which may not all sensors may be able to calculate.
-            	interferer_affected_volume_type affected_volume;
-            	// Specifies the coordinate system used to define the interferer.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_coordinate_specification;
-            };
-  
-
-
-
-
-            // A sequence type, to represent multiple values. Note: variable length sequence,
-            // which should contain at least one instance.
-            typedef sequence<interferer_type> interference_report_interferers_type;
-  
-
-
-
-
-            // Set of interferer objects in a report.
-            struct interference_report_type
-            {
-            	// The interference sources, which are described by the report.
-            	interference_report_interferers_type interferers;
-            };
-  
-
-
-
 
             // Defined as a signal excess in dB above noise floor for a nominal 0dB target
             // strength, when assessing nominal performance or for the jammer when providing
             // jammer assessment..
             typedef float performance_type;
-  
 
+            // A sequence type, to represent multiple values.
+            typedef sequence<org::omg::c4i::Domain_Model::Common_Types::frequency_band_type> interferer_affected_bands_type;
 
+            // a simple union type, to represent an optional value
+            union interferer_position_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type value;
+            };
 
+            // a simple union type, to represent an optional value
+            union interferer_affected_volume_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union performance_assessment_parameters_start_azimuth_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union performance_assessment_parameters_end_azimuth_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union performance_assessment_parameters_start_elevation_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union performance_assessment_parameters_end_elevation_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union performance_assessment_parameters_min_range_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union performance_assessment_parameters_max_range_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
+            };
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<org::omg::c4i::Domain_Model::Common_Types::frequency_band_type> performance_assessment_parameters_frequency_bands_type;
+
+            // a simple union type, to represent an optional value
+            union performance_band_frequency_band_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::frequency_band_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union interferer_magnitude_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : jamming_magnitude_type value;
+            };
 
             // a simple union type, to represent an optional value
             union perfomance_bin_value_type switch (boolean)
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::performance_type value;
+              // the value when present
+              case TRUE : performance_type value;
             };
-  
 
-
-
-
-            // Value of performance in a volume of space. This is given as a signal excess in
-            // dB above noise floor for a nominal 0dB target strength.  For a current
-            // performance report, this noise floor shall include clutter and jamming. These
-            // are not included in a nominal performance report.
+            // Value of performance in a volume of space. This is given as a signal excess in dB
+            // above noise floor for a nominal 0dB target strength.  For a current performance
+            // report, this noise floor shall include clutter and jamming. These are not
+            // included in a nominal performance report.
             struct perfomance_bin_type
             {
-            	// The start of the bin in range.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type start_range;
-            	// The end of the bin in range.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type end_range;
-            	// The assessed level of performance.
-            	//      If no value present, there is no performance data available for this bin.
-            	perfomance_bin_value_type value;
+              // The start of the bin in range.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type start_range;
+              // The end of the bin in range.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type end_range;
+              // The assessed level of performance.
+              // If no value present, there is no performance data available for this bin.
+              perfomance_bin_value_type value;
             };
-  
 
-
-
-
-            // A sequence type, to represent multiple values. Note: variable length sequence,
-            // which should contain at least one instance.
+            // A sequence type, to represent multiple values.
             typedef sequence<perfomance_bin_type> performance_beam_bin_type;
-  
 
-
-
-
-            // Set of performance values for a line of points in space. Each value applies to
-            // a volume whose boundaries may be inferred from the numbers of bins and the min
-            // and max values in the report.
+            // Set of performance values for a line of points in space. Each value applies to a
+            // volume whose boundaries may be inferred from the numbers of bins and the min and
+            // max values in the report.
             struct performance_beam_type
             {
-            	// The start of the beam in elevation (positive orientation).
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type start_elevation;
-            	// The end of the beam in elevation (positive orientation).
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type end_elevation;
-            	// The list of 'bins' in a beam of the performance assessment
-            	performance_beam_bin_type bin;
+              // The start of the beam in elevation (positive orientation).
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type start_elevation;
+              // The end of the beam in elevation (positive orientation).
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type end_elevation;
+              // The list of 'bins' in a beam of the performance assessment
+              performance_beam_bin_type bin;
             };
-  
 
+            // A single source of interference.
+            struct interferer_type
+            {
+              // Time to which the performance report applies.
+              org::omg::c4i::Domain_Model::Common_Types::time_type timestamp;
+              // The Effective Radiated Power (ERP) of the source of interference. This is an
+              // optional attribute, which may not all sensors may be able to calculate.
+              interferer_magnitude_type magnitude;
+              // A list of frequency bands which are effected by the source of interference.
+              interferer_affected_bands_type affected_bands;
+              // The source position of the interference. This is an optional attribute that not
+              // all sensors may be able to calculate.
+              interferer_position_type position;
+              // A classification of the interference source.
+              interferer_kind kind;
+              // The volume in space, which the interference source is affecting. This is an
+              // optional attribute, which may not all sensors may be able to calculate.
+              interferer_affected_volume_type affected_volume;
+              // Specifies the coordinate system used to define the interferer.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_coordinate_specification;
+            };
 
-
-
-            // A sequence type, to represent multiple values. Note: variable length sequence,
-            // which should contain at least one instance.
+            // A sequence type, to represent multiple values.
             typedef sequence<performance_beam_type> performance_sector_beam_type;
-  
 
+            // A sequence type, to represent multiple values.
+            typedef sequence<interferer_type> interference_report_interferers_type;
 
+            // The report on interference
+            // Provides an updated set of interference reports to the CMS.
+            // This describes the process whereby the subsystem provides a set of reports on
+            // sources of interference, including jammers. The data shall, therefore, in
+            // general, be non-real-time but should, where appropriate, be time-tagged and shall
+            // be updated when any observed data changes.
+            // The sensor need not be radiating but shall at least be receiving. The subsystem
+            // VOI (volume of interest) or other filter mechanisms might be supplied in a
+            // request to the subsystem
+            // For a nominal effect assessment, the request might contain data on number,
+            // strength/Effective Radiated Power (ERP), type and deployment of jammers and other
+            // interferers affecting radar operations. For example, for each interferer
+            // <ul>
+            //  <li>Sensor time-tag</li>
+            //  <li>Interference type - active noise, self-screening jammer, standoff jammer
+            // etc</li>
+            //  <li>Strength/Effective Radiated Power</li>
+            //  <li>Locations - strobes etc.</li>
+            // </ul>
+            // <ul>
+            //  <li>Affected sectors</li>
+            //  <li>Frequency bands affected</li>
+            // </ul>
+            // Set of interferer objects in a report.
+            struct interference_report_type
+            {
+              // The interference sources, which are described by the report.
+              interference_report_interferers_type interferers;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+#ifdef DDS_XTYPES
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+            };
+#ifndef DDS_XTYPES
+#pragma keylist interference_report_type subsystem_id
+#endif
 
-
-            // A set of performance values for a sector of azimuth [start_azimuth..
-            // end_azimuth].
+            // A set of performance values for a sector of azimuth [start_azimuth..end_azimuth].
             struct performance_sector_type
             {
-            	// The start of the sector of azimuth (positive orientation).
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type start_azimuth;
-            	// The end of the sector of azimuth (positive orientation).
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type end_azimuth;
-            	// The list of beams in the sector of the performance report
-            	performance_sector_beam_type beam;
+              // The start of the sector of azimuth (positive orientation).
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type start_azimuth;
+              // The end of the sector of azimuth (positive orientation).
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type end_azimuth;
+              // The list of beams in the sector of the performance report
+              performance_sector_beam_type beam;
             };
-  
 
+            // A sequence type, to represent multiple values.
+            typedef sequence<performance_sector_type> performance_band_sector_type;
 
-
-
-            // A sequence type, to represent multiple values. Note: variable length sequence,
-            // which should contain at least one instance.
-            typedef sequence<performance_sector_type> performance_assessment_report_sector_type;
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union performance_assessment_request_start_azimuth_type switch (boolean)
+            // The parameters of a performance assessment request consists of an overall volume
+            // of interest and a specification of a number of 'bins' into which that volume is
+            // to be sub-divided. In response the sensor assess performance for each 'bin'.
+            // The coordinate origin for the request is the SENSOR_REFERENCE_POINT as defined in
+            // coordinate_origin_type.
+            struct performance_assessment_parameters_type
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type value;
+              // Number of azimuth bins that the CMS would like in the performance report. The
+              // subsystem should try to honour this request but does not have to.
+              unsigned short azimuth_bin_count;
+              // Number of range bins that the CMS would like in the report. The subsystem should
+              // try to honour this request but does not have to.
+              unsigned short range_bin_count;
+              // The number of elevation bins that the CMS would like in the report.  The
+              // subsystem should try to honour this request but does not have to.
+              unsigned short elevation_bin_count;
+              // Defines the start of the arc of azimuth (positive orientation) of the volume in
+              // which the sensor's performance is to be assessed.
+              performance_assessment_parameters_start_azimuth_type start_azimuth;
+              // Defines the end of the arc of azimuth (positive orientation) of the volume in
+              // which the sensor's performance is to be assessed.
+              performance_assessment_parameters_end_azimuth_type end_azimuth;
+              // Defines the start of the arc of elevation (positive orientation) of the volume in
+              // which the sensor's performance is to be assessed.
+              performance_assessment_parameters_start_elevation_type start_elevation;
+              // Defines the end of the arc of elevation (positive orientation) of the volume in
+              // which the sensor's performance is to be assessed.
+              performance_assessment_parameters_end_elevation_type end_elevation;
+              // Defines the minimum range of the volume in which the sensor's performance is to
+              // be assessed.
+              performance_assessment_parameters_min_range_type min_range;
+              // Defines the maximum range of the volume in which the sensor's performance is to
+              // be assessed.
+              performance_assessment_parameters_max_range_type max_range;
+              // The set of frequency bands to assess the performance for. Where no bands are
+              // specified the performance is assessed for the sensor in general in the specified
+              // operational mode.
+              performance_assessment_parameters_frequency_bands_type frequency_bands;
+              // The performance assessment is to be in the context of this
+              // operational mode of the sensor subsystem.
+              org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::operational_mode_type applicable_mode;
+              // The orientation of the polar coordinates used in this class. Note that the origin
+              // is always the sensor reference point and that the coordinate system is always
+              // polar.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type coordinate_orientation;
             };
-  
 
-
-
-
-            // a simple union type, to represent an optional value
-            union performance_assessment_request_end_azimuth_type switch (boolean)
+            // The performance reported in a particular band (or in general)
+            struct performance_band_type
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type value;
+              // The specific band to which the contained performance assessments refers 
+              performance_band_frequency_band_type frequency_band;
+              // The list of sectors in the performance assessment
+              performance_band_sector_type sector;
             };
-  
 
-
-
-
-            // a simple union type, to represent an optional value
-            union performance_assessment_request_start_elevation_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union performance_assessment_request_end_elevation_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union performance_assessment_request_min_range_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union performance_assessment_request_max_range_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
-            };
-  
-
-
-
-
-            // A performance assessment request consists of an overall volume of interest and
-            // a specification of a number of 'bins' into which that volume is to be sub-
-            // divided. In response the sensor assess performance for each 'bin'.
-            //    The coordinate origin for the request is the SENSOR_REFERENCE_POINT as
-            // defined in coordinate_origin_type.
-            struct performance_assessment_request_type
-            {
-            	// Number of azimuth bins that the CMS would like in the performance report. The
-            	// subsystem should try to honour this request but does not have to.
-            	unsigned short azimuth_bin_count;
-            	// Number of range bins that the CMS would like in the report. The subsystem
-            	// should try to honour this request but does not have to.
-            	unsigned short range_bin_count;
-            	// The number of elevation bins that the CMS would like in the report.  The
-            	// subsystem should try to honour this request but does not have to.
-            	unsigned short elevation_bin_count;
-            	// Defines the start of the arc of azimuth (positive orientation) of the volume in
-            	// which the sensor's performance is to be assessed.
-            	performance_assessment_request_start_azimuth_type start_azimuth;
-            	// Defines the end of the arc of azimuth (positive orientation) of the volume in
-            	// which the sensor's performance is to be assessed.
-            	performance_assessment_request_end_azimuth_type end_azimuth;
-            	// Defines the start of the arc of elevation (positive orientation) of the volume
-            	// in which the sensor's performance is to be assessed.
-            	performance_assessment_request_start_elevation_type start_elevation;
-            	// Defines the end of the arc of elevation (positive orientation) of the volume in
-            	// which the sensor's performance is to be assessed.
-            	performance_assessment_request_end_elevation_type end_elevation;
-            	// Defines the minimum range of the volume in which the sensor's performance is to
-            	// be assessed.
-            	performance_assessment_request_min_range_type min_range;
-            	// Defines the maximum range of the volume in which the sensor's performance is to
-            	// be assessed.
-            	performance_assessment_request_max_range_type max_range;
-            	// The performance assessment is to be in the context of this
-            	//      operational mode of the sensor subsystem.
-            	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::operational_mode_type applicable_mode;
-            	// The orientation of the polar coordinates used in this class. Note that the
-            	// origin is always the sensor reference point and that the coordinate system is
-            	// always polar.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type coordinate_orientation;
-            };
-  
-
-
-
+            // A sequence type, to represent multiple values.
+            typedef sequence<performance_band_type> performance_assessment_report_band_type;
 
             // Contains the results of a performance assessment.
             struct performance_assessment_report_type
             {
-            	// The time of validity of the performance assessment.
-            	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_report;
-            	// The list of sectors in the performance assessment
-            	performance_assessment_report_sector_type sector;
-            	// The actual dimensions of the assessment that is performed are reported with the
-            	// result.
-            	performance_assessment_request_type assessment_dimensions;
+              // The time of validity of the performance assessment.
+              org::omg::c4i::Domain_Model::Common_Types::time_type time_of_report;
+              // The actual dimensions of the assessment that is performed are reported with the
+              // result.
+              performance_assessment_parameters_type assessment_dimensions;
+              // The performance assessment for the band (or the sensor in general)
+              performance_assessment_report_band_type band;
             };
-  
-
-
 
           };
         };

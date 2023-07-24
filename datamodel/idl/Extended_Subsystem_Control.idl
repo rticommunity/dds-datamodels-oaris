@@ -1,61 +1,51 @@
-#ifndef EXTENDED_SUBSYSTEM_CONTROLDEFVAR
-#define EXTENDED_SUBSYSTEM_CONTROLDEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
 
+#ifndef ORGOMGC4IDOMAIN_MODELSUBSYSTEM_DOMAINEXTENDED_SUBSYSTEM_CONTROLDEFVAR
+#define ORGOMGC4IDOMAIN_MODELSUBSYSTEM_DOMAINEXTENDED_SUBSYSTEM_CONTROLDEFVAR
 
-// Version 1.1
-module org {
+module org
+{
 
+  module omg
+  {
 
-  module omg {
+    module c4i
+    {
 
+      module Domain_Model
+      {
 
-    module c4i {
+        module Subsystem_Domain
+        {
 
+          // Contains Structs used within the Extended Subsystem Control service.
+          module Extended_Subsystem_Control
+          {
 
-      module Domain_Model {
-
-
-        module Subsystem_Domain {
-
-
-          module Extended_Subsystem_Control {
-
-
-
+            // A string type
             // String which provides a url location for configuration data.
             typedef string<255> configuration_url_type;
-  
 
-
-
-
+            // A string type
             // Subsystem specific detailed test results
             typedef string<4096> offline_test_result_details_type;
-  
-
-
-
 
             // Used to return the test results: failed, partial_pass or failed
             enum offline_test_result_type
             {
-            	// FAILED
-            	FAILED,
-            	// PARTIAL_PASS
-            	PARTIAL_PASS,
-            	// PASSED
-            	PASSED
+              // A number of tests were not successful, such that the subsystem exceeded its
+              // failure threshold. Detailed information is available upon request.
+              FAILED,
+              // A number of tests were not successful, but the subsystem did not exceed its
+              // failure threshold. Detailed information is available upon request.
+              PARTIAL_PASS,
+              // All tests were successful.
+              PASSED
             };
-  
 
-
-
-
+            // A string type
             // A subsystem specific string identifying the required test type.
             typedef string<255> offline_test_type;
-  
-
-
 
           };
         };

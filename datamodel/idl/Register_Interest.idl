@@ -1,121 +1,111 @@
-#ifndef REGISTER_INTERESTDEFVAR
-#define REGISTER_INTERESTDEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4ISERVICE_INTERFACESSUBSYSTEM_SERVICESSUBSYSTEM_CONTROLREGISTER_INTERESTDEFVAR
+#define ORGOMGC4ISERVICE_INTERFACESSUBSYSTEM_SERVICESSUBSYSTEM_CONTROLREGISTER_INTERESTDEFVAR
 #include "Common_Types.idl"
-
 #include "Requests.idl"
-
 #include "Subsystem_Control.idl"
 
+module org
+{
 
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Service_Interfaces
+      {
 
+        module Subsystem_Services
+        {
 
-    module c4i {
+          module Subsystem_Control
+          {
 
+            module Register_Interest
+            {
 
-      module Service_Interfaces {
+              // struct holding keys for class confirm_registration_type.
+              struct confirm_registration_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-
-        module Subsystem_Services {
-
-
-          module Subsystem_Control {
-
-
-            module Register_Interest {
-
-
-
-              // Version 1.0
-              // Topic type for operation confirm_registration. This service allows the CMS to
-              // register (and deregister) interest in other services. It is explicitly meant to
-              // address the possibility of CMS ìsubscribingî to information supplied by the
-              // subsystem, with the understanding that the information shall be provided by the
-              // subsystem, without the need for further request. Such mode of operation may be
-              // applicable for those services, which have been reported as such in Provide
-              // subsystem services. This includes typically track and plot reporting services,
-              // but may involve other services as well.
-              // 
-              //      The service starts when the actor registers interest in information
-              // provided by a service. The registration shall include information on:
-              //      <ul>
-              //      	<li>The service for which the actor wants to register / deregister his
+              // Confirm registration of interest
+              // This service allows the CMS to register (and deregister) interest in other
+              // services. It is explicitly meant to address the possibility of CMS ‚Äúsubscribing‚Äù
+              // to information supplied by the subsystem, with the understanding that the
+              // information shall be provided by the subsystem, without the need for further
+              // request. Such mode of operation may be applicable for those services, which have
+              // been reported as such in Provide subsystem services. This includes typically
+              // track and plot reporting services, but may involve other services as well. 
+              // The service starts when the actor registers interest in information provided by a
+              // service. The registration shall include information on:
+              // <ul>
+              //  <li>The service for which the actor wants to register / deregister his
               // interest</li>
-              //      	<li>The information within the service for which the actor wants to
-              // register / deregister his interest</li>
-              //      	<li>The intended (direct or indirect) recipient(s) of the information
-              // provided by the subsystem. </li>
-              //      	<li>Any parameters of the provision needed such as Quality of Service
+              //  <li>The information within the service for which the actor wants to register /
+              // deregister his interest</li>
+              //  <li>The intended (direct or indirect) recipient(s) of the information provided
+              // by the subsystem. </li>
+              //  <li>Any parameters of the provision needed such as Quality of Service
               // parameters.</li>
-              //      </ul>
-              // 
-              //      The service ends when the subsystem confirms registration / deregistration
-              // of interest.  . Confirm registration of interest
+              // </ul>
+              // The service ends when the subsystem confirms registration / deregistration of
+              // interest.  
               struct confirm_registration_type
               {
-              	// Field for interface operation parameter request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
               };
-#pragma keylist confirm_registration_type 
-  
+#ifndef DDS_XTYPES
+#pragma keylist confirm_registration_type request_id subsystem_id
+#endif
 
-
-
-
-              // Version 1.0
-              // Topic type for operation receive_error. This service allows the CMS to register
-              // (and deregister) interest in other services. It is explicitly meant to address
-              // the possibility of CMS ìsubscribingî to information supplied by the subsystem,
-              // with the understanding that the information shall be provided by the subsystem,
-              // without the need for further request. Such mode of operation may be applicable
-              // for those services, which have been reported as such in Provide subsystem
-              // services. This includes typically track and plot reporting services, but may
-              // involve other services as well.
-              // 
-              //      The service starts when the actor registers interest in information
-              // provided by a service. The registration shall include information on:
-              //      <ul>
-              //      	<li>The service for which the actor wants to register / deregister his
-              // interest</li>
-              //      	<li>The information within the service for which the actor wants to
-              // register / deregister his interest</li>
-              //      	<li>The intended (direct or indirect) recipient(s) of the information
-              // provided by the subsystem. </li>
-              //      	<li>Any parameters of the provision needed such as Quality of Service
-              // parameters.</li>
-              //      </ul>
-              // 
-              //      The service ends when the subsystem confirms registration / deregistration
-              // of interest.  . Receive an error if registration unsuccessful
-              struct receive_error_type
+              // struct holding keys for class register_interest_type.
+              struct register_interest_key_type
               {
-              	// Field for interface operation parameter request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-              	// Field for interface operation parameter error_reason. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::error_reason_type error_reason;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
-#pragma keylist receive_error_type 
-  
 
-
-
-
-              // Version 1.0
-              // Topic type for operation register_interest. . Register interest in the service
+              // Register interest in the service
               struct register_interest_type
               {
-              	// Field for interface operation parameter request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-              	// Field for interface operation parameter the_interest_list. 
-              	org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::interest_list the_interest_list;
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::interest_list_type the_interest_list;
               };
-#pragma keylist register_interest_type 
-  
-
-
+#ifndef DDS_XTYPES
+#pragma keylist register_interest_type request_id subsystem_id
+#endif
 
             };
           };

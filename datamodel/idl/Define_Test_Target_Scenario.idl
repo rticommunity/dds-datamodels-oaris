@@ -1,227 +1,258 @@
-#ifndef DEFINE_TEST_TARGET_SCENARIODEFVAR
-#define DEFINE_TEST_TARGET_SCENARIODEFVAR
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4ISERVICE_INTERFACESSENSOR_SERVICESSENSOR_CONTROLDEFINE_TEST_TARGET_SCENARIODEFVAR
+#define ORGOMGC4ISERVICE_INTERFACESSENSOR_SERVICESSENSOR_CONTROLDEFINE_TEST_TARGET_SCENARIODEFVAR
 #include "Common_Types.idl"
 #include "Requests.idl"
 #include "Sensor_Control.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Service_Interfaces
+      {
 
+        module Sensor_Services
+        {
 
-    module c4i {
+          module Sensor_Control
+          {
 
+            // This package contains interfaces for the Define Test Target Scenario service.
+            module Define_Test_Target_Scenario
+            {
 
-      module Service_Interfaces {
-
-
-        module Sensor_Services {
-
-
-          module Sensor_Control {
-
-
-            module Define_Test_Target_Scenario {
-
-
-
-              // Topic type for operation read_test_target_scenario. This is the Subsystem
-              // interface for defining test target scenarios.. Method used by the CMS to send
-              // to the sensor a read request of a specified Test Target scenario.
-              struct read_test_target_scenario_type
+              // struct holding keys for class test_target_scenario_setting_type.
+              struct test_target_scenario_setting_key_type
               {
-              	// Field for interface operation parameter request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-              	// Field for interface operation parameter test_target_scenario_id. 
-              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_id_type test_target_scenario_id;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
-#pragma keylist read_test_target_scenario_type  subsystem_id
-  
 
-
-
-
-              // Topic type for operation test_target_scenario_setting_all_feature. This
-              // specifies the interactions for defining and modifying a test target scenario. A
-              // Test Target scenario consists of a number of Test Targets to be generated
-              // according to their characteristics (positions, motion law, generation
-              // parameters) with the purpose of producing stimuli devoted to the execution of
-              // an internal functional test of the sensor.
-              //      A number of Test Target scenarios may be maintained in a sensor internal
-              // Test Targets scenarios database, where each scenario is identified by a unique
+              // Method used by the sensor to return the identification number of the modified or
+              // created test target scenario.
+              // This specifies the interactions for defining and modifying a test target
+              // scenario. A Test Target scenario consists of a number of Test Targets to be
+              // generated according to their characteristics (positions, motion law, generation
+              // parameters) with the purpose of producing stimuli devoted to the execution of an
+              // internal functional test of the sensor.
+              // A number of Test Target scenarios may be maintained in a sensor internal Test
+              // Targets scenarios database, where each scenario is identified by a unique
               // identification number. Write accesses to this database shall rejected if the
               // sensor Mastership is not actually assigned to CMS, but the possession of the
               // sensor Mastership is not required for executing read accesses.
-              //      The generation of the so defined Test Target scenarios may be activated as
+              // The generation of the so defined Test Target scenarios may be activated as
               // specified in <i>Control Test Target Facility</i>. For the generation mechanism
               // see the interface <i>Control Test Target Facility</i>
-              //      <i>
-              //      </i>One or more Test Target scenarios may be maintained in a sensor
-              // internal Test Targets scenarios database, where each scenario is identified by
-              // an unique identification number. The number of available Test Target scenarios
-              // is accessed by <i>Manage subsystem parameters</i>.
-              //      <i>
-              //      </i>Depending on the sensor type and its capabilities, a Test Target
-              // scenario may be constituted by:
-              // 
-              //      a)	a number of independent targets, with each target having own
-              // characteristic parameters; so the scenario is defined by:
-              //      <ul>
-              //      	<li>number of targets</li>
-              //      </ul>
-              // 
-              //      and for each target
-              // 
-              //      <ul>
-              //      	<li>the initial target position with the relevant initial time</li>
-              //      	<li>target parameters</li>
-              //      </ul>
-              // 
-              //      b)	a number of targets distributed in a defined area/volume and having the
-              // same common parameters, so the scenario is defined by:
-              //      <ul>
-              //      	<li>number of targets</li>
-              //      </ul>
-              //      <ul>
-              //      	<li>area/volume boundaries</li>
-              //      </ul>
-              //      <ul>
-              //      	<li>common initial time</li>
-              //      </ul>
-              //      <ul>
-              //      	<li>common targets parameters</li>
-              //      </ul>
-              // 
-              //      Target parameters define:
-              //      a.	the target motion type, with the relevant motion parameters
-              //      b.	the target generation parameters, such as injection type (internal /
+              // <i>
+              // </i>One or more Test Target scenarios may be maintained in a sensor internal Test
+              // Targets scenarios database, where each scenario is identified by an unique
+              // identification number. The number of available Test Target scenarios is accessed
+              // by <i>Manage subsystem parameters</i>.
+              // <i>
+              // </i>Depending on the sensor type and its capabilities, a Test Target scenario may
+              // be constituted by:
+              // a) a number of independent targets, with each target having own characteristic
+              // parameters; so the scenario is defined by:
+              // <ul>
+              //  <li>number of targets</li>
+              // </ul>
+              // and for each target
+              // <ul>
+              //  <li>the initial target position with the relevant initial time</li>
+              //  <li>target parameters</li>
+              // </ul>
+              // b) a number of targets distributed in a defined area/volume and having the same
+              // common parameters, so the scenario is defined by:
+              // <ul>
+              //  <li>number of targets</li>
+              // </ul>
+              // <ul>
+              //  <li>area/volume boundaries</li>
+              // </ul>
+              // <ul>
+              //  <li>common initial time</li>
+              // </ul>
+              // <ul>
+              //  <li>common targets parameters</li>
+              // </ul>
+              // Target parameters define:
+              // a. the target motion type, with the relevant motion parameters
+              // b. the target generation parameters, such as injection type (internal /
               // external), attenuation law (constant / variable-with-range), doppler type (0 /
-              // PRF/2).. Method used by the sensor to return the required test target scenario
-              // with its parameters.
-              struct test_target_scenario_setting_all_feature_type
-              {
-              	// Field for interface operation parameter request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-              	// Field for interface operation parameter test_target_features. 
-              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_type test_target_features;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-              };
-#pragma keylist test_target_scenario_setting_all_feature_type  subsystem_id
-  
-
-
-
-
-              // Topic type for operation test_target_scenario_setting. This specifies the
-              // interactions for defining and modifying a test target scenario. A Test Target
-              // scenario consists of a number of Test Targets to be generated according to
-              // their characteristics (positions, motion law, generation parameters) with the
-              // purpose of producing stimuli devoted to the execution of an internal functional
-              // test of the sensor.
-              //      A number of Test Target scenarios may be maintained in a sensor internal
-              // Test Targets scenarios database, where each scenario is identified by a unique
-              // identification number. Write accesses to this database shall rejected if the
-              // sensor Mastership is not actually assigned to CMS, but the possession of the
-              // sensor Mastership is not required for executing read accesses.
-              //      The generation of the so defined Test Target scenarios may be activated as
-              // specified in <i>Control Test Target Facility</i>. For the generation mechanism
-              // see the interface <i>Control Test Target Facility</i>
-              //      <i>
-              //      </i>One or more Test Target scenarios may be maintained in a sensor
-              // internal Test Targets scenarios database, where each scenario is identified by
-              // an unique identification number. The number of available Test Target scenarios
-              // is accessed by <i>Manage subsystem parameters</i>.
-              //      <i>
-              //      </i>Depending on the sensor type and its capabilities, a Test Target
-              // scenario may be constituted by:
-              // 
-              //      a)	a number of independent targets, with each target having own
-              // characteristic parameters; so the scenario is defined by:
-              //      <ul>
-              //      	<li>number of targets</li>
-              //      </ul>
-              // 
-              //      and for each target
-              // 
-              //      <ul>
-              //      	<li>the initial target position with the relevant initial time</li>
-              //      	<li>target parameters</li>
-              //      </ul>
-              // 
-              //      b)	a number of targets distributed in a defined area/volume and having the
-              // same common parameters, so the scenario is defined by:
-              //      <ul>
-              //      	<li>number of targets</li>
-              //      </ul>
-              //      <ul>
-              //      	<li>area/volume boundaries</li>
-              //      </ul>
-              //      <ul>
-              //      	<li>common initial time</li>
-              //      </ul>
-              //      <ul>
-              //      	<li>common targets parameters</li>
-              //      </ul>
-              // 
-              //      Target parameters define:
-              //      a.	the target motion type, with the relevant motion parameters
-              //      b.	the target generation parameters, such as injection type (internal /
-              // external), attenuation law (constant / variable-with-range), doppler type (0 /
-              // PRF/2).. Method used by the sensor to return the identification number of the
-              // modified or created test target scenario.
+              // PRF/2).
               struct test_target_scenario_setting_type
               {
-              	// Field for interface operation parameter request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-              	// Field for interface operation parameter test_target_scenario_id. 
-              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_id_type test_target_scenario_id;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_id_type test_target_scenario_id;
               };
-#pragma keylist test_target_scenario_setting_type  subsystem_id
-  
+#ifndef DDS_XTYPES
+#pragma keylist test_target_scenario_setting_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class test_target_scenario_setting_all_feature_type.
+              struct test_target_scenario_setting_all_feature_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
+              // Method used by the sensor to return the required test target scenario with its
+              // parameters.
+              // This specifies the interactions for defining and modifying a test target
+              // scenario. A Test Target scenario consists of a number of Test Targets to be
+              // generated according to their characteristics (positions, motion law, generation
+              // parameters) with the purpose of producing stimuli devoted to the execution of an
+              // internal functional test of the sensor.
+              // A number of Test Target scenarios may be maintained in a sensor internal Test
+              // Targets scenarios database, where each scenario is identified by a unique
+              // identification number. Write accesses to this database shall rejected if the
+              // sensor Mastership is not actually assigned to CMS, but the possession of the
+              // sensor Mastership is not required for executing read accesses.
+              // The generation of the so defined Test Target scenarios may be activated as
+              // specified in <i>Control Test Target Facility</i>. For the generation mechanism
+              // see the interface <i>Control Test Target Facility</i>
+              // <i>
+              // </i>One or more Test Target scenarios may be maintained in a sensor internal Test
+              // Targets scenarios database, where each scenario is identified by an unique
+              // identification number. The number of available Test Target scenarios is accessed
+              // by <i>Manage subsystem parameters</i>.
+              // <i>
+              // </i>Depending on the sensor type and its capabilities, a Test Target scenario may
+              // be constituted by:
+              // a) a number of independent targets, with each target having own characteristic
+              // parameters; so the scenario is defined by:
+              // <ul>
+              //  <li>number of targets</li>
+              // </ul>
+              // and for each target
+              // <ul>
+              //  <li>the initial target position with the relevant initial time</li>
+              //  <li>target parameters</li>
+              // </ul>
+              // b) a number of targets distributed in a defined area/volume and having the same
+              // common parameters, so the scenario is defined by:
+              // <ul>
+              //  <li>number of targets</li>
+              // </ul>
+              // <ul>
+              //  <li>area/volume boundaries</li>
+              // </ul>
+              // <ul>
+              //  <li>common initial time</li>
+              // </ul>
+              // <ul>
+              //  <li>common targets parameters</li>
+              // </ul>
+              // Target parameters define:
+              // a. the target motion type, with the relevant motion parameters
+              // b. the target generation parameters, such as injection type (internal /
+              // external), attenuation law (constant / variable-with-range), doppler type (0 /
+              // PRF/2).
+              struct test_target_scenario_setting_all_feature_type
+              {
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_type test_target_features;
+              };
+#ifndef DDS_XTYPES
+#pragma keylist test_target_scenario_setting_all_feature_type request_id subsystem_id
+#endif
 
+              // struct holding keys for class read_test_target_scenario_type.
+              struct read_test_target_scenario_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
 
-              // Topic type for operation write_test_target_scenario. This is the Subsystem
-              // interface for defining test target scenarios.. Method used by the CMS to send
-              // to the sensor a write request of a specified Test Target scenario.
+              // Method used by the CMS to send to the sensor a read request of a specified Test
+              // Target scenario.
+              // This is the Subsystem interface for defining test target scenarios.
+              struct read_test_target_scenario_type
+              {
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+#endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_id_type test_target_scenario_id;
+              };
+#ifndef DDS_XTYPES
+#pragma keylist read_test_target_scenario_type request_id subsystem_id
+#endif
+
+              // struct holding keys for class write_test_target_scenario_type.
+              struct write_test_target_scenario_key_type
+              {
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
+
+              // Method used by the CMS to send to the sensor a write request of a specified Test
+              // Target scenario.
+              // This is the Subsystem interface for defining test target scenarios.
               struct write_test_target_scenario_type
               {
-              	// Field for interface operation parameter request_id. 
-              	org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-              	// Field for interface operation parameter test_target_scenario. 
-              	org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_type test_target_scenario;
-              // Indicates which subsystem published the data or is intended to read it as a subscriber
 #ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 #endif
+                // Indicates which subsystem published the data or is intended to read it as a
+                // subscriber
+#ifdef DDS_XTYPES
+                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#else
+                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+#endif
+                org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_type test_target_scenario;
               };
-#pragma keylist write_test_target_scenario_type  subsystem_id
-  
-
-
+#ifndef DDS_XTYPES
+#pragma keylist write_test_target_scenario_type request_id subsystem_id
+#endif
 
             };
           };

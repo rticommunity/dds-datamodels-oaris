@@ -1,430 +1,467 @@
-#ifndef TRACK_REPORTINGDEFVAR
-#define TRACK_REPORTINGDEFVAR
-#include "Coordinates_and_Positions.idl"
+// copyright 2013-2020 BAE Systems, Thales Group, Object Management Group Inc; 2013 Selex ES, DSTO, Atlas Elektronik, EADS Deutschland GmbH
+
+#ifndef ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINTRACK_REPORTINGDEFVAR
+#define ORGOMGC4IDOMAIN_MODELSENSOR_DOMAINTRACK_REPORTINGDEFVAR
 #include "Common_Types.idl"
+#include "Coordinates_and_Positions.idl"
+#include "Subsystem_Control.idl"
 
+module org
+{
 
-// Version 1.1
-module org {
+  module omg
+  {
 
+    module c4i
+    {
 
-  module omg {
+      module Domain_Model
+      {
 
+        module Sensor_Domain
+        {
 
-    module c4i {
+          // This service provides facilities to report different types of sensor tracks.
+          module Track_Reporting
+          {
 
+            // Unique identifier for the objects to which the sensor assessment is attempting to
+            // match the measurement parameters.
+            typedef long assessment_objective_id_type;
 
-      module Domain_Model {
+            // Sensor Track Identification
+            typedef unsigned long sensor_track_id_type;
 
+            // The representation of the track's priority with respect to the allocation of the
+            // sensor's resources.
+            typedef unsigned short track_priority_type;
 
-        module Sensor_Domain {
-
-
-          module Track_Reporting {
-
-
+            // The representation of the quality of a track for the purposes of comparison
+            // according to system specific criteria.
+            typedef float track_quality_type;
 
             // The sensor tracking environment
             enum environment_type
             {
-            	// AIR
-            	AIR,
-            	// LAND
-            	LAND,
-            	// SURFACE
-            	SURFACE,
-            	// SUBSURFACE
-            	SUBSURFACE,
-            	// SPACE
-            	SPACE
+              AIR,
+              LAND,
+              SURFACE,
+              SUBSURFACE,
+              SPACE
             };
-  
-
-
-
 
             // Type of track initiation
             enum initiation_mode_type
             {
-            	// AUTOMATIC
-            	AUTOMATIC,
-            	// EXTERNAL_REQUEST
-            	EXTERNAL_REQUEST
+              // Automatic track initiation mode
+              AUTOMATIC,
+              // Track initiation on external request (e.g. from CMS)
+              EXTERNAL_REQUEST
             };
-  
-
-
-
 
             // The recognition type indicates the type of the real-world physical object being
             // tracked.
-            //    The numeric value is used to map to a system or implementation specific
-            // taxonomy of real-world physical objects that are of tactical interest.
+            // The numeric value is used to map to a system or implementation specific taxonomy
+            // of real-world physical objects that are of tactical interest.
             typedef unsigned short recognition_type;
-  
 
-
-
-
-            // A sequence type, to represent multiple values. Note: variable length sequence.
-            typedef sequence<long, 256> sensor_track_based_on_id_type;
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_covariance_matrix_type switch (boolean)
+            // struct holding keys for class sensor_track_type.
+            struct sensor_track_key_type
             {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::covariance_matrix_type value;
+              // The sensor's unique identifying reference for the track. Sensors may reuse
+              // identifiers after they have deleted the corresponding track. The scheme used for
+              // identifier reallocation is system dependent.
+              sensor_track_id_type sensor_track_id;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_environment_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::environment_type value;
-            };
-  
-
-
-
-
-            // Sensor Track Identification
-            typedef unsigned long sensor_track_id_type;
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_initiation_mode_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::initiation_mode_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_max_range_limit_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_position_accuracy_coordinate_system_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_position_accuracy_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_accuracy_coordinate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_sensor_track_pre_identification_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::identity_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_sensor_track_pre_recognition_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::recognition_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_velocity_accuracy_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_accuracy_coordinate_type value;
-            };
-  
-
-
-
-
-            // a simple union type, to represent an optional value
-            union sensor_track_velocity_accuracy_coordinate_system_type switch (boolean)
-            {
-            	// the value when present
-            	case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type value;
-            };
-  
-
-
-
 
             // The detection lifecycle phase of the track
             enum track_phase_type
             {
-            	// DEAD_RECKONED
-            	DEAD_RECKONED,
-            	// Delete enumeration not used for DDS; dispose topic instance instead.
-            	NOT_USED,
-            	// LOST
-            	LOST,
-            	// TRACKED
-            	TRACKED
+              // Track provided based on extrapolated position (dead-reckoned)
+              DEAD_RECKONED,
+              // Track has been lost
+              LOST,
+              // Regular update of new and existing track
+              TRACKED,
+              // No new measurements were available to contribute to this track at the last
+              // opportunity to do so. It is expected that should such measurements be made at the
+              // next opportunity, these will successfully update the track.
+              INACTIVE
             };
-  
 
+            // a simple union type, to represent an optional value
+            union sensor_track_covariance_matrix_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::covariance_matrix_type value;
+            };
 
+            // a simple union type, to represent an optional value
+            union sensor_track_max_range_limit_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
+            };
 
+            // a simple union type, to represent an optional value
+            union sensor_track_position_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_accuracy_coordinate_type value;
+            };
 
+            // a simple union type, to represent an optional value
+            union sensor_track_position_accuracy_coordinate_system_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_sensor_track_pre_identification_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::identity_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_time_of_initiation_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::time_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_velocity_accuracy_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_accuracy_coordinate_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_velocity_accuracy_coordinate_system_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_time_of_first_detection_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::time_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_time_of_last_detection_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::time_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_amplitude_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : org::omg::c4i::Domain_Model::Common_Types::strength_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_environment_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : environment_type value;
+            };
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::function_key_type> sensor_track_sensor_function_id_type;
+
+            // a simple union type, to represent an optional value
+            union sensor_track_activity_id_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : assessment_objective_id_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_initiation_mode_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : initiation_mode_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_observed_function_id_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : assessment_objective_id_type value;
+            };
+
+            // A sequence type, to represent multiple values.
+            typedef sequence<org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type, 256> sensor_track_based_on_id_type;
+
+            // a simple union type, to represent an optional value
+            union sensor_track_equipment_id_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : assessment_objective_id_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_track_quality_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : track_quality_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_priority_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : track_priority_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_platform_id_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : assessment_objective_id_type value;
+            };
+
+            // a simple union type, to represent an optional value
+            union sensor_track_sensor_track_pre_recognition_type switch (boolean)
+            {
+              // the value when present
+              case TRUE : recognition_type value;
+            };
+
+            // The method represents a write of a single sensor track (air, land, space or
+            // surface) to the CMS.
+            // The write may be periodic or not.
+            // This service allows the CMS to obtain an overview of (real and/or simulated) air
+            // / land / space / surface objects observed or simulated. Information may cover all
+            // aspects of a track such as kinematic and amplifying information.
+            // The service does not cover:
+            // <ul>
+            //  <li>additional track information provision dedicated for engagement
+            // support,</li>
+            //  <li>special search functions such as cued search, volume search and horizon
+            // search (however, if such a search function is initiated by means of another
+            // service, the tracks shall be provided by this service),</li>
+            // </ul>
+            // Although the service focuses on radar as an example of a sensor, the service also
+            // applies to other sensors, like IR/EO sensors and ECM/ESM sensors.
+            // The actor is the Combat Management System.
+            // The service starts when:
+            // <ul>
+            //  <li>if the service does provide registration capabilities: the service "Register
+            // interest" has completed successfully, or</li>
+            //  <li>if the service does not provide registration capabilities: the service
+            // "Provide subsystem services" has completed successfully for this service.</li>
+            // </ul>
+            // The sensor provides, periodically or on event, a set of sensor tracks observed by
+            // the sensor. These may be sensor point or bearing tracks. The set of sensor tracks
+            // includes:
+            // <ul>
+            //  <li>Track updates of existing and new sensor tracks. These are provided when
+            // there are sufficient measurements (e.g. plots) in the last observation cycle,
+            // which may be associated with the sensor track.</li>
+            //  <li>Dead-reckoned tracks. These are sensor track updates for which in the last
+            // observation cycle there are no measurements that may be associated with the
+            // sensor track. For dead-reckoned tracks, the sensor track information (e.g.
+            // kinematics) is extrapolated. The dead-reckoned tracks may become"normal" tracks
+            // again if, in the next scan, there are measurement(s) that may be associated with
+            // the track. Alternatively, dead-reckoned tracks (after n unsuccessful scans) may
+            // become lost tracks.</li>
+            //  <li>Lost tracks. These are sensor track updates that are reported once, if in
+            // the last n scans, there are no measurements that may be associated with the
+            // sensor track. The value of n is typically a sensor parameter that is managed by
+            // the service "Manage subsystem parameters".</li>
+            // </ul>
+            // Some sensors are not capable of reporting lost and/or dead-reckoned tracks.
+            // The sensor may also provide single sensor tracks periodically or on event.
+            // The service ends with success when:
+            // <ul>
+            //  <li>if the service does provide registration capabilities: the service "Register
+            // interest" has completed successfully for a deregistration request, or</li>
+            //  <li>if the service does not  provide registration capabilities: the sensor is
+            // shutdown using service  "Shut down".</li>
+            // </ul>
             // Encapsulation of a sensor track
             struct sensor_track_type
             {
-            	// Additional, vendor-specific information
-            	org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_information;
-            	// The number of elements in the covariance matrix is dependent on the sensor.
-            	// When present, the position_accuracy and velocity_accuracy attributes should not
-            	// be present.
-            	sensor_track_covariance_matrix_type covariance_matrix;
-            	// Environment of the track (air, surface etc)
-            	sensor_track_environment_type environment;
-            	// Initiation mode of track (automatic or externally initiatied)
-            	sensor_track_initiation_mode_type initiation_mode;
-            	// Indication whether or not a track is jamming.
-            	boolean jammer_indication;
-            	// Maximal range for a bearing track
-            	sensor_track_max_range_limit_type max_range_limit;
-            	// The location of the track as calculated in the sensor's chosen coordinate
-            	// system at the stated time.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
-            	// The sensor's stated accuracy for its calculated position.
-            	//      When present, the covariance_matrix attribute should not be present.
-            	sensor_track_position_accuracy_type position_accuracy;
-            	// The coordinate system chosen by the sensor for reporting accuracy.
-            	sensor_track_position_accuracy_coordinate_system_type position_accuracy_coordinate_system;
-            	// The coordinate system chosen by the sensor.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_coordinate_system;
-            	// The sensor's unique identifying reference for the track. Sensors may reuse
-            	// identifiers after they have deleted the corresponding track. The scheme used
-            	// for identifier reallocation is system dependent.
+              // Additional, vendor-specific information
+              org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_information;
+              // The number of elements in the covariance matrix is dependent on the sensor. When
+              // present, the position_accuracy and velocity_accuracy attributes should not be
+              // present.
+              sensor_track_covariance_matrix_type covariance_matrix;
+              // Environment of the track (air, surface etc)
+              sensor_track_environment_type environment;
+              // Initiation mode of track (automatic or externally initiated)
+              sensor_track_initiation_mode_type initiation_mode;
+              // Indication whether or not a track is jamming.
+              boolean jammer_indication;
+              // Maximal range for a bearing track
+              sensor_track_max_range_limit_type max_range_limit;
+              // The location of the track as calculated in the sensor's chosen coordinate system
+              // at the stated time.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
+              // The sensor's stated accuracy for its calculated position.
+              // When present, the covariance_matrix attribute should not be present.
+              sensor_track_position_accuracy_type position_accuracy;
+              // The coordinate system chosen by the sensor for reporting accuracy.
+              sensor_track_position_accuracy_coordinate_system_type position_accuracy_coordinate_system;
+              // The coordinate system chosen by the sensor.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_coordinate_system;
+              // The sensor's unique identifying reference for the track. Sensors may reuse
+              // identifiers after they have deleted the corresponding track. The scheme used for
+              // identifier reallocation is system dependent.
 #ifdef DDS_XTYPES
-            	@Key sensor_track_id_type sensor_track_id;
+              @Key sensor_track_id_type sensor_track_id;
 #else
-            	sensor_track_id_type sensor_track_id;
+              sensor_track_id_type sensor_track_id;
 #endif
-            	// Identification information for the sensor track (if available)
-            	sensor_track_sensor_track_pre_identification_type sensor_track_pre_identification;
-            	// Recognition information for the sensor track (if available)
-            	sensor_track_sensor_track_pre_recognition_type sensor_track_pre_recognition;
-            	// Whether the CMS should process the track as having been synthetically generated
-            	// as opposed to corresponding to an actual detection in the real world.
-            	boolean simulated;
-            	// The time at which the information in this object is valid, in particular its
-            	// position.
-            	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
-            	// The time at which the sensor first determined the existence of this track.
-            	org::omg::c4i::Domain_Model::Common_Types::time_type time_of_initiation;
-            	// Track phase (e.g. TRACKED, DELETED, LOST)
-            	track_phase_type track_phase;
-            	// The velocity of the track as calculated in the sensor's chosen coordinate
-            	// system at the stated time.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_coordinate_type velocity;
-            	// The sensor's stated accuracy for its calculated velocity.
-            	//      When present, the covariance_matrix attribute should not be present.
-            	sensor_track_velocity_accuracy_type velocity_accuracy;
-            	// The coordinate system chosen by the sensor for reporting accuracy.
-            	sensor_track_velocity_accuracy_coordinate_system_type velocity_accuracy_coordinate_system;
-            	// The coordinate system chosen by the sensor.
-            	org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type velocity_coordinate_system;
-            	sensor_track_based_on_id_type based_on_id;
-            // Indicates which subsystem published the data or is intended to read it as a subscriber
+              // Identification information for the sensor track (if available)
+              sensor_track_sensor_track_pre_identification_type sensor_track_pre_identification;
+              // Recognition information for the sensor track (if available)
+              sensor_track_sensor_track_pre_recognition_type sensor_track_pre_recognition;
+              // Whether the CMS should process the track as having been synthetically generated
+              // as opposed to corresponding to an actual detection in the real world.
+              boolean simulated;
+              // The time at which the information in this object is valid, in particular its
+              // position.
+              org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
+              // The time at which the sensor first determined the existence of this track.
+              sensor_track_time_of_initiation_type time_of_initiation;
+              // Track phase (e.g. TRACKED, DELETED, LOST)
+              track_phase_type track_phase;
+              // The velocity of the track as calculated in the sensor's chosen coordinate system
+              // at the stated time.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_coordinate_type velocity;
+              // The sensor's stated accuracy for its calculated velocity.
+              // When present, the covariance_matrix attribute should not be present.
+              sensor_track_velocity_accuracy_type velocity_accuracy;
+              // The coordinate system chosen by the sensor for reporting accuracy.
+              sensor_track_velocity_accuracy_coordinate_system_type velocity_accuracy_coordinate_system;
+              // The coordinate system chosen by the sensor.
+              org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type velocity_coordinate_system;
+              // The sensor specific quality of this track in comparison to its typical tracks.
+              sensor_track_track_quality_type track_quality;
+              // The time at which the sensor first made measurements leading to the detection of
+              // the existence of this track (as opposed to the time of initiation when there was
+              // sufficient confidence in one or more detection to initiate a track).
+              sensor_track_time_of_first_detection_type time_of_first_detection;
+              // The time at which the sensor last detected the existence of this track.
+              sensor_track_time_of_last_detection_type time_of_last_detection;
+              // The relative priority of a track with regard to the sensor's resources
+              sensor_track_priority_type priority;
+              // The amplitude or strength of the measurement(s) being tracked by the sensor
+              sensor_track_amplitude_type amplitude;
+              // The sensor's assessment of the activity being undertaken by the real world object
+              // represented by the sensor track as observed by the sensor.
+              sensor_track_activity_id_type activity_id;
+              // The sensor functions whose processing has contributed to the track's data.
+              sensor_track_sensor_function_id_type sensor_function_id;
+              // The sensor's assessment of the function being undertaken by the equipment of real
+              // world object represented by the sensor track that has been observed by the
+              // sensor.
+              sensor_track_observed_function_id_type observed_function_id;
+              // The sensor's assessment of the equipment on the real world object represented by
+              // the sensor track that has been detected by the sensor.
+              sensor_track_equipment_id_type equipment_id;
+              // The sensor's assessment of the name of the platform or class of platform of the
+              // real world object.
+              sensor_track_platform_id_type platform_id;
+              // The set of plots on which the sensor track is based
+              sensor_track_based_on_id_type based_on_id;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
 #ifdef DDS_XTYPES
-            @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 #else
-            org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 #endif
             };
-            // Topic type for operation write_sensor_track. This service allows the CMS to
-            // obtain an overview of (real and/or simulated) air / land / space / surface
-            // objects observed or simulated. Information may cover all aspects of a track
-            // such as kinematic and amplifying information.
-            //      The service does not cover:
-            //      <ul>
-            //      	<li>additional track information provision dedicated for engagement
-            // support,</li>
-            //      	<li>special search functions such as cued search, volume search and
-            // horizon search (however, if such a search function is initiated by means of
-            // another service, the tracks shall be provided by this service),</li>
-            //      </ul>
-            //      Although the service focuses on radar as an example of a sensor, the
-            // service also applies to other sensors, like IR/EO sensors and ECM/ESM sensors.
-            // 
-            //      The actor is the Combat Management System.
-            // 
-            //      The service starts when:
-            //      <ul>
-            //      	<li>if the service does provide registration capabilities: the service
-            // "Register interest" has completed successfully, or</li>
-            //      	<li>if the service does not provide registration capabilities: the
-            // service "Provide subsystem services" has completed successfully for this
-            // service.</li>
-            //      </ul>
-            // 
-            //      The sensor provides, periodically or on event, a set of sensor tracks
-            // observed by the sensor. These may be sensor point or bearing tracks. The set of
-            // sensor tracks includes:
-            //      <ul>
-            //      	<li>Track updates of existing and new sensor tracks. These are provided
-            // when there are sufficient measurements (e.g. plots) in the last observation
-            // cycle, which may be associated with the sensor track.</li>
-            //      	<li>Dead-reckoned tracks. These are sensor track updates for which in the
-            // last observation cycle there are no measurements that may be associated with
-            // the sensor track. For dead-reckoned tracks, the sensor track information (e.g.
-            // kinematics) is extrapolated. The dead-reckoned tracks may become"normal" tracks
-            // again if, in the next scan, there are measurement(s) that may be associated
-            // with the track. Alternatively, dead-reckoned tracks (after n unsuccessful
-            // scans) may become lost tracks.</li>
-            //      	<li>Lost tracks. These are sensor track updates that are reported once,
-            // if in the last n scans, there are no measurements that may be associated with
-            // the sensor track. The value of n is typically a sensor parameter that is
-            // managed by the service "Manage subsystem parameters".</li>
-            //      </ul>
-            //      Some sensors are not capable of reporting lost and/or dead-reckoned tracks.
-            // 
-            //      The sensor may also provide single sensor tracks periodically or on event.
-            // 
-            // 
-            //      The service ends with success when:
-            //      <ul>
-            //      	<li>if the service does provide registration capabilities: the service
-            // "Register interest" has completed successfully for a deregistration request,
-            // or</li>
-            //      	<li>if the service does not  provide registration capabilities: the
-            // sensor is shutdown using service  "Shut down".</li>
-            //      </ul>. The method represents a write of a single sensor track (air, land,
-            // space or surface) to the CMS.
-            //      The write may be periodic or not.
+#ifndef DDS_XTYPES
 #pragma keylist sensor_track_type sensor_track_id subsystem_id
-  
+#endif
 
-
-
-
-            // A sequence type, to represent multiple values. Note: variable length sequence.
+            // A sequence type, to represent multiple values.
             typedef sequence<sensor_track_type, 1000> sensor_track_set_element_type;
-  
 
-
-
-
+            // The method represents a single write of a set of sensor tracks to the CMS. The
+            // write may be:
+            // - periodic or not
+            // - include all tracks observed during a sensor scan
+            // - be an update of just one track (a set of 1) if this is how the sensor works
+            // This service allows the CMS to obtain an overview of (real and/or simulated) air
+            // / land / space / surface objects observed or simulated. Information may cover all
+            // aspects of a track such as kinematic and amplifying information.
+            // The service does not cover:
+            // <ul>
+            //  <li>additional track information provision dedicated for engagement
+            // support,</li>
+            //  <li>special search functions such as cued search, volume search and horizon
+            // search (however, if such a search function is initiated by means of another
+            // service, the tracks shall be provided by this service),</li>
+            // </ul>
+            // Although the service focuses on radar as an example of a sensor, the service also
+            // applies to other sensors, like IR/EO sensors and ECM/ESM sensors.
+            // The actor is the Combat Management System.
+            // The service starts when:
+            // <ul>
+            //  <li>if the service does provide registration capabilities: the service "Register
+            // interest" has completed successfully, or</li>
+            //  <li>if the service does not provide registration capabilities: the service
+            // "Provide subsystem services" has completed successfully for this service.</li>
+            // </ul>
+            // The sensor provides, periodically or on event, a set of sensor tracks observed by
+            // the sensor. These may be sensor point or bearing tracks. The set of sensor tracks
+            // includes:
+            // <ul>
+            //  <li>Track updates of existing and new sensor tracks. These are provided when
+            // there are sufficient measurements (e.g. plots) in the last observation cycle,
+            // which may be associated with the sensor track.</li>
+            //  <li>Dead-reckoned tracks. These are sensor track updates for which in the last
+            // observation cycle there are no measurements that may be associated with the
+            // sensor track. For dead-reckoned tracks, the sensor track information (e.g.
+            // kinematics) is extrapolated. The dead-reckoned tracks may become"normal" tracks
+            // again if, in the next scan, there are measurement(s) that may be associated with
+            // the track. Alternatively, dead-reckoned tracks (after n unsuccessful scans) may
+            // become lost tracks.</li>
+            //  <li>Lost tracks. These are sensor track updates that are reported once, if in
+            // the last n scans, there are no measurements that may be associated with the
+            // sensor track. The value of n is typically a sensor parameter that is managed by
+            // the service "Manage subsystem parameters".</li>
+            // </ul>
+            // Some sensors are not capable of reporting lost and/or dead-reckoned tracks.
+            // The sensor may also provide single sensor tracks periodically or on event.
+            // The service ends with success when:
+            // <ul>
+            //  <li>if the service does provide registration capabilities: the service "Register
+            // interest" has completed successfully for a deregistration request, or</li>
+            //  <li>if the service does not  provide registration capabilities: the sensor is
+            // shutdown using service  "Shut down".</li>
+            // </ul>
             // A set of sensor tracks (to enable batch reporting)
             struct sensor_track_set_type
             {
-            	sensor_track_set_element_type element;
-            // Indicates which subsystem published the data or is intended to read it as a subscriber
+              sensor_track_set_element_type element;
+              // Indicates which subsystem published the data or is intended to read it as a
+              // subscriber
 #ifdef DDS_XTYPES
-            @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 #else
-            org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 #endif
             };
-            // Topic type for operation write_sensor_track_set. This service allows the CMS to
-            // obtain an overview of (real and/or simulated) air / land / space / surface
-            // objects observed or simulated. Information may cover all aspects of a track
-            // such as kinematic and amplifying information.
-            //      The service does not cover:
-            //      <ul>
-            //      	<li>additional track information provision dedicated for engagement
-            // support,</li>
-            //      	<li>special search functions such as cued search, volume search and
-            // horizon search (however, if such a search function is initiated by means of
-            // another service, the tracks shall be provided by this service),</li>
-            //      </ul>
-            //      Although the service focuses on radar as an example of a sensor, the
-            // service also applies to other sensors, like IR/EO sensors and ECM/ESM sensors.
-            // 
-            //      The actor is the Combat Management System.
-            // 
-            //      The service starts when:
-            //      <ul>
-            //      	<li>if the service does provide registration capabilities: the service
-            // "Register interest" has completed successfully, or</li>
-            //      	<li>if the service does not provide registration capabilities: the
-            // service "Provide subsystem services" has completed successfully for this
-            // service.</li>
-            //      </ul>
-            // 
-            //      The sensor provides, periodically or on event, a set of sensor tracks
-            // observed by the sensor. These may be sensor point or bearing tracks. The set of
-            // sensor tracks includes:
-            //      <ul>
-            //      	<li>Track updates of existing and new sensor tracks. These are provided
-            // when there are sufficient measurements (e.g. plots) in the last observation
-            // cycle, which may be associated with the sensor track.</li>
-            //      	<li>Dead-reckoned tracks. These are sensor track updates for which in the
-            // last observation cycle there are no measurements that may be associated with
-            // the sensor track. For dead-reckoned tracks, the sensor track information (e.g.
-            // kinematics) is extrapolated. The dead-reckoned tracks may become"normal" tracks
-            // again if, in the next scan, there are measurement(s) that may be associated
-            // with the track. Alternatively, dead-reckoned tracks (after n unsuccessful
-            // scans) may become lost tracks.</li>
-            //      	<li>Lost tracks. These are sensor track updates that are reported once,
-            // if in the last n scans, there are no measurements that may be associated with
-            // the sensor track. The value of n is typically a sensor parameter that is
-            // managed by the service "Manage subsystem parameters".</li>
-            //      </ul>
-            //      Some sensors are not capable of reporting lost and/or dead-reckoned tracks.
-            // 
-            //      The sensor may also provide single sensor tracks periodically or on event.
-            // 
-            // 
-            //      The service ends with success when:
-            //      <ul>
-            //      	<li>if the service does provide registration capabilities: the service
-            // "Register interest" has completed successfully for a deregistration request,
-            // or</li>
-            //      	<li>if the service does not  provide registration capabilities: the
-            // sensor is shutdown using service  "Shut down".</li>
-            //      </ul>. The method represents a single write of a set of sensor tracks to
-            // the CMS. The write may be:
-            //      - periodic or not
-            //      - include all tracks observed during a sensor scan
-            //      - be an update of just one track (a set of 1) if this is how the sensor
-            // works
-#pragma keylist sensor_track_set_type  subsystem_id
-  
-
-
+#ifndef DDS_XTYPES
+#pragma keylist sensor_track_set_type subsystem_id
+#endif
 
           };
         };
