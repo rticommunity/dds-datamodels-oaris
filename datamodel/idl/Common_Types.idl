@@ -4,6 +4,10 @@
 #define ORGOMGC4IDOMAIN_MODELCOMMON_TYPESDEFVAR
 #include "TimeBase.idl"
 
+@annotation doc {
+    string value default "TBD";
+};
+
 module org
 {
 
@@ -16,22 +20,22 @@ module org
       module Domain_Model
       {
 
-        // This package contains the types that are common to several areas of the model.
-        // Most of the content is in three sub-packages: Coordinates_and_Positions,
-        // Shape_Model and Requests. General types are captured at the top level. 
+        @doc("This package contains the types that are common to several areas of the model. \
+            Most of the content is in three sub-packages: Coordinates_and_Positions, \
+            Shape_Model and Requests. General types are captured at the top level.")
         module Common_Types
         {
 
-          // Representation for a general binary type
+          @doc("Representation for a general binary type")
           typedef sequence<octet, 1024> anonymous_blob_type;
 
-          // The confidence in the measurement or assessment expressed as a probability. This
-          // is the result of a hypothesis test that the data is a measurement of real-world
-          // phenomenon corresponding to its label. For an assessment it is the hypothesis
-          // that the assessment describes the real-world.
+          @doc("The confidence in the measurement or assessment expressed as a probability. This \
+            is the result of a hypothesis test that the data is a measurement of real-world \
+            phenomenon corresponding to its label. For an assessment it is the hypothesis \
+            that the assessment describes the real-world.")
           typedef float confidence_type;
 
-          // Identity according to STANAG 5516.
+          @doc("Identity according to STANAG 5516.")
           enum identity_type
           {
             PENDING,
@@ -43,27 +47,27 @@ module org
             HOSTILE
           };
 
-          // Strength of the measurement (for a track or plot). The precise semantics of this
-          // type are sensor subsystem specific, but a typical interpretation is as a signal
-          // to noise ratio in dB.
+          @doc("Strength of the measurement (for a track or plot). The precise semantics of this \
+            type are sensor subsystem specific, but a typical interpretation is as a signal \
+            to noise ratio in dB.")
           typedef unsigned short strength_type;
 
-          // This type provides a unique id for different subsystems. Subsystem ids shall be
-          // allocated by the platform integrator. Subsystem id equal to zero is reserved to
-          // imply applicability to all and any subsystem.
+          @doc("This type provides a unique id for different subsystems. Subsystem ids shall be \
+            allocated by the platform integrator. Subsystem id equal to zero is reserved to \
+            imply applicability to all and any subsystem.")
           typedef unsigned short subsystem_id_type;
 
-          // System Track Identification
+          @doc("System Track Identification")
           typedef unsigned long system_track_id_type;
 
-          // based on start of Gregorian calendar (1582-10-15T 00:00UTC)
-          // unit: 100 nano seconds
-          // i.a.w CORBA Time Service Time T
+          @doc("based on start of Gregorian calendar (1582-10-15T 00:00UTC) \
+            unit: 100 nano seconds \
+            i.a.w CORBA Time Service Time T")
           typedef org::omg::c4i::TimeBase::TimeT time_type;
 
-          // An index indicating a particular frequency channel or band. The actual frequency
-          // is typically not of concern to the command team. A band refers to a discrete
-          // frequency or a range of frequencies; such bands may overlap.
+          @doc("An index indicating a particular frequency channel or band. The actual frequency \
+            is typically not of concern to the command team. A band refers to a discrete \
+            frequency or a range of frequencies; such bands may overlap.")
           typedef unsigned short frequency_band_type;
 
         };

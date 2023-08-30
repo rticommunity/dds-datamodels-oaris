@@ -23,25 +23,25 @@ module org
           module Engagement_Support
           {
 
-            // The number/amount of available fire control channels. 
+            @doc("The number/amount of available fire control channels.")
             typedef unsigned short available_fire_control_channels_type;
 
-            // The fire control channel ID as assigned by the subsystem.
+            @doc("The fire control channel ID as assigned by the subsystem.")
             typedef unsigned short fire_control_channel_id_type;
 
-            // The possible outcomes of a kill assessment.
+            @doc("The possible outcomes of a kill assessment.")
             enum kill_assessment_result_type
             {
-              // Kill Probability &gt; 50%
+              @doc("Kill Probability &gt; 50%")
               PROBABLE_KILL,
-              // Kill Probability &lt; 50%
+              @doc("Kill Probability &lt; 50%")
               PROBABLE_MISS,
-              // Assessment indeterminate
+              @doc("Assessment indeterminate")
               NO_RESULT
             };
 
-            // Target position/kinematics for which a fire control channel is requested to
-            // designate.
+            @doc("Target position/kinematics for which a fire control channel is requested to \
+                designate.")
             struct kinematics_type
             {
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type orientation;

@@ -24,135 +24,95 @@ module org
           module Extended_Subsystem_Control
           {
 
-            // Contains the interface for offline testing.
+            @doc("Contains the interface for offline testing.")
             module Perform_Offline_Test
             {
 
-              // struct holding keys for class receive_detailed_test_results_type.
+              @doc("struct holding keys for class receive_detailed_test_results_type.")
               struct receive_detailed_test_results_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Provides the CMS with subsystem specific information concerning offline test
-              // failures
-              // This is used to instruct the subsystem to perform offline test and return the
-              // results to the CMS. The nature of the offline tests is subsystem specific
+              @doc("Provides the CMS with subsystem specific information concerning offline test \
+                failures \
+                This is used to instruct the subsystem to perform offline test and return the \
+                results to the CMS. The nature of the offline tests is subsystem specific")
               struct receive_detailed_test_results_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::offline_test_result_details_type offline_test_detailed_results;
               };
-#ifndef DDS_XTYPES
-#pragma keylist receive_detailed_test_results_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class receive_test_results_type.
+              @doc("truct holding keys for class receive_test_results_type.")
               struct receive_test_results_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Informs the CMS whether the offline tests passed, passed partially, or failed.
-              // This is used to instruct the subsystem to perform offline test and return the
-              // results to the CMS. The nature of the offline tests is subsystem specific
+              @doc("Informs the CMS whether the offline tests passed, passed partially, or failed. \
+                This is used to instruct the subsystem to perform offline test and return the \
+                results to the CMS. The nature of the offline tests is subsystem specific")
               struct receive_test_results_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::offline_test_result_type test_results;
               };
-#ifndef DDS_XTYPES
-#pragma keylist receive_test_results_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class perform_tests_type.
+              @doc("struct holding keys for class perform_tests_type.")
               struct perform_tests_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Instructs the subsystem to perform the offline tests.
+              @doc("Instructs the subsystem to perform the offline tests.")
               struct perform_tests_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-                // Allows a particular test to be selected. If null, all tests are performed.
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+
+                @doc("Allows a particular test to be selected. If null, all tests are performed.")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::offline_test_type test_name;
               };
-#ifndef DDS_XTYPES
-#pragma keylist perform_tests_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class request_detailed_test_results_type.
+              @doc("struct holding keys for class request_detailed_test_results_type.")
               struct request_detailed_test_results_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Asks the subsystem to provide detailed information on the failures.
+              @doc("Asks the subsystem to provide detailed information on the failures.")
               struct request_detailed_test_results_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-              };
-#ifndef DDS_XTYPES
-#pragma keylist request_detailed_test_results_type request_id subsystem_id
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
             };
           };
         };

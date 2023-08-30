@@ -27,239 +27,183 @@ module org
             module Manage_Subsystem_Parameters
             {
 
-              // struct holding keys for class report_parameter_values_type.
+              @doc("struct holding keys for class report_parameter_values_type.")
               struct report_parameter_values_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // The service allows the actor to obtain and modify the values of parameters of the
-              // subsystem. It also provides the facilities to retrieve the descriptions of
-              // parameters available in a certain subsystem. 
-              // The actor of the service is the Combat Management System.
-              // The service starts when the CMS requests one of the following:
-              // <ul>
-              //  <li>Parameter value retrieval</li>
-              //  <li>Parameter value modification</li>
-              //  <li>Retrieval of parameter descriptor,</li>
-              // </ul>
-              // with a list of parameter names (and values in case of modification).
-              // A parameter value may be structured (e.g. a vector or a table).
-              // The service ends when the subsystem has provided the requested information or
-              // modified the parameter value.
-              // It is the CMS's responsibility to initiate the determination of initial state by
-              // making a request for information to the subsystem. 
-              // Parameter names used by a subsystem are to be unique within the scope of that
-              // subsystem. Requests for parameter descriptions and to get and set current values
-              // are consequently well-defined. Parameter names may be structured using a
-              // namespace scheme to promote uniqueness.
-              // Unknown parameter
-              // On receipt of a request for parameter value retrieval, parameter value
-              // modification or parameter descriptor retrieval for an unknown parameter name, the
-              // subsystem responds with an indication “unknown parameter”. Other (correctly
-              // identified) parameters in the same request are processed as requested.
-              // Illegal parameter value
-              // On receipt of a request for parameter value modification with a parameter value
-              // that is outside the allowable range of the specified parameter, the subsystem
-              // responds with an indication “illegal parameter value” and does not change the
-              // parameter value.
-              // This includes inconsistencies of parameter type (e.g. real where integer is
-              // expected) and structure (e.g. vector of 2 elements, where a vector of 3 is
-              // expected).
-              // Other parameters with legal values in the same request are modified as requested.
-              // In case of an illegal value for an element of a structured parameter, the entire
-              // parameter remains unchanged.
-              // <b>
-              // </b>Modification of parameter value
-              // A parameter value may only be modified in the technical state(s) as specified in
-              // the descriptor of that parameter.
-              // Security
-              // Access to the service may be restricted to certain parts of the CMS because of
-              // security restrictions. 
+              @doc("The service allows the actor to obtain and modify the values of parameters of the \
+                subsystem. It also provides the facilities to retrieve the descriptions of \
+                parameters available in a certain subsystem. \
+                The actor of the service is the Combat Management System. \
+                The service starts when the CMS requests one of the following: \
+                <ul> \
+                    <li>Parameter value retrieval</li> \
+                    <li>Parameter value modification</li> \
+                    <li>Retrieval of parameter descriptor,</li> \
+                </ul> \
+                with a list of parameter names (and values in case of modification). \
+                A parameter value may be structured (e.g. a vector or a table). \
+                The service ends when the subsystem has provided the requested information or \
+                modified the parameter value. \
+                It is the CMS's responsibility to initiate the determination of initial state by \
+                making a request for information to the subsystem. \
+                Parameter names used by a subsystem are to be unique within the scope of that \
+                subsystem. Requests for parameter descriptions and to get and set current values \
+                are consequently well-defined. Parameter names may be structured using a \
+                namespace scheme to promote uniqueness. \
+                Unknown parameter \
+                On receipt of a request for parameter value retrieval, parameter value \
+                modification or parameter descriptor retrieval for an unknown parameter name, the \
+                subsystem responds with an indication \"unknown parameter\". Other (correctly \
+                identified) parameters in the same request are processed as requested. \
+                Illegal parameter value \
+                On receipt of a request for parameter value modification with a parameter value \
+                that is outside the allowable range of the specified parameter, the subsystem \
+                responds with an indication \"illegal parameter value\" and does not change the \
+                parameter value. \
+                This includes inconsistencies of parameter type (e.g. real where integer is \
+                expected) and structure (e.g. vector of 2 elements, where a vector of 3 is \
+                expected). \
+                Other parameters with legal values in the same request are modified as requested. \
+                In case of an illegal value for an element of a structured parameter, the entire \
+                parameter remains unchanged. \
+                <b> \
+                </b>Modification of parameter value \
+                A parameter value may only be modified in the technical state(s) as specified in \
+                the descriptor of that parameter. \
+                Security \
+                Access to the service may be restricted to certain parts of the CMS because of \
+                security restrictions.")
               struct report_parameter_values_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_value_sequence_type the_name_value_set;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_error_sequence_type the_name_error_set;
               };
-#ifndef DDS_XTYPES
-#pragma keylist report_parameter_values_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class report_parameter_descriptors_type.
+              @doc("struct holding keys for class report_parameter_descriptors_type.")
               struct report_parameter_descriptors_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // The service allows the actor to obtain and modify the values of parameters of the
-              // subsystem. It also provides the facilities to retrieve the descriptions of
-              // parameters available in a certain subsystem. 
-              // The actor of the service is the Combat Management System.
-              // The service starts when the CMS requests one of the following:
-              // <ul>
-              //  <li>Parameter value retrieval</li>
-              //  <li>Parameter value modification</li>
-              //  <li>Retrieval of parameter descriptor,</li>
-              // </ul>
-              // with a list of parameter names (and values in case of modification).
-              // A parameter value may be structured (e.g. a vector or a table).
-              // The service ends when the subsystem has provided the requested information or
-              // modified the parameter value.
-              // It is the CMS's responsibility to initiate the determination of initial state by
-              // making a request for information to the subsystem. 
-              // Parameter names used by a subsystem are to be unique within the scope of that
-              // subsystem. Requests for parameter descriptions and to get and set current values
-              // are consequently well-defined. Parameter names may be structured using a
-              // namespace scheme to promote uniqueness.
-              // Unknown parameter
-              // On receipt of a request for parameter value retrieval, parameter value
-              // modification or parameter descriptor retrieval for an unknown parameter name, the
-              // subsystem responds with an indication “unknown parameter”. Other (correctly
-              // identified) parameters in the same request are processed as requested.
-              // Illegal parameter value
-              // On receipt of a request for parameter value modification with a parameter value
-              // that is outside the allowable range of the specified parameter, the subsystem
-              // responds with an indication “illegal parameter value” and does not change the
-              // parameter value.
-              // This includes inconsistencies of parameter type (e.g. real where integer is
-              // expected) and structure (e.g. vector of 2 elements, where a vector of 3 is
-              // expected).
-              // Other parameters with legal values in the same request are modified as requested.
-              // In case of an illegal value for an element of a structured parameter, the entire
-              // parameter remains unchanged.
-              // <b>
-              // </b>Modification of parameter value
-              // A parameter value may only be modified in the technical state(s) as specified in
-              // the descriptor of that parameter.
-              // Security
-              // Access to the service may be restricted to certain parts of the CMS because of
-              // security restrictions. 
+              @doc("The service allows the actor to obtain and modify the values of parameters of the \
+                subsystem. It also provides the facilities to retrieve the descriptions of \
+                parameters available in a certain subsystem. \
+                The actor of the service is the Combat Management System. \
+                The service starts when the CMS requests one of the following: \
+                <ul> \
+                 <li>Parameter value retrieval</li> \
+                 <li>Parameter value modification</li> \
+                 <li>Retrieval of parameter descriptor,</li> \
+                </ul> \
+                with a list of parameter names (and values in case of modification). \
+                A parameter value may be structured (e.g. a vector or a table). \
+                The service ends when the subsystem has provided the requested information or \
+                modified the parameter value. \
+                It is the CMS's responsibility to initiate the determination of initial state by \
+                making a request for information to the subsystem. \
+                Parameter names used by a subsystem are to be unique within the scope of that \
+                subsystem. Requests for parameter descriptions and to get and set current values \
+                are consequently well-defined. Parameter names may be structured using a \
+                namespace scheme to promote uniqueness. \
+                Unknown parameter \
+                On receipt of a request for parameter value retrieval, parameter value \
+                modification or parameter descriptor retrieval for an unknown parameter name, the \
+                subsystem responds with an indication \"unknown parameter\". Other (correctly \
+                identified) parameters in the same request are processed as requested. \
+                Illegal parameter value \
+                On receipt of a request for parameter value modification with a parameter value \
+                that is outside the allowable range of the specified parameter, the subsystem \
+                responds with an indication \"illegal parameter value\" and does not change the \
+                parameter value. \
+                This includes inconsistencies of parameter type (e.g. real where integer is \
+                expected) and structure (e.g. vector of 2 elements, where a vector of 3 is \
+                expected). \
+                Other parameters with legal values in the same request are modified as requested. \
+                In case of an illegal value for an element of a structured parameter, the entire \
+                parameter remains unchanged. \
+                <b> \
+                </b>Modification of parameter value \
+                A parameter value may only be modified in the technical state(s) as specified in \
+                the descriptor of that parameter. \
+                Security \
+                Access to the service may be restricted to certain parts of the CMS because of \
+                security restrictions.")
               struct report_parameter_descriptors_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::descriptor_sequence_type the_descriptor_sequence;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_error_sequence_type the_name_error_set;
               };
-#ifndef DDS_XTYPES
-#pragma keylist report_parameter_descriptors_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class retrieve_parameter_values_type.
+              @doc("struct holding keys for class retrieve_parameter_values_type.")
               struct retrieve_parameter_values_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
               struct retrieve_parameter_values_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::parameter_name_sequence_type the_name_set;
               };
-#ifndef DDS_XTYPES
-#pragma keylist retrieve_parameter_values_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class modify_parameter_values_type.
+              @doc("struct holding keys for class modify_parameter_values_type.")
               struct modify_parameter_values_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
               struct modify_parameter_values_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::name_value_sequence_type the_name_value_set;
               };
-#ifndef DDS_XTYPES
-#pragma keylist modify_parameter_values_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class retrieve_parameter_descriptors_type.
+              @doc("struct holding keys for class retrieve_parameter_descriptors_type.")
               struct retrieve_parameter_descriptors_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
               struct retrieve_parameter_descriptors_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::parameter_name_sequence_type the_name_set;
               };
-#ifndef DDS_XTYPES
-#pragma keylist retrieve_parameter_descriptors_type request_id subsystem_id
-#endif
-
             };
           };
         };

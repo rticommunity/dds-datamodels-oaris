@@ -27,117 +27,83 @@ module org
             module Manage_Operational_Mode
             {
 
-              // struct holding keys for class report_operational_mode_type.
+              @doc("struct holding keys for class report_operational_mode_type.")
               struct report_operational_mode_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // The current operational mode is reported via this interface method.
-              // Subsystems provide several operational modes like long-range-detection,
-              // missile-detection, surface surveillance etc. in case of surveillance radar,
-              // normal tracking, slaved, joystick controlled in case of fire control radar etc. 
-              // Operational modes summarise a set of subsystem parameters optimising the
-              // subsystem with respect to an operational purpose.
-              // The names of modes of a specific type of subsystem (e.g. or a radar) differ from
-              // supplier to supplier. Consequently, they shall be handled as configuration
-              // parameters. They shall be offered to the operator to enable him for a selection
-              // and shall be transferred to the subsystem to achieve the intended reaction.
-              // The definition of names of operational modes is not within the scope of this
-              // standard.
-              // It is the CMS's responsibility to initiate the determination of initial state by
-              // making a request for information to the subsystem. 
-              // In the case where the CMS does not have mastership of the subsystem, a change of
-              // the operational mode shall be indicated by informing the CMS about the new
-              // operational mode (see service "Provide health state").
-              // Configuration data like the set of available operational modes may be received at
-              // runtime but may also be inserted by means of an automatic or manual setup
-              // process. Although automatic runtime transfer of such information may be achieved
-              // through ‘Manage Subsystem Parameters’ it is not a mandatory requirement of this
-              // standard for that mechanism to be used.
+              @doc("The current operational mode is reported via this interface method. \
+                Subsystems provide several operational modes like long-range-detection, \
+                missile-detection, surface surveillance etc. in case of surveillance radar, \
+                normal tracking, slaved, joystick controlled in case of fire control radar etc. \
+                Operational modes summarise a set of subsystem parameters optimising the \
+                subsystem with respect to an operational purpose. \
+                The names of modes of a specific type of subsystem (e.g. or a radar) differ from \
+                supplier to supplier. Consequently, they shall be handled as configuration \
+                parameters. They shall be offered to the operator to enable him for a selection \
+                and shall be transferred to the subsystem to achieve the intended reaction. \
+                The definition of names of operational modes is not within the scope of this \
+                standard. \
+                    It is the CMS's responsibility to initiate the determination of initial state by \
+                making a request for information to the subsystem. \
+                In the case where the CMS does not have mastership of the subsystem, a change of \
+                the operational mode shall be indicated by informing the CMS about the new \
+                operational mode (see service \"Provide health state\"). \
+                Configuration data like the set of available operational modes may be received at \
+                runtime but may also be inserted by means of an automatic or manual setup \
+                process. Although automatic runtime transfer of such information may be achieved \
+                through 'Manage Subsystem Parameters' it is not a mandatory requirement of this \
+                standard for that mechanism to be used.")
               struct report_operational_mode_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::operational_mode_type current_mode;
               };
-#ifndef DDS_XTYPES
-#pragma keylist report_operational_mode_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class request_get_operational_mode_type.
+              @doc("struct holding keys for class request_get_operational_mode_type.")
               struct request_get_operational_mode_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // The subsystem is requested to report the current operational mode.
+              @doc("The subsystem is requested to report the current operational mode.")
               struct request_get_operational_mode_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist request_get_operational_mode_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class request_set_operational_mode_type.
+              @doc("struct holding keys for class request_set_operational_mode_type.")
               struct request_set_operational_mode_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // The subsystem is requested to change the operational mode to the given new
-              // operational mode.
+              @doc("The subsystem is requested to change the operational mode to the given new \
+                operational mode.")
               struct request_set_operational_mode_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::operational_mode_type new_operational_mode;
               };
-#ifndef DDS_XTYPES
-#pragma keylist request_set_operational_mode_type request_id subsystem_id
-#endif
-
             };
           };
         };

@@ -24,86 +24,63 @@ module org
           module Subsystem_Control
           {
 
-            // This package contains interfaces for the Control Battle Override service.
+            @doc("This package contains interfaces for the Control Battle Override service.")
             module Control_Battle_Override
             {
 
-              // struct holding keys for class battle_override_setting_type.
+              @doc("struct holding keys for class battle_override_setting_type.")
               struct battle_override_setting_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // This metod is used by the subsystem to return the current Battle Override state.
-              // The subsystem is requested to set/reset the Battle Override. When Battle Override
-              // is set the subsystem disregards warnings on circumstances which may cause damage
-              // to own equipment, typically the overtemperature protections.
-              // It is the CMS's responsibility to initiate the determination of initial state by
-              // making a request for information to the subsystem. 
-              // Provision of the Battle Override state
-              // Subsystem shall keep CMS informed about the current Battle Override state and its
-              // changes (if any).
-              // Lack of mastership
-              // In the case where CMS does not have mastership of the subsystem, CMS shall be
-              // informed about the current Battle Override state and its changes (if any).
-              // Relationship to the subsystem health state
-              // As long as the Battle Override is set, the subsystem internal overtemperature
-              // indications shall not result in any heath state set to “NOT AVAILABLE” (see
-              // <i>Provide health state</i>).
-              struct battle_override_setting_type
+              @doc("This metod is used by the subsystem to return the current Battle Override state. \
+                The subsystem is requested to set/reset the Battle Override. When Battle Override \
+                is set the subsystem disregards warnings on circumstances which may cause damage \
+                to own equipment, typically the overtemperature protections. \
+                It is the CMS's responsibility to initiate the determination of initial state by \
+                making a request for information to the subsystem. \
+                Provision of the Battle Override state \
+                Subsystem shall keep CMS informed about the current Battle Override state and its \
+                changes (if any). \
+                Lack of mastership \
+                In the case where CMS does not have mastership of the subsystem, CMS shall be \
+                informed about the current Battle Override state and its changes (if any). \
+                Relationship to the subsystem health state \
+                As long as the Battle Override is set, the subsystem internal overtemperature \
+                indications shall not result in any heath state set to \"NOT AVAILABLE\" (see \
+                <i>Provide health state</i>).")
+              struct battle_override_setting_type \
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::battle_override_state_type battle_override_state;
               };
-#ifndef DDS_XTYPES
-#pragma keylist battle_override_setting_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class set_battle_override_type.
+              @doc("struct holding keys for class set_battle_override_type.")
               struct set_battle_override_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // This method is used by the CMS to send a Battle Override set/reset request to the
-              // subsystem,
+              @doc("This method is used by the CMS to send a Battle Override set/reset request to the \
+                subsystem.")
               struct set_battle_override_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::battle_override_state_type battle_override_state;
               };
-#ifndef DDS_XTYPES
-#pragma keylist set_battle_override_type request_id subsystem_id
-#endif
-
             };
           };
         };

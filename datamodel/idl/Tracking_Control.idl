@@ -20,75 +20,75 @@ module org
         module Sensor_Domain
         {
 
-          // This package contains structs and type defs for managing tracking zones and
-          // sensor track information.
+          @doc("This package contains structs and type defs for managing tracking zones and \
+            sensor track information.")
           module Tracking_Control
           {
 
-            // The meaning of track_priority_type is to assign a priority among a set of tracks
-            // based on some criteria (i.e. subsystem's time dedicated to a track analysis).
-            // Example of values:
-            // 1 Track While Scan (TWS)
-            // 2 Low Priority Target (LPT)
-            // 3 High Priority Target (HPT)
+            @doc("The meaning of track_priority_type is to assign a priority among a set of tracks \
+              based on some criteria (i.e. subsystem's time dedicated to a track analysis). \
+              Example of values: \
+              1 Track While Scan (TWS) \
+              2 Low Priority Target (LPT) \
+              3 High Priority Target (HPT)")
             typedef short track_priority_type;
 
-            // This struct identifies track information.
+            @doc("This struct identifies track information.")
             struct track_info_type
             {
-              // This is additional information that is not specified as part of the interface.
-              // Candidate information includes:
-              // - Track type, 
-              // - Track priority,
-              // - Track Identification Category Assigned (Pending, Friend, Assumed Friend,
-              // Neutral, Unknown, Suspect, Hostile).
+              @doc("This is additional information that is not specified as part of the interface. \
+                Candidate information includes: \
+                - Track type, \
+                - Track priority, \
+                - Track Identification Category Assigned (Pending, Friend, Assumed Friend, \
+                Neutral, Unknown, Suspect, Hostile).")
               org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_information;
               org::omg::c4i::Domain_Model::Common_Types::system_track_id_type system_track_id;
               track_priority_type track_priority;
               org::omg::c4i::Domain_Model::Common_Types::identity_type identification_assigned_type;
             };
 
-            // Identifies the kind of a tracking zone.
+            @doc("Identifies the kind of a tracking zone.")
             enum tracking_zone_kind_type
             {
-              // Zones where the sensor is allowed to auto initiate new tracks. Depending on the
-              // sensor type and its capabilities, such a type of zones may be delimited in
-              // azimuth only, or both in azimuth and elevation, or may have further range bounds,
-              // and in some cases also additional constraints (such as target type, velocity
-              // bounds, etc.).
+              @doc("Zones where the sensor is allowed to auto initiate new tracks. Depending on the \
+                sensor type and its capabilities, such a type of zones may be delimited in \
+                azimuth only, or both in azimuth and elevation, or may have further range bounds, \
+                and in some cases also additional constraints (such as target type, velocity \
+                bounds, etc.).")
               AUTOMATIC_TRACK_INITIATION,
-              // Sectors where the sensor is required to use, for tracking activities, devoted
-              // waveforms to reduce the multipath effects. This capability is usually provided by
-              // multifunctional radars. Such a type of sectors is usually limited in azimuth
-              // only, below a defined elevation.
+              @doc("Sectors where the sensor is required to use, for tracking activities, devoted \
+                waveforms to reduce the multipath effects. This capability is usually provided by \
+                multifunctional radars. Such a type of sectors is usually limited in azimuth \
+                only, below a defined elevation.")
               MULTIPATH_DEVOTED_TRACKING,
-              // Sectors where the sensor is allowed to manage Track-On-Jammer. Depending on the
-              // sensor type and its capabilities, such a type of sectors may be delimited either
-              // in azimuth only or both in azimuth and elevation.
+              @doc("Sectors where the sensor is allowed to manage Track-On-Jammer. Depending on the \
+                sensor type and its capabilities, such a type of sectors may be delimited either \
+                in azimuth only or both in azimuth and elevation.")
               TRACK_ON_JAMMER
             };
 
-            // This typedef is used to identify a specific tracking zone.
+            @doc("This typedef is used to identify a specific tracking zone.")
             typedef short tracking_zone_id_type;
 
-            // This struct identifies a tracking zone.
+            @doc("This struct identifies a tracking zone.")
             struct tracking_zone_type
             {
-              // Indicates whether the CMS is enabling or disabling a tracking zone.
+              @doc("Indicates whether the CMS is enabling or disabling a tracking zone.")
               boolean enable;
-              // This is the polar volume of the zone.
+              @doc("This is the polar volume of the zone.")
               org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type shape;
-              // This indicates the tracking zone type.
+              @doc("This indicates the tracking zone type.")
               tracking_zone_kind_type tracking_type;
-              // A unique identifier for the tracking zone.
+              @doc("A unique identifier for the tracking zone.")
               tracking_zone_id_type tracking_zone_id;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<tracking_zone_type> tracking_zone_set_zone_type;
 
-            // This struct contains zero  to many tracking zones which must be set/reset by the
-            // CMS.
+            @doc("This struct contains zero  to many tracking zones which must be set/reset by the \
+                CMS.")
             struct tracking_zone_set_type
             {
               tracking_zone_set_zone_type zone;

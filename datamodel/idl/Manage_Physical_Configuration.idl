@@ -24,158 +24,113 @@ module org
           module Extended_Subsystem_Control
           {
 
-            // Contains operations and sequence diagrams for the Manage Physical Configuration
-            // interface.
+            @doc("Contains operations and sequence diagrams for the Manage Physical Configuration \
+                interface.")
             module Manage_Physical_Configuration
             {
 
-              // struct holding keys for class receive_physical_configuration_type.
+              @doc("struct holding keys for class receive_physical_configuration_type.")
               struct receive_physical_configuration_key_type
               {
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
 
-              // Interface used by CMS to receive a url to access physical configuration data from
-              // the subsystem. 
-              // The purpose of this interface is to provide a mechanism to exchange a physical
-              // configuration data file between a subsystem and the CMS (potentially xml format).
-              // The exact format of the file is subsystem specific. The purpose of the file is to
-              // support the maintainer with facilities to configure the internal parts of the
-              // subsystem; also to be used as integration support. 
-              // Additional Information:
-              // There are at least two cases where the CMS would provide a sub-system&rsquo;s
-              // physical configuration.  Case 1 is when the sub-system was able to detect a
-              // configuration change and the data must be manually entered in sub-system
-              // configuration data (e.g. a servo type and serial number).  Case 2 is when the
-              // sub-system is being developed and changes to the configuration which cause
-              // changes in system behavior are being tested.
+              @doc("Interface used by CMS to receive a url to access physical configuration data from \
+                the subsystem. \
+                The purpose of this interface is to provide a mechanism to exchange a physical \
+                configuration data file between a subsystem and the CMS (potentially xml format). \
+                The exact format of the file is subsystem specific. The purpose of the file is to \
+                support the maintainer with facilities to configure the internal parts of the \
+                subsystem; also to be used as integration support. \
+                Additional Information: \
+                There are at least two cases where the CMS would provide a sub-system&rsquo;s \
+                physical configuration.  Case 1 is when the sub-system was able to detect a \
+                configuration change and the data must be manually entered in sub-system \
+                configuration data (e.g. a servo type and serial number).  Case 2 is when the \
+                sub-system is being developed and changes to the configuration which cause \
+                changes in system behavior are being tested.")
               struct receive_physical_configuration_type
               {
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::configuration_url_type configuration_url;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist receive_physical_configuration_type subsystem_id request_id
-#endif
 
-              // struct holding keys for class receive_physical_configuration_success_type.
+              @doc("struct holding keys for class receive_physical_configuration_success_type.")
               struct receive_physical_configuration_success_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Interface used by CMS to receive an indication from the subsystem that it has
-              // successfully changed its physical configuration data.
-              // The purpose of this interface is to provide a mechanism to exchange a physical
-              // configuration data file between a subsystem and the CMS (potentially xml format).
-              // The exact format of the file is subsystem specific. The purpose of the file is to
-              // support the maintainer with facilities to configure the internal parts of the
-              // subsystem; also to be used as integration support. 
-              // Additional Information:
-              // There are at least two cases where the CMS would provide a sub-system&rsquo;s
-              // physical configuration.  Case 1 is when the sub-system was able to detect a
-              // configuration change and the data must be manually entered in sub-system
-              // configuration data (e.g. a servo type and serial number).  Case 2 is when the
-              // sub-system is being developed and changes to the configuration which cause
-              // changes in system behavior are being tested.
+              @doc("Interface used by CMS to receive an indication from the subsystem that it has \
+                successfully changed its physical configuration data. \
+                The purpose of this interface is to provide a mechanism to exchange a physical \
+                configuration data file between a subsystem and the CMS (potentially xml format). \
+                The exact format of the file is subsystem specific. The purpose of the file is to \
+                support the maintainer with facilities to configure the internal parts of the \
+                subsystem; also to be used as integration support. \
+                Additional Information: \
+                There are at least two cases where the CMS would provide a sub-system&rsquo;s \
+                physical configuration.  Case 1 is when the sub-system was able to detect a \
+                configuration change and the data must be manually entered in sub-system \
+                configuration data (e.g. a servo type and serial number).  Case 2 is when the \
+                sub-system is being developed and changes to the configuration which cause \
+                changes in system behavior are being tested.")"
               struct receive_physical_configuration_success_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist receive_physical_configuration_success_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class change_physical_configuration_type.
+              @doc("struct holding keys for class change_physical_configuration_type.")
               struct change_physical_configuration_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Interface used by the subsystem to receive requests from the CMS to change its
-              // physical configuration data to align with data located at the url specified in
-              // the request.
+              @doc("Interface used by the subsystem to receive requests from the CMS to change its \
+                physical configuration data to align with data located at the url specified in \
+                the request.")
               struct change_physical_configuration_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::configuration_url_type configuraiton_url;
               };
-#ifndef DDS_XTYPES
-#pragma keylist change_physical_configuration_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class provide_physical_configuration_type.
+              @doc("struct holding keys for class provide_physical_configuration_type.")
               struct provide_physical_configuration_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Interface used by the subsystem to receive requests from the CMS to provide its
-              // current physical configuration data.
+              @doc("Interface used by the subsystem to receive requests from the CMS to provide its \
+                current physical configuration data.")
               struct provide_physical_configuration_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist provide_physical_configuration_type request_id subsystem_id
-#endif
-
             };
           };
         };

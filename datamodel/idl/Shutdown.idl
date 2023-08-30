@@ -24,75 +24,54 @@ module org
           module Extended_Subsystem_Control
           {
 
-            // Contains operations and sequence diagrams for the Shutdown interface.
+            @doc("Contains operations and sequence diagrams for the Shutdown interface.")
             module Shutdown
             {
 
-              // struct holding keys for class receive_shutdown_state_type.
+              @doc("struct holding keys for class receive_shutdown_state_type.")
               struct receive_shutdown_state_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Interface used by CMS to receive an indication from the subsystem that it has
-              // successfully performed shutdown.
-              // The purpose of this interface is to transition the sub-system to the STANDBY
-              // state from any other state as defined by Manage Technical State. Note: this shall
-              // cause the Subsystem to cease radiating if it is in an ONLINE state with emissions
-              // enabled.
+              @doc("Interface used by CMS to receive an indication from the subsystem that it has \
+                successfully performed shutdown. \
+                The purpose of this interface is to transition the sub-system to the STANDBY \
+                state from any other state as defined by Manage Technical State. Note: this shall \
+                cause the Subsystem to cease radiating if it is in an ONLINE state with emissions \
+                enabled.")
               struct receive_shutdown_state_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
               };
-#ifndef DDS_XTYPES
-#pragma keylist receive_shutdown_state_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class perform_shutdown_type.
+              @doc("struct holding keys for class perform_shutdown_type.")
               struct perform_shutdown_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Interface used by the subsystem to receive a request from the CMS to execute a
-              // shutdown.
+              @doc("Interface used by the subsystem to receive a request from the CMS to execute a \
+                shutdown.")
               struct perform_shutdown_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-              };
-#ifndef DDS_XTYPES
-#pragma keylist perform_shutdown_type request_id subsystem_id
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
             };
           };
         };

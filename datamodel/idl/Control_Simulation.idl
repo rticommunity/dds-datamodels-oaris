@@ -27,177 +27,132 @@ module org
             module Control_Simulation
             {
 
-              // struct holding keys for class report_sim_mode_status_type.
+              @doc("struct holding keys for class report_sim_mode_status_type.")
               struct report_sim_mode_status_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Receive the status and mode of simulation.
-              // This service controls the simulation mode of a subsystem. This simulation mode is
-              // independent of the operational mode of the subsystem. Simulation mode is either
-              // ON or OFF. “ON” has different meanings for different kinds of subsystems.
-              // Effector type subsystems shall not engage real targets but shall simulate the
-              // engagement instead. Sensor type subsystems may be fed with simulated targets
-              // which shall be reported as plots or tracks. In each case while in simulation mode
-              // “ON” the subsystem shall strictly avoid any impact on the environment that could
-              // be the result if simulation mode was “OFF”.
-              // The actor is the Combat Management System.
-              // Basic Flow – Control simulation mode
-              // Start event – command of simulation-mode
-              // The service is triggered by the actor. The actor commands the simulation mode
-              // which may be one of the following:
-              // <ul>
-              //  <li>ON: This indicates that the subsystem shall operate in simulation mode</li>
-              //  <li>OFF: This indicates that the subsystem shall stop operating in simulation
-              // mode and that any current simulation shall be terminated</li>
-              // </ul>
-              // On occurrence of the trigger provision of subsystem-simulation-mode is executed. 
-              // Provision of subsystem-simulation-mode
-              // After receipt of the simulation mode from the actor the subsystem responds with
-              // its subsystem simulation mode.
-              // The subsystem simulation mode may be one of the two:
-              // <ul>
-              //  <li>ON: This indicates that the subsystem is operating in simulation mode</li>
-              //  <li>OFF: This indicates that the subsystem is not operating in simulation mode
-              // </li>
-              // </ul>
-              // Basic Flow – Control Simulation (Start/Resume, Stop/Freeze)
-              // START/RESUME simulation scenario
-              // Only when in simulation mode ON:
-              // Upon provision of the START/RESUME command by the actor the simulation scenario
-              // starts or is resumed after a previously issued FREEZE.
-              // STOP/FREEZE simulation scenario
-              // Only when in simulation mode ON:
-              // Upon provision of the STOP/FREEZE command by the actor the simulation scenario
-              // stops or stays frozen. 
-              // The service ends. 
-              // Provision on initialization
-              // The simulation mode shall be provided by the actor after initialization of the
-              // CMS.
-              // The flow of information relevant to subsystem simulation are the subject of
-              // another service: Define simulation scenario. 
-              // If simulation is stopped or frozen simulation time of the subsystem and the actor
-              // shall be also stopped.
-              // The synchronization of simulation time may be performed using START/RESUME
-              // command.
+              @doc("Receive the status and mode of simulation. \
+                This service controls the simulation mode of a subsystem. This simulation mode is \
+                independent of the operational mode of the subsystem. Simulation mode is either \
+                ON or OFF. \"ON\" has different meanings for different kinds of subsystems. \
+                Effector type subsystems shall not engage real targets but shall simulate the \
+                engagement instead. Sensor type subsystems may be fed with simulated targets \
+                which shall be reported as plots or tracks. In each case while in simulation mode \
+                \"ON\" the subsystem shall strictly avoid any impact on the environment that could \
+                 be the result if simulation mode was \"OFF\". \
+                The actor is the Combat Management System. \
+                Basic Flow – Control simulation mode \
+                Start event – command of simulation-mode \
+                The service is triggered by the actor. The actor commands the simulation mode \
+                which may be one of the following: \
+                <ul> \
+                 <li>ON: This indicates that the subsystem shall operate in simulation mode</li> \
+                 <li>OFF: This indicates that the subsystem shall stop operating in simulation \
+                mode and that any current simulation shall be terminated</li> \
+                </ul> \
+                On occurrence of the trigger provision of subsystem-simulation-mode is executed. \
+                Provision of subsystem-simulation-mode \
+                After receipt of the simulation mode from the actor the subsystem responds with \
+                its subsystem simulation mode. \
+                The subsystem simulation mode may be one of the two: \
+                <ul> \
+                 <li>ON: This indicates that the subsystem is operating in simulation mode</li> \
+                  <li>OFF: This indicates that the subsystem is not operating in simulation mode \
+                </li> \
+                </ul> \
+                Basic Flow – Control Simulation (Start/Resume, Stop/Freeze) \
+                START/RESUME simulation scenario \
+                Only when in simulation mode ON: \
+                Upon provision of the START/RESUME command by the actor the simulation scenario \
+                starts or is resumed after a previously issued FREEZE. \
+                STOP/FREEZE simulation scenario \
+                Only when in simulation mode ON: \
+                Upon provision of the STOP/FREEZE command by the actor the simulation scenario \
+                stops or stays frozen. \
+                The service ends. \
+                Provision on initialization \
+                The simulation mode shall be provided by the actor after initialization of the \
+                CMS. \
+                The flow of information relevant to subsystem simulation are the subject of \
+                another service: Define simulation scenario. \
+                If simulation is stopped or frozen simulation time of the subsystem and the actor \
+                shall be also stopped. \
+                The synchronization of simulation time may be performed using START/RESUME \
+                command.")
               struct report_sim_mode_status_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::sim_mode_status_type the_status;
               };
-#ifndef DDS_XTYPES
-#pragma keylist report_sim_mode_status_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class start_resume_session_type.
+              @doc("struct holding keys for class start_resume_session_type.")
               struct start_resume_session_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // This request  shall be initiated on demand of the CMS. If the subsystem is in
-              // simulation mode it shall start/resume its simulation session and acknowledges the
-              // request.
+              @doc("This request shall be initiated on demand of the CMS. If the subsystem is in \
+                simulation mode it shall start/resume its simulation session and acknowledges the \
+                request.")
               struct start_resume_session_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist start_resume_session_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class start_stop_sim_mode_type.
+              @doc("struct holding keys for class start_stop_sim_mode_type.")
               struct start_stop_sim_mode_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // This request  shall be initiated on demand of the CMS to activate/deactivate the
-              // simulation mode of the subsystem. The subsystem needs to acknowledge the request.
+              @doc("This request  shall be initiated on demand of the CMS to activate/deactivate the \
+                simulation mode of the subsystem. The subsystem needs to acknowledge the request.")
               struct start_stop_sim_mode_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::start_stop_sim_mode_request_type the_request;
               };
-#ifndef DDS_XTYPES
-#pragma keylist start_stop_sim_mode_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class stop_freeze_session_type.
+              @doc("struct holding keys for class stop_freeze_session_type.")
               struct stop_freeze_session_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // This request  shall be initiated on demand of the CMS. If the subsystem is in
-              // simulation mode and the session state is running the subsystem needs to
-              // stop/freeze its session and acknowledges the request.
+              @doc("This request  shall be initiated on demand of the CMS. If the subsystem is in \
+                simulation mode and the session state is running the subsystem needs to \
+                stop/freeze its session and acknowledges the request.")
               struct stop_freeze_session_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::stop_freeze_session_request_type the_request;
               };
-#ifndef DDS_XTYPES
-#pragma keylist stop_freeze_session_type request_id subsystem_id
-#endif
-
             };
           };
         };

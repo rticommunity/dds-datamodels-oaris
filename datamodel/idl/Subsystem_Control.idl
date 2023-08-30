@@ -19,27 +19,27 @@ module org
         module Subsystem_Domain
         {
 
-          // Contains Structs used within the Subsystem Control service and a state diagram
-          // corresponding with the Manage Technical State interface.
+          @doc("Contains Structs used within the Subsystem Control service and a state diagram \
+            corresponding with the Manage Technical State interface.")
           module Subsystem_Control
           {
 
-            // Unique identifier for a function within a subsystem.
+            @doc("Unique identifier for a function within a subsystem.")
             typedef unsigned short function_id_type;
 
-            // struct holding keys for class function_type.
+            @doc("struct holding keys for class function_type.")
             struct function_key_type
             {
-              // The functions unique idenitifier
+              @doc("The functions unique idenitifier")
               function_id_type function_id;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            // Enumeration of possible service names. Where a service may be offered at
-            // different compliance levels, multiple names are introduced with _LEVEL_x postfix
-            // to indicate different parts. 
+            @doc("Enumeration of possible service names. Where a service may be offered at \
+                different compliance levels, multiple names are introduced with _LEVEL_x postfix \
+                to indicate different parts.")
             enum service_name_type
             {
               AIR_ENGAGEMENT_SUPPORT,
@@ -74,25 +74,25 @@ module org
               MEDIA_STREAMING
             };
 
-            // If the boolean is true the battle override is applied.
+            @doc("If the boolean is true the battle override is applied.")
             struct battle_override_state_type
             {
-              // Indicates if the battle override is applied or not.
+              @doc("Indicates if the battle override is applied or not.")
               boolean battle_override_applied;
             };
 
-            // A string type
-            // Name of an entry in the device identification.
+            @doc("A string type \
+                Name of an entry in the device identification.")
             typedef string<64> device_name_type;
 
-            // Type of event
+            @doc("Type of event")
             enum event_type
             {
               OCCURRENCE,
               DISAPPEARANCE
             };
 
-            // Reason for the health state
+            @doc("Reason for the health state")
             struct health_state_reason_type
             {
               boolean caused_by_fault;
@@ -101,28 +101,28 @@ module org
               boolean caused_by_operational_mode;
             };
 
-            // Encapsulation of health state
+            @doc("Encapsulation of health state")
             enum health_state_type
             {
-              // Service: Indicates that the service is available with specified performance.
-              // Subsystem: Indicates that all implemented services of the subsystem have health
-              // state AVAILABLE.
+              @doc("Service: Indicates that the service is available with specified performance. \
+                Subsystem: Indicates that all implemented services of the subsystem have health \
+                state AVAILABLE.")
               AVAILABLE,
-              // Service: Indicates that the service may perform its operational task, but
-              // possibly with less than specified performance.
-              // Subsystem: Indicates that at least one of the implemented services of the
-              // subsystem have health state other than AVAILABLE.
+              @doc("Service: Indicates that the service may perform its operational task, but \
+                possibly with less than specified performance. \
+                Subsystem: Indicates that at least one of the implemented services of the \
+                subsystem have health state other than AVAILABLE.")
               DEGRADED,
-              // Service: Indicates that the service is not available.
-              // Subsystem: Indicates that all implemented services of the subsystem have health
-              // state NOT_AVAILABLE.
+              @doc("Service: Indicates that the service is not available. \
+                Subsystem: Indicates that all implemented services of the subsystem have health \
+                state NOT_AVAILABLE.")
               NOT_AVAILABLE,
-              // Indicates that the subsystem may not determine the health state of the service or
-              // subsystem (e.g. because BIT is not running).
+              @doc("Indicates that the subsystem may not determine the health state of the service or \
+                subsystem (e.g. because BIT is not running).")
               UNKNOWN_HEALTH
             };
 
-            // Name of information
+            @doc("Name of information")
             enum information_name_type
             {
               AIR_PLOTS,
@@ -141,189 +141,189 @@ module org
               INTERFERENCE_REPORTS
             };
 
-            // This enumeration represents the state of the mastership.
-            // The subsystem Mastership may be either “free”, that is assigned to none and then
-            // available to anybody asks for it, or assigned to somebody: CMS or not.
+            @doc("This enumeration represents the state of the mastership. \
+                The subsystem Mastership may be either \"free\", that is assigned to none and then \
+                available to anybody asks for it, or assigned to somebody: CMS or not.")
             enum mastership_state_type
             {
-              // Mastership state is “free”, the first received Mastership request shall be
-              // satisfied.
+              @doc("Mastership state is \"free\", the first received Mastership request shall be \
+                satisfied.")
               MASTERSHIP_FREE,
-              // The Mastership is assigned to somebody other than CMS.
+              @doc("The Mastership is assigned to somebody other than CMS.")
               MASTERSHIP_OTHER,
-              // The Mastership is assigned to CMS.
+              @doc("The Mastership is assigned to CMS.")
               MASTERSHIP_TO_CMS
             };
 
-            // The value should be mapped to the corresponding operational mode. This mapping is
-            // retrieved through the service 'Manage Subsystem Parameters'.
+            @doc("The value should be mapped to the corresponding operational mode. This mapping is \
+                retrieved through the service 'Manage Subsystem Parameters'.")
             typedef unsigned short operational_mode_type;
 
-            // Response type for retrieving and modifying sequences of parameters.
+            @doc("Response type for retrieving and modifying sequences of parameters.")
             struct parameter_value_response_type
             {
               long request_id;
             };
 
-            // Type of registration
+            @doc("Type of registration")
             enum registration_type
             {
               REGISTER,
               DEREGISTER
             };
 
-            // Type of service
+            @doc("Type of service")
             struct service_type
             {
-              // Only registrable services are allowed
+              @doc("Only registrable services are allowed")
               service_name_type service_name;
             };
 
-            // Type which is used to indicate a technical state.
+            @doc("Type which is used to indicate a technical state.")
             enum technical_state_type
             {
-              // Subsystem is running Built-In-Test procedure.  CMS may communicate with
-              // subsystem, but subsystem shall only respond affirmatively to a limited set of
-              // commands.  From this state the subsystem may transition to <i>READY</i>,
-              // <i>FAILED</i>, <i>CALIBRATE</i>, STANDBY (transition may be ordered before
-              // completion of BIT if Battle Override is enabled), or <i>OFFLINE</i>. 
+              @doc("Subsystem is running Built-In-Test procedure.  CMS may communicate with \
+                subsystem, but subsystem shall only respond affirmatively to a limited set of \
+                commands.  From this state the subsystem may transition to <i>READY</i>, \
+                <i>FAILED</i>, <i>CALIBRATE</i>, STANDBY (transition may be ordered before \
+                completion of BIT if Battle Override is enabled), or <i>OFFLINE</i>.")
               BIT,
-              // Subsystem is running calibration procedure. Subsystem shall only respond to a
-              // limited set of commands from CMS.  From this state the subsystem may transition
-              // to <i>READY</i>, <i>FAILED</i>, BIT, STANDBY (transition may be ordered before
-              // completion of calibration if Battle Override is enabled), or <i>OFFLINE</i>.
+              @doc("Subsystem is running calibration procedure. Subsystem shall only respond to a \
+                limited set of commands from CMS.  From this state the subsystem may transition \
+                to <i>READY</i>, <i>FAILED</i>, BIT, STANDBY (transition may be ordered before \
+                completion of calibration if Battle Override is enabled), or <i>OFFLINE</i>.")
               CALIBRATE,
-              // Interface between CMS and subsystem may or may not exist. Some power is applied
-              // to the subsystem and temperature control (e.g. cooling) is active.  From this
-              // state, the sub-system may transition to FAILED, STANDBY, or OFFLINE.
+              @doc("Interface between CMS and subsystem may or may not exist. Some power is applied \
+                to the subsystem and temperature control (e.g. cooling) is active.  From this \
+                state, the sub-system may transition to FAILED, STANDBY, or OFFLINE.")
               DORMANT,
-              // Subsystem is non-operational due to a critical fault such as a primary power
-              // supply failure. CMS is able to communicate with subsystem to perform diagnostics.
-              // In the FAILED state, the health state of the sub-system and nearly all associated
-              // services is NOT AVAILABLE or UNKNOWN (provided via Health State). If the health
-              // state of the sub-system or some services is DEGRADED, the sub-system is not
-              // required to enter into this state. From this state the sub-system may transition
-              // to <i>BIT</i>, <i>STANDBY</i>, <i>READY</i>, CALIBRATE, DORMANT or
-              // <i>OFFLINE</i>.
+              @doc("Subsystem is non-operational due to a critical fault such as a primary power \
+                supply failure. CMS is able to communicate with subsystem to perform diagnostics. \
+                In the FAILED state, the health state of the sub-system and nearly all associated \
+                services is NOT AVAILABLE or UNKNOWN (provided via Health State). If the health \
+                state of the sub-system or some services is DEGRADED, the sub-system is not \
+                required to enter into this state. From this state the sub-system may transition \
+                to <i>BIT</i>, <i>STANDBY</i>, <i>READY</i>, CALIBRATE, DORMANT or \
+                <i>OFFLINE</i>.")
               FAILED,
-              // No connection between CMS and Subsystem is open.  Main power is usually not
-              // applied to subsystem. From OFFLINE, subsystem transitions to FAILED, DORMANT,
-              // BIT, or STANDBY.
+              @doc("No connection between CMS and Subsystem is open.  Main power is usually not \
+                applied to subsystem. From OFFLINE, subsystem transitions to FAILED, DORMANT, \
+                BIT, or STANDBY.")
               OFFLINE,
-              // Subsystem is operational and may respond to all requests from CMS. Simulation and
-              // diagnostics may be allowed in this state. Radiation is allowed in this state but
-              // must be commanded on via Control Emissions. From this state the subsystem may
-              // transition to <i>BIT, CALIBRATE, READY, STANDBY, FAILED, </i>or<i> OF</i>FLINE.
+              @doc("Subsystem is operational and may respond to all requests from CMS. Simulation and \
+                diagnostics may be allowed in this state. Radiation is allowed in this state but \
+                must be commanded on via Control Emissions. From this state the subsystem may \
+                transition to <i>BIT, CALIBRATE, READY, STANDBY, FAILED, </i>or<i> OF</i>FLINE.")
               ONLINE,
-              // Subsystem is ready for CMS to command full operation.  Simulation may be allowed
-              // in this state. Ready to transition to <i>ONLINE</i>, self-tests and calibration
-              // has been performed as necessary. Radiation is not allowed in the READY state.
-              // From this state the subsystem may transition to <i>STANDBY</i>, ONLINE, FAILED,
-              // BIT, CALIBRATE, or <i>OFFLINE</i>.
+              @doc("Subsystem is ready for CMS to command full operation.  Simulation may be allowed \
+                in this state. Ready to transition to <i>ONLINE</i>, self-tests and calibration \
+                has been performed as necessary. Radiation is not allowed in the READY state. \
+                From this state the subsystem may transition to <i>STANDBY</i>, ONLINE, FAILED, \
+                BIT, CALIBRATE, or <i>OFFLINE</i>.")
               READY,
-              // Interface between CMS and subsystem is established. Subsystem may not operate
-              // fully. Maintenance may be performed in this state. From this state the sub-system
-              // may transition to READY, CALIBRATE, BIT, FAILED, DORMANT, or OFFLINE.
+              @doc("Interface between CMS and subsystem is established. Subsystem may not operate \
+                fully. Maintenance may be performed in this state. From this state the sub-system \
+                may transition to READY, CALIBRATE, BIT, FAILED, DORMANT, or OFFLINE.")
               STANDBY
             };
 
-            // Indication of a service provided by the subsystem.
+            @doc("Indication of a service provided by the subsystem.")
             struct service_indication_type
             {
-              // Name of the service.
+              @doc("Name of the service.")
               service_name_type service_name;
-              // Indication whether the service is registered.
+              @doc("Indication whether the service is registered.")
               boolean registration_indicator;
             };
 
-            // Version of the equipment
+            @doc("Version of the equipment")
             struct version_type
             {
-              // Major version number
+              @doc("Major version number")
               unsigned short major_version;
-              // Minor version number
+              @doc("Minor version number")
               unsigned short minor_version;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<long> function_applicable_mode_id_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<long> descriptor_related_parameter_id_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute function_name of class function_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute function_name of class function_type.")
             typedef string<32> function_function_name_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute parameter_name of class descriptor_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute parameter_name of class descriptor_type.")
             typedef string<128> descriptor_parameter_name_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute parameter_type of class descriptor_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute parameter_type of class descriptor_type.")
             typedef string<32> descriptor_parameter_type_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute parameter_unit of class descriptor_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute parameter_unit of class descriptor_type.")
             typedef string<32> descriptor_parameter_unit_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute typical_value of class descriptor_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute typical_value of class descriptor_type.")
             typedef string<32> descriptor_typical_value_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute parameter_range of class descriptor_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute parameter_range of class descriptor_type.")
             typedef string<32> descriptor_parameter_range_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute fault_name of class fault_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute fault_name of class fault_type.")
             typedef string<32> fault_fault_name_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute fault_isolation_data of class fault_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute fault_isolation_data of class fault_type.")
             typedef string<32> fault_fault_isolation_data_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute quality_of_service of class interest_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute quality_of_service of class interest_type.")
             typedef string<32> interest_quality_of_service_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute recipient of class interest_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute recipient of class interest_type.")
             typedef string<32> interest_recipient_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute parameter_name of class parameter_name_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute parameter_name of class parameter_name_type.")
             typedef string<128> parameter_name_parameter_name_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute parameter_name of class name_error_pair_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute parameter_name of class name_error_pair_type.")
             typedef string<128> name_error_pair_parameter_name_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute error_indication of class name_error_pair_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute error_indication of class name_error_pair_type.")
             typedef string<32> name_error_pair_error_indication_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute parameter_name of class name_value_pair_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute parameter_name of class name_value_pair_type.")
             typedef string<128> name_value_pair_parameter_name_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<service_name_type> service_list_service_indication_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute value of class name_value_pair_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute value of class name_value_pair_type.")
             typedef string<32> name_value_pair_value_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<device_name_type, 64> device_identification_serial_number_type;
 
-            // Information about a service
+            @doc("Information about a service")
             struct service_information_type
             {
               information_name_type information_name;
             };
 
-            // Health of service
+            @doc("Health of service")
             struct service_health_type
             {
               service_name_type service_name;
@@ -332,292 +332,281 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
             };
 
-            // Typedef for strings representing names of parameters. 
+            @doc("Typedef for strings representing names of parameters.")
             struct parameter_name_type
             {
-              // parameter_name values are unique within the scope of a subsystem.
+              @doc("parameter_name values are unique within the scope of a subsystem.")
               parameter_name_parameter_name_type parameter_name;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<operational_mode_type> descriptor_applicable_operational_mode_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<technical_state_type> descriptor_technical_state_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<service_indication_type> service_indication_list_service_indication_type;
 
-            // A list of service names as used by Provide_Subsystem_Services.
+            @doc("A list of service names as used by Provide_Subsystem_Services.")
             struct service_list_type
             {
               service_list_service_indication_type service_indication;
             };
 
-            // A function operated by the subsystem
-            // Subsystems provide several operational modes like long-range-detection,
-            // missile-detection, surface surveillance etc. in case of surveillance radar,
-            // normal tracking, slaved, joystick controlled in case of fire control radar etc. 
-            // Operational modes summarise a set of subsystem parameters optimising the
-            // subsystem with respect to an operational purpose.
-            // The names of modes of a specific type of subsystem (e.g. or a radar) differ from
-            // supplier to supplier. Consequently, they shall be handled as configuration
-            // parameters. They shall be offered to the operator to enable him for a selection
-            // and shall be transferred to the subsystem to achieve the intended reaction.
-            // The definition of names of operational modes is not within the scope of this
-            // standard.
-            // It is the CMS's responsibility to initiate the determination of initial state by
-            // making a request for information to the subsystem. 
-            // In the case where the CMS does not have mastership of the subsystem, a change of
-            // the operational mode shall be indicated by informing the CMS about the new
-            // operational mode (see service "Provide health state").
-            // Configuration data like the set of available operational modes may be received at
-            // runtime but may also be inserted by means of an automatic or manual setup
-            // process. Although automatic runtime transfer of such information may be achieved
-            // through ‘Manage Subsystem Parameters’ it is not a mandatory requirement of this
-            // standard for that mechanism to be used.
-            // One of the functions of a subsystem
+            @doc("A function operated by the subsystem \
+              Subsystems provide several operational modes like long-range-detection, \
+              missile-detection, surface surveillance etc. in case of surveillance radar, \
+              normal tracking, slaved, joystick controlled in case of fire control radar etc. \
+              Operational modes summarise a set of subsystem parameters optimising the \
+              subsystem with respect to an operational purpose. \
+              The names of modes of a specific type of subsystem (e.g. or a radar) differ from \
+              supplier to supplier. Consequently, they shall be handled as configuration \
+              parameters. They shall be offered to the operator to enable him for a selection \
+              and shall be transferred to the subsystem to achieve the intended reaction. \
+              The definition of names of operational modes is not within the scope of this \
+              standard. \
+              It is the CMS's responsibility to initiate the determination of initial state by \
+              making a request for information to the subsystem. \
+              In the case where the CMS does not have mastership of the subsystem, a change of \
+              the operational mode shall be indicated by informing the CMS about the new \
+              operational mode (see service \"Provide health state\"). \
+              Configuration data like the set of available operational modes may be received at \
+              runtime but may also be inserted by means of an automatic or manual setup \
+              process. Although automatic runtime transfer of such information may be achieved \
+              through 'Manage Subsystem Parameters' it is not a mandatory requirement of this \
+              standard for that mechanism to be used. \
+              One of the functions of a subsystem")
             struct function_type
             {
-              // The functions unique idenitifier
-#ifdef DDS_XTYPES
-              @Key function_id_type function_id;
-#else
-              function_id_type function_id;
-#endif
-              // The name of function as understood by an operator
-              function_function_name_type function_name;
-              // The operational modes in which the function is available
-              function_applicable_mode_id_type applicable_mode_id;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-            };
-#ifndef DDS_XTYPES
-#pragma keylist function_type function_id subsystem_id
-#endif
+              @doc("The functions unique idenitifier")
+              @key function_id_type function_id;
 
-            // A sequence type, to represent multiple values.
+              @doc("The name of function as understood by an operator")
+              function_function_name_type function_name;
+
+              @doc("The operational modes in which the function is available")
+              function_applicable_mode_id_type applicable_mode_id;
+
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
+              @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<parameter_name_type> parameter_name_sequence_element_type;
 
-            // Report a fault to CMS
-            // The service allows the CMS to monitor and evaluate the health state of the
-            // subsystem. The health state information describes functional availability of the
-            // subsystem and the services it provides.
-            // The service may be triggered by several possible situations:
-            // <ul>
-            //  <li>Periodic event, for example by internal clock,</li>
-            //  <li>Actor (CMS) request,</li>
-            //  <li>Health state change,</li>
-            //  <li>Initialization (start-up),</li>
-            //  <li>Recovery of the subsystem after a failure.</li>
-            // </ul>
-            // In addition to the health state being provided, additional information may be
-            // provided to the CMS. In case of a service, the information may include a list of
-            // detected faults. In case of a subsystem, the information may include the list of
-            // services together with their health state, and for every service which has health
-            // state other than AVAILABLE, a list of detected faults. This two dimensional
-            // structure is called the service availability matrix.
-            // The state NOT AVAILABLE may also describe the situation in which the service is
-            // not implemented. In this case the list of faults shall be empty. In the state
-            // UNKNOWN, the subsystem may provide the reason for not being able to evaluate
-            // health state (e.g. BIT process not running).
-            // The service ends with success when the health state (possibly accompanied by
-            // additional information) is provided to the actor. 
-            // Relationship to technical state.
-            // The reported health state of the services is dependent on the technical state.
-            // In the technical state ONLINE, the health state of the services is determined
-            // based on the detected faults (if any).
-            // In all technical states other than ONLINE (except OFFLINE), the health state of
-            // all services, except the service Subsystem_Control, is NOT AVAILABLE.
-            // The health state of the service Subsystem_Control shall then be DEGRADED, since
-            // some functions (e.g. Control Battle Override) are not available in those
-            // technical states, and some functions are (e.g. Manage Technical State).
-            // In the technical state OFFLINE no communication at all is possible with the CMS
-            // so the health state is not reported.
-            // Relationship to battle override.
-            // When Battle Override is set (see service Control Battle Override), certain faults
-            // are not taken into account when determining the health state. These overridable
-            // faults generally refer to circumstances that may cause damage to own equipments,
-            // but do not prohibit executing the requested task.
-            // Relationship to simulation mode.
-            // If the subsystem is in Simulation mode (technical state is ONLINE), only the
-            // faults for parts needed for the simulated execution of the service are taken into
-            // account when determining the health state of a service.
-            // For instance, if the transmitter is defective, the service Track_Reporting is
-            // reported AVAILABLE when in Simulation mode, but is reported NOT AVAILABLE when
-            // not in Simulation mode.
-            // Faults may also be simulated for training purposes (see service Define Fault
-            // Script). Therefore, irrespective of the Simulation mode, all faults (real and
-            // simulated) are included in the reported list of detected faults, each with an
-            // indication whether the fault is real or simulated.
-            // If a real system part is simulated, faults of the simulated part should have a
-            // different identification.
-            // For instance (see previous example) in Simulation mode, a simulated transmitter
-            // could be used, for which the trainer has inserted a simulated fault.
-            // Any faults in the real transmitter would be reported (real fault) as well as the
-            // injected fault in the simulated transmitter (simulated fault). However, the
-            // health state of the service Track_Reporting would be based only on the status of
-            // the simulated transmitter.
-            // Reason for health state
-            // Each reported health state other than AVAILABLE is accompanied by the reason(s)
-            // for that health. In this way the CMS may for instance derive that although the
-            // technical state of the subsystem is STANDBY (and NOT AVAILABLE for that reason),
-            // there are also faults that would prevent the service to become AVAILABLE when the
-            // technical state would be switched to ONLINE.
-            // Class to represent a subsystem fault
+            @doc("Report a fault to CMS \
+              The service allows the CMS to monitor and evaluate the health state of the \
+              subsystem. The health state information describes functional availability of the \
+              subsystem and the services it provides. \
+              The service may be triggered by several possible situations: \
+              <ul> \
+               <li>Periodic event, for example by internal clock,</li> \
+               <li>Actor (CMS) request,</li> \
+               <li>Health state change,</li> \
+               <li>Initialization (start-up),</li> \
+               <li>Recovery of the subsystem after a failure.</li> \
+              </ul> \
+              In addition to the health state being provided, additional information may be \
+              provided to the CMS. In case of a service, the information may include a list of \
+              detected faults. In case of a subsystem, the information may include the list of \
+              services together with their health state, and for every service which has health \
+              state other than AVAILABLE, a list of detected faults. This two dimensional \
+              structure is called the service availability matrix. \
+              The state NOT AVAILABLE may also describe the situation in which the service is \
+              not implemented. In this case the list of faults shall be empty. In the state \
+              UNKNOWN, the subsystem may provide the reason for not being able to evaluate \
+              health state (e.g. BIT process not running). \
+              The service ends with success when the health state (possibly accompanied by \
+              additional information) is provided to the actor.  \
+              Relationship to technical state. \
+              The reported health state of the services is dependent on the technical state. \
+              In the technical state ONLINE, the health state of the services is determined \
+              based on the detected faults (if any). \
+              In all technical states other than ONLINE (except OFFLINE), the health state of \
+              all services, except the service Subsystem_Control, is NOT AVAILABLE. \
+              The health state of the service Subsystem_Control shall then be DEGRADED, since \
+              some functions (e.g. Control Battle Override) are not available in those \
+              technical states, and some functions are (e.g. Manage Technical State). \
+              In the technical state OFFLINE no communication at all is possible with the CMS \
+              so the health state is not reported. \
+              Relationship to battle override. \
+              When Battle Override is set (see service Control Battle Override), certain faults \
+              are not taken into account when determining the health state. These overridable \
+              faults generally refer to circumstances that may cause damage to own equipments, \
+              but do not prohibit executing the requested task. \
+              Relationship to simulation mode. \
+              If the subsystem is in Simulation mode (technical state is ONLINE), only the \
+              faults for parts needed for the simulated execution of the service are taken into \
+              account when determining the health state of a service. \
+              For instance, if the transmitter is defective, the service Track_Reporting is \
+              reported AVAILABLE when in Simulation mode, but is reported NOT AVAILABLE when \
+              not in Simulation mode. \
+              Faults may also be simulated for training purposes (see service Define Fault \
+              Script). Therefore, irrespective of the Simulation mode, all faults (real and \
+              simulated) are included in the reported list of detected faults, each with an \
+              indication whether the fault is real or simulated. \
+              If a real system part is simulated, faults of the simulated part should have a \
+              different identification. \
+              For instance (see previous example) in Simulation mode, a simulated transmitter \
+              could be used, for which the trainer has inserted a simulated fault. \
+              Any faults in the real transmitter would be reported (real fault) as well as the \
+              injected fault in the simulated transmitter (simulated fault). However, the \
+              health state of the service Track_Reporting would be based only on the status of \
+              the simulated transmitter. \
+              Reason for health state \
+              Each reported health state other than AVAILABLE is accompanied by the reason(s) \
+              for that health. In this way the CMS may for instance derive that although the \
+              technical state of the subsystem is STANDBY (and NOT AVAILABLE for that reason), \
+              there are also faults that would prevent the service to become AVAILABLE when the \
+              technical state would be switched to ONLINE. \
+              Class to represent a subsystem fault")
             struct fault_type
             {
               fault_fault_name_type fault_name;
               event_type event;
-              // Indicates whether this fault is real or simulated/inserted.
-              boolean simulated;
-              // Indicates whether this fault is overridden by Battle Override when determining
-              // the health state.
-              boolean overridden;
-              // For instance cabinet id and rack id.
-              fault_fault_isolation_data_type fault_isolation_data;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-            };
-#ifndef DDS_XTYPES
-#pragma keylist fault_type subsystem_id
-#endif
 
-            // A list of service indications as used by Provide_Subsystem_Services.
+              @doc("Indicates whether this fault is real or simulated/inserted.")
+              boolean simulated;
+
+              @doc("Indicates whether this fault is overridden by Battle Override when determining \
+                the health state.")
+              boolean overridden;
+
+              @doc("For instance cabinet id and rack id.")
+              fault_fault_isolation_data_type fault_isolation_data;
+
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
+              @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            @doc("A list of service indications as used by Provide_Subsystem_Services.")
             struct service_indication_list_type
             {
               service_indication_list_service_indication_type service_indication;
             };
 
-            // Combination of name of parameter (for which a request could not be processed) and
-            // an indication of the error.
+            @doc("Combination of name of parameter (for which a request could not be processed) and \
+                an indication of the error.")
             struct name_error_pair_type
             {
-              // parameter_name values are unique within the scope of a subsystem.
+              @doc("parameter_name values are unique within the scope of a subsystem.")
               name_error_pair_parameter_name_type parameter_name;
               name_error_pair_error_indication_type error_indication;
             };
 
-            // Identification data of the equipment.
+            @doc("Identification data of the equipment.")
             struct device_identification_type
             {
-              // Name of the product. Example TRS3D
+              @doc("Name of the product. Example TRS3D")
               device_name_type product;
-              // Serial number identifying the individual device. 
+              @doc("Serial number identifying the individual device. ")
               device_identification_serial_number_type serial_number;
-              // This describes the general type of the equipment. Example: Air Surveillance Radar
+              @doc("This describes the general type of the equipment. Example: Air Surveillance Radar")
               device_name_type equipment_type;
-              // Version of the device.
+              @doc("Version of the device.")
               version_type version;
             };
 
-            // A generic struct for (name, value) pairs. Used in multiple situations. 
+            @doc("A generic struct for (name, value) pairs. Used in multiple situations.")
             struct name_value_pair_type
             {
-              // parameter_name values are unique within the scope of a subsystem.
+              @doc("parameter_name values are unique within the scope of a subsystem.")
               name_value_pair_parameter_name_type parameter_name;
               name_value_pair_value_type value;
             };
 
-            // A sequence of strings (names). Used in request for parameters and parameter
-            // descriptors. If the sequence is empty, the request is for all parameters. 
+            @doc("A sequence of strings (names). Used in request for parameters and parameter \
+                descriptors. If the sequence is empty, the request is for all parameters.")
             struct parameter_name_sequence_type
             {
               parameter_name_sequence_element_type element;
             };
 
-            // Encapsulation of interest in service
+            @doc("Encapsulation of interest in service")
             struct interest_type
             {
               registration_type registration;
-              // * optional *
+              @doc("* optional *")
               interest_quality_of_service_type quality_of_service;
-              // * optional *
+              @doc("* optional *")
               interest_recipient_type recipient;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<fault_type> fault_list_element_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<name_error_pair_type> name_error_sequence_element_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<name_value_pair_type> name_value_sequence_element_type;
 
-            // A list of faults
+            @doc("A list of faults")
             struct fault_list_type
             {
               fault_list_element_type element;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<interest_type> interest_list_element_type;
 
-            // sequence of error reports identifying the parameter names for which the request
-            // could not be processed, including an indication of the error (e.g. unknown
-            // parameter, illegal value).
+            @doc("sequence of error reports identifying the parameter names for which the request \
+              could not be processed, including an indication of the error (e.g. unknown \
+              parameter, illegal value).")
             struct name_error_sequence_type
             {
               name_error_sequence_element_type element;
             };
 
-            // Type describing the health state of a subsystem
+            @doc("Type describing the health state of a subsystem")
             struct subsystem_health_type
             {
-              // Current health state
+              @doc("Current health state")
               health_state_type health_state;
-              // Reason for last change of health state
+              @doc("Reason for last change of health state")
               health_state_reason_type health_state_reason;
               device_identification_type subsystem_identification;
               org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
             };
 
-            // Sequence of (name, value) pairs used in retrieving and modifying parameters. 
+            @doc("Sequence of (name, value) pairs used in retrieving and modifying parameters.")
             struct name_value_sequence_type
             {
               name_value_sequence_element_type element;
             };
 
-            // A list of interest
+            @doc("A list of interest")
             struct interest_list_type
             {
               interest_list_element_type element;
             };
 
-            // Type for parameter descriptors. 
+            @doc("Type for parameter descriptors.")
             struct descriptor_type
             {
-              // parameter_name values are unique within the scope of a subsystem.
+              @doc("parameter_name values are unique within the scope of a subsystem.")
               descriptor_parameter_name_type parameter_name;
               descriptor_parameter_type_type parameter_type;
               descriptor_parameter_unit_type parameter_unit;
-              // *optional*
+              @doc("*optional*")
               descriptor_typical_value_type typical_value;
-              // *optional*
+              @doc("*optional*")
               descriptor_parameter_range_type parameter_range;
-              // Technical state(s) in which this parameter may be modified.
+              @doc("Technical state(s) in which this parameter may be modified.")
               descriptor_technical_state_type technical_state;
               descriptor_applicable_operational_mode_type applicable_operational_mode;
-              // Refers (by index) into the descriptor_sequence instance of which this instance of
-              // the descriptor class is a part.
+              @doc("Refers (by index) into the descriptor_sequence instance of which this instance of \
+                the descriptor class is a part.")
               descriptor_related_parameter_id_type related_parameter_id;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<descriptor_type> descriptor_sequence_element_type;
 
-            // Sequence of parameter descriptors, used in retrieving parameter descriptors.
+            @doc("Sequence of parameter descriptors, used in retrieving parameter descriptors.")
             struct descriptor_sequence_type
             {
               descriptor_sequence_element_type element;

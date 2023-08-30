@@ -24,90 +24,67 @@ module org
           module Sensor_Control
           {
 
-            // This package contains interfaces for the Control Emissions service.
+            @doc("This package contains interfaces for the Control Emissions service.")
             module Control_Emissions
             {
 
-              // struct holding keys for class control_emission_setting_type.
+              @doc("struct holding keys for class control_emission_setting_type.")
               struct control_emission_setting_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Method used by the sensor to return the current state of emissions and its
-              // changes (if any).
-              // The sensor is requested to inhibit/enable own emissions. In the case where the
-              // sensor is a radar, this shall result in the Radiation on/off command.
-              // Note that this interface just covers the software managed control of the emission
-              // state. For safety reasons many sensors are supplied with an additional hardware
-              // control of own emission state, such as a pushbutton directly connected to the
-              // transmitter.
-              // Provision of the Emission state
-              // Sensor shall keep CMS informed about the current state of emissions and its
-              // changes (if any).
-              // It is the CMS's responsibility to initiate the determination of initial state by
-              // making a request for information to the subsystem. 
-              // Lack of mastership
-              // In the case where CMS does not have mastership of the sensor, CMS shall be
-              // informed about the current emissions state and its changes (if any).
-              // Relationship to the Transmission Sectors management
-              // As long as emissions are on, the sensor shall transmit in the sectors where
-              // transmission is allowed and according to the relevant transmission modes and
-              // parameters, as determined through <i>Manage Transmission Sectors</i>.
+              @doc("Method used by the sensor to return the current state of emissions and its \
+                changes (if any). \
+                The sensor is requested to inhibit/enable own emissions. In the case where the \
+                sensor is a radar, this shall result in the Radiation on/off command. \
+                Note that this interface just covers the software managed control of the emission \
+                state. For safety reasons many sensors are supplied with an additional hardware \
+                control of own emission state, such as a pushbutton directly connected to the \
+                transmitter. \
+                Provision of the Emission state \
+                Sensor shall keep CMS informed about the current state of emissions and its \
+                changes (if any). \
+                It is the CMS's responsibility to initiate the determination of initial state by \
+                making a request for information to the subsystem. \
+                Lack of mastership \
+                In the case where CMS does not have mastership of the sensor, CMS shall be \
+                informed about the current emissions state and its changes (if any). \
+                Relationship to the Transmission Sectors management \
+                As long as emissions are on, the sensor shall transmit in the sectors where \
+                transmission is allowed and according to the relevant transmission modes and \
+                parameters, as determined through <i>Manage Transmission Sectors</i>.")
               struct control_emission_setting_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::control_emission_state_type emission_state;
               };
-#ifndef DDS_XTYPES
-#pragma keylist control_emission_setting_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class set_control_emission_type.
+              @doc("struct holding keys for class set_control_emission_type.")
               struct set_control_emission_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Method used by the CMS to send an Emissions on/off request to the sensor.
-              // This is the Subsystem interface for controlling emissions.
+              @doc("Method used by the CMS to send an Emissions on/off request to the sensor. \
+                This is the Subsystem interface for controlling emissions.")
               struct set_control_emission_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::control_emission_state_type control_emission_state;
               };
-#ifndef DDS_XTYPES
-#pragma keylist set_control_emission_type request_id subsystem_id
-#endif
-
             };
           };
         };

@@ -21,12 +21,12 @@ module org
           module Encyclopaedic_Support
           {
 
-            // A string type
-            // Standard description of the encyclopaedic data set
+            @doc("A string type \
+                Standard description of the encyclopaedic data set")
             typedef string<60> data_descriptor_type;
 
-            // A string type
-            // Representation of a Uniform Resource Locator see www.w3.org
+            @doc("A string type \
+                Representation of a Uniform Resource Locator see www.w3.org")
             typedef string<255> url_type;
 
           };

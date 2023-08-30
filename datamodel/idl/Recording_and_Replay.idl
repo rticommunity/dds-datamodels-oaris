@@ -19,105 +19,105 @@ module org
         module Subsystem_Domain
         {
 
-          // Defines the domain model for the Recording and Replay interfaces.
+          @doc("Defines the domain model for the Recording and Replay interfaces.")
           module Recording_and_Replay
           {
 
-            // The current time (time of day). Used to indicate when playback should start. This
-            // allows synchronisation of playback from different subsystems.
+            @doc("The current time (time of day). Used to indicate when playback should start. This \
+                allows synchronisation of playback from different subsystems.")
             typedef org::omg::c4i::Domain_Model::Common_Types::time_type actual_time_type;
 
-            // The amount by which a parameter shall change in order to be recorded, when
-            // recording on change
+            @doc("The amount by which a parameter shall change in order to be recorded, when \
+                recording on change")
             typedef float change_threshold_type;
 
-            // Defined the rate at which the parameter is to be recorded for periodic recording
+            @doc("Defined the rate at which the parameter is to be recorded for periodic recording")
             typedef float rate_type;
 
-            // Boolean specifying record on change (true) or periodic (false)
+            @doc("Boolean specifying record on change (true) or periodic (false)")
             typedef boolean record_on_change_type;
 
-            // The time in a recording. This is used to indicate the position in the recording
-            // at which playback should start.
+            @doc("The time in a recording. This is used to indicate the position in the recording \
+                at which playback should start.")
             typedef org::omg::c4i::Domain_Model::Common_Types::time_type recorded_time_type;
 
-            // Used to identify a specific recording. The subsystem shall manage a number of
-            // recordings and associate recording ids with them in a subsystem dependent way.
-            // Once associated, it passes that reference through the parameter recording_id to
-            // the CMS so that the CMS may ask for a specific recording later on. Again, the CMS
-            // manages the relationship between the recording_id and the recording it requested
-            // to be made in a system dependent way.
-            // There is no intention to model the method either the subsystem or the CMS uses to
-            // manage the relationship between recording_id and the recordings as this is
-            // transparent to the interface and would unnecessarily restrict the choices
-            // available to the designers.
+            @doc("Used to identify a specific recording. The subsystem shall manage a number of \
+                recordings and associate recording ids with them in a subsystem dependent way. \
+                Once associated, it passes that reference through the parameter recording_id to \
+                the CMS so that the CMS may ask for a specific recording later on. Again, the CMS \
+                manages the relationship between the recording_id and the recording it requested \
+                to be made in a system dependent way. \
+                There is no intention to model the method either the subsystem or the CMS uses to \
+                manage the relationship between recording_id and the recordings as this is \
+                transparent to the interface and would unnecessarily restrict the choices \
+                available to the designers.")
             typedef long recording_id_type;
 
-            // Controls the replay speed. 1.0 represents real time.
+            @doc("Controls the replay speed. 1.0 represents real time.")
             typedef float replay_speed_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute parameter of class parameter_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute parameter of class parameter_type.")
             typedef string<32> parameter_parameter_type;
 
-            // A string type
-            // Typdef for bounded string type for attribute recorded_value of class recorded_data_type.
+            @doc("A string type \
+                Typdef for bounded string type for attribute recorded_value of class recorded_data_type.")
             typedef string<20> recorded_data_recorded_value_type;
 
-            // Identified the parameter to be recorded
+            @doc("Identified the parameter to be recorded")
             struct parameter_type
             {
               parameter_parameter_type parameter;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<parameter_type> replay_set_parameter_type;
 
-            // Specifies the recording characteristics required for each parameter
+            @doc("Specifies the recording characteristics required for each parameter")
             struct recording_descriptor_type
             {
-              // When record_on_change is true, any change greater than the change_threshold from
-              // the last recorded value shall be recorded. This only applies for numeric
-              // quantities i.e. not enumerated types, and is ignored otherwise.
+              @doc("When record_on_change is true, any change greater than the change_threshold from \
+                the last recorded value shall be recorded. This only applies for numeric \
+                quantities i.e. not enumerated types, and is ignored otherwise.")
               change_threshold_type change_threshold;
-              // Specifies recording rate when record_on_change is false.
+              @doc("Specifies recording rate when record_on_change is false.")
               rate_type rate;
-              // Indicates whether to record all changes greater than the change threshold or
-              // record at the specified rate.
+              @doc("Indicates whether to record all changes greater than the change threshold or \
+                record at the specified rate.")
               record_on_change_type record_on_change;
               parameter_type parameter;
             };
 
-            // Data recorded against the specified parameter
+            @doc("Data recorded against the specified parameter")
             struct recorded_data_type
             {
-              // This needs to reference allowable values defined by the possible recording
-              // parameters - see 'recording parameters'.
+              @doc("This needs to reference allowable values defined by the possible recording \
+                parameters - see 'recording parameters'.")
               recorded_data_recorded_value_type recorded_value;
               org::omg::c4i::Domain_Model::Common_Types::time_type time_stamp;
               parameter_type parameter;
             };
 
-            // A set of parameters required to be replayed. These must exist in the associated
-            // recording set to be of any use.
+            @doc("A set of parameters required to be replayed. These must exist in the associated \
+                recording set to be of any use.")
             struct replay_set_type
             {
               replay_set_parameter_type parameter;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<recording_descriptor_type> recording_set_recording_descriptor_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<recorded_data_type> recording_recorded_data_type;
 
-            // A set of recording descriptors specifying what is to be recorded
+            @doc("A set of recording descriptors specifying what is to be recorded")
             struct recording_set_type
             {
               recording_set_recording_descriptor_type recording_descriptor;
             };
 
-            // A recording: a set of recorded data
+            @doc("A recording: a set of recorded data")
             struct recording_type
             {
               recording_recorded_data_type recorded_data;

@@ -24,103 +24,80 @@ module org
           module Sensor_Control
           {
 
-            // This package contains interfaces for the Test Target Facility service.
+            @doc("This package contains interfaces for the Test Target Facility service.")
             module Test_Target_Facility
             {
 
-              // struct holding keys for class notify_test_target_type.
+              @doc("struct holding keys for class notify_test_target_type.")
               struct notify_test_target_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                  subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Method used by the sensor to return the actual state of the Test Target
-              // generation consistent with the request.
-              // The sensor is requested to activate/deactivate the execution of its internal
-              // functional test and stimulation realized by means of test targets generation. A
-              // number of Test Target scenarios may be defined and modified as specified in
-              // <i>Define Test Target Scenario</i>, each scenario is identified by a proper
-              // identification. At any time no more than one Test Target scenario may be active. 
-              // Test Target generation mechanism (applicable to some sensors)
-              // The Test Target generation consists of the injection of proper signals at
-              // different points of the receiver chain in order to produce the relevant
-              // detections in input to the RMC (Radar Management Computer); these Test Target
-              // detections are processed by the RMC as the real ones, so they shall generate one
-              // o more plots (“Test Target” plots) and tracks (“Test Target” tracks).
-              // Such a generation mechanism is controlled by the RMC driving a devoted hardware,
-              // its purpose is to execute an on-line BITE of the complete receiver chain.
-              // Test Target generation is executed while the radar is working in operational
-              // mode, so Test Target detections and real detections live together, forming “Test
-              // Target” plots and tracks at the same time as real plots and tracks. This implies
-              // that CMS shall receive “Test Target” plots and tracks together with real plots
-              // and tracks.
-              // Lack of mastership
-              // In the case where CMS does not have mastership of the sensor, CMS shall be
-              // informed about the actual state of the Test Target generation and its changes (if
-              // any).
-              // Provision of the Test Target generation state
-              // Sensor shall keep CMS informed about the actual state of the Test Target
-              // generation and its changes (if any).
-              // Relationship to the subsystem health state
-              // As long as a Test Target scenario is in generation sensor checks the relevant
-              // returns at different points of the receiver chain, up to form plots in the same
-              // positions where Test Targets have been generated. The relevant results contribute
-              // to the sensor health state.
+              @doc("Method used by the sensor to return the actual state of the Test Target \
+                generation consistent with the request. \
+                The sensor is requested to activate/deactivate the execution of its internal \
+                functional test and stimulation realized by means of test targets generation. A \
+                number of Test Target scenarios may be defined and modified as specified in \
+                <i>Define Test Target Scenario</i>, each scenario is identified by a proper \
+                identification. At any time no more than one Test Target scenario may be active. \
+                Test Target generation mechanism (applicable to some sensors) \
+                The Test Target generation consists of the injection of proper signals at \
+                different points of the receiver chain in order to produce the relevant \
+                detections in input to the RMC (Radar Management Computer); these Test Target \
+                detections are processed by the RMC as the real ones, so they shall generate one \
+                o more plots (\"Test Target\" plots) and tracks (\"Test Target\" tracks). \
+                Such a generation mechanism is controlled by the RMC driving a devoted hardware, \
+                its purpose is to execute an on-line BITE of the complete receiver chain. \
+                Test Target generation is executed while the radar is working in operational \
+                mode, so Test Target detections and real detections live together, forming \"Test \
+                Target\" plots and tracks at the same time as real plots and tracks. This implies \
+                that CMS shall receive \"Test Target\" plots and tracks together with real plots \
+                and tracks. \
+                Lack of mastership \
+                In the case where CMS does not have mastership of the sensor, CMS shall be \
+                informed about the actual state of the Test Target generation and its changes (if \
+                any). \
+                Provision of the Test Target generation state \
+                Sensor shall keep CMS informed about the actual state of the Test Target \
+                generation and its changes (if any). \
+                Relationship to the subsystem health state \
+                As long as a Test Target scenario is in generation sensor checks the relevant \
+                returns at different points of the receiver chain, up to form plots in the same \
+                positions where Test Targets have been generated. The relevant results contribute \
+                to the sensor health state.")
               struct notify_test_target_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_state_type test_target_scenario_state;
               };
-#ifndef DDS_XTYPES
-#pragma keylist notify_test_target_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class set_test_target_facility_state_type.
+              @doc("struct holding keys for class set_test_target_facility_state_type.")
               struct set_test_target_facility_state_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                  subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Method used by the CMS to send an activation request of a specified Test Target
-              // scenario.
-              // This is the Subsystem interface for testing target facilities.
+              @doc("Method used by the CMS to send an activation request of a specified Test Target \
+                scenario. \
+                This is the Subsystem interface for testing target facilities.")
               struct set_test_target_facility_state_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::test_target_scenario_state_type scenario_state;
               };
-#ifndef DDS_XTYPES
-#pragma keylist set_test_target_facility_state_type request_id subsystem_id
-#endif
-
             };
           };
         };

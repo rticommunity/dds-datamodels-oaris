@@ -27,254 +27,213 @@ module org
             module Provide_Health_State
             {
 
-              // struct holding keys for class report_service_health_type.
+              @doc("struct holding keys for class report_service_health_type.")
               struct report_service_health_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Report health of service
-              // The service allows the CMS to monitor and evaluate the health state of the
-              // subsystem. The health state information describes functional availability of the
-              // subsystem and the services it provides.
-              // The service may be triggered by several possible situations:
-              // <ul>
-              //  <li>Periodic event, for example by internal clock,</li>
-              //  <li>Actor (CMS) request,</li>
-              //  <li>Health state change,</li>
-              //  <li>Initialization (start-up),</li>
-              //  <li>Recovery of the subsystem after a failure.</li>
-              // </ul>
-              // In addition to the health state being provided, additional information may be
-              // provided to the CMS. In case of a service, the information may include a list of
-              // detected faults. In case of a subsystem, the information may include the list of
-              // services together with their health state, and for every service which has health
-              // state other than AVAILABLE, a list of detected faults. This two dimensional
-              // structure is called the service availability matrix.
-              // The state NOT AVAILABLE may also describe the situation in which the service is
-              // not implemented. In this case the list of faults shall be empty. In the state
-              // UNKNOWN, the subsystem may provide the reason for not being able to evaluate
-              // health state (e.g. BIT process not running).
-              // The service ends with success when the health state (possibly accompanied by
-              // additional information) is provided to the actor. 
-              // Relationship to technical state.
-              // The reported health state of the services is dependent on the technical state.
-              // In the technical state ONLINE, the health state of the services is determined
-              // based on the detected faults (if any).
-              // In all technical states other than ONLINE (except OFFLINE), the health state of
-              // all services, except the service Subsystem_Control, is NOT AVAILABLE.
-              // The health state of the service Subsystem_Control shall then be DEGRADED, since
-              // some functions (e.g. Control Battle Override) are not available in those
-              // technical states, and some functions are (e.g. Manage Technical State).
-              // In the technical state OFFLINE no communication at all is possible with the CMS
-              // so the health state is not reported.
-              // Relationship to battle override.
-              // When Battle Override is set (see service Control Battle Override), certain faults
-              // are not taken into account when determining the health state. These overridable
-              // faults generally refer to circumstances that may cause damage to own equipments,
-              // but do not prohibit executing the requested task.
-              // Relationship to simulation mode.
-              // If the subsystem is in Simulation mode (technical state is ONLINE), only the
-              // faults for parts needed for the simulated execution of the service are taken into
-              // account when determining the health state of a service.
-              // For instance, if the transmitter is defective, the service Track_Reporting is
-              // reported AVAILABLE when in Simulation mode, but is reported NOT AVAILABLE when
-              // not in Simulation mode.
-              // Faults may also be simulated for training purposes (see service Define Fault
-              // Script). Therefore, irrespective of the Simulation mode, all faults (real and
-              // simulated) are included in the reported list of detected faults, each with an
-              // indication whether the fault is real or simulated.
-              // If a real system part is simulated, faults of the simulated part should have a
-              // different identification.
-              // For instance (see previous example) in Simulation mode, a simulated transmitter
-              // could be used, for which the trainer has inserted a simulated fault.
-              // Any faults in the real transmitter would be reported (real fault) as well as the
-              // injected fault in the simulated transmitter (simulated fault). However, the
-              // health state of the service Track_Reporting would be based only on the status of
-              // the simulated transmitter.
-              // Reason for health state
-              // Each reported health state other than AVAILABLE is accompanied by the reason(s)
-              // for that health. In this way the CMS may for instance derive that although the
-              // technical state of the subsystem is STANDBY (and NOT AVAILABLE for that reason),
-              // there are also faults that would prevent the service to become AVAILABLE when the
-              // technical state would be switched to ONLINE.
+              @doc("eport health of service \
+                The service allows the CMS to monitor and evaluate the health state of the \
+                subsystem. The health state information describes functional availability of the \
+                subsystem and the services it provides. \
+                The service may be triggered by several possible situations: \
+                <ul> \
+                 <li>Periodic event, for example by internal clock,</li> \
+                 <li>Actor (CMS) request,</li> \
+                 <li>Health state change,</li> \
+                 <li>Initialization (start-up),</li> \
+                 <li>Recovery of the subsystem after a failure.</li> \
+                </ul> \
+                In addition to the health state being provided, additional information may be \
+                provided to the CMS. In case of a service, the information may include a list of \
+                detected faults. In case of a subsystem, the information may include the list of \
+                services together with their health state, and for every service which has health \
+                state other than AVAILABLE, a list of detected faults. This two dimensional \
+                structure is called the service availability matrix. \
+                The state NOT AVAILABLE may also describe the situation in which the service is \
+                not implemented. In this case the list of faults shall be empty. In the state \
+                UNKNOWN, the subsystem may provide the reason for not being able to evaluate \
+                health state (e.g. BIT process not running). \
+                The service ends with success when the health state (possibly accompanied by \
+                additional information) is provided to the actor. \
+                Relationship to technical state. \
+                The reported health state of the services is dependent on the technical state. \
+                In the technical state ONLINE, the health state of the services is determined \
+                based on the detected faults (if any). \
+                In all technical states other than ONLINE (except OFFLINE), the health state of \
+                all services, except the service Subsystem_Control, is NOT AVAILABLE. \
+                The health state of the service Subsystem_Control shall then be DEGRADED, since \
+                some functions (e.g. Control Battle Override) are not available in those \
+                technical states, and some functions are (e.g. Manage Technical State). \
+                In the technical state OFFLINE no communication at all is possible with the CMS \
+                so the health state is not reported. \
+                Relationship to battle override. \
+                When Battle Override is set (see service Control Battle Override), certain faults \
+                are not taken into account when determining the health state. These overridable \
+                faults generally refer to circumstances that may cause damage to own equipments, \
+                but do not prohibit executing the requested task. \
+                Relationship to simulation mode. \
+                If the subsystem is in Simulation mode (technical state is ONLINE), only the \
+                faults for parts needed for the simulated execution of the service are taken into \
+                account when determining the health state of a service. \
+                For instance, if the transmitter is defective, the service Track_Reporting is \
+                reported AVAILABLE when in Simulation mode, but is reported NOT AVAILABLE when \
+                not in Simulation mode. \
+                Faults may also be simulated for training purposes (see service Define Fault \
+                Script). Therefore, irrespective of the Simulation mode, all faults (real and \
+                simulated) are included in the reported list of detected faults, each with an \
+                indication whether the fault is real or simulated. \
+                If a real system part is simulated, faults of the simulated part should have a \
+                different identification. \
+                For instance (see previous example) in Simulation mode, a simulated transmitter \
+                could be used, for which the trainer has inserted a simulated fault. \
+                Any faults in the real transmitter would be reported (real fault) as well as the \
+                injected fault in the simulated transmitter (simulated fault). However, the \
+                health state of the service Track_Reporting would be based only on the status of \
+                the simulated transmitter. \
+                Reason for health state \
+                Each reported health state other than AVAILABLE is accompanied by the reason(s) \
+                for that health. In this way the CMS may for instance derive that although the \
+                technical state of the subsystem is STANDBY (and NOT AVAILABLE for that reason), \
+                there are also faults that would prevent the service to become AVAILABLE when the \
+                technical state would be switched to ONLINE.")
               struct report_service_health_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::service_health_type health;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::fault_list_type the_fault_list;
               };
-#ifndef DDS_XTYPES
-#pragma keylist report_service_health_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class report_subsystem_health_type.
+              @doc("struct holding keys for class report_subsystem_health_type.")
               struct report_subsystem_health_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Report health of subsystem
-              // The service allows the CMS to monitor and evaluate the health state of the
-              // subsystem. The health state information describes functional availability of the
-              // subsystem and the services it provides.
-              // The service may be triggered by several possible situations:
-              // <ul>
-              //  <li>Periodic event, for example by internal clock,</li>
-              //  <li>Actor (CMS) request,</li>
-              //  <li>Health state change,</li>
-              //  <li>Initialization (start-up),</li>
-              //  <li>Recovery of the subsystem after a failure.</li>
-              // </ul>
-              // In addition to the health state being provided, additional information may be
-              // provided to the CMS. In case of a service, the information may include a list of
-              // detected faults. In case of a subsystem, the information may include the list of
-              // services together with their health state, and for every service which has health
-              // state other than AVAILABLE, a list of detected faults. This two dimensional
-              // structure is called the service availability matrix.
-              // The state NOT AVAILABLE may also describe the situation in which the service is
-              // not implemented. In this case the list of faults shall be empty. In the state
-              // UNKNOWN, the subsystem may provide the reason for not being able to evaluate
-              // health state (e.g. BIT process not running).
-              // The service ends with success when the health state (possibly accompanied by
-              // additional information) is provided to the actor. 
-              // Relationship to technical state.
-              // The reported health state of the services is dependent on the technical state.
-              // In the technical state ONLINE, the health state of the services is determined
-              // based on the detected faults (if any).
-              // In all technical states other than ONLINE (except OFFLINE), the health state of
-              // all services, except the service Subsystem_Control, is NOT AVAILABLE.
-              // The health state of the service Subsystem_Control shall then be DEGRADED, since
-              // some functions (e.g. Control Battle Override) are not available in those
-              // technical states, and some functions are (e.g. Manage Technical State).
-              // In the technical state OFFLINE no communication at all is possible with the CMS
-              // so the health state is not reported.
-              // Relationship to battle override.
-              // When Battle Override is set (see service Control Battle Override), certain faults
-              // are not taken into account when determining the health state. These overridable
-              // faults generally refer to circumstances that may cause damage to own equipments,
-              // but do not prohibit executing the requested task.
-              // Relationship to simulation mode.
-              // If the subsystem is in Simulation mode (technical state is ONLINE), only the
-              // faults for parts needed for the simulated execution of the service are taken into
-              // account when determining the health state of a service.
-              // For instance, if the transmitter is defective, the service Track_Reporting is
-              // reported AVAILABLE when in Simulation mode, but is reported NOT AVAILABLE when
-              // not in Simulation mode.
-              // Faults may also be simulated for training purposes (see service Define Fault
-              // Script). Therefore, irrespective of the Simulation mode, all faults (real and
-              // simulated) are included in the reported list of detected faults, each with an
-              // indication whether the fault is real or simulated.
-              // If a real system part is simulated, faults of the simulated part should have a
-              // different identification.
-              // For instance (see previous example) in Simulation mode, a simulated transmitter
-              // could be used, for which the trainer has inserted a simulated fault.
-              // Any faults in the real transmitter would be reported (real fault) as well as the
-              // injected fault in the simulated transmitter (simulated fault). However, the
-              // health state of the service Track_Reporting would be based only on the status of
-              // the simulated transmitter.
-              // Reason for health state
-              // Each reported health state other than AVAILABLE is accompanied by the reason(s)
-              // for that health. In this way the CMS may for instance derive that although the
-              // technical state of the subsystem is STANDBY (and NOT AVAILABLE for that reason),
-              // there are also faults that would prevent the service to become AVAILABLE when the
-              // technical state would be switched to ONLINE.
+              @doc("Report health of subsystem \
+                The service allows the CMS to monitor and evaluate the health state of the \
+                subsystem. The health state information describes functional availability of the \
+                subsystem and the services it provides. \
+                The service may be triggered by several possible situations: \
+                <ul> \
+                 <li>Periodic event, for example by internal clock,</li> \
+                 <li>Actor (CMS) request,</li> \
+                 <li>Health state change,</li> \
+                 <li>Initialization (start-up),</li> \
+                 <li>Recovery of the subsystem after a failure.</li> \
+                </ul> \
+                In addition to the health state being provided, additional information may be \
+                provided to the CMS. In case of a service, the information may include a list of \
+                detected faults. In case of a subsystem, the information may include the list of \
+                services together with their health state, and for every service which has health \
+                state other than AVAILABLE, a list of detected faults. This two dimensional \
+                structure is called the service availability matrix. \
+                The state NOT AVAILABLE may also describe the situation in which the service is \
+                not implemented. In this case the list of faults shall be empty. In the state \
+                UNKNOWN, the subsystem may provide the reason for not being able to evaluate \
+                health state (e.g. BIT process not running). \
+                The service ends with success when the health state (possibly accompanied by \
+                additional information) is provided to the actor. \
+                Relationship to technical state. \
+                The reported health state of the services is dependent on the technical state. \
+                In the technical state ONLINE, the health state of the services is determined \
+                based on the detected faults (if any). \
+                In all technical states other than ONLINE (except OFFLINE), the health state of \
+                all services, except the service Subsystem_Control, is NOT AVAILABLE. \
+                The health state of the service Subsystem_Control shall then be DEGRADED, since \
+                some functions (e.g. Control Battle Override) are not available in those \
+                technical states, and some functions are (e.g. Manage Technical State). \
+                In the technical state OFFLINE no communication at all is possible with the CMS \
+                so the health state is not reported. \
+                Relationship to battle override. \
+                When Battle Override is set (see service Control Battle Override), certain faults \
+                are not taken into account when determining the health state. These overridable \
+                faults generally refer to circumstances that may cause damage to own equipments, \
+                but do not prohibit executing the requested task. \
+                Relationship to simulation mode. \
+                If the subsystem is in Simulation mode (technical state is ONLINE), only the \
+                faults for parts needed for the simulated execution of the service are taken into \
+                account when determining the health state of a service. \
+                For instance, if the transmitter is defective, the service Track_Reporting is \
+                reported AVAILABLE when in Simulation mode, but is reported NOT AVAILABLE when \
+                not in Simulation mode. \
+                Faults may also be simulated for training purposes (see service Define Fault \
+                Script). Therefore, irrespective of the Simulation mode, all faults (real and \
+                simulated) are included in the reported list of detected faults, each with an \
+                indication whether the fault is real or simulated. \
+                If a real system part is simulated, faults of the simulated part should have a \
+                different identification. \
+                For instance (see previous example) in Simulation mode, a simulated transmitter \
+                could be used, for which the trainer has inserted a simulated fault. \
+                Any faults in the real transmitter would be reported (real fault) as well as the \
+                injected fault in the simulated transmitter (simulated fault). However, the \
+                health state of the service Track_Reporting would be based only on the status of \
+                the simulated transmitter. \
+                Reason for health state \
+                Each reported health state other than AVAILABLE is accompanied by the reason(s) \
+                for that health. In this way the CMS may for instance derive that although the \
+                technical state of the subsystem is STANDBY (and NOT AVAILABLE for that reason), \
+                there are also faults that would prevent the service to become AVAILABLE when the \
+                technical state would be switched to ONLINE.")
               struct report_subsystem_health_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::subsystem_health_type health;
               };
-#ifndef DDS_XTYPES
-#pragma keylist report_subsystem_health_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class request_service_health_type.
+              @doc("struct holding keys for class request_service_health_type.")
               struct request_service_health_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Request service health
+              @doc("Request service health")
               struct request_service_health_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::service_name_type service_name;
               };
-#ifndef DDS_XTYPES
-#pragma keylist request_service_health_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class request_subsystem_health_type.
+              @doc("struct holding keys for class request_subsystem_health_type.")
               struct request_subsystem_health_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Request subsystem health
+              @doc("Request subsystem health")
               struct request_subsystem_health_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-              };
-#ifndef DDS_XTYPES
-#pragma keylist request_subsystem_health_type request_id subsystem_id
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
             };
           };
         };

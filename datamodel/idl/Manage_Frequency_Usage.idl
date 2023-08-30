@@ -24,253 +24,208 @@ module org
           module Sensor_Control
           {
 
-            // This package contains interfaces for the Manage Frequency Usage service.
+            @doc("This package contains interfaces for the Manage Frequency Usage service.")
             module Manage_Frequency_Usage
             {
 
-              // struct holding keys for class report_transmission_mode_state_type.
+              @doc("struct holding keys for class report_transmission_mode_state_type.")
               struct report_transmission_mode_state_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Method used by the sensor to return the selected transmission mode, with the
-              // relevant parameters, and its changes (if any).
-              // This controls the sensor behaviour with respect to the transmission frequency
-              // management. Basing on a discrete set of transmission frequencies offered by the
-              // sensor, CMS may disable/enable the use of a subset of them. As well CMS may
-              // select the sensor transmission mode, i.e. how the sensor shall select the
-              // transmission frequencies, among the set of transmission modes supported by the
-              // sensor. 
-              // The transmission mode defines how the sensor selects the transmission
-              // frequencies, which may be:
-              // <ul>
-              //  <li>Fixed Frequency: sensor always uses the same pre-selected frequency</li>
-              // </ul>
-              // <ul>
-              //  <li>Frequency Diversity: at each transmission sensor selects the frequency to be
-              // used inside a pre-selected subset of frequencies</li>
-              // </ul>
-              // <ul>
-              //  <li>Automatic Frequency Selection: at each transmission sensor selects the
-              // frequency to be used among the least jammed frequencies</li>
-              // </ul>
-              // <ul>
-              //  <li>Random Agility: at each transmission sensor random selects the frequency to
-              // be used.</li>
-              // </ul>
-              // The availability of each of the above listed transmission modes depends on the
-              // sensor type and its capabilities (not all the sensor types support all them).
-              // Besides a transmission mode supported by the sensor may be “selectable” or “not
-              // selectable” according to the specific sensor rules and the state of transmission
-              // frequencies.
-              // Both the set of transmission frequencies offered by the sensor and the supported
-              // transmission modes (names and characteristics) differ from sensor to sensor, so
-              // they shall be handled as configuration parameters. The sensor reports all
-              // supported frequencies whether or not currently available or enabled.
-              // Sensors cannot enable/disable the setting of the frequency usage at its own
-              // initiative, but at any time a transmission frequency could become not available
-              // because of a fault (e.g. fault of the relevant oscillator), and this could affect
-              // the effective availability of one or more sensor supported transmission modes.
-              // Provision of the frequency usage state
-              // Sensor shall keep CMS informed about the current availability of the frequency
-              // usage and its changes (if any).
-              // Provision of the transmission mode
-              // Sensor shall keep CMS informed about the currently selected transmission mode,
-              // with the relevant parameters, and its changes (if any).
-              // It is the CMS's responsibility to initiate the determination of initial state by
-              // making a request for information to the subsystem. 
-              // Lack of mastership
-              // In the case where CMS does not have mastership of the sensor, CMS shall be
-              // informed about both the actual setting of the frequency usage and the actual
-              // transmission mode, with its changes (if any).
-              // State of transmission frequencies
-              // With respect to its operational use each sensor transmission frequency may be
-              // “enabled” or “disabled”, according to the relevant setting. On the other hand,
-              // with respect to its health status, each transmission frequency may be “available”
-              // or “not available” according to the presence of faults.
-              // Note that a transmission frequency may be effectively selectable for the sensor
-              // transmission if it is both “enabled” and not in fault.
-              // Relationship to <i>Manage Transmission Sectors</i>
-              // As well as the overall transmission mode, here specified, CMS may define sectors
-              // where a devoted transmission mode is to be applied (see<i> Manage Transmission
-              // Sectors</i>).
+              @doc("Method used by the sensor to return the selected transmission mode, with the \
+                relevant parameters, and its changes (if any). \
+                This controls the sensor behaviour with respect to the transmission frequency \
+                management. Basing on a discrete set of transmission frequencies offered by the \
+                sensor, CMS may disable/enable the use of a subset of them. As well CMS may \
+                select the sensor transmission mode, i.e. how the sensor shall select the \
+                transmission frequencies, among the set of transmission modes supported by the \
+                sensor. \
+                The transmission mode defines how the sensor selects the transmission \
+                frequencies, which may be: \
+                <ul> \
+                <li>Fixed Frequency: sensor always uses the same pre-selected frequency</li> \
+                </ul> \
+                <ul> \
+                <li>Frequency Diversity: at each transmission sensor selects the frequency to be \
+                used inside a pre-selected subset of frequencies</li> \
+                </ul> \
+                <ul> \
+                <li>Automatic Frequency Selection: at each transmission sensor selects the \
+                frequency to be used among the least jammed frequencies</li> \
+                </ul> \
+                <ul> \
+                <li>Random Agility: at each transmission sensor random selects the frequency to \
+                be used.</li> \
+                </ul> \
+                The availability of each of the above listed transmission modes depends on the \
+                sensor type and its capabilities (not all the sensor types support all them). \
+                Besides a transmission mode supported by the sensor may be \"selectable\" or \"not \
+                selectable\" according to the specific sensor rules and the state of transmission \
+                frequencies. \
+                Both the set of transmission frequencies offered by the sensor and the supported \
+                transmission modes (names and characteristics) differ from sensor to sensor, so \
+                they shall be handled as configuration parameters. The sensor reports all \
+                supported frequencies whether or not currently available or enabled. \
+                Sensors cannot enable/disable the setting of the frequency usage at its own \
+                initiative, but at any time a transmission frequency could become not available \
+                because of a fault (e.g. fault of the relevant oscillator), and this could affect \
+                the effective availability of one or more sensor supported transmission modes. \
+                Provision of the frequency usage state \
+                Sensor shall keep CMS informed about the current availability of the frequency \
+                usage and its changes (if any). \
+                Provision of the transmission mode \
+                Sensor shall keep CMS informed about the currently selected transmission mode, \
+                with the relevant parameters, and its changes (if any). \
+                It is the CMS's responsibility to initiate the determination of initial state by \
+                making a request for information to the subsystem. \
+                Lack of mastership \
+                In the case where CMS does not have mastership of the sensor, CMS shall be \
+                informed about both the actual setting of the frequency usage and the actual \
+                transmission mode, with its changes (if any). \
+                State of transmission frequencies \
+                With respect to its operational use each sensor transmission frequency may be \
+                \"enabled\" or \"disabled\", according to the relevant setting. On the other hand, \
+                with respect to its health status, each transmission frequency may be \"available\" \
+                or \"not available\" according to the presence of faults. \
+                Note that a transmission frequency may be effectively selectable for the sensor \
+                transmission if it is both \"enabled\" and not in fault. \
+                Relationship to <i>Manage Transmission Sectors</i> \
+                As well as the overall transmission mode, here specified, CMS may define sectors \
+                where a devoted transmission mode is to be applied (see<i> Manage Transmission \
+                Sectors</i>).")
               struct report_transmission_mode_state_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::transmission_frequency_mode_type transmissionModeSetting;
               };
-#ifndef DDS_XTYPES
-#pragma keylist report_transmission_mode_state_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class transmission_frequency_state_response_type.
+              @doc("struct holding keys for class transmission_frequency_state_response_type.")
               struct transmission_frequency_state_response_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Method used by the sensor to return the actual setting of the frequency usage
-              // modified according to the request.
-              // This controls the sensor behaviour with respect to the transmission frequency
-              // management. Basing on a discrete set of transmission frequencies offered by the
-              // sensor, CMS may disable/enable the use of a subset of them. As well CMS may
-              // select the sensor transmission mode, i.e. how the sensor shall select the
-              // transmission frequencies, among the set of transmission modes supported by the
-              // sensor. 
-              // The transmission mode defines how the sensor selects the transmission
-              // frequencies, which may be:
-              // <ul>
-              //  <li>Fixed Frequency: sensor always uses the same pre-selected frequency</li>
-              // </ul>
-              // <ul>
-              //  <li>Frequency Diversity: at each transmission sensor selects the frequency to be
-              // used inside a pre-selected subset of frequencies</li>
-              // </ul>
-              // <ul>
-              //  <li>Automatic Frequency Selection: at each transmission sensor selects the
-              // frequency to be used among the least jammed frequencies</li>
-              // </ul>
-              // <ul>
-              //  <li>Random Agility: at each transmission sensor random selects the frequency to
-              // be used.</li>
-              // </ul>
-              // The availability of each of the above listed transmission modes depends on the
-              // sensor type and its capabilities (not all the sensor types support all them).
-              // Besides a transmission mode supported by the sensor may be “selectable” or “not
-              // selectable” according to the specific sensor rules and the state of transmission
-              // frequencies.
-              // Both the set of transmission frequencies offered by the sensor and the supported
-              // transmission modes (names and characteristics) differ from sensor to sensor, so
-              // they shall be handled as configuration parameters. The sensor reports all
-              // supported frequencies whether or not currently available or enabled.
-              // Sensors cannot enable/disable the setting of the frequency usage at its own
-              // initiative, but at any time a transmission frequency could become not available
-              // because of a fault (e.g. fault of the relevant oscillator), and this could affect
-              // the effective availability of one or more sensor supported transmission modes.
-              // Provision of the frequency usage state
-              // Sensor shall keep CMS informed about the current availability of the frequency
-              // usage and its changes (if any).
-              // Provision of the transmission mode
-              // Sensor shall keep CMS informed about the currently selected transmission mode,
-              // with the relevant parameters, and its changes (if any).
-              // It is the CMS's responsibility to initiate the determination of initial state by
-              // making a request for information to the subsystem. 
-              // Lack of mastership
-              // In the case where CMS does not have mastership of the sensor, CMS shall be
-              // informed about both the actual setting of the frequency usage and the actual
-              // transmission mode, with its changes (if any).
-              // State of transmission frequencies
-              // With respect to its operational use each sensor transmission frequency may be
-              // “enabled” or “disabled”, according to the relevant setting. On the other hand,
-              // with respect to its health status, each transmission frequency may be “available”
-              // or “not available” according to the presence of faults.
-              // Note that a transmission frequency may be effectively selectable for the sensor
-              // transmission if it is both “enabled” and not in fault.
-              // Relationship to <i>Manage Transmission Sectors</i>
-              // As well as the overall transmission mode, here specified, CMS may define sectors
-              // where a devoted transmission mode is to be applied (see<i> Manage Transmission
-              // Sectors</i>).
+              @doc("Method used by the sensor to return the actual setting of the frequency usage \
+                modified according to the request. \
+                This controls the sensor behaviour with respect to the transmission frequency \
+                management. Basing on a discrete set of transmission frequencies offered by the \
+                sensor, CMS may disable/enable the use of a subset of them. As well CMS may \
+                select the sensor transmission mode, i.e. how the sensor shall select the \
+                transmission frequencies, among the set of transmission modes supported by the \
+                sensor. \
+                The transmission mode defines how the sensor selects the transmission \
+                frequencies, which may be: \
+                <ul> \
+                 <li>Fixed Frequency: sensor always uses the same pre-selected frequency</li> \
+                </ul> \
+                <ul> \
+                 <li>Frequency Diversity: at each transmission sensor selects the frequency to be \
+                used inside a pre-selected subset of frequencies</li> \
+                </ul> \
+                <ul> \
+                 <li>Automatic Frequency Selection: at each transmission sensor selects the \
+                frequency to be used among the least jammed frequencies</li> \
+                </ul> \
+                <ul> \
+                 <li>Random Agility: at each transmission sensor random selects the frequency to \
+                be used.</li> \
+                </ul> \
+                The availability of each of the above listed transmission modes depends on the \
+                sensor type and its capabilities (not all the sensor types support all them). \
+                Besides a transmission mode supported by the sensor may be \"selectable\" or \"not \
+                selectable\" according to the specific sensor rules and the state of transmission \
+                frequencies. \
+                Both the set of transmission frequencies offered by the sensor and the supported \
+                transmission modes (names and characteristics) differ from sensor to sensor, so \
+                they shall be handled as configuration parameters. The sensor reports all \
+                supported frequencies whether or not currently available or enabled. \
+                Sensors cannot enable/disable the setting of the frequency usage at its own \
+                initiative, but at any time a transmission frequency could become not available \
+                because of a fault (e.g. fault of the relevant oscillator), and this could affect \
+                the effective availability of one or more sensor supported transmission modes. \
+                Provision of the frequency usage state \
+                Sensor shall keep CMS informed about the current availability of the frequency \
+                usage and its changes (if any). \
+                Provision of the transmission mode \
+                Sensor shall keep CMS informed about the currently selected transmission mode, \
+                with the relevant parameters, and its changes (if any). \
+                It is the CMS's responsibility to initiate the determination of initial state by \
+                making a request for information to the subsystem. \
+                Lack of mastership \
+                In the case where CMS does not have mastership of the sensor, CMS shall be \
+                informed about both the actual setting of the frequency usage and the actual \
+                transmission mode, with its changes (if any). \
+                State of transmission frequencies \
+                With respect to its operational use each sensor transmission frequency may be \
+                \"enabled\" or \"disabled\", according to the relevant setting. On the other hand, \
+                with respect to its health status, each transmission frequency may be \"available\"
+                or \"not available\" according to the presence of faults. \
+                Note that a transmission frequency may be effectively selectable for the sensor \
+                transmission if it is both \"enabled\" and not in fault. \
+                Relationship to <i>Manage Transmission Sectors</i> \
+                As well as the overall transmission mode, here specified, CMS may define sectors \
+                where a devoted transmission mode is to be applied (see<i> Manage Transmission \
+                Sectors</i>).")
               struct transmission_frequency_state_response_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::selected_frequency_list_type setting_message;
               };
-#ifndef DDS_XTYPES
-#pragma keylist transmission_frequency_state_response_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class set_frequencies_type.
+              @doc("struct holding keys for class set_frequencies_type.")
               struct set_frequencies_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Method used by the CMS to enable or disable frequency bands or discrete
-              // frequencies.
-              // This is the Subsystem interface for managing frequency usage.
+              @doc("Method used by the CMS to enable or disable frequency bands or discrete \
+                frequencies. \
+                This is the Subsystem interface for managing frequency usage.")
               struct set_frequencies_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::selected_frequency_list_type request;
               };
-#ifndef DDS_XTYPES
-#pragma keylist set_frequencies_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class set_transmission_mode_type.
+              @doc("struct holding keys for class set_transmission_mode_type.")
               struct set_transmission_mode_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Method used by the CMS to select the available sensor transmission mode.
-              // This is the Subsystem interface for managing frequency usage.
+              @doc("Method used by the CMS to select the available sensor transmission mode. \
+                This is the Subsystem interface for managing frequency usage.")
               struct set_transmission_mode_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::transmission_frequency_mode_type trasmissionmode;
               };
-#ifndef DDS_XTYPES
-#pragma keylist set_transmission_mode_type request_id subsystem_id
-#endif
-
             };
           };
         };

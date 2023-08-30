@@ -27,71 +27,48 @@ module org
             module Control_Fault_Scripts
             {
 
-              // struct holding keys for class enable_fault_script_type.
+              @doc("struct holding keys for class enable_fault_script_type.")
               struct enable_fault_script_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Causes the subsystem to indicate the faults specified by the given fault scripts
-              // when appropriately stimulated. The faults remain in place until they are cleared
-              // either by a call to clear_fault or by an action on another interface that would
-              // clear the equivalent non-simulated fault.
+              @doc("Causes the subsystem to indicate the faults specified by the given fault scripts \
+                when appropriately stimulated. The faults remain in place until they are cleared \
+                either by a call to clear_fault or by an action on another interface that would \
+                clear the equivalent non-simulated fault.")
               struct enable_fault_script_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-                // The script ids to be enabled
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @doc("The script ids to be enabled")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type scripts;
               };
-#ifndef DDS_XTYPES
-#pragma keylist enable_fault_script_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class clear_faults_type.
+              @doc("struct holding keys for class clear_faults_type.")
               struct clear_faults_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Clears the faults defined by the given fault scripts.
+              @doc("Clears the faults defined by the given fault scripts.")
               struct clear_faults_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-                // The script ids to be cleared
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @doc("The script ids to be cleared")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type fault_scripts;
               };
-#ifndef DDS_XTYPES
-#pragma keylist clear_faults_type request_id subsystem_id
-#endif
-
             };
           };
         };

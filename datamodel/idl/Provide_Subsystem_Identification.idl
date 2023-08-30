@@ -27,57 +27,43 @@ module org
             module Provide_Subsystem_Identification
             {
 
-              // Receive the identification data from the subsystem.
-              // In order to enable two interface partners to connect to each other and to open
-              // mutual communication, one partner shall initiate and the other to answer. The
-              // intention is to let the subsystem initiate the communication.
-              // Consequently, the subsystem introduces itself to the CMS identifying e.g. the
-              // type of subsystem, the product and its version. That allows the CMS to decide
-              // whether it may work with that subsystem. 
-              // The actor is the Combat Management System. 
-              // The possibility that CMS and subsystem are connected without being capable to
-              // work with each other is a consequence of a plug-&amp;-play concept. 
-              // Although the interface is standardized the CMS may need a setup process to
-              // prepare it for a subsystem. This process shall introduce the information
-              // necessary to configure functions of that particular CMS with respect to the
-              // subsystem. 
-              // This may also be necessary on side of the subsystem.
-              // The preparation for a subsystem may be done by means of system configuration data
-              // which are implemented on installation of the combat system. It does not address
-              // security information.
+              @doc("Receive the identification data from the subsystem. \
+                In order to enable two interface partners to connect to each other and to open \
+                mutual communication, one partner shall initiate and the other to answer. The \
+                intention is to let the subsystem initiate the communication. \
+                Consequently, the subsystem introduces itself to the CMS identifying e.g. the \
+                type of subsystem, the product and its version. That allows the CMS to decide \
+                whether it may work with that subsystem. \
+                The actor is the Combat Management System. \
+                The possibility that CMS and subsystem are connected without being capable to \
+                work with each other is a consequence of a plug-&amp;-play concept. \
+                Although the interface is standardized the CMS may need a setup process to \
+                prepare it for a subsystem. This process shall introduce the information \
+                necessary to configure functions of that particular CMS with respect to the \
+                subsystem. \
+                This may also be necessary on side of the subsystem. \
+                The preparation for a subsystem may be done by means of system configuration data \
+                which are implemented on installation of the combat system. It does not address \
+                security information.")
               struct receive_sub_identification_data_type
               {
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::device_identification_type identification;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type the_request_id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist receive_sub_identification_data_type subsystem_id
-#endif
 
-              // Receive the identification data from the CMS.
+              @doc("Receive the identification data from the CMS.")
               struct receive_cms_identification_data_type
               {
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::device_identification_type identification;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type the_request_id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist receive_cms_identification_data_type subsystem_id
-#endif
-
             };
           };
         };

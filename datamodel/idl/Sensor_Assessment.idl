@@ -21,34 +21,34 @@ module org
         module Sensor_Domain
         {
 
-          // This package provides a data model to describe the identification and
-          // classification assessment that a sensor can make about its sensor tracks. The
-          // approach is to be agnostic to any specific assessment process or classification
-          // regime. The model assumes a general process whereby matches (with confidence
-          // values) are made between data relating to the sensor track and reference data.
-          // Matches can relate to previous matches building up a structured hierarchy of
-          // assumptions leading to progressively higher-level identification and
-          // classification assessments. The lowest level is to match measurement parameters
-          // with reference data; the next level is to match one or more of these with modes;
-          // then modes with equipment and finally equipment with platforms.
-          // Assessment Objectives (Equipment, Function, Platform and Activity) are passed
-          // from Subsystems to CMS by value in the Sensor Assessment use cases. They contain
-          // an Objective Id key value which is used to refer to the assessment values in
-          // Track Reporting use cases.
+          @doc("This package provides a data model to describe the identification and \
+            classification assessment that a sensor can make about its sensor tracks. The \
+            approach is to be agnostic to any specific assessment process or classification \
+            regime. The model assumes a general process whereby matches (with confidence \
+            values) are made between data relating to the sensor track and reference data. \
+            Matches can relate to previous matches building up a structured hierarchy of \
+            assumptions leading to progressively higher-level identification and \
+            classification assessments. The lowest level is to match measurement parameters \
+            with reference data; the next level is to match one or more of these with modes; \
+            then modes with equipment and finally equipment with platforms. \
+            Assessment Objectives (Equipment, Function, Platform and Activity) are passed \
+            from Subsystems to CMS by value in the Sensor Assessment use cases. They contain \
+            an Objective Id key value which is used to refer to the assessment values in \
+            Track Reporting use cases.")
           module Sensor_Assessment
           {
 
-            // A string type
-            // Two character (Alpha 2) country code as defined by ISO 3166-1.
-            // An empty string represents undefined data.
+            @doc("A string type \
+                Two character (Alpha 2) country code as defined by ISO 3166-1. \
+                An empty string represents undefined data.")
             typedef string<2> country_code_type;
 
-            // A string type
-            // Represents the name of a descriptor
+            @doc("A string type \
+                Represents the name of a descriptor")
             typedef string<24> descriptor_name_type;
 
-            // A string type
-            // Represents the value of a descriptor
+            @doc("A string type \
+                Represents the value of a descriptor")
             typedef string<32> descriptor_single_value_type;
 
             enum descriptor_value_switch_type
@@ -57,892 +57,843 @@ module org
               descriptor_value_type_list_kind
             };
 
-            // list of descriptor values
+            @doc("list of descriptor values")
             typedef sequence<descriptor_single_value_type, 10> descriptor_list_type;
 
-            // A string type
-            // The name of or label for an item of equipment
+            @doc("A string type \
+                The name of or label for an item of equipment")
             typedef string<32> equipment_name_type;
 
-            // The value of the descriptor - a single value or a list
+            @doc("The value of the descriptor - a single value or a list")
             union descriptor_value_type switch (descriptor_value_switch_type)
             {
               case descriptor_value_type_value_kind : descriptor_single_value_type value;
               case descriptor_value_type_list_kind : descriptor_list_type list;
             };
 
-            // A string type
-            // The name of some functional behavior exhibited by an equipment
+            @doc("A string type \
+                The name of some functional behavior exhibited by an equipment")
             typedef string<20> function_name_type;
 
-            // The unique identifier for a match instance (within the scope of a sensor).
+            @doc("The unique identifier for a match instance (within the scope of a sensor).")
             typedef long match_id_type;
 
-            // Enumeration of specialisations options for union class match_link_type.
+            @doc("Enumeration of specialisations options for union class match_link_type.")
             enum match_link_kind_type
             {
-              // equipment_mode_match_type option for match_link_type
+              @doc("equipment_mode_match_type option for match_link_type")
               EQUIPMENT_MODE_MATCH_KIND,
-              // equipment_parameter_match_type option for match_link_type
+              @doc("equipment_parameter_match_type option for match_link_type")
               EQUIPMENT_PARAMETER_MATCH_KIND,
-              // measurement_element_match_type option for match_link_type
+              @doc("measurement_element_match_type option for match_link_type")
               MEASUREMENT_ELEMENT_MATCH_KIND,
-              // platform_equipment_match_type option for match_link_type
+              @doc("platform_equipment_match_type option for match_link_type")
               PLATFORM_EQUIPMENT_MATCH_KIND,
-              // platform_mode_match_type option for match_link_type
+              @doc("platform_mode_match_type option for match_link_type")
               PLATFORM_MODE_MATCH_KIND,
-              // reference_parameter_match_type option for match_link_type
+              @doc("reference_parameter_match_type option for match_link_type")
               REFERENCE_PARAMETER_MATCH_KIND
             };
 
-            // Enumeration of specialisations options for union class match_type.
+            @doc("Enumeration of specialisations options for union class match_type.")
             enum match_kind_type
             {
-              // equipment_match_type option for match_type
+              @doc("equipment_match_type option for match_type")
               EQUIPMENT_MATCH_KIND,
-              // parametric_mode_match_type option for match_type
+              @doc("parametric_mode_match_type option for match_type")
               PARAMETRIC_MODE_MATCH_KIND,
-              // platform_match_type option for match_type
+              @doc("platform_match_type option for match_type")
               PLATFORM_MATCH_KIND
             };
 
-            // A string type
-            // The name or label for a kind of mode that gives rise to a set of measurements.
+            @doc("A string type \
+                The name or label for a kind of mode that gives rise to a set of measurements.")
             typedef string<32> mode_name_type;
 
-            // A string type
-            // The name of or label for an activity that can be undertaken by a platform.
+            @doc("A string type \
+                The name of or label for an activity that can be undertaken by a platform.")
             typedef string<32> platform_activity_name_type;
 
-            // Enumeration of specialisations options for union class platform_class_type.
+            @doc("Enumeration of specialisations options for union class platform_class_type.")
             enum platform_class_kind_type
             {
-              // base option for platform_class_type
+              @doc("base option for platform_class_type")
               PLATFORM_CLASS_BASE_KIND,
-              // platform_type option for platform_class_type
+              @doc("platform_type option for platform_class_type")
               PLATFORM_KIND
             };
 
-            // struct holding keys for class multipath_set_type.
+            @doc("struct holding keys for class multipath_set_type.")
             struct multipath_set_key_type
             {
-              // The unique identifier for the multi-path set
+              @doc("The unique identifier for the multi-path set")
               match_id_type multipath_id;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            // The representation of a function observable by the sensor that can be exhibited
-            // by equipment detected by the sensor and matched to sensor parametric measurements
+            @doc("The representation of a function observable by the sensor that can be exhibited \
+                by equipment detected by the sensor and matched to sensor parametric measurements")
             struct observable_function_type
             {
-              // The name or label of the function
+              @doc("The name or label of the function")
               function_name_type name;
-              // Unique identifier for the function (within the scope of the sensor).
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
-#else
-              org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
-#endif
+              @doc("Unique identifier for the function (within the scope of the sensor).")
+              @key org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
             };
 
-            // A string type
-            // The name or label for a platform or class of platforms. A platform being a
-            // discrete independently acting object in the real-world environment.
+            @doc("A string type \
+                The name or label for a platform or class of platforms. A platform being a \
+                discrete independently acting object in the real-world environment.")
             typedef string<32> platform_name_type;
 
-            // The unique identifier for a reference parameter, sequence or mode.
+            @doc("The unique identifier for a reference parameter, sequence or mode.")
             typedef long reference_id_type;
 
-            // Enumeration of specialisations options for union class reference_type.
+            @doc("Enumeration of specialisations options for union class reference_type.")
             enum reference_kind_type
             {
-              // base option for reference_type
+              @doc("base option for reference_type")
               REFERENCE_BASE_KIND,
-              // reference_mode_type option for reference_type
+              @doc("reference_mode_type option for reference_type")
               REFERENCE_MODE_KIND,
-              // reference_parameter_type option for reference_type
+              @doc("reference_parameter_type option for reference_type")
               REFERENCE_PARAMETER_KIND
             };
 
-            // struct holding keys for class sensor_track_equipment_assessment_type.
+            @doc("struct holding keys for class sensor_track_equipment_assessment_type.")
             struct sensor_track_equipment_assessment_key_type
             {
               long sensor_track_id;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            // struct holding keys for class sensor_track_platform_assessment_type.
+            @doc("struct holding keys for class sensor_track_platform_assessment_type.")
             struct sensor_track_platform_assessment_key_type
             {
-              // The sensor track corresponding to the platform assessment
+              @doc("The sensor track corresponding to the platform assessment")
               long sensor_track_id;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            // The representation of descriptor for a configuration reference data instance.
-            // Reference descriptor instances qualify the reference data instance (e.g. mode,
-            // equipment) and are a mechanism to specify aliases and other supporting
-            // information.
+            @doc("The representation of descriptor for a configuration reference data instance. \
+                Reference descriptor instances qualify the reference data instance (e.g. mode, \
+                equipment) and are a mechanism to specify aliases and other supporting \
+                information.")
             struct reference_descriptor_type
             {
-              // The name of the descriptor for the mode
+              @doc("The name of the descriptor for the mode")
               descriptor_name_type name;
-              // The value of the descriptor for the mode
+              @doc("The value of the descriptor for the mode")
               descriptor_value_type value;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type, 10> equipment_platform_id_type;
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union match_link_confidence_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union match_confidence_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<long> measurement_element_match_discrete_parameter_element_id_type;
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union multipath_set_master_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type value;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type, 20> multipath_set_supporting_track_id_type;
 
-            // An activity that can be undertaken by a platform
+            @doc("An activity that can be undertaken by a platform")
             struct platform_activity_type
             {
-              // The name of the platform's activity
+              @doc("The name of the platform's activity")
               platform_activity_name_type name;
-              // Unique identifier for the activity (within the scope of the sensor).
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
-#else
-              org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
-#endif
+              @doc("Unique identifier for the activity (within the scope of the sensor).")
+              @key org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union platform_class_pre_identification_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : org::omg::c4i::Domain_Model::Common_Types::identity_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union platform_class_pre_recognition_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : short value;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type, 10> platform_class_equipment_id_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type> platform_match_associated_sensor_track_id_type;
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union subplatform_match_confidence_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
             };
 
-            // Struct of base attributes defined for class match_link_type.
+            @doc("Struct of base attributes defined for class match_link_type.")
             struct match_link_base_type
             {
-              // The confidence in the match between a one match and an existing lower level match
-              // for a sensor track. This is the result of a statistical hypothesis test.
+              @doc("The confidence in the match between a one match and an existing lower level match \
+                for a sensor track. This is the result of a statistical hypothesis test.")
               match_link_confidence_type confidence;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union sensor_plot_equipement_assessment_best_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : match_id_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union sensor_plot_mode_assessment_best_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : match_id_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union sensor_plot_platform_assessment_best_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : match_id_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union sensor_track_equipment_assessment_selected_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : match_id_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union sensor_track_equipment_assessment_best_match_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : match_id_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union sensor_track_mode_assessment_best_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : match_id_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union sensor_track_mode_assessment_selected_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : match_id_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union sensor_track_platform_assessment_selected_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : match_id_type value;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union sensor_track_platform_assessment_best_match_id_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : match_id_type value;
             };
 
-            // A match between an equipment match and  a measurement parameter match. For a
-            // possible match to an equipment this represents the linkage to a possible
-            // reference parameter that has been identified in the assessment of the sensor
-            // track.
+            @doc("A match between an equipment match and  a measurement parameter match. For a \
+                possible match to an equipment this represents the linkage to a possible \
+                reference parameter that has been identified in the assessment of the sensor \
+                track.")
             struct equipment_parameter_match_type
             {
-              // Base attribute containing attributes from generalisation match_link_type
+              @doc("Base attribute containing attributes from generalisation match_link_type")
               match_link_base_type base;
-              // The parameter from the sensor tracks measurement parameters being matched.
+              @doc("The parameter from the sensor tracks measurement parameters being matched.")
               long parameter_id;
             };
 
-            // Struct of base attributes defined for class reference_type.
+            @doc("Struct of base attributes defined for class reference_type.")
             struct reference_base_type
             {
-              // The unique identifier for the reference data. This may facilitate the retrieval
-              // of additional data outside the scope of this specification.
-#ifdef DDS_XTYPES
-              @Key reference_id_type id;
-#else
-              reference_id_type id;
-#endif
-              // The identifier for an alerting or warning process associated with the matching of
-              // this reference data.
+              @doc("The unique identifier for the reference data. This may facilitate the retrieval \
+                of additional data outside the scope of this specification.")
+              @key reference_id_type id;
+              @doc("The identifier for an alerting or warning process associated with the matching of \
+                this reference data.")
               long alert_id;
             };
 
-            // Struct of base attributes defined for class match_type.
+            @doc("Struct of base attributes defined for class match_type.")
             struct match_base_type
             {
-              // The confidence in the match between an equipment and a parametric measurement for
-              // a sensor track. This is result of a statistical hypothesis test.
+              @doc("The confidence in the match between an equipment and a parametric measurement for \
+                a sensor track. This is result of a statistical hypothesis test.")
               match_confidence_type confidence;
-              // The unique identifier (within the scope of a sensor) for the match instance.
-              // Match links for higher-level assessment objectives refer to lower-level matches
-              // using this identifier.
-#ifdef DDS_XTYPES
-              @Key match_id_type id;
-#else
-              match_id_type id;
-#endif
+
+              @doc("The unique identifier (within the scope of a sensor) for the match instance. \
+                Match links for higher-level assessment objectives refer to lower-level matches \
+                using this identifier.")
+              @key match_id_type id;
             };
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union equipment_match_function_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : observable_function_type value;
             };
 
-            // A match between an equipment match and  a mode match. For a possible match to an
-            // equipment this represents the linkage to a possible parametric mode that has been
-            // identified in the assessment of the sensor track.
+            @doc("A match between an equipment match and  a mode match. For a possible match to an \
+                equipment this represents the linkage to a possible parametric mode that has been \
+                identified in the assessment of the sensor track.")
             struct equipment_mode_match_type
             {
-              // Base attribute containing attributes from generalisation match_link_type
+              @doc("Base attribute containing attributes from generalisation match_link_type")
               match_link_base_type base;
-              // The mode from the sensor track's parametric measurements being matched.
+
+              @doc("The mode from the sensor track's parametric measurements being matched.")
               match_id_type mode_id;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<reference_descriptor_type, 20> equipment_descriptor_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<reference_descriptor_type, 20> reference_mode_descriptor_type;
 
-            // a simple union type, to represent an optional value
+            @doc("a simple union type, to represent an optional value")
             union platform_match_activity_type switch (boolean)
             {
-              // the value when present
+              @doc("the value when present")
               case TRUE : platform_activity_type value;
             };
 
-            // Represents the matching link between a platform  and a constituent piece of
-            // equipment
+            @doc("Represents the matching link between a platform  and a constituent piece of \
+                equipment")
             struct platform_equipment_match_type
             {
-              // Base attribute containing attributes from generalisation match_link_type
+              @doc("Base attribute containing attributes from generalisation match_link_type")
               match_link_base_type base;
               match_id_type equipment_id;
             };
 
-            // Represents the matching link between a platform  and a mode of a constituent
-            // piece of equipment
+            @doc("Represents the matching link between a platform  and a mode of a constituent \
+                piece of equipment")
             struct platform_mode_match_type
             {
-              // Base attribute containing attributes from generalisation match_link_type
+              @doc("Base attribute containing attributes from generalisation match_link_type")
               match_link_base_type base;
               match_id_type mode_id;
             };
 
             struct subplatform_match_type
             {
-              // The confidence in the match between a (super) platform and a potential
-              // constituent sub-platform. This is result of a statistical hypothesis test.
+              @doc("The confidence in the match between a (super) platform and a potential \
+                constituent sub-platform. This is result of a statistical hypothesis test.")
               subplatform_match_confidence_type confidence;
-              // A (sub) platform (potentially independently operating real-world object) that is
-              // currently contained by the platform. Examples include a helicopter that is
-              // currently on a ship's landing deck.
+
+              @doc("A (sub) platform (potentially independently operating real-world object) that is \
+                currently contained by the platform. Examples include a helicopter that is \
+                currently on a ship's landing deck.")
               match_id_type subplatform_id;
             };
 
-            // This class represents a label for a  reference value, set or distribution for a
-            // parameter. Such tactically significant labels and their underlying data sets may
-            // be made available as an encyclopedic library.
+            @doc("This class represents a label for a  reference value, set or distribution for a \
+                parameter. Such tactically significant labels and their underlying data sets may \
+                be made available as an encyclopedic library.")
             struct reference_parameter_type
             {
-              // Base attribute containing attributes from generalisation reference_type
+              @doc("Base attribute containing attributes from generalisation reference_type")
               reference_base_type base;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<equipment_parameter_match_type, 10> equipment_match_parameter_match_type;
 
             struct measurement_element_match_type
             {
-              // Base attribute containing attributes from generalisation match_link_type
+              @doc("Base attribute containing attributes from generalisation match_link_type")
               match_link_base_type base;
-              // The discrete parameter measurement value contained in the element of the
-              // sequence. Each measurement_element_type instance referred to by an association
-              // instance belongs to a different discrete_set_measurement_type instance 
+              @doc("The discrete parameter measurement value contained in the element of the \
+                sequence. Each measurement_element_type instance referred to by an association \
+                instance belongs to a different discrete_set_measurement_type instance")
               measurement_element_match_discrete_parameter_element_id_type discrete_parameter_element_id;
             };
 
-            // To report on the assessment of a set of sensor track representing the same real
-            // world object through multiple paths.
-            // The interface for a sensor to provide assessments (identification and
-            // classification) of sensor tracks to the CMS. The sensor matches parametric
-            // measurements to reference data and then reports each of these sets as an
-            // assessment for each track for the categories of equipment modes, equipment marks
-            // (build standards / versions) and platform instances (or platform classes). The
-            // sensor also reports what it has assessed to be the best match and the match
-            // currently selected. The currently selected match influences the attributes
-            // reported for the sensor track (including its recognition and identification).
-            // The CMS uses the select and deselect methods to set or override the match that is
-            // selected for an assessment of a sensor track.
-            // Sensors report a track to the CMS using the Track Reporting use case before
-            // providing an assessment. Assessments are only reported for tracks whilst the
-            // sensor track is in the TRACKED track state.
-            // Represents a set of tracks that correspond to the signal which has been measured
-            // through the detection of discrete signals that have arrived at the sensor by
-            // means of different paths through the environment.
+            @doc("To report on the assessment of a set of sensor track representing the same real \
+              world object through multiple paths. \
+              The interface for a sensor to provide assessments (identification and \
+              classification) of sensor tracks to the CMS. The sensor matches parametric \
+              measurements to reference data and then reports each of these sets as an \
+              assessment for each track for the categories of equipment modes, equipment marks \
+              (build standards / versions) and platform instances (or platform classes). The \
+              sensor also reports what it has assessed to be the best match and the match \
+              currently selected. The currently selected match influences the attributes \
+              reported for the sensor track (including its recognition and identification). \
+              The CMS uses the select and deselect methods to set or override the match that is \
+              selected for an assessment of a sensor track. \
+              Sensors report a track to the CMS using the Track Reporting use case before \
+              providing an assessment. Assessments are only reported for tracks whilst the \
+              sensor track is in the TRACKED track state. \
+              Represents a set of tracks that correspond to the signal which has been measured \
+              through the detection of discrete signals that have arrived at the sensor by \
+              means of different paths through the environment.")
             struct multipath_set_type
             {
-              // The unique identifier for the multi-path set
-#ifdef DDS_XTYPES
-              @Key match_id_type multipath_id;
-#else
-              match_id_type multipath_id;
-#endif
-              // The probability that the set represents independently routed detections of the
-              // same real world object.
-              org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
-              // The master track for the multipath set
-              multipath_set_master_id_type master_id;
-              // One of the tracks in the multipath set
-              multipath_set_supporting_track_id_type supporting_track_id;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-            };
-#ifndef DDS_XTYPES
-#pragma keylist multipath_set_type multipath_id subsystem_id
-#endif
+              @doc("The unique identifier for the multi-path set")
+              @key match_id_type multipath_id;
 
-            // A sequence type, to represent multiple values.
+              @doc("The probability that the set represents independently routed detections of the \
+                same real world object.")
+              org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
+              @doc("The master track for the multipath set")
+              multipath_set_master_id_type master_id;
+              @doc("One of the tracks in the multipath set")
+              multipath_set_supporting_track_id_type supporting_track_id;
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
+              @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<equipment_mode_match_type, 10> equipment_match_mode_match_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<platform_equipment_match_type> platform_match_equipment_match_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<platform_mode_match_type, 10> platform_match_mode_match_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<subplatform_match_type> platform_match_match_type;
 
-            // The representation of an item of equipment that is relevant to assessment of
-            // parametric sensor measurements.
+            @doc("The representation of an item of equipment that is relevant to assessment of \
+                parametric sensor measurements.")
             struct equipment_type
             {
-              // The name of the equipment
+              @doc("The name of the equipment")
               equipment_name_type name;
-              // Unique identifier for the equipment (within the scope of the sensor).
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
-#else
-              org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
-#endif
-              // Descriptors for the equipment provising supporting, amplifying or qualifying
-              // information
+
+              @doc("Unique identifier for the equipment (within the scope of the sensor).")
+              @key org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
+
+              @doc("Descriptors for the equipment provising supporting, amplifying or qualifying \
+                information")
               equipment_descriptor_type descriptor;
-              // The platforms known to contain the equipment
+
+              @doc("The platforms known to contain the equipment")
               equipment_platform_id_type platform_id;
             };
 
-            // Struct of base attributes defined for class platform_class_type.
+            @doc("Struct of base attributes defined for class platform_class_type.")
             struct platform_class_base_type
             {
-              // The name of the platform (or class of platforms)
+              @doc("The name of the platform (or class of platforms)")
               platform_name_type name;
-              // The standard identification of the platform
+              @doc("The standard identification of the platform")
               platform_class_pre_identification_type pre_identification;
-              // The discrete code representing the type of platform.
+              @doc("The discrete code representing the type of platform.")
               platform_class_pre_recognition_type pre_recognition;
-              // The code representing the country of registration of the platform
+              @doc("The code representing the country of registration of the platform")
               country_code_type country_code;
-              // Unique identifier for the platform (within the scope of the sensor).
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
-#else
-              org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
-#endif
-              // The equipment known to be associated with a platform
+
+              @doc("Unique identifier for the platform (within the scope of the sensor).")
+              @key org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
+
+              @doc("The equipment known to be associated with a platform")
               platform_class_equipment_id_type equipment_id;
             };
 
-            // The representation of a match to a reference parameter for a sensor track
+            @doc("The representation of a match to a reference parameter for a sensor track")
             struct reference_parameter_match_type
             {
-              // Base attribute containing attributes from generalisation match_link_type
+              @doc("Base attribute containing attributes from generalisation match_link_type")
               match_link_base_type base;
-              // The reference parameters matched by this mode identification
+              @doc("The reference parameters matched by this mode identification")
               reference_parameter_type reference_parameter;
-              // The kind of the measured parameters that support the mode identification.
+              @doc("The kind of the measured parameters that support the mode identification.")
               org::omg::c4i::Domain_Model::Sensor_Domain::Supplementary_Measurement::measurement_parameter_kind_key_type parameter_kind_id;
             };
 
-            // This class represents a label for a  reference mode for a sensor tracks
-            // measurement parameter. Such tactically significant labels and their underlying
-            // data sets may be made available as an encyclopedic library.
+            @doc("This class represents a label for a  reference mode for a sensor tracks \
+                measurement parameter. Such tactically significant labels and their underlying \
+                data sets may be made available as an encyclopedic library.")
             struct reference_mode_type
             {
-              // Base attribute containing attributes from generalisation reference_type
+              @doc("Base attribute containing attributes from generalisation reference_type")
               reference_base_type base;
-              // The name or label of the mode.
+              @doc("The name or label of the mode.")
               mode_name_type name;
-              // The descriptors associated with the mode
+              @doc("The descriptors associated with the mode")
               reference_mode_descriptor_type descriptor;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<reference_parameter_match_type, 10> parametric_mode_match_parameter_match_type;
 
-            // The representation of a platform that an assessment of sensor track data can
-            // match against.
+            @doc("The representation of a platform that an assessment of sensor track data can \
+                match against.")
             struct platform_type
             {
-              // Base attribute containing attributes from generalisation platform_class_type
+              @doc("Base attribute containing attributes from generalisation platform_class_type
               platform_class_base_type base;
-              // The name of the platform (or class of platforms)
+              @doc("The name of the platform (or class of platforms)
               platform_name_type platform_name;
             };
 
-            // Union of the specialisations for class reference_type.
-            // A base class for reference data being compared with measurements in the
-            // assessment process.
+            @doc("Union of the specialisations for class reference_type. \
+                A base class for reference data being compared with measurements in the \
+                assessment process.")
             union reference_type switch (reference_kind_type)
             {
-              // base option for reference_type
+              @doc("base option for reference_type")
               case REFERENCE_BASE_KIND : reference_base_type referencebase;
-              // reference_mode_type option for reference_type
+              @doc("reference_mode_type option for reference_type")
               case REFERENCE_MODE_KIND : reference_mode_type reference_mode;
-              // reference_parameter_type option for reference_type
+              @doc("reference_parameter_type option for reference_type")
               case REFERENCE_PARAMETER_KIND : reference_base_type reference_parameter;
             };
 
-            // Union of the specialisations for class platform_class_type.
-            // The class of an individual platform instance - i.e. a common design from which
-            // platform instances are manufactured. This contains attributes that apply to all
-            // the platform instances of a class
+            @doc("Union of the specialisations for class platform_class_type. \
+                The class of an individual platform instance - i.e. a common design from which \
+                platform instances are manufactured. This contains attributes that apply to all \
+                the platform instances of a class")
             union platform_class_type switch (platform_class_kind_type)
             {
-              // base option for platform_class_type
+              @doc("base option for platform_class_type")
               case PLATFORM_CLASS_BASE_KIND : platform_class_base_type platform_classbase;
-              // platform_type option for platform_class_type
+              @doc("platform_type option for platform_class_type")
               case PLATFORM_KIND : platform_type platform;
             };
 
-            // The representation of a match between a sensor track and an item of equipment.
+            @doc("The representation of a match between a sensor track and an item of equipment.")
             struct equipment_match_type
             {
-              // Base attribute containing attributes from generalisation match_type
+              @doc("Base attribute containing attributes from generalisation match_type")
               match_base_type base;
-              // Whether the equipment - function combination is considered to be threatening
+              @doc("Whether the equipment - function combination is considered to be threatening")
               boolean is_a_threat;
-              // The function the equipment has been matched as performing
+              @doc("The function the equipment has been matched as performing")
               equipment_match_function_type function;
               equipment_type equipment;
-              // A match between an equipment an a measurement parameter of the sensor track.
+              @doc("A match between an equipment an a measurement parameter of the sensor track.")
               equipment_match_parameter_match_type parameter_match;
-              // A match between an equipment an a mode identified in the sensor track's
-              // parametric measurements.
+              @doc("A match between an equipment an a mode identified in the sensor track's \
+                parametric measurements.")
               equipment_match_mode_match_type mode_match;
             };
 
-            // The identification of a mode within a sensor track's parametric data. A mode is a
-            // behavior of the real-world object being tracked by the sensor (or a component of
-            // that object).
+            @doc("The identification of a mode within a sensor track's parametric data. A mode is a \
+                behavior of the real-world object being tracked by the sensor (or a component of \
+                that object).")
             struct parametric_mode_match_type
             {
-              // Base attribute containing attributes from generalisation match_type
+              @doc("Base attribute containing attributes from generalisation match_type")
               match_base_type base;
-              // The reference mode being matched
+              @doc("The reference mode being matched")
               reference_mode_type reference_mode;
-              // The reference parameters which have been matched by the measurement parameters in
-              // determining the mode assessment.
+              @doc("The reference parameters which have been matched by the measurement parameters in \
+                determining the mode assessment.")
               parametric_mode_match_parameter_match_type parameter_match;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<equipment_match_type> sensor_plot_equipement_assessment_equipment_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<equipment_match_type, 20> sensor_track_equipment_assessment_equipment_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<parametric_mode_match_type> sensor_plot_mode_assessment_mode_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<parametric_mode_match_type, 20> sensor_track_mode_assessment_mode_type;
 
-            // The assessment of the equipment to which the sensor track's data may correspond.
-            // To report on the overall equipment assessment for a sensor plot.
-            // The interface for a sensor to provide assessments (identification and
-            // classification) of sensor plots to the CMS. It is expected that the assessment
-            // relates to matching the plot's measurement parameters to reference data. The
-            // sensor provides a set of mode, equipment and/or platform matches relating to a
-            // particular plot (referenced by the plot id). Therefore the sensor plot must have
-            // a plot_id attribute defined.
-            // The sensor subsystem's assessment of the equipment potentially matched by the
-            // sensor plot's measurement parameters.
+            @doc("The assessment of the equipment to which the sensor track's data may correspond. \
+              To report on the overall equipment assessment for a sensor plot. \
+              The interface for a sensor to provide assessments (identification and \
+              classification) of sensor plots to the CMS. It is expected that the assessment \
+              relates to matching the plot's measurement parameters to reference data. The \
+              sensor provides a set of mode, equipment and/or platform matches relating to a \
+              particular plot (referenced by the plot id). Therefore the sensor plot must have \
+              a plot_id attribute defined. \
+              The sensor subsystem's assessment of the equipment potentially matched by the \
+              sensor plot's measurement parameters.")
             struct sensor_plot_equipement_assessment_type
             {
-              // The equipment assessed by the sensor as being the best match for the sensor plot
+              @doc("The equipment assessed by the sensor as being the best match for the sensor plot")
               sensor_plot_equipement_assessment_best_id_type best_id;
-              // The sensor plot to which the assessment refers. The plot instance must contain a
-              // plot_id attribute.
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type sensor_plot_id;
-              // The equipment assessed as potentially being represented by the sensor plot
-              sensor_plot_equipement_assessment_equipment_type equipment;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-            };
-#ifndef DDS_XTYPES
-#pragma keylist sensor_plot_equipement_assessment_type subsystem_id
-#endif
 
-            // Union of the specialisations for class match_link_type.
-            // The representation of a link between an assessment match and an existing lower
-            // level match.
+              @doc("The sensor plot to which the assessment refers. The plot instance must contain a \
+                plot_id attribute.")
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type sensor_plot_id;
+
+              @doc("The equipment assessed as potentially being represented by the sensor plot")
+              sensor_plot_equipement_assessment_equipment_type equipment;
+
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
+              @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            @doc("Union of the specialisations for class match_link_type. \
+                The representation of a link between an assessment match and an existing lower \
+                level match.")
             union match_link_type switch (match_link_kind_type)
             {
-              // equipment_mode_match_type option for match_link_type
+              @doc("equipment_mode_match_type option for match_link_type")
               case EQUIPMENT_MODE_MATCH_KIND : equipment_mode_match_type equipment_mode_match;
-              // equipment_parameter_match_type option for match_link_type
+              @doc("equipment_parameter_match_type option for match_link_type")
               case EQUIPMENT_PARAMETER_MATCH_KIND : equipment_parameter_match_type equipment_parameter_match;
-              // measurement_element_match_type option for match_link_type
+              @doc("measurement_element_match_type option for match_link_type")
               case MEASUREMENT_ELEMENT_MATCH_KIND : measurement_element_match_type measurement_element_match;
-              // platform_equipment_match_type option for match_link_type
+              @doc("platform_equipment_match_type option for match_link_type")
               case PLATFORM_EQUIPMENT_MATCH_KIND : platform_equipment_match_type platform_equipment_match;
-              // platform_mode_match_type option for match_link_type
+              @doc("platform_mode_match_type option for match_link_type")
               case PLATFORM_MODE_MATCH_KIND : platform_mode_match_type platform_mode_match;
-              // reference_parameter_match_type option for match_link_type
+              @doc("reference_parameter_match_type option for match_link_type")
               case REFERENCE_PARAMETER_MATCH_KIND : reference_parameter_match_type reference_parameter_match;
             };
 
-            // The overall assessment of mode (of the detected equipment) for a sensor track
-            // To report on the overall mode assessment for a sensor plot.
-            // The interface for a sensor to provide assessments (identification and
-            // classification) of sensor plots to the CMS. It is expected that the assessment
-            // relates to matching the plot's measurement parameters to reference data. The
-            // sensor provides a set of mode, equipment and/or platform matches relating to a
-            // particular plot (referenced by the plot id). Therefore the sensor plot must have
-            // a plot_id attribute defined.
-            // The sensor subsystem's assessment of the modes potentially matched by the sensor
-            // plot's measurement parameters.
+            @doc("The overall assessment of mode (of the detected equipment) for a sensor track \
+              To report on the overall mode assessment for a sensor plot. \
+              The interface for a sensor to provide assessments (identification and \
+              classification) of sensor plots to the CMS. It is expected that the assessment \
+              relates to matching the plot's measurement parameters to reference data. The \
+              sensor provides a set of mode, equipment and/or platform matches relating to a \
+              particular plot (referenced by the plot id). Therefore the sensor plot must have \
+              a plot_id attribute defined. \
+              The sensor subsystem's assessment of the modes potentially matched by the sensor \
+              plot's measurement parameters.")
             struct sensor_plot_mode_assessment_type
             {
-              // The sensor plot to which the assessment refers. The plot instance must contain a
-              // plot_id attribute.
+              @doc("The sensor plot to which the assessment refers. The plot instance must contain a \
+                plot_id attribute.")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type sensor_plot_id;
-              // The mode assessed as most likely by the sensor.
-              sensor_plot_mode_assessment_best_id_type best_id;
-              // The modes assessed as candidates for the sensor plot.
-              sensor_plot_mode_assessment_mode_type mode;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-            };
-#ifndef DDS_XTYPES
-#pragma keylist sensor_plot_mode_assessment_type subsystem_id
-#endif
 
-            // The assessment of the equipment to which the sensor track's data may correspond.
-            // To report on the overall equipment assessment for a sensor track.
-            // The interface for a sensor to provide assessments (identification and
-            // classification) of sensor tracks to the CMS. The sensor matches parametric
-            // measurements to reference data and then reports each of these sets as an
-            // assessment for each track for the categories of equipment modes, equipment marks
-            // (build standards / versions) and platform instances (or platform classes). The
-            // sensor also reports what it has assessed to be the best match and the match
-            // currently selected. The currently selected match influences the attributes
-            // reported for the sensor track (including its recognition and identification).
-            // The CMS uses the select and deselect methods to set or override the match that is
-            // selected for an assessment of a sensor track.
-            // Sensors report a track to the CMS using the Track Reporting use case before
-            // providing an assessment. Assessments are only reported for tracks whilst the
-            // sensor track is in the TRACKED track state.
-            // A representation of an assessment of the equipment that potentially correspond to
-            // a sensor track.
+              @doc("The mode assessed as most likely by the sensor.")
+              sensor_plot_mode_assessment_best_id_type best_id;
+
+              @doc("The modes assessed as candidates for the sensor plot.")
+              sensor_plot_mode_assessment_mode_type mode;
+
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
+              @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            @doc("The assessment of the equipment to which the sensor track's data may correspond. \
+              To report on the overall equipment assessment for a sensor track. \
+              The interface for a sensor to provide assessments (identification and \
+              classification) of sensor tracks to the CMS. The sensor matches parametric \
+              measurements to reference data and then reports each of these sets as an \
+              assessment for each track for the categories of equipment modes, equipment marks \
+              (build standards / versions) and platform instances (or platform classes). The \
+              sensor also reports what it has assessed to be the best match and the match \
+              currently selected. The currently selected match influences the attributes \
+              reported for the sensor track (including its recognition and identification). \
+              The CMS uses the select and deselect methods to set or override the match that is \
+              selected for an assessment of a sensor track. \
+              Sensors report a track to the CMS using the Track Reporting use case before \
+              providing an assessment. Assessments are only reported for tracks whilst the \
+              sensor track is in the TRACKED track state. \
+              A representation of an assessment of the equipment that potentially correspond to \
+              a sensor track.")
             struct sensor_track_equipment_assessment_type
             {
-#ifdef DDS_XTYPES
-              @Key long sensor_track_id;
-#else
-              long sensor_track_id;
-#endif
-              // The match selected as the authoritative assessment by command
-              sensor_track_equipment_assessment_selected_id_type selected_id;
-              // The equipment assessed as most likely to correspond to the sensor track
-              sensor_track_equipment_assessment_best_match_id_type best_match_id;
-              // An item of equipment that has been assessed as a possible match for the sensor
-              // track
-              sensor_track_equipment_assessment_equipment_type equipment;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-            };
-#ifndef DDS_XTYPES
-#pragma keylist sensor_track_equipment_assessment_type sensor_track_id subsystem_id
-#endif
+              @key long sensor_track_id;
 
-            // The overall assessment of mode (of the detected equipment) for a sensor track
-            // To report on the overall mode assessment for a sensor track.
-            // The interface for a sensor to provide assessments (identification and
-            // classification) of sensor tracks to the CMS. The sensor matches parametric
-            // measurements to reference data and then reports each of these sets as an
-            // assessment for each track for the categories of equipment modes, equipment marks
-            // (build standards / versions) and platform instances (or platform classes). The
-            // sensor also reports what it has assessed to be the best match and the match
-            // currently selected. The currently selected match influences the attributes
-            // reported for the sensor track (including its recognition and identification).
-            // The CMS uses the select and deselect methods to set or override the match that is
-            // selected for an assessment of a sensor track.
-            // Sensors report a track to the CMS using the Track Reporting use case before
-            // providing an assessment. Assessments are only reported for tracks whilst the
-            // sensor track is in the TRACKED track state.
-            // The representation of the state of the assessment of a sensor track's possible
-            // identified modes.
+              @doc("The match selected as the authoritative assessment by command")
+              sensor_track_equipment_assessment_selected_id_type selected_id;
+
+              @doc("The equipment assessed as most likely to correspond to the sensor track")
+              sensor_track_equipment_assessment_best_match_id_type best_match_id;
+
+              @doc("An item of equipment that has been assessed as a possible match for the sensor \
+                track")
+              sensor_track_equipment_assessment_equipment_type equipment;
+
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
+              @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            @doc("The overall assessment of mode (of the detected equipment) for a sensor track \
+              To report on the overall mode assessment for a sensor track. \
+              The interface for a sensor to provide assessments (identification and \
+              classification) of sensor tracks to the CMS. The sensor matches parametric \
+              measurements to reference data and then reports each of these sets as an \
+              assessment for each track for the categories of equipment modes, equipment marks \
+              (build standards / versions) and platform instances (or platform classes). The \
+              sensor also reports what it has assessed to be the best match and the match \
+              currently selected. The currently selected match influences the attributes \
+              reported for the sensor track (including its recognition and identification). \
+              The CMS uses the select and deselect methods to set or override the match that is \
+              selected for an assessment of a sensor track. \
+              Sensors report a track to the CMS using the Track Reporting use case before \
+              providing an assessment. Assessments are only reported for tracks whilst the \
+              sensor track is in the TRACKED track state. \
+              The representation of the state of the assessment of a sensor track's possible \
+              identified modes.")
             struct sensor_track_mode_assessment_type
             {
-              // The sensor's best match
+              @doc("The sensor's best match")
               sensor_track_mode_assessment_best_id_type best_id;
-              // The sensor track to which the mode assessment relates
-              org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type sensor_track_id;
-              // The match that has been authoritatively selected as the mode relating to the
-              // sensor track.
-              sensor_track_mode_assessment_selected_id_type selected_id;
-              // The parametric modes matched in the assessment of the sensor track's measurement
-              // parameters. 
-              sensor_track_mode_assessment_mode_type mode;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-            };
-#ifndef DDS_XTYPES
-#pragma keylist sensor_track_mode_assessment_type subsystem_id
-#endif
 
-            // The representation of a match between a sensor track and a platform.
+              @doc("The sensor track to which the mode assessment relates")
+              org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type sensor_track_id;
+
+              @doc("The match that has been authoritatively selected as the mode relating to the \
+                sensor track.")
+              sensor_track_mode_assessment_selected_id_type selected_id;
+
+               @doc("The parametric modes matched in the assessment of the sensor track's measurement \
+                parameters. ")
+              sensor_track_mode_assessment_mode_type mode;
+
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
+              @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            @doc("The representation of a match between a sensor track and a platform.")
             struct platform_match_type
             {
-              // Base attribute containing attributes from generalisation match_type
+              @doc("Base attribute containing attributes from generalisation match_type")
               match_base_type base;
-              // The platform being matched
+
+              @doc("The platform being matched")
               platform_class_type platform;
-              // The activity identified as being undertaken by the platform when matching the
-              // sensor track to it.
+
+              @doc("The activity identified as being undertaken by the platform when matching the \
+                sensor track to it.")
               platform_match_activity_type activity;
-              // The set of sensor tracks that are all associated with the same platform instance
-              // and hence real world object under the hypothesis of this platform match.
+
+              @doc("The set of sensor tracks that are all associated with the same platform instance \
+                and hence real world object under the hypothesis of this platform match.")
               platform_match_associated_sensor_track_id_type associated_sensor_track_id;
-              // A hierarchical match from a (super) platform to a separable (sub) platform that
-              // it is potentially hosting or carrying as one of its constituent parts.
+
+              @doc("A hierarchical match from a (super) platform to a separable (sub) platform that \
+                it is potentially hosting or carrying as one of its constituent parts.")
               platform_match_match_type match;
-              // The observable equipment modes matched by the sensor in determining the platform
-              // match.
+
+              @doc("The observable equipment modes matched by the sensor in determining the platform \
+                match.")
               platform_match_mode_match_type mode_match;
-              // A match between a platform and a constituent equipment
+
+              @doc("A match between a platform and a constituent equipment")
               platform_match_equipment_match_type equipment_match;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<platform_match_type> sensor_plot_platform_assessment_platform_type;
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<platform_match_type, 20> sensor_track_platform_assessment_platform_type;
 
-            // The assessment of the platform to which the sensor track's data may correspond.
-            // To report on the overall platform assessment for a sensor plot.
-            // The interface for a sensor to provide assessments (identification and
-            // classification) of sensor plots to the CMS. It is expected that the assessment
-            // relates to matching the plot's measurement parameters to reference data. The
-            // sensor provides a set of mode, equipment and/or platform matches relating to a
-            // particular plot (referenced by the plot id). Therefore the sensor plot must have
-            // a plot_id attribute defined.
-            // The sensor subsystem's assessment of the platforms potentially matched by the
-            // sensor plot's measurement parameters.
+            @doc("The assessment of the platform to which the sensor track's data may correspond. \
+              To report on the overall platform assessment for a sensor plot. \
+              The interface for a sensor to provide assessments (identification and \
+              classification) of sensor plots to the CMS. It is expected that the assessment \
+              relates to matching the plot's measurement parameters to reference data. The \
+              sensor provides a set of mode, equipment and/or platform matches relating to a \
+              particular plot (referenced by the plot id). Therefore the sensor plot must have \
+              a plot_id attribute defined. \
+              The sensor subsystem's assessment of the platforms potentially matched by the \
+              sensor plot's measurement parameters.")
             struct sensor_plot_platform_assessment_type
             {
-              // The platform assessed by the sensor as the best match for the sensor plot.
+              @doc("The platform assessed by the sensor as the best match for the sensor plot.")
               sensor_plot_platform_assessment_best_id_type best_id;
-              // The sensor plot to which the assessment refers. The plot instance must contain a
-              // plot_id attribute.
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type sensor_plot_id;
-              // The platforms assessed as potentially being represented by the sensor plot
-              sensor_plot_platform_assessment_platform_type platform;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-            };
-#ifndef DDS_XTYPES
-#pragma keylist sensor_plot_platform_assessment_type subsystem_id
-#endif
 
-            // The assessment of the platform to which the sensor track's data may correspond.
-            // To report on the overall platform assessment for a sensor track.
-            // The interface for a sensor to provide assessments (identification and
-            // classification) of sensor tracks to the CMS. The sensor matches parametric
-            // measurements to reference data and then reports each of these sets as an
-            // assessment for each track for the categories of equipment modes, equipment marks
-            // (build standards / versions) and platform instances (or platform classes). The
-            // sensor also reports what it has assessed to be the best match and the match
-            // currently selected. The currently selected match influences the attributes
-            // reported for the sensor track (including its recognition and identification).
-            // The CMS uses the select and deselect methods to set or override the match that is
-            // selected for an assessment of a sensor track.
-            // Sensors report a track to the CMS using the Track Reporting use case before
-            // providing an assessment. Assessments are only reported for tracks whilst the
-            // sensor track is in the TRACKED track state.
-            // A representation of an assessment of the platforms that potentially correspond to
-            // a sensor track.
+              @doc("The sensor plot to which the assessment refers. The plot instance must contain a \
+                plot_id attribute.")
+              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type sensor_plot_id;
+
+              @doc("The platforms assessed as potentially being represented by the sensor plot")
+              sensor_plot_platform_assessment_platform_type platform;
+
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
+              @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            @doc("The assessment of the platform to which the sensor track's data may correspond. \
+              To report on the overall platform assessment for a sensor track. \
+              The interface for a sensor to provide assessments (identification and \
+              classification) of sensor tracks to the CMS. The sensor matches parametric \
+              measurements to reference data and then reports each of these sets as an \
+              assessment for each track for the categories of equipment modes, equipment marks \
+              (build standards / versions) and platform instances (or platform classes). The \
+              sensor also reports what it has assessed to be the best match and the match \
+              currently selected. The currently selected match influences the attributes \
+              reported for the sensor track (including its recognition and identification). \
+              The CMS uses the select and deselect methods to set or override the match that is \
+              selected for an assessment of a sensor track. \
+              Sensors report a track to the CMS using the Track Reporting use case before \
+              providing an assessment. Assessments are only reported for tracks whilst the \
+              sensor track is in the TRACKED track state. \
+              A representation of an assessment of the platforms that potentially correspond to \
+              a sensor track.")
             struct sensor_track_platform_assessment_type
             {
-              // The match selected as the authoritative assessment by command
+              @doc("The match selected as the authoritative assessment by command")
               sensor_track_platform_assessment_selected_id_type selected_id;
-              // The sensor track corresponding to the platform assessment
-#ifdef DDS_XTYPES
-              @Key long sensor_track_id;
-#else
-              long sensor_track_id;
-#endif
-              // The platform assessed as most likely to correspond to the sensor track
-              sensor_track_platform_assessment_best_match_id_type best_match_id;
-              // A platform that has been assessed as a possible match for the sensor track
-              sensor_track_platform_assessment_platform_type platform;
-              // Indicates which subsystem published the data or is intended to read it as a
-              // subscriber
-#ifdef DDS_XTYPES
-              @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-              org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-            };
-#ifndef DDS_XTYPES
-#pragma keylist sensor_track_platform_assessment_type sensor_track_id subsystem_id
-#endif
 
-            // Union of the specialisations for class match_type.
-            // An abstract base class for matches between measurements and reference data in the
-            // assessment process
+              @doc("The sensor track corresponding to the platform assessment")
+              @key long sensor_track_id;
+
+              @doc("The platform assessed as most likely to correspond to the sensor track")
+              sensor_track_platform_assessment_best_match_id_type best_match_id;
+
+              @doc("A platform that has been assessed as a possible match for the sensor track")
+              sensor_track_platform_assessment_platform_type platform;
+
+              @doc("Indicates which subsystem published the data or is intended to read it as a \
+                subscriber")
+              @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+            };
+
+            @doc("Union of the specialisations for class match_type. \
+                An abstract base class for matches between measurements and reference data in the \
+                assessment process")
             union match_type switch (match_kind_type)
             {
-              // equipment_match_type option for match_type
+              @doc("equipment_match_type option for match_type")
               case EQUIPMENT_MATCH_KIND : equipment_match_type equipment_match;
-              // parametric_mode_match_type option for match_type
+              @doc("parametric_mode_match_type option for match_type")
               case PARAMETRIC_MODE_MATCH_KIND : parametric_mode_match_type parametric_mode_match;
-              // platform_match_type option for match_type
+              @doc("platform_match_type option for match_type")
               case PLATFORM_MATCH_KIND : platform_match_type platform_match;
             };
 

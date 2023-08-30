@@ -23,37 +23,37 @@ module org
           module Surface_Engagement_Support
           {
 
-            // the area ID assigned by the sensor.
+            @doc("the area ID assigned by the sensor.")
             typedef unsigned short splash_spotting_area_id_type;
 
-            // The area definition from the User (CMS) when Splash Spotting is defined using the
-            // service "activate splash spotting area by position".  The minimum and maximum
-            // available sizes are defined in "Manage Subsystem Parameters".
+            @doc("The area definition from the User (CMS) when Splash Spotting is defined using the \
+              service \"activate splash spotting area by position\". The minimum and maximum \
+              available sizes are defined in \"Manage Subsystem Parameters\".")
             struct splash_spotting_area_position_type
             {
-              // when max is less than min, areas covers the north azimuth
+              @doc("when max is less than min, areas covers the north azimuth")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type azimuth_max;
-              // when min is less than max, areas covers the north azimuth
+              @doc("when min is less than max, areas covers the north azimuth")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type azimuth_min;
-              // limited to less than or equal to instrumented range
+              @doc("limited to less than or equal to instrumented range")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type range_max;
-              // limited to greater than or equal to minimum visible range
+              @doc("limited to greater than or equal to minimum visible range")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type range_min;
             };
 
-            // Definition of a single splash spotting area.
+            @doc("Definition of a single splash spotting area.")
             struct splash_spotting_area_type
             {
-              // Shape and size of the splash spotting area 
+              @doc("Shape and size of the splash spotting area")
               org::omg::c4i::Domain_Model::Common_Types::Shape_Model::truncated_sector_type shape;
-              // Area ID of the splash spotting area.
+              @doc("Area ID of the splash spotting area.")
               splash_spotting_area_id_type area_id;
             };
 
-            // A sequence type, to represent multiple values.
+            @doc("A sequence type, to represent multiple values.")
             typedef sequence<splash_spotting_area_type, 32> splash_spotting_area_set_splash_spotting_area_descriptor_type;
 
-            // A set consisting of splash spotting areas.
+            @doc("A set consisting of splash spotting areas.")
             struct splash_spotting_area_set_type
             {
               splash_spotting_area_set_splash_spotting_area_descriptor_type splash_spotting_area_descriptor;

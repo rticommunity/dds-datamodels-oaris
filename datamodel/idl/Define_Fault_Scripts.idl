@@ -27,104 +27,70 @@ module org
             module Define_Fault_Scripts
             {
 
-              // struct holding keys for class fault_script_summary_type.
+              @doc("struct holding keys for class fault_script_summary_type.")
               struct fault_script_summary_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // This provides a list of all fault scripts for a subsystem to the CMS for
-              // confirmation.
-              // This enables a maintainer trainer to script a set of subsystem faults, the
-              // effects of which would be simulated for training purposes. The faults may be
-              // scripted in relation to a specific simulation scenario. Each fault script shall
-              // include a unique identifier.
+              @doc("This provides a list of all fault scripts for a subsystem to the CMS for \
+                confirmation. \
+                This enables a maintainer trainer to script a set of subsystem faults, the \
+                effects of which would be simulated for training purposes. The faults may be \
+                scripted in relation to a specific simulation scenario. Each fault script shall \
+                include a unique identifier.")
               struct fault_script_summary_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-                // The list of fault scripts
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @doc("The list of fault scripts")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_scripts_type faults;
               };
-#ifndef DDS_XTYPES
-#pragma keylist fault_script_summary_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class add_fault_scripts_type.
+              @doc("struct holding keys for class add_fault_scripts_type.")
               struct add_fault_scripts_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Adds the given fault scripts to the subsystem's simulation.
+              @doc("Adds the given fault scripts to the subsystem's simulation.")
               struct add_fault_scripts_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-                // The fault scripts to be added
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @doc("The fault scripts to be added")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_scripts_type scripts;
               };
-#ifndef DDS_XTYPES
-#pragma keylist add_fault_scripts_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class remove_fault_scripts_type.
+              @doc("struct holding keys for class remove_fault_scripts_type.")
               struct remove_fault_scripts_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Removes the given fault scripts from the subsystem's simulation.
+              @doc("Removes the given fault scripts from the subsystem's simulation.")
               struct remove_fault_scripts_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-                // The ids of the fault scripts to be removed
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+                @doc("The ids of the fault scripts to be removed)
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type fault_scripts;
               };
-#ifndef DDS_XTYPES
-#pragma keylist remove_fault_scripts_type request_id subsystem_id
-#endif
-
             };
           };
         };

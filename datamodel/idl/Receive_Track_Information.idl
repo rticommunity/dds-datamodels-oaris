@@ -25,43 +25,32 @@ module org
           module Tracking_Control
           {
 
-            // This package contains interfaces for the Receive Track Information service.
+            @doc("This package contains interfaces for the Receive Track Information service.")
             module Receive_Track_Information
             {
 
-              // struct holding keys for class insert_info_track_type.
+              @doc("struct holding keys for class insert_info_track_type.")
               struct insert_info_track_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // Method used by the CMS to send a receive track information request, specifying
-              // the track identification number and related track information.
-              // This is the Subsystem interface for receiving track information.
+              @doc("Method used by the CMS to send a receive track information request, specifying \
+                the track identification number and related track information. \
+                This is the Subsystem interface for receiving track information.")
               struct insert_info_track_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type trackId;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Tracking_Control::track_info_type trackInfo;
               };
-#ifndef DDS_XTYPES
-#pragma keylist insert_info_track_type request_id subsystem_id
-#endif
-
             };
           };
         };

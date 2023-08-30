@@ -28,76 +28,47 @@ module org
             module Allocate_Tracks_To_Stream
             {
 
-              // A request to add the sensor's track to the specified stream.
+              @doc("A request to add the sensor's track to the specified stream.")
               struct Add_Track_To_Stream_type
               {
                 org::omg::c4i::Domain_Model::Sensor_Domain::Media_Streaming::media_stream_id_type Stream_Id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type Track_Id;
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type Request_Id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist Add_Track_To_Stream_type subsystem_id
-#endif
 
-              // A request to remove the sensor's track from the specified stream.
+              @doc("A request to remove the sensor's track from the specified stream.")
               struct Remove_Track_From_Stream_type
               {
                 org::omg::c4i::Domain_Model::Sensor_Domain::Media_Streaming::media_stream_id_type Stream_Id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type Track_Id;
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type Request_Id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist Remove_Track_From_Stream_type subsystem_id
-#endif
 
-              // A request to add all the sensor's tracks to the specified stream.
+              @doc("A request to add all the sensor's tracks to the specified stream.")
               struct Add_All_Tracks_To_Stream_type
               {
                 org::omg::c4i::Domain_Model::Sensor_Domain::Media_Streaming::media_stream_id_type Stream_Id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type Request_Id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist Add_All_Tracks_To_Stream_type subsystem_id
-#endif
 
-              // A request to remove all the sensor's tracks from the specified stream.
+              @doc("A request to remove all the sensor's tracks from the specified stream.")
               struct Remove_All_Tracks_From_Stream_type
               {
                 org::omg::c4i::Domain_Model::Sensor_Domain::Media_Streaming::media_stream_id_type Stream_Id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type Request_Id;
               };
-#ifndef DDS_XTYPES
-#pragma keylist Remove_All_Tracks_From_Stream_type subsystem_id
-#endif
-
             };
           };
         };

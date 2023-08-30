@@ -27,186 +27,155 @@ module org
             module Perform_Missile_Downlink
             {
 
-              // struct holding keys for class report_downlink_type.
+              @doc("struct holding keys for class report_downlink_type.")
               struct report_downlink_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // The service describes the reception and provision of missile downlink information
-              // to the CMS. 
-              // Downlink consists of transmission of energy by the missile. The radar subsystem
-              // may track a missile based on these downlink transmissions (beacon track).
-              // Provision of the beacon track of the missile to the CMS is covered by service
-              // Provide sensor tracks.
-              // This service handles the situation where the downlink also has content.
-              // Generally, a sequence of downlinks is transmitted by the missile, on periodic
-              // basis or triggered by an uplink. However, the CMS (or a dedicated missile
-              // subsystem) is responsible for evaluating the downlinks in this sequence. The
-              // radar subsystem only receives downlinks and provides them to the CMS, and does
-              // not keep track of the sequence. In the special case where the downlink contains
-              // own missile kinematics, this data may also be used internally by the radar
-              // subsystem.
-              // The actor is the Combat Management System. 
-              // Although the downlink may be evaluated by a missile subsystem (which is not part
-              // of the CMS), the downlink is assumed to be passed to that missile subsystem via
-              // the CMS.
-              // The service is triggered by the downlink request of the actor. 
-              // The actor sends a downlink request to the radar.
-              // During the request listening period, the radar listens to transmissions that are
-              // in accordance with the provided downlink parameters.
-              // The radar reports to the actor the occurrence of the downlink, including the
-              // (decoded) content of the downlink.
-              // The information provided by the missile may vary depending on the applied missile
-              // fire control principle, and lies outside the scope of the OARIS standard. 
-              // The information within the downlink may be used internally by the radar.
-              // The service ends at the end of the listening period. 
-              // If the downlink transmission is interrupted, this is reported to the actor, and
-              // the service stops.
-              // If during the downlink a radar fault takes place that prevents execution of the
-              // downlink,  the health state of the Missile Guidance service (of which this
-              // service is part) becomes DEGRADED (if the Missile Guidance service is still
-              // capable of performing uplinks and/or illumination) or NOT AVAILABLE, and the
-              // service stops.
-              // Relationship to missile uplink
-              // For some missile types a downlink may be transmitted as a response to a received
-              // uplink (e.g. an acknowledge of receipt). This relationship (including the
-              // inherent timing relationship) depends heavily on the missile type and lies
-              // outside the scope of the OARIS standard.
-              // Relationship to provide sensor tracks
-              // If the downlink contains kinematic information about the missile, the radar
-              // subsystem may use this information internally to improve the own missile track
-              // (provided service Provide sensor tracks or service Process target designation).
-              // It is also possible that the missile is tracked based on the fact that it
-              // transmits energy and not based on the contents of the downlink. This so-called
-              // beacon tracking is covered by service Provide sensor tracks.
+              @doc("The service describes the reception and provision of missile downlink information \
+                to the CMS. \
+                Downlink consists of transmission of energy by the missile. The radar subsystem \
+                may track a missile based on these downlink transmissions (beacon track). \
+                Provision of the beacon track of the missile to the CMS is covered by service \
+                Provide sensor tracks. \
+                This service handles the situation where the downlink also has content. \
+                Generally, a sequence of downlinks is transmitted by the missile, on periodic \
+                basis or triggered by an uplink. However, the CMS (or a dedicated missile \
+                subsystem) is responsible for evaluating the downlinks in this sequence. The \
+                radar subsystem only receives downlinks and provides them to the CMS, and does \
+                not keep track of the sequence. In the special case where the downlink contains \
+                own missile kinematics, this data may also be used internally by the radar \
+                subsystem. \
+                The actor is the Combat Management System. \
+                Although the downlink may be evaluated by a missile subsystem (which is not part \
+                of the CMS), the downlink is assumed to be passed to that missile subsystem via \
+                the CMS. \
+                The service is triggered by the downlink request of the actor. \
+                The actor sends a downlink request to the radar. \
+                During the request listening period, the radar listens to transmissions that are \
+                in accordance with the provided downlink parameters. \
+                The radar reports to the actor the occurrence of the downlink, including the \
+                (decoded) content of the downlink. \
+                The information provided by the missile may vary depending on the applied missile \
+                fire control principle, and lies outside the scope of the OARIS standard. \
+                The information within the downlink may be used internally by the radar. \
+                The service ends at the end of the listening period. \
+                If the downlink transmission is interrupted, this is reported to the actor, and \
+                the service stops. \
+                If during the downlink a radar fault takes place that prevents execution of the \
+                downlink,  the health state of the Missile Guidance service (of which this \
+                service is part) becomes DEGRADED (if the Missile Guidance service is still \
+                capable of performing uplinks and/or illumination) or NOT AVAILABLE, and the \
+                service stops. \
+                Relationship to missile uplink \
+                For some missile types a downlink may be transmitted as a response to a received \
+                uplink (e.g. an acknowledge of receipt). This relationship (including the \
+                inherent timing relationship) depends heavily on the missile type and lies \
+                outside the scope of the OARIS standard. \
+                Relationship to provide sensor tracks \
+                If the downlink contains kinematic information about the missile, the radar \
+                subsystem may use this information internally to improve the own missile track \
+                (provided service Provide sensor tracks or service Process target designation). \
+                It is also possible that the missile is tracked based on the fact that it \
+                transmits energy and not based on the contents of the downlink. This so-called \
+                beacon tracking is covered by service Provide sensor tracks.")
               struct report_downlink_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Missile_Guidance::downlink_report_type the_downlink_info;
               };
-#ifndef DDS_XTYPES
-#pragma keylist report_downlink_type request_id subsystem_id
-#endif
 
-              // struct holding keys for class report_downlink_completed_type.
+              @doc("struct holding keys for class report_downlink_completed_type.")
               struct report_downlink_completed_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              // The service describes the reception and provision of missile downlink information
-              // to the CMS. 
-              // Downlink consists of transmission of energy by the missile. The radar subsystem
-              // may track a missile based on these downlink transmissions (beacon track).
-              // Provision of the beacon track of the missile to the CMS is covered by service
-              // Provide sensor tracks.
-              // This service handles the situation where the downlink also has content.
-              // Generally, a sequence of downlinks is transmitted by the missile, on periodic
-              // basis or triggered by an uplink. However, the CMS (or a dedicated missile
-              // subsystem) is responsible for evaluating the downlinks in this sequence. The
-              // radar subsystem only receives downlinks and provides them to the CMS, and does
-              // not keep track of the sequence. In the special case where the downlink contains
-              // own missile kinematics, this data may also be used internally by the radar
-              // subsystem.
-              // The actor is the Combat Management System. 
-              // Although the downlink may be evaluated by a missile subsystem (which is not part
-              // of the CMS), the downlink is assumed to be passed to that missile subsystem via
-              // the CMS.
-              // The service is triggered by the downlink request of the actor. 
-              // The actor sends a downlink request to the radar.
-              // During the request listening period, the radar listens to transmissions that are
-              // in accordance with the provided downlink parameters.
-              // The radar reports to the actor the occurrence of the downlink, including the
-              // (decoded) content of the downlink.
-              // The information provided by the missile may vary depending on the applied missile
-              // fire control principle, and lies outside the scope of the OARIS standard. 
-              // The information within the downlink may be used internally by the radar.
-              // The service ends at the end of the listening period. 
-              // If the downlink transmission is interrupted, this is reported to the actor, and
-              // the service stops.
-              // If during the downlink a radar fault takes place that prevents execution of the
-              // downlink,  the health state of the Missile Guidance service (of which this
-              // service is part) becomes DEGRADED (if the Missile Guidance service is still
-              // capable of performing uplinks and/or illumination) or NOT AVAILABLE, and the
-              // service stops.
-              // Relationship to missile uplink
-              // For some missile types a downlink may be transmitted as a response to a received
-              // uplink (e.g. an acknowledge of receipt). This relationship (including the
-              // inherent timing relationship) depends heavily on the missile type and lies
-              // outside the scope of the OARIS standard.
-              // Relationship to provide sensor tracks
-              // If the downlink contains kinematic information about the missile, the radar
-              // subsystem may use this information internally to improve the own missile track
-              // (provided service Provide sensor tracks or service Process target designation).
-              // It is also possible that the missile is tracked based on the fact that it
-              // transmits energy and not based on the contents of the downlink. This so-called
-              // beacon tracking is covered by service Provide sensor tracks.
+              @doc("The service describes the reception and provision of missile downlink information \
+                to the CMS. \
+                Downlink consists of transmission of energy by the missile. The radar subsystem \
+                may track a missile based on these downlink transmissions (beacon track). \
+                Provision of the beacon track of the missile to the CMS is covered by service \
+                Provide sensor tracks. \
+                This service handles the situation where the downlink also has content. \
+                Generally, a sequence of downlinks is transmitted by the missile, on periodic \
+                basis or triggered by an uplink. However, the CMS (or a dedicated missile \
+                subsystem) is responsible for evaluating the downlinks in this sequence. The \
+                radar subsystem only receives downlinks and provides them to the CMS, and does \
+                not keep track of the sequence. In the special case where the downlink contains \
+                own missile kinematics, this data may also be used internally by the radar \
+                subsystem. \
+                The actor is the Combat Management System. \
+                Although the downlink may be evaluated by a missile subsystem (which is not part \
+                of the CMS), the downlink is assumed to be passed to that missile subsystem via \
+                the CMS. \
+                The service is triggered by the downlink request of the actor. \
+                The actor sends a downlink request to the radar. \
+                During the request listening period, the radar listens to transmissions that are \
+                in accordance with the provided downlink parameters. \
+                The radar reports to the actor the occurrence of the downlink, including the \
+                (decoded) content of the downlink. \
+                The information provided by the missile may vary depending on the applied missile \
+                fire control principle, and lies outside the scope of the OARIS standard. \
+                The information within the downlink may be used internally by the radar. \
+                The service ends at the end of the listening period. \
+                If the downlink transmission is interrupted, this is reported to the actor, and \
+                the service stops. \
+                If during the downlink a radar fault takes place that prevents execution of the \
+                downlink,  the health state of the Missile Guidance service (of which this \
+                service is part) becomes DEGRADED (if the Missile Guidance service is still \
+                capable of performing uplinks and/or illumination) or NOT AVAILABLE, and the \
+                service stops. \
+                Relationship to missile uplink \
+                For some missile types a downlink may be transmitted as a response to a received \
+                uplink (e.g. an acknowledge of receipt). This relationship (including the \
+                inherent timing relationship) depends heavily on the missile type and lies \
+                outside the scope of the OARIS standard. \
+                Relationship to provide sensor tracks \
+                If the downlink contains kinematic information about the missile, the radar \
+                subsystem may use this information internally to improve the own missile track \
+                (provided service Provide sensor tracks or service Process target designation). \
+                It is also possible that the missile is tracked based on the fact that it \
+                transmits energy and not based on the contents of the downlink. This so-called \
+                beacon tracking is covered by service Provide sensor tracks.")
               struct report_downlink_completed_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
-              };
-#ifndef DDS_XTYPES
-#pragma keylist report_downlink_completed_type request_id subsystem_id
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-              // struct holding keys for class request_downlink_type.
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
+              };
+
+              @doc("struct holding keys for class request_downlink_type.")
               struct request_downlink_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
               struct request_downlink_type
               {
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-#endif
-                // Indicates which subsystem published the data or is intended to read it as a
-                // subscriber
-#ifdef DDS_XTYPES
-                @Key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#else
-                org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-#endif
+                @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
+
+                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                    subscriber")
+                @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Missile_Guidance::downlink_request_type request;
               };
-#ifndef DDS_XTYPES
-#pragma keylist request_downlink_type request_id subsystem_id
-#endif
-
             };
           };
         };

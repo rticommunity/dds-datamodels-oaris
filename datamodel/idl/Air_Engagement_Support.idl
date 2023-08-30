@@ -24,33 +24,33 @@ module org
           module Air_Engagement_Support
           {
 
-            // Is sent once a hit or miss is noted.
+            @doc("Is sent once a hit or miss is noted.")
             struct miss_indication_data_type
             {
-              // Closest distance of the projectile to the target expressed in polar coordinates.
+              @doc("Closest distance of the projectile to the target expressed in polar coordinates.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::polar_position_type miss_distance;
-              // Closest time of approach of the projectile to the target.
+              @doc("Closest time of approach of the projectile to the target.")
               org::omg::c4i::Domain_Model::Common_Types::time_type time_stamp;
             };
 
-            // Identifies the kinematics of the projectile that is expected to hit the target.
+            @doc("Identifies the kinematics of the projectile that is expected to hit the target.")
             struct projectile_kinematics_type
             {
-              // The timestamp when the kinematics was valid/measured.
+              @doc("The timestamp when the kinematics was valid/measured.")
               org::omg::c4i::Domain_Model::Common_Types::time_type time_stamp;
-              // The projectile's position.
+              @doc("The projectile's position.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position_descriptor;
-              // The projectile's velocity.
+              @doc("The projectile's velocity.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_coordinate_type velocity_descriptor;
             };
 
-            // Expected hit identifies the target and the time a hit is expected. This data is
-            // used to initiate the evaluation of a miss indication within the radar.
+            @doc("Expected hit identifies the target and the time a hit is expected. This data is \
+                used to initiate the evaluation of a miss indication within the radar.")
             struct expected_hit_data_type
             {
-              // Time when projectile is expected to hit the target.
+              @doc("Time when projectile is expected to hit the target.")
               org::omg::c4i::Domain_Model::Common_Types::time_type expected_hit_time;
-              // The target track id.
+              @doc("The target track id.")
               org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type track_id_descriptor;
               projectile_kinematics_type kinematics_descriptor;
             };
