@@ -55,7 +55,7 @@ module org
                 information. This indication should be set for all tracks that are reported in \
                 the context of this interface. \
                 Relationship to Receive geographic information \
-                Geographic information is received by using 'Receive geographic information'.);
+                Geographic information is received by using 'Receive geographic information'.")
               struct write_emitter_system_data_CMS_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type emitter_system_data;

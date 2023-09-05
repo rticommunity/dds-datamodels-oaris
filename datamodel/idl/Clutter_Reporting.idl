@@ -79,7 +79,7 @@ module org
             @doc("CMS request for plot concentration of a specified region.")
             struct plot_concentration_request_data_type
             {
-              @doc("Region for which the plot concentration was requested.")"
+              @doc("Region for which the plot concentration was requested.")
               org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type region_of_plot_concentration_request;
             };
 

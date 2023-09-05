@@ -169,7 +169,7 @@ module org
                 State of transmission frequencies \
                 With respect to its operational use each sensor transmission frequency may be \
                 \"enabled\" or \"disabled\", according to the relevant setting. On the other hand, \
-                with respect to its health status, each transmission frequency may be \"available\"
+                with respect to its health status, each transmission frequency may be \"available\" \
                 or \"not available\" according to the presence of faults. \
                 Note that a transmission frequency may be effectively selectable for the sensor \
                 transmission if it is both \"enabled\" and not in fault. \

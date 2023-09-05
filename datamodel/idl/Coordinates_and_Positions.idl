@@ -474,7 +474,7 @@ module org
             };
 
             @doc("This class represents a covariance matrix for coordinate estimates and their time \
-                derivatives through a choice of formats.")"
+                derivatives through a choice of formats.")
             union covariance_matrix_type switch (covariance_matrix_switch_type)
             {
               case covariance_matrix_type_diagonal_covariance_matrix_kind : diagonal_covariance_matrix_type diagonal_covariance_matrix;
@@ -496,7 +496,7 @@ module org
                 the full extent of the plot. \
                 This attribute is optional. Not all sensors are capable of measuring it.")
               elevation_qualification_spread_type spread;
-              @doc("The accuracy of the measurement; equal to one standard deviation of uncertainty.")"
+              @doc("The accuracy of the measurement; equal to one standard deviation of uncertainty.")
               elevation_coordinate_type accuracy;
             };
 
@@ -514,7 +514,7 @@ module org
             {
               cartesian_coordinate_type x_coordinate_accuracy;
               cartesian_coordinate_type y_coordinate_accuracy;
-              @doc("Optional as some sensors are 2D (horizontal plane or no elevation information)")"
+              @doc("Optional as some sensors are 2D (horizontal plane or no elevation information)")
               cartesian_position_accuracy_z_coordinate_accuracy_type z_coordinate_accuracy;
             };
 

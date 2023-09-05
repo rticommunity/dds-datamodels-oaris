@@ -71,7 +71,7 @@ module org
                 Subsystem, thereafter reports the sensor track in accordance with this \
                 assessment. \
                 The interface by which a CMS can control the sensor's assessment of the track \
-                data. \
+                data.")
               struct select_platform_assessment_type
               {
                 @doc("The unique identifier of the request to select the match")

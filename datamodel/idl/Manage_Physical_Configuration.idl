@@ -83,7 +83,7 @@ module org
                 configuration change and the data must be manually entered in sub-system \
                 configuration data (e.g. a servo type and serial number).  Case 2 is when the \
                 sub-system is being developed and changes to the configuration which cause \
-                changes in system behavior are being tested.")"
+                changes in system behavior are being tested.")
               struct receive_physical_configuration_success_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;

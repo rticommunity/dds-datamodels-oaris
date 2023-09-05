@@ -34,7 +34,7 @@ module org
             @doc("Enumeration of specialisations options for union class continuous_measurement_type.")
             enum continuous_measurement_kind_type
             {
-              @doc("measurement_interval_type option for continuous_measurement_type
+              @doc("measurement_interval_type option for continuous_measurement_type")
               MEASUREMENT_INTERVAL_KIND,
               @doc("modulation_type option for continuous_measurement_type")
               MODULATION_KIND,
@@ -459,7 +459,7 @@ module org
               @doc("Base attribute containing attributes from generalisation single_measurement_type")
               single_measurement_base_type base;
               @doc("The covariance between the elements of the vector value in a 1-dimensional \
-              @doc("representation of the triangular matrix. The i,j element (i &gt;= j) of a \
+                representation of the triangular matrix. The i,j element (i &gt;= j) of a \
                 covariance matrix for a vector of size N is at position sum(k=0..j-1, N - k) + (i \
                 - j). The covariance is zero length if not specified.")
               vector_measurement_covariance_type covariance;

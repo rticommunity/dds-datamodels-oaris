@@ -107,7 +107,7 @@ module org
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The current time (time of day) at which playback should start. This allows \
-                    synchronisation of playback from different subsystems.")"
+                    synchronisation of playback from different subsystems.")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::actual_time_type actual_time;
                 @doc("Controls the replay speed. 1.0 represents real time.")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::replay_speed_type replay_speed;

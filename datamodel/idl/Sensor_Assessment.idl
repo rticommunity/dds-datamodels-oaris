@@ -565,9 +565,9 @@ module org
                 match against.")
             struct platform_type
             {
-              @doc("Base attribute containing attributes from generalisation platform_class_type
+              @doc("Base attribute containing attributes from generalisation platform_class_type")
               platform_class_base_type base;
-              @doc("The name of the platform (or class of platforms)
+              @doc("The name of the platform (or class of platforms")
               platform_name_type platform_name;
             };
 

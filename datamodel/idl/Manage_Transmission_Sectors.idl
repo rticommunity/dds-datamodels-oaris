@@ -104,7 +104,7 @@ module org
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
                 @doc("Indicates which subsystem published the data or is intended to read it as a \
-                    subscriber").
+                    subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Control::transmission_sector_set_type sector;
               };

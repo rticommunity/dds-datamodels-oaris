@@ -88,7 +88,7 @@ module org
                 @doc("Indicates which subsystem published the data or is intended to read it as a \
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-                @doc("The ids of the fault scripts to be removed)
+                @doc("The ids of the fault scripts to be removed")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Simulation_Support::fault_script_ids_type fault_scripts;
               };
             };
