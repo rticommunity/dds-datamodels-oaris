@@ -32,27 +32,6 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union system_track_velocity_accuracy_coordinate_system_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union system_track_velocity_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_accuracy_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union system_track_max_range_limit_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
-            };
-
             @doc("System track information is limited to information required by a subsystem for \
               missile guidance.")
             struct system_track_type
@@ -66,9 +45,9 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_coordinate_type velocity;
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_accuracy_coordinate_system;
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_accuracy_coordinate_type position_accuracy;
-              system_track_velocity_accuracy_coordinate_system_type velocity_accuracy_coordinate_system;
-              system_track_velocity_accuracy_type velocity_accuracy;
-              system_track_max_range_limit_type max_range_limit;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type velocity_accuracy_coordinate_system;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_accuracy_coordinate_type velocity_accuracy;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type max_range_limit;
               @doc("Indicates which subsystem published the data or is intended to read it as a \
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;

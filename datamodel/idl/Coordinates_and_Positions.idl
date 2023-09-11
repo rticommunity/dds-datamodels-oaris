@@ -287,45 +287,10 @@ module org
               coordinate_origin_type origin;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union azimuth_qualification_spread_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : azimuth_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union wgs84_velocity_angle_of_climb_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : angle_of_climb_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union cartesian_position_z_coordinate_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : cartesian_coordinate_type value;
-            };
-
             struct elevation_interval_type
             {
               elevation_coordinate_type start;
               elevation_coordinate_type stop;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union wgs84_velocity_accuracy_angle_of_climb_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : angle_of_climb_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union cartesian_velocity_z_dot_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : cartesian_velocity_component_type value;
             };
 
             @doc("Qualifies a measurement with attributes of accuracy and, if possible, \
@@ -335,51 +300,9 @@ module org
               @doc("The spread of the measurement. The combined measures of spread should encompass \
                 the full extent of the plot. \
                 This attribute is optional. Not all sensors are capable of measuring it.")
-              azimuth_qualification_spread_type spread;
+              @optional azimuth_coordinate_type spread;
               @doc("The accuracy of the measurement; equal to one standard deviation of uncertainty.")
               azimuth_coordinate_type accuracy;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union cartesian_position_accuracy_z_coordinate_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : cartesian_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union cartesian_velocity_accuracy_z_dot_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : cartesian_velocity_component_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union elevation_qualification_spread_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : elevation_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union polar_position_elevation_coordinate_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : elevation_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union polar_position_accuracy_elevation_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : elevation_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union polar_velocity_elevation_rate_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : elevation_rate_type value;
             };
 
             struct height_interval_type
@@ -388,35 +311,14 @@ module org
               height_coordinate_type stop;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union polar_velocity_accuracy_elevation_rate_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : elevation_rate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union wgs84_position_height_coordinate_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : height_coordinate_type value;
-            };
-
             @doc("Coordinates in a Cartesian reference frame as described by a coordinate \
                 specification object")
             struct cartesian_position_type
             {
               cartesian_coordinate_type x_coordinate;
               @doc("Optional as some sensors are 2D (horizontal plane or no elevation information)")
-              cartesian_position_z_coordinate_type z_coordinate;
+              @optional cartesian_coordinate_type z_coordinate;
               cartesian_coordinate_type y_coordinate;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union wgs84_position_accuracy_height_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : height_coordinate_type value;
             };
 
             struct latitude_interval_type
@@ -425,52 +327,17 @@ module org
               latitude_coordinate_type stop;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union polar_position_range_coordinate_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : range_coordinate_type value;
-            };
-
             struct longitude_interval_type
             {
               longitude_coordinate_type start;
               longitude_coordinate_type stop;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union range_qualification_spread_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : range_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union polar_position_accuracy_range_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : range_coordinate_type value;
-            };
-
             struct cartesian_velocity_type
             {
               cartesian_velocity_component_type x_dot;
               cartesian_velocity_component_type y_dot;
-              cartesian_velocity_z_dot_type z_dot;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union polar_velocity_range_rate_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : range_rate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union polar_velocity_accuracy_range_rate_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : range_rate_type value;
+              @optional cartesian_velocity_component_type z_dot;
             };
 
             @doc("This class represents a covariance matrix for coordinate estimates and their time \
@@ -495,7 +362,7 @@ module org
               @doc("The spread of the measurement. The combined measures of spread should encompass \
                 the full extent of the plot. \
                 This attribute is optional. Not all sensors are capable of measuring it.")
-              elevation_qualification_spread_type spread;
+              @optional elevation_coordinate_type spread;
               @doc("The accuracy of the measurement; equal to one standard deviation of uncertainty.")
               elevation_coordinate_type accuracy;
             };
@@ -515,7 +382,7 @@ module org
               cartesian_coordinate_type x_coordinate_accuracy;
               cartesian_coordinate_type y_coordinate_accuracy;
               @doc("Optional as some sensors are 2D (horizontal plane or no elevation information)")
-              cartesian_position_accuracy_z_coordinate_accuracy_type z_coordinate_accuracy;
+              @optional cartesian_coordinate_type z_coordinate_accuracy;
             };
 
             @doc("The accuracy of the components of Cartesian velocity")
@@ -524,7 +391,7 @@ module org
               cartesian_velocity_component_type x_dot_accuracy;
               cartesian_velocity_component_type y_dot_accuracy;
               @doc("Optional as some sensors are 2D (horizontal plane or no elevation information)")
-              cartesian_velocity_accuracy_z_dot_accuracy_type z_dot_accuracy;
+              @optional cartesian_velocity_component_type z_dot_accuracy;
             };
 
             @doc("Velocity defined in the WGS84 grid system from the viewpoint of the object in \
@@ -535,7 +402,7 @@ module org
               course_type course;
               @doc("Optional as some sensors as 2D (work in horizontal plane) and some other \
                 functions do not supply or require this information either.")
-              wgs84_velocity_angle_of_climb_type angle_of_climb;
+              @optional angle_of_climb_type angle_of_climb;
               @doc("The total speed within the WGS84 spheroid (not speed over ground) in the \
                 direction of travel including angle of climb when present.")
               speed_type speed;
@@ -548,7 +415,7 @@ module org
               @doc("The spread of the measurement. The combined measures of spread should encompass \
                 the full extent of the plot. \
                 This attribute is optional. Not all sensors are capable of measuring it.")
-              range_qualification_spread_type spread;
+              @optional range_coordinate_type spread;
               @doc("The accuracy of the measurement; equal to one standard deviation of uncertainty.")
               range_coordinate_type accuracy;
             };
@@ -559,7 +426,7 @@ module org
               course_type course_accuracy;
               @doc("Optional as some sensors as 2D (work in horizontal plane) and some other \
                 functions do not supply or require this information either.")
-              wgs84_velocity_accuracy_angle_of_climb_accuracy_type angle_of_climb_accuracy;
+              @optional angle_of_climb_type angle_of_climb_accuracy;
               speed_type speed_accuracy;
             };
 
@@ -568,7 +435,7 @@ module org
             {
               @doc("Optional as some sensors as 2D (work in horizontal plane) and some other \
                 functions do not supply or require this information either.")
-              wgs84_position_height_coordinate_type height_coordinate;
+              @optional height_coordinate_type height_coordinate;
               latitude_coordinate_type latitude_coordinate;
               longitude_coordinate_type longitude_coordinate;
             };
@@ -578,7 +445,7 @@ module org
             {
               @doc("Optional as some sensors as 2D (work in horizontal plane) and some other \
                 functions do not supply or require this information either.")
-              wgs84_position_accuracy_height_accuracy_type height_accuracy;
+              @optional height_coordinate_type height_accuracy;
               latitude_coordinate_type latitude_accuracy;
               longitude_coordinate_type longitude_accuracy;
             };
@@ -589,9 +456,9 @@ module org
             {
               azimuth_rate_type azimuth_rate;
               @doc("Optional as some sensors provide no elevation information")
-              polar_velocity_elevation_rate_type elevation_rate;
+              @optional elevation_rate_type elevation_rate;
               @doc("Optional as some sensor provide no range information (e.g. most passive sensors)")
-              polar_velocity_range_rate_type range_rate;
+              @optional range_rate_type range_rate;
             };
 
             @doc("The accuracy of the components of polar velocity")
@@ -599,23 +466,9 @@ module org
             {
               azimuth_rate_type azimuth_rate_accuracy;
               @doc("Optional as some sensors provide no elevation information")
-              polar_velocity_accuracy_elevation_rate_accuracy_type elevation_rate_accuracy;
+              @optional elevation_rate_type elevation_rate_accuracy;
               @doc("Optional as some sensor provide no range information (e.g. most passive sensors)")
-              polar_velocity_accuracy_range_rate_accuracy_type range_rate_accuracy;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union polar_position_origin_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : wgs84_position_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union polar_position_accuracy_origin_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : wgs84_position_accuracy_type value;
+              @optional range_rate_type range_rate_accuracy;
             };
 
             @doc("Coordinates in a polar reference frame as a described by a coordinate \
@@ -624,13 +477,13 @@ module org
             {
               azimuth_coordinate_type azimuth_coordinate;
               @doc("Optional as some sensors provide no elevation information")
-              polar_position_elevation_coordinate_type elevation_coordinate;
+              @optional elevation_coordinate_type elevation_coordinate;
               @doc("Optional as some sensor provide no range information (e.g. most passive sensors)")
-              polar_position_range_coordinate_type range_coordinate;
+              @optional range_coordinate_type range_coordinate;
               @doc("Specifies the origin from which to interpret the polar position. This attribute \
                 is optional as the origin can be implicitly specified according to the value of \
                 the applicable coordinate specification enumeration.")
-              polar_position_origin_type origin;
+              @optional wgs84_position_type origin;
             };
 
             @doc("The accuracy of the components of polar position")
@@ -638,13 +491,13 @@ module org
             {
               azimuth_coordinate_type azimuth_accuracy;
               @doc("Optional as some sensors provide no elevation information")
-              polar_position_accuracy_elevation_accuracy_type elevation_accuracy;
+              @optional elevation_coordinate_type elevation_accuracy;
               @doc("Optional as some sensor provide no range information (e.g. most passive sensors)")
-              polar_position_accuracy_range_accuracy_type range_accuracy;
+              @optional range_coordinate_type range_accuracy;
               @doc("Specifies the accuracy of the origin from which to interpret the polar position. \
                 This attribute is optional as the origin can be implicitly specified according to \
                 the value of the applicable coordinate specification enumeration.")
-              polar_position_accuracy_origin_type origin;
+              @optional wgs84_position_accuracy_type origin;
             };
 
             @doc("To offer flexibility, three variants of coordinate system representation are \

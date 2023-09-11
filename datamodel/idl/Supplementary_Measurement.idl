@@ -232,90 +232,6 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union discrete_set_measurement_repeating_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : boolean value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union discrete_set_measurement_known_set_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : boolean value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_drift_confidence_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_drift_fit_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : double value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_element_count_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : short value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_element_total_count_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : long value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_parameter_confidence_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_parameter_continuous_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : boolean value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_parameter_count_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : long value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_parameter_intentional_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : boolean value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union scalar_measurement_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : double value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union single_measurement_confidence_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
-            };
-
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<double, 21> vector_measurement_covariance_type;
 
@@ -366,20 +282,13 @@ module org
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union measurement_parameter_sample_range_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : sample_range_type value;
-            };
-
             @doc("Struct of base attributes defined for class single_measurement_type.")
             struct single_measurement_base_type
             {
               @doc("The confidence in the parameter measurement value; this is the probability that \
                 the value and accuracy represent the true distribution of the physical effect \
                 they are labelled as measuring in the real world.")
-              single_measurement_confidence_type confidence;
+              @optional org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
             };
 
             @doc("This represents a parameter which takes discrete values.")
@@ -406,51 +315,9 @@ module org
               @doc("Base attribute containing attributes from generalisation single_measurement_type")
               single_measurement_base_type base;
               @doc("The accuracy of the measurement value (one standard deviation)")
-              scalar_measurement_accuracy_type accuracy;
+              @optional double accuracy;
               @doc("The value of the parameter measurement")
               double value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_drift_repetition_period_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : scalar_measurement_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_drift_max_rate_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : scalar_measurement_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_drift_min_rate_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : scalar_measurement_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_interval_standard_deviation_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : scalar_measurement_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union modulation_modulation_amplitude_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : scalar_measurement_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union modulation_modulation_frequency_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : scalar_measurement_type value;
             };
 
             @doc("This class represents individual vector measurements of parameter values.")
@@ -476,9 +343,9 @@ module org
               @doc("The mean value of the measurement that is subject to modulation.")
               scalar_measurement_type mean_value;
               @doc("The amplitude of the modulation of the parameter being measured.")
-              modulation_modulation_amplitude_type modulation_amplitude;
+              @optional scalar_measurement_type modulation_amplitude;
               @doc("The frequency of the modulation of the parameter being measured.")
-              modulation_modulation_frequency_type modulation_frequency;
+              @optional scalar_measurement_type modulation_frequency;
             };
 
             @doc("Union of the specialisations for class single_measurement_type. \
@@ -505,22 +372,15 @@ module org
               single_measurement_type value;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union pdf_measurement_standard_deviation_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : single_measurement_type value;
-            };
-
             @doc("The representation of an element within a discrete distribution")
             struct measurement_element_type
             {
               @doc("The number of times the parameter measured has corresponded to this element in a \
                 row. That is since another element was measured.")
-              measurement_element_count_type count;
+              @optional short count;
               @doc("The total number of times this element has been measured with the discrete \
                 distribution for this parameter value for the sensor track.")
-              measurement_element_total_count_type total_count;
+              @optional long total_count;
               @doc("The measurement of the element within the discrete distribution.")
               single_measurement_type measurement;
             };
@@ -532,12 +392,12 @@ module org
             struct discrete_set_measurement_type
             {
               @doc("Whether the elements within the discrete distribution repeat (in the same order)")
-              discrete_set_measurement_repeating_type repeating;
+              @optional boolean repeating;
               @doc("The semantics of the ordering of the elements of the discrete distribution")
               discrete_order_type order;
               @doc("Whether the elements within the discrete distribution correspond to a known set \
                 of measurement values")
-              discrete_set_measurement_known_set_type known_set;
+              @optional boolean known_set;
               @doc("A discrete element within the discrete distribution")
               discrete_set_measurement_element_type element;
             };
@@ -549,28 +409,21 @@ module org
               @doc("The qualitative measure of the kind of drift detected.")
               measurement_variation_kind_type kind;
               @doc("The sensor's confidence in identifying the kind of drift.")
-              measurement_drift_confidence_type confidence;
+              @optional org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
               @doc("Sample size independent measure of the closeness by which the measurement sample \
                 fit the model of the identified kind of drift.")
-              measurement_drift_fit_type fit;
+              @optional double fit;
               @doc("The time for the drift behavior to repeat itself.")
-              measurement_drift_repetition_period_type repetition_period;
+              @optional scalar_measurement_type repetition_period;
               @doc("The maximum rate of change of the measurement detected (in the units of the \
                 measurement's kind per second).")
-              measurement_drift_max_rate_type max_rate;
+              @optional scalar_measurement_type max_rate;
               @doc("The mean rate of change of the measurement detected (in the units of the \
                 measurement's kind per second).")
               scalar_measurement_type mean_rate;
               @doc("The minimum rate of change of the measurement detected (in the units of the \
                 measurement's kind per second).")
-              measurement_drift_min_rate_type min_rate;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union measurement_interval_drift_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : measurement_drift_type value;
+              @optional scalar_measurement_type min_rate;
             };
 
             @doc("Struct of base attributes defined for class pdf_measurement_type.")
@@ -579,7 +432,7 @@ module org
               @doc("The mean (expected) value of the probability density function.")
               single_measurement_type mean;
               @doc("The standard deviation of values from the probability density function.")
-              pdf_measurement_standard_deviation_type standard_deviation;
+              @optional single_measurement_type standard_deviation;
             };
 
             @doc("The representation of a measurement parameter that is normally distributed")
@@ -609,9 +462,9 @@ module org
                 actual sample measurements received or processed.")
               scalar_measurement_type max_value;
               @doc("A qualitative description of how the parameter measurement changes over time")
-              measurement_interval_drift_type drift;
+              @optional measurement_drift_type drift;
               @doc("The standard deviation of the measurement within the interval.")
-              measurement_interval_standard_deviation_type standard_deviation;
+              @optional scalar_measurement_type standard_deviation;
               @doc("The mean value of the measurement within the interval.")
               scalar_measurement_type mean_value;
             };
@@ -690,40 +543,33 @@ module org
               case SINGLE_MEASUREMENT_KIND : single_measurement_type single_measurement;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union measurement_parameter_distribution_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : parameter_distribution_type value;
-            };
-
             @doc("A measurement of a parameter by a sensor for a sensor track.")
             struct measurement_parameter_type
             {
               @doc("The probability that the measurement corresponds to measure labelled for the \
                 sensor track.")
-              measurement_parameter_confidence_type confidence;
+              @optional org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
               @doc("Indicates that the phenomenon being measured is in an enduring steady state and \
                 hence that complementary/orthogonal measurements of more detailed time-varying \
                 characteristics/phenomena are not present for this track.")
-              measurement_parameter_continuous_type continuous;
+              @optional boolean continuous;
               @doc("The number of coherent discrete measurements of this quantity.If the sensor \
                 detects a qualitative change then the count is reset.")
-              measurement_parameter_count_type count;
+              @optional long count;
               @doc("The measurement status of the parameter")
               measurement_parameter_status_type status;
               @doc("The time at which the parameter was measured")
               org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
               @doc("Whether or not the phenomenon being measured by this parameter is considered to \
                 be design feature of the equipment causing the phenomenon.")
-              measurement_parameter_intentional_type intentional;
+              @optional boolean intentional;
               @doc("The description of the parameter and the unique identifier (within the scope of a \
                 sensor track) of a measurement parameter instance.")
               @key long kind_id;
               @doc("The range in which samples contributing to the measurement have occurred.")
-              measurement_parameter_sample_range_type sample_range;
+              @optional sample_range_type sample_range;
               @doc("The representation of the statistical distribution of the measurement parameter.")
-              measurement_parameter_distribution_type distribution;
+              @optional parameter_distribution_type distribution;
             };
 
             @doc("The sensor's measurement of a parameter \

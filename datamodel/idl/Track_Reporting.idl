@@ -92,151 +92,11 @@ module org
               INACTIVE
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_covariance_matrix_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::covariance_matrix_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_max_range_limit_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_position_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_accuracy_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_position_accuracy_coordinate_system_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_sensor_track_pre_identification_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::identity_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_time_of_initiation_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::time_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_velocity_accuracy_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_accuracy_coordinate_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_velocity_accuracy_coordinate_system_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_time_of_first_detection_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::time_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_time_of_last_detection_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::time_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_amplitude_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::strength_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_environment_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : environment_type value;
-            };
-
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::function_key_type> sensor_track_sensor_function_id_type;
 
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_activity_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : assessment_objective_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_initiation_mode_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : initiation_mode_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_observed_function_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : assessment_objective_id_type value;
-            };
-
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type, 256> sensor_track_based_on_id_type;
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_equipment_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : assessment_objective_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_track_quality_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : track_quality_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_priority_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : track_priority_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_platform_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : assessment_objective_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_sensor_track_pre_recognition_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : recognition_type value;
-            };
 
             @doc("The method represents a write of a single sensor track (air, land, space or \
               surface) to the CMS. \
@@ -298,23 +158,23 @@ module org
               @doc("The number of elements in the covariance matrix is dependent on the sensor. When \
                 present, the position_accuracy and velocity_accuracy attributes should not be \
                 present.")
-              sensor_track_covariance_matrix_type covariance_matrix;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::covariance_matrix_type covariance_matrix;
               @doc("Environment of the track (air, surface etc)")
-              sensor_track_environment_type environment;
+              @optional environment_type environment;
               @doc("Initiation mode of track (automatic or externally initiated)")
-              sensor_track_initiation_mode_type initiation_mode;
+              @optional initiation_mode_type initiation_mode;
               @doc("Indication whether or not a track is jamming.")
               boolean jammer_indication;
               @doc("Maximal range for a bearing track")
-              sensor_track_max_range_limit_type max_range_limit;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type max_range_limit;
               @doc("The location of the track as calculated in the sensor's chosen coordinate system \
                 at the stated time.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
               @doc("The sensor's stated accuracy for its calculated position. \
                 When present, the covariance_matrix attribute should not be present.")
-              sensor_track_position_accuracy_type position_accuracy;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_accuracy_coordinate_type position_accuracy;
               @doc("The coordinate system chosen by the sensor for reporting accuracy.")
-              sensor_track_position_accuracy_coordinate_system_type position_accuracy_coordinate_system;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_accuracy_coordinate_system;
               @doc("The coordinate system chosen by the sensor.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_coordinate_system;
               @doc("The sensor's unique identifying reference for the track. Sensors may reuse \
@@ -322,9 +182,9 @@ module org
                 identifier reallocation is system dependent.")
               @key sensor_track_id_type sensor_track_id;
               @doc("Identification information for the sensor track (if available)")
-              sensor_track_sensor_track_pre_identification_type sensor_track_pre_identification;
+              @optional org::omg::c4i::Domain_Model::Common_Types::identity_type sensor_track_pre_identification;
               @doc("Recognition information for the sensor track (if available)")
-              sensor_track_sensor_track_pre_recognition_type sensor_track_pre_recognition;
+              @optional recognition_type sensor_track_pre_recognition;
               @doc("Whether the CMS should process the track as having been synthetically generated \
                 as opposed to corresponding to an actual detection in the real world.")
               boolean simulated;
@@ -332,7 +192,7 @@ module org
                 position.")
               org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
               @doc("The time at which the sensor first determined the existence of this track.")
-              sensor_track_time_of_initiation_type time_of_initiation;
+              @optional org::omg::c4i::Domain_Model::Common_Types::time_type time_of_initiation;
               @doc("Track phase (e.g. TRACKED, DELETED, LOST)")
               track_phase_type track_phase;
               @doc("The velocity of the track as calculated in the sensor's chosen coordinate system \
@@ -340,38 +200,38 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_coordinate_type velocity;
               @doc("The sensor's stated accuracy for its calculated velocity. \
                 When present, the covariance_matrix attribute should not be present.")
-              sensor_track_velocity_accuracy_type velocity_accuracy;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_accuracy_coordinate_type velocity_accuracy;
               @doc("The coordinate system chosen by the sensor for reporting accuracy.")
-              sensor_track_velocity_accuracy_coordinate_system_type velocity_accuracy_coordinate_system;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type velocity_accuracy_coordinate_system;
               @doc("The coordinate system chosen by the sensor.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type velocity_coordinate_system;
               @doc("The sensor specific quality of this track in comparison to its typical tracks.")
-              sensor_track_track_quality_type track_quality;
+              @optional track_quality_type track_quality;
               @doc("The time at which the sensor first made measurements leading to the detection of \
                 the existence of this track (as opposed to the time of initiation when there was \
                 sufficient confidence in one or more detection to initiate a track).")
-              sensor_track_time_of_first_detection_type time_of_first_detection;
+              @optional org::omg::c4i::Domain_Model::Common_Types::time_type time_of_first_detection;
               @doc("The time at which the sensor last detected the existence of this track.")
-              sensor_track_time_of_last_detection_type time_of_last_detection;
+              @optional org::omg::c4i::Domain_Model::Common_Types::time_type time_of_last_detection;
               @doc("The relative priority of a track with regard to the sensor's resources")
-              sensor_track_priority_type priority;
+              @optional track_priority_type priority;
               @doc("The amplitude or strength of the measurement(s) being tracked by the sensor")
-              sensor_track_amplitude_type amplitude;
+              @optional org::omg::c4i::Domain_Model::Common_Types::strength_type amplitude;
               @doc("The sensor's assessment of the activity being undertaken by the real world object \
                 represented by the sensor track as observed by the sensor.")
-              sensor_track_activity_id_type activity_id;
+              @optional assessment_objective_id_type activity_id;
               @doc("The sensor functions whose processing has contributed to the track's data.")
               sensor_track_sensor_function_id_type sensor_function_id;
               @doc("The sensor's assessment of the function being undertaken by the equipment of real \
                 world object represented by the sensor track that has been observed by the \
                 sensor.")
-              sensor_track_observed_function_id_type observed_function_id;
+              @optional assessment_objective_id_type observed_function_id;
               @doc("The sensor's assessment of the equipment on the real world object represented by \
                 the sensor track that has been detected by the sensor.")
-              sensor_track_equipment_id_type equipment_id;
+              @optional assessment_objective_id_type equipment_id;
               @doc("The sensor's assessment of the name of the platform or class of platform of the \
                 real world object.")
-              sensor_track_platform_id_type platform_id;
+              @optional assessment_objective_id_type platform_id;
               @doc("The set of plots on which the sensor track is based")
               sensor_track_based_on_id_type based_on_id;
               @doc("Indicates which subsystem published the data or is intended to read it as a \

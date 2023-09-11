@@ -196,29 +196,8 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type, 10> equipment_platform_id_type;
 
-            @doc("a simple union type, to represent an optional value")
-            union match_link_confidence_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union match_confidence_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
-            };
-
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<long> measurement_element_match_discrete_parameter_element_id_type;
-
-            @doc("a simple union type, to represent an optional value")
-            union multipath_set_master_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type value;
-            };
 
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type, 20> multipath_set_supporting_track_id_type;
@@ -232,102 +211,18 @@ module org
               @key org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type id;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union platform_class_pre_identification_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::identity_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union platform_class_pre_recognition_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : short value;
-            };
-
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::assessment_objective_id_type, 10> platform_class_equipment_id_type;
 
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type> platform_match_associated_sensor_track_id_type;
 
-            @doc("a simple union type, to represent an optional value")
-            union subplatform_match_confidence_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::confidence_type value;
-            };
-
             @doc("Struct of base attributes defined for class match_link_type.")
             struct match_link_base_type
             {
               @doc("The confidence in the match between a one match and an existing lower level match \
                 for a sensor track. This is the result of a statistical hypothesis test.")
-              match_link_confidence_type confidence;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_plot_equipement_assessment_best_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : match_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_plot_mode_assessment_best_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : match_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_plot_platform_assessment_best_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : match_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_equipment_assessment_selected_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : match_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_equipment_assessment_best_match_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : match_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_mode_assessment_best_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : match_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_mode_assessment_selected_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : match_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_platform_assessment_selected_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : match_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sensor_track_platform_assessment_best_match_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : match_id_type value;
+              @optional org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
             };
 
             @doc("A match between an equipment match and  a measurement parameter match. For a \
@@ -358,19 +253,12 @@ module org
             {
               @doc("The confidence in the match between an equipment and a parametric measurement for \
                 a sensor track. This is result of a statistical hypothesis test.")
-              match_confidence_type confidence;
+              @optional org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
 
               @doc("The unique identifier (within the scope of a sensor) for the match instance. \
                 Match links for higher-level assessment objectives refer to lower-level matches \
                 using this identifier.")
               @key match_id_type id;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union equipment_match_function_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : observable_function_type value;
             };
 
             @doc("A match between an equipment match and  a mode match. For a possible match to an \
@@ -390,13 +278,6 @@ module org
 
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<reference_descriptor_type, 20> reference_mode_descriptor_type;
-
-            @doc("a simple union type, to represent an optional value")
-            union platform_match_activity_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : platform_activity_type value;
-            };
 
             @doc("Represents the matching link between a platform  and a constituent piece of \
                 equipment")
@@ -420,7 +301,7 @@ module org
             {
               @doc("The confidence in the match between a (super) platform and a potential \
                 constituent sub-platform. This is result of a statistical hypothesis test.")
-              subplatform_match_confidence_type confidence;
+              @optional org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
 
               @doc("A (sub) platform (potentially independently operating real-world object) that is \
                 currently contained by the platform. Examples include a helicopter that is \
@@ -477,7 +358,7 @@ module org
                 same real world object.")
               org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
               @doc("The master track for the multipath set")
-              multipath_set_master_id_type master_id;
+              @optional org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type master_id;
               @doc("One of the tracks in the multipath set")
               multipath_set_supporting_track_id_type supporting_track_id;
               @doc("Indicates which subsystem published the data or is intended to read it as a \
@@ -521,9 +402,9 @@ module org
               @doc("The name of the platform (or class of platforms)")
               platform_name_type name;
               @doc("The standard identification of the platform")
-              platform_class_pre_identification_type pre_identification;
+              @optional org::omg::c4i::Domain_Model::Common_Types::identity_type pre_identification;
               @doc("The discrete code representing the type of platform.")
-              platform_class_pre_recognition_type pre_recognition;
+              @optional short pre_recognition;
               @doc("The code representing the country of registration of the platform")
               country_code_type country_code;
 
@@ -604,7 +485,7 @@ module org
               @doc("Whether the equipment - function combination is considered to be threatening")
               boolean is_a_threat;
               @doc("The function the equipment has been matched as performing")
-              equipment_match_function_type function;
+              @optional observable_function_type function;
               equipment_type equipment;
               @doc("A match between an equipment an a measurement parameter of the sensor track.")
               equipment_match_parameter_match_type parameter_match;
@@ -652,7 +533,7 @@ module org
             struct sensor_plot_equipement_assessment_type
             {
               @doc("The equipment assessed by the sensor as being the best match for the sensor plot")
-              sensor_plot_equipement_assessment_best_id_type best_id;
+              @optional match_id_type best_id;
 
               @doc("The sensor plot to which the assessment refers. The plot instance must contain a \
                 plot_id attribute.")
@@ -702,7 +583,7 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type sensor_plot_id;
 
               @doc("The mode assessed as most likely by the sensor.")
-              sensor_plot_mode_assessment_best_id_type best_id;
+              @optional match_id_type best_id;
 
               @doc("The modes assessed as candidates for the sensor plot.")
               sensor_plot_mode_assessment_mode_type mode;
@@ -734,10 +615,10 @@ module org
               @key long sensor_track_id;
 
               @doc("The match selected as the authoritative assessment by command")
-              sensor_track_equipment_assessment_selected_id_type selected_id;
+              @optional match_id_type selected_id;
 
               @doc("The equipment assessed as most likely to correspond to the sensor track")
-              sensor_track_equipment_assessment_best_match_id_type best_match_id;
+              @optional match_id_type best_match_id;
 
               @doc("An item of equipment that has been assessed as a possible match for the sensor \
                 track")
@@ -768,14 +649,14 @@ module org
             struct sensor_track_mode_assessment_type
             {
               @doc("The sensor's best match")
-              sensor_track_mode_assessment_best_id_type best_id;
+              @optional match_id_type best_id;
 
               @doc("The sensor track to which the mode assessment relates")
               org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_key_type sensor_track_id;
 
               @doc("The match that has been authoritatively selected as the mode relating to the \
                 sensor track.")
-              sensor_track_mode_assessment_selected_id_type selected_id;
+              @optional match_id_type selected_id;
 
                @doc("The parametric modes matched in the assessment of the sensor track's measurement \
                 parameters. ")
@@ -797,7 +678,7 @@ module org
 
               @doc("The activity identified as being undertaken by the platform when matching the \
                 sensor track to it.")
-              platform_match_activity_type activity;
+              @optional platform_activity_type activity;
 
               @doc("The set of sensor tracks that are all associated with the same platform instance \
                 and hence real world object under the hypothesis of this platform match.")
@@ -834,7 +715,7 @@ module org
             struct sensor_plot_platform_assessment_type
             {
               @doc("The platform assessed by the sensor as the best match for the sensor plot.")
-              sensor_plot_platform_assessment_best_id_type best_id;
+              @optional match_id_type best_id;
 
               @doc("The sensor plot to which the assessment refers. The plot instance must contain a \
                 plot_id attribute.")
@@ -868,13 +749,13 @@ module org
             struct sensor_track_platform_assessment_type
             {
               @doc("The match selected as the authoritative assessment by command")
-              sensor_track_platform_assessment_selected_id_type selected_id;
+              @optional match_id_type selected_id;
 
               @doc("The sensor track corresponding to the platform assessment")
               @key long sensor_track_id;
 
               @doc("The platform assessed as most likely to correspond to the sensor track")
-              sensor_track_platform_assessment_best_match_id_type best_match_id;
+              @optional match_id_type best_match_id;
 
               @doc("A platform that has been assessed as a possible match for the sensor track")
               sensor_track_platform_assessment_platform_type platform;

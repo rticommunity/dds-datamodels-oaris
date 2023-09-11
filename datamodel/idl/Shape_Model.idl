@@ -68,34 +68,6 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type, 12> polygon_point_type;
 
-            @doc("a simple union type, to represent an optional value")
-            union polar_volume_origin_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : figure_ref_point_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union sector_origin_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : figure_ref_point_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union truncated_polar_volume_origin_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : figure_ref_point_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union truncated_sector_origin_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : figure_ref_point_type value;
-            };
-
             @doc("A geographically defined general area")
             struct polygon_type
             {
@@ -123,7 +95,7 @@ module org
               @doc("This attribute specifies the elevation delta on each side of a specified centre \
                 elevation line.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type delta_elevation;
-              polar_volume_origin_type origin;
+              @optional figure_ref_point_type origin;
             };
 
             @doc("A sector specifies a 2D area in a horizontal plane by means of its origin, its \
@@ -142,7 +114,7 @@ module org
               @doc("This attribute specifies the bearing delta on each side of a specified centre \
                 bearing line.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
-              sector_origin_type origin;
+              @optional figure_ref_point_type origin;
             };
 
             @doc("A truncated_polar_volume specifies a 3D volume based on a horizontal plane by \
@@ -174,7 +146,7 @@ module org
               @doc("This attribute specifies the range that limits a volume; i.e. the maximum \
                 distance from the volume's origin.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type outer_range;
-              truncated_polar_volume_origin_type origin;
+              @optional figure_ref_point_type origin;
             };
 
             @doc("A truncated_sector specifies a 2D area in a horizontal plane by means of its \
@@ -201,7 +173,7 @@ module org
               @doc("This attribute specifies the range that limits a truncated sector; i.e. the \
                 maximum distance from the truncated sector's origin.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type outer_range;
-              truncated_sector_origin_type origin;
+              @optional figure_ref_point_type origin;
             };
 
             @doc("An area for the sensor to keep under surveillance")

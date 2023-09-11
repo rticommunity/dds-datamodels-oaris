@@ -94,20 +94,13 @@ module org
               error_reason_type error_reason;
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union request_ack_rejection_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : denial_type value;
-            };
-
             @doc("Struct used within the receive_acknowledgement operation to indicate acceptance \
                 or rejection (which includes rationale).")
             struct request_ack_type
             {
               @doc("Attribute to indicate whether a request has been accepted (1) or rejected (0).")
               boolean accepted;
-              request_ack_rejection_type rejection;
+              @optional denial_type rejection;
             };
 
             @doc("This operation is used by the subsystem to indicate whether it has accepted or \

@@ -67,32 +67,11 @@ module org
               UNSPECIFIED_REPEAT
             };
 
-            @doc("a simple union type, to represent an optional value")
-            union cued_search_cue_speed_interval_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::speed_interval_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union cued_search_report_found_track_id_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type value;
-            };
-
-            @doc("a simple union type, to represent an optional value")
-            union surveillance_search_frequency_band_type switch (boolean)
-            {
-              @doc("the value when present")
-              case TRUE : org::omg::c4i::Domain_Model::Common_Types::frequency_band_type value;
-            };
-
             @doc("Type used for specifying the constraints on a cued search.")
             struct cued_search_cue_type
             {
               @doc("The range of track-speed to search for from the cue.")
-              cued_search_cue_speed_interval_type speed_interval;
+              @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::speed_interval_type speed_interval;
               @doc("The region in the environment, in which the cue to search for tracks is to be \
                 performed.")
               org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type volume;
@@ -108,7 +87,7 @@ module org
             @doc("Data returned to the CMS to indicate the results of a cued search.")
             struct cued_search_report_type
             {
-              cued_search_report_found_track_id_type found_track_id;
+              @optional org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type found_track_id;
               long original_cue_id;
             };
 
@@ -133,7 +112,7 @@ module org
                 polar.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type coordinate_orientation;
               @doc("The frequency band to be searched.")
-              surveillance_search_frequency_band_type frequency_band;
+              @optional org::omg::c4i::Domain_Model::Common_Types::frequency_band_type frequency_band;
             };
 
             @doc("A sequence type, to represent multiple values.")
