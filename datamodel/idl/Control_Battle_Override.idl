@@ -53,7 +53,7 @@ module org
                 As long as the Battle Override is set, the subsystem internal overtemperature \
                 indications shall not result in any heath state set to \"NOT AVAILABLE\" (see \
                 <i>Provide health state</i>).")
-              struct battle_override_setting_type \
+              struct battle_override_setting_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
                 @doc("Indicates which subsystem published the data or is intended to read it as a \

@@ -31,7 +31,7 @@ module org
                 the request has been accepted.")
             typedef string<40> denial_reason_type;
 
-            @doc("A string type
+            @doc("A string type \
                 A string which gives an indication of the error associated with processing of the \
                 request.")
             typedef string<40> error_reason_type;
