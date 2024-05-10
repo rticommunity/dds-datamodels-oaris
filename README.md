@@ -77,11 +77,36 @@ This is replaced by:
 ```
 
 ## Testing
-In order to test this datamodel after the applied changes, `rtiddsgen` from
-RTI Connext 6.1.2 has been used. A convenient script has been used to run this
-automatically. You can find the script here: https://github.com/angelrti/run-rtiddsgen
 
-In order to run the script in all files the following command was called:
+In order to test this datamodel after the applied changes, `rtiddsgen` from
+RTI Connext 6.1.2 has been used. A convenient CMake script has been used to
+generate code and build a library with all the types included in this datamodel.
+
+In order to generate such library:
 ```
-run-rtiddsgen -v -D datamodel/idl -o delete_generated_files --additional-options="-verbosity 1" --dds-type
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
+This CMake script downloads the
+[dds-datamodels-utils](https://github.com/rticommunity/dds-datamodels-utils)
+repository. You can also provide a local copy of that repository by setting the
+cmake variable `DDS_DATAMODELS_UTILS_DIR`. This variable must point to the
+absolute path where the `dds-datamodels-utils` repo is located, for example:
+
+```
+cmake .. -DDDS_DATAMODELS_UTILS_DIR=/Users/angel/datamodels/dds-datamodels-utils
+```
+
+## Generating XML files
+
+In order to generate XML files from this datamodel, you need to set the CMake
+variable `DDS_DATAMODELS_CONVERT_TO_XML`, for example:
+```
+mkdir build
+cd build
+cmake .. -DDDS_DATAMODELS_CONVERT_TO_XML=ON
+cmake --build .
 ```
