@@ -1,0 +1,16 @@
+{
+   "datamodel": {
+       "name": "OARIS",
+       "domain": "Defense",
+       "organization": "OMG",
+       "description": "Open Architecture Radar Interface Standard",
+       "contact": "https://www.omg.org/spec/OARIS/2.0/Beta2",
+       "purpose": "",
+       "topic": "",
+       "version": "2.0-beta2-enhanced",
+       "previous": -1,
+       "compression": "",
+       "enhanced": true,
+       "repository": "https://github.com/rticommunity/dds-datamodels-oaris"
+   }
+}
