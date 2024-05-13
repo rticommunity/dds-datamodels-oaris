@@ -18,9 +18,8 @@
 # DDS_DATAMODELS_UTILS_DIR to point to a local copy of this repository.
 # If this is not provided, this macro downloads it as a dependency.
 # This macro alsso loads all necessary files from the dependencies.
-# This sets two variables that may be used in the parent scope:
+# This sets one variable that may be used in the parent scope:
 #   * DDS_DATAMODELS_UTILS_DIR: the path to the datamodels-utils repo
-#   * rti_cmake_utils_dir: the path to the rticonnextdds-cmake-utils repo
 
 macro (configure_datamodels_dependencies)
     # Get the absolute path for the dds-datamodels-utils repo if it is defined
