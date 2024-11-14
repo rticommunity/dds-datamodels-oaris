@@ -1,0 +1,6 @@
+.DS_Store
+.venv/
+.vscode
+delete_*
+build/
+original_datamodel/
