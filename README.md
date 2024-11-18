@@ -1,6 +1,6 @@
 # dds-datamodels-oaris
 
-This datamodel is an enhanced version of the OMG® OARIS™ 2.0 beta 2datamodel
+This datamodel is an enhanced version of the OMG® OARIS™ 2.0 beta 2 datamodel
 that you can find here: https://www.omg.org/spec/OARIS/2.0/Beta2/About-OARIS
 Nothing herein limits your rights under, or grants you rights that supersede,
 the applicable license from OMG, and it is your responsibility to ensure that
