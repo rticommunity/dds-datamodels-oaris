@@ -21,6 +21,9 @@
 # This sets one variable that may be used in the parent scope:
 #   * DDS_DATAMODELS_UTILS_DIR: the path to the datamodels-utils repo
 
+option(DDS_DATAMODELS_CONVERT_TO_XML "Conver datamodel to XML" OFF)
+option(DDS_DATAMODELS_BUILD_CXX11_LIB "Build a C++11 library from the types in this datamodel" ON)
+
 macro (configure_datamodels_dependencies)
     # Get the absolute path for the dds-datamodels-utils repo if it is defined
     if (NOT DEFINED DDS_DATAMODELS_UTILS_DIR)
@@ -91,8 +94,9 @@ if (DDS_DATAMODELS_CONVERT_TO_XML)
         IDL_DEPENDENCIES_FOLDERS "${DDS_DATAMODELS_UTILS_DIR}/dds"
         CODEGEN_EXTRA_ARGS "-verbosity" "1"
     )
-else()
-    connextdds_datamodels_generate_code(
+endif()
+if (DDS_DATAMODELS_BUILD_CXX11_LIB)
+        connextdds_datamodels_generate_code(
         INPUT_FOLDERS "datamodel/idl"
         OUTPUT_FOLDER "${CMAKE_CURRENT_BINARY_DIR}/datamodel/idl"
         LANG C++11

@@ -108,6 +108,9 @@ absolute path where the `dds-datamodels-utils` repo is located, for example:
 cmake .. -DDDS_DATAMODELS_UTILS_DIR=/Users/angel/datamodels/dds-datamodels-utils
 ```
 
+**NOTE**: you can disable the generation of the library by setting
+`DDS_DATAMODELS_BUILD_CXX11_LIB=OFF`
+
 ## Generating XML files
 
 In order to generate XML files from this datamodel, you need to set the CMake
