@@ -32,30 +32,30 @@ module org
               struct report_kill_assessment_result_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Via this message, the subsystem reports the kill assessment to the CMS. \
-                With this service the subsystem provides of kill assessment information to the \
-                CMS. The information relates to an above water engagement primarily against an \
-                air target. \
-                The kill assessment report of the subsystem may be one of the three: \
-                <ul> \
-                 <li>PROBABLE-KILL. This indicates that the subsystem assumes the target to be \
-                killed.</li> \
-                 <li>PROBABLE-MISS. This indicates that the subsystem assumes the target to be \
-                missed by the used weapon system. </li> \
-                 <li>NO-RESULT. This indicates that the subsystem was not able to determine a \
-                valid result for this request. </li> \
-                </ul> \
+              @doc("Via this message, the subsystem reports the kill assessment to the CMS.
+                With this service the subsystem provides of kill assessment information to the
+                CMS. The information relates to an above water engagement primarily against an
+                air target.
+                The kill assessment report of the subsystem may be one of the three:
+                <ul>
+                 <li>PROBABLE-KILL. This indicates that the subsystem assumes the target to be
+                killed.</li>
+                 <li>PROBABLE-MISS. This indicates that the subsystem assumes the target to be
+                missed by the used weapon system. </li>
+                 <li>NO-RESULT. This indicates that the subsystem was not able to determine a
+                valid result for this request. </li>
+                </ul>
                 See also service (interface) \"Process Target Designation\".")
               struct report_kill_assessment_result_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::kill_assessment_result_type KillAssessmentReport;
@@ -65,7 +65,7 @@ module org
               struct request_kill_assessment_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -75,7 +75,7 @@ module org
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Air_Engagement_Support::expected_hit_data_type KillAssessmentData;

@@ -31,31 +31,31 @@ module org
               @doc("struct holding keys for class report_cued_search_result_type.")
               struct report_cued_search_result_key_type
               {
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The unique id relating to this cued search request as supplied by the CMS.")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
 
-              @doc("Send a report to the CMS containing the results of a previously cued search. \
-                The CMS Search Interface. \
-                The subsystem is requested to undertake a cued search in the requested cue volume \
-                or to the requested track. The cue may be 1D (azimuth only), 2D (has an \
-                additional elevation constraint), 3D (has a further range constraint) or 4D (has \
-                a further target velocity constraint). The response of the subsystem is either to \
-                reject the cued search request if it is invalid within the current \
-                mode/configuration or to provide a cue request reply containing data relating to \
-                any resulting tracks. \
-                Depending upon the individual radar it may be possible to predefine a cued search \
-                waveform \
-                The cued search request may contain azimuth, elevation and range data along with \
+              @doc("Send a report to the CMS containing the results of a previously cued search.
+                The CMS Search Interface.
+                The subsystem is requested to undertake a cued search in the requested cue volume
+                or to the requested track. The cue may be 1D (azimuth only), 2D (has an
+                additional elevation constraint), 3D (has a further range constraint) or 4D (has
+                a further target velocity constraint). The response of the subsystem is either to
+                reject the cued search request if it is invalid within the current
+                mode/configuration or to provide a cue request reply containing data relating to
+                any resulting tracks.
+                Depending upon the individual radar it may be possible to predefine a cued search
+                waveform
+                The cued search request may contain azimuth, elevation and range data along with
                 time of the positional data.")
               struct report_cued_search_result_type
               {
                 @doc("The result of the search.")
                 org::omg::c4i::Domain_Model::Sensor_Domain::Search::cued_search_report_type result_report;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The unique id relating to this cued search request as supplied by the CMS.")
@@ -65,25 +65,25 @@ module org
               @doc("struct holding keys for class perform_cued_search_type.")
               struct perform_cued_search_key_type
               {
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-                @doc("The unique id for this request. The radar includes this in all replies relating \
+                @doc("The unique id for this request. The radar includes this in all replies relating
                     to this request.")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
 
-              @doc("Request to subsystem to perform a cued search in accordance with the given set of \
-                constraints. \
+              @doc("Request to subsystem to perform a cued search in accordance with the given set of
+                constraints.
                 The Subsystem Search Interface.")
               struct perform_cued_search_type
               {
                 @doc("The details of the constraints on where the radar is to look for tracks.")
                 org::omg::c4i::Domain_Model::Sensor_Domain::Search::cued_search_cue_type constraint;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-                @doc("The unique id for this request. The radar includes this in all replies relating \
+                @doc("The unique id for this request. The radar includes this in all replies relating
                     to this request.")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
@@ -91,10 +91,10 @@ module org
               @doc("struct holding keys for class perform_cue_to_track_type.")
               struct perform_cue_to_track_key_type
               {
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-                @doc("The unique id for this request. The radar includes this in all replies relating \
+                @doc("The unique id for this request. The radar includes this in all replies relating
                     to this request.")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
@@ -102,10 +102,10 @@ module org
               @doc("struct holding keys for class perform_surveillance_type.")
               struct perform_surveillance_key_type
               {
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-                @doc("The unique id for this request. The sensor includes this in all replies relating \
+                @doc("The unique id for this request. The sensor includes this in all replies relating
                     to this request.")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
@@ -115,10 +115,10 @@ module org
               {
                 @doc("The surveillance task to be performed")
                 org::omg::c4i::Domain_Model::Sensor_Domain::Search::surveillance_task_type surveillance_task;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-                @doc("The unique id for this request. The sensor includes this in all replies relating \
+                @doc("The unique id for this request. The sensor includes this in all replies relating
                     to this request.")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
@@ -126,10 +126,10 @@ module org
               @doc("struct holding keys for class stop_surveillance_type.")
               struct stop_surveillance_key_type
               {
-                @doc("The unique id for this request. The sensor includes this in all replies relating \
+                @doc("The unique id for this request. The sensor includes this in all replies relating
                     to this request.")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -137,31 +137,31 @@ module org
               @doc("The Subsystem Search Interface.")
               struct stop_surveillance_type
               {
-                @doc("The unique id for this request. The sensor includes this in all replies relating \
+                @doc("The unique id for this request. The sensor includes this in all replies relating
                     to this request.")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("A string type \
+              @doc("A string type
                 Typdef for bounded string type for attribute subsystem_name of class perform_cue_to_track_type.")
               typedef string<64> perform_cue_to_track_subsystem_name_type;
 
-              @doc("Request to subsystem to perform a cue to the position of a track produced by a \
-                different subsystem. \
+              @doc("Request to subsystem to perform a cue to the position of a track produced by a
+                different subsystem.
                 The Subsystem Search Interface.")
               struct perform_cue_to_track_type
               {
                 @doc("The identifier of the track to cue to.")
                 org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type sensor_track_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The name of the subsystem that produced the track to cue to.")
                 perform_cue_to_track_subsystem_name_type subsystem_name;
-                @doc("The unique id for this request. The radar includes this in all replies relating \
+                @doc("The unique id for this request. The radar includes this in all replies relating
                     to this request.")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };

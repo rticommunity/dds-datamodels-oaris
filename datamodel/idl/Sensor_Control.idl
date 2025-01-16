@@ -21,7 +21,7 @@ module org
         module Sensor_Domain
         {
 
-          @doc("This package contains structs and type defs for managing frequency usage, \
+          @doc("This package contains structs and type defs for managing frequency usage,
             transmission sectors, emission control, and test target scenarios.")
           module Sensor_Control
           {
@@ -51,10 +51,10 @@ module org
             {
               @doc("The sensor always uses the same pre-selected frequency")
               AUTOMATIC_FREQUENCY_SELECTION,
-              @doc("At each transmission sensor selects the frequency to be used inside a \
+              @doc("At each transmission sensor selects the frequency to be used inside a
                 pre-selected subset of frequencies")
               FIXED_FREQUENCY,
-              @doc("At each transmission sensor selects the frequency to be used among the least \
+              @doc("At each transmission sensor selects the frequency to be used among the least
                 jammed frequencies")
               FREQUENCY_DIVERSITY,
               @doc("At each transmission sensor random selects the frequency to be used.")
@@ -67,7 +67,7 @@ module org
               test_target_scenario_type_scenario_independent_target_kind
             };
 
-            @doc("This enumeration allows specification of a CMS commanded power level for a \
+            @doc("This enumeration allows specification of a CMS commanded power level for a
                 sector.")
             enum transmission_sector_power_level_type
             {
@@ -90,7 +90,7 @@ module org
               boolean emission_activated;
             };
 
-            @doc("Encapsulation of a test target (simulated target to enable technical testing of a \
+            @doc("Encapsulation of a test target (simulated target to enable technical testing of a
                 sensor)")
             struct test_target_type
             {
@@ -100,9 +100,9 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::wgs84_position_type position;
               @doc("A identifier for the test targets.")
               unsigned short test_target_id;
-              @doc("This attribute defines: \
-                - the target motion type, with the relevant motion parameters \
-                - the target generation parameters, such as injection type (internal / external), \
+              @doc("This attribute defines:
+                - the target motion type, with the relevant motion parameters
+                - the target generation parameters, such as injection type (internal / external),
                 attenuation law (constant / variable-with-range), doppler type (0 / PRF/2).")
               org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type test_target_parameter;
             };
@@ -112,9 +112,9 @@ module org
             {
               @doc("A identifier for the test targets.")
               unsigned short test_target_id;
-              @doc("This attribute defines: \
-                - the target motion type, with the relevant motion parameters \
-                - the target generation parameters, such as injection type (internal / external), \
+              @doc("This attribute defines:
+                - the target motion type, with the relevant motion parameters
+                - the target generation parameters, such as injection type (internal / external),
                 attenuation law (constant / variable-with-range), doppler type (0 / PRF/2).")
               org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type test_target_parameter;
             };
@@ -125,7 +125,7 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<transmission_frequency_state_type> selected_frequency_list_selected_frequencies_type;
 
-            @doc("This struct contains zero to many frequencies which may be enabled/disabled by \
+            @doc("This struct contains zero to many frequencies which may be enabled/disabled by
                 the CMS")
             struct selected_frequency_list_type
             {
@@ -135,73 +135,73 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<reported_frequency_state_type> all_frequencies_state_reported_frequencies_type;
 
-            @doc("Method used by the sensor to return the current availability of the frequency \
-              usage and its changes (if any). \
-              This controls the sensor behaviour with respect to the transmission frequency \
-              management. Basing on a discrete set of transmission frequencies offered by the \
-              sensor, CMS may disable/enable the use of a subset of them. As well CMS may \
-              select the sensor transmission mode, i.e. how the sensor shall select the \
-              transmission frequencies, among the set of transmission modes supported by the \
-              sensor.  \
-              The transmission mode defines how the sensor selects the transmission \
-              frequencies, which may be: \
-              <ul> \
-               <li>Fixed Frequency: sensor always uses the same pre-selected frequency</li> \
-              </ul> \
-              <ul> \
-               <li>Frequency Diversity: at each transmission sensor selects the frequency to be \
-              used inside a pre-selected subset of frequencies</li> \
-              </ul> \
-              <ul> \
-               <li>Automatic Frequency Selection: at each transmission sensor selects the \
-              frequency to be used among the least jammed frequencies</li> \
-              </ul> \
-              <ul> \
-               <li>Random Agility: at each transmission sensor random selects the frequency to \
-              be used.</li> \
-              </ul> \
-              The availability of each of the above listed transmission modes depends on the \
-              sensor type and its capabilities (not all the sensor types support all them). \
-              Besides a transmission mode supported by the sensor may be \"selectable\" or \"not \
-              selectable\" according to the specific sensor rules and the state of transmission \
-              frequencies. \
-              Both the set of transmission frequencies offered by the sensor and the supported \
-              transmission modes (names and characteristics) differ from sensor to sensor, so \
-              they shall be handled as configuration parameters. The sensor reports all \
-              supported frequencies whether or not currently available or enabled. \
-              Sensors cannot enable/disable the setting of the frequency usage at its own \
-              initiative, but at any time a transmission frequency could become not available \
-              because of a fault (e.g. fault of the relevant oscillator), and this could affect \
-              the effective availability of one or more sensor supported transmission modes. \
-              Provision of the frequency usage state \
-              Sensor shall keep CMS informed about the current availability of the frequency \
-              usage and its changes (if any). \
-              Provision of the transmission mode \
-              Sensor shall keep CMS informed about the currently selected transmission mode, \
-              with the relevant parameters, and its changes (if any). \
-              It is the CMS's responsibility to initiate the determination of initial state by \
-              making a request for information to the subsystem.  \
-              Lack of mastership \
-              In the case where CMS does not have mastership of the sensor, CMS shall be \
-              informed about both the actual setting of the frequency usage and the actual \
-              transmission mode, with its changes (if any). \
-              State of transmission frequencies \
-              With respect to its operational use each sensor transmission frequency may be \
-              \"enabled\" or \"disabled\", according to the relevant setting. On the other hand, \
-              with respect to its health status, each transmission frequency may be \"available\" \
-              or \"not available\" according to the presence of faults. \
-              Note that a transmission frequency may be effectively selectable for the sensor \
-              transmission if it is both \"enabled\" and not in fault. \
-              Relationship to <i>Manage Transmission Sectors</i> \
-              As well as the overall transmission mode, here specified, CMS may define sectors \
-              where a devoted transmission mode is to be applied (see<i> Manage Transmission \
-              Sectors</i>). \
-              This struct contains zero to many \"available\" or \"not available\" frequencies \
+            @doc("Method used by the sensor to return the current availability of the frequency
+              usage and its changes (if any).
+              This controls the sensor behaviour with respect to the transmission frequency
+              management. Basing on a discrete set of transmission frequencies offered by the
+              sensor, CMS may disable/enable the use of a subset of them. As well CMS may
+              select the sensor transmission mode, i.e. how the sensor shall select the
+              transmission frequencies, among the set of transmission modes supported by the
+              sensor. 
+              The transmission mode defines how the sensor selects the transmission
+              frequencies, which may be:
+              <ul>
+               <li>Fixed Frequency: sensor always uses the same pre-selected frequency</li>
+              </ul>
+              <ul>
+               <li>Frequency Diversity: at each transmission sensor selects the frequency to be
+              used inside a pre-selected subset of frequencies</li>
+              </ul>
+              <ul>
+               <li>Automatic Frequency Selection: at each transmission sensor selects the
+              frequency to be used among the least jammed frequencies</li>
+              </ul>
+              <ul>
+               <li>Random Agility: at each transmission sensor random selects the frequency to
+              be used.</li>
+              </ul>
+              The availability of each of the above listed transmission modes depends on the
+              sensor type and its capabilities (not all the sensor types support all them).
+              Besides a transmission mode supported by the sensor may be \"selectable\" or \"not
+              selectable\" according to the specific sensor rules and the state of transmission
+              frequencies.
+              Both the set of transmission frequencies offered by the sensor and the supported
+              transmission modes (names and characteristics) differ from sensor to sensor, so
+              they shall be handled as configuration parameters. The sensor reports all
+              supported frequencies whether or not currently available or enabled.
+              Sensors cannot enable/disable the setting of the frequency usage at its own
+              initiative, but at any time a transmission frequency could become not available
+              because of a fault (e.g. fault of the relevant oscillator), and this could affect
+              the effective availability of one or more sensor supported transmission modes.
+              Provision of the frequency usage state
+              Sensor shall keep CMS informed about the current availability of the frequency
+              usage and its changes (if any).
+              Provision of the transmission mode
+              Sensor shall keep CMS informed about the currently selected transmission mode,
+              with the relevant parameters, and its changes (if any).
+              It is the CMS's responsibility to initiate the determination of initial state by
+              making a request for information to the subsystem. 
+              Lack of mastership
+              In the case where CMS does not have mastership of the sensor, CMS shall be
+              informed about both the actual setting of the frequency usage and the actual
+              transmission mode, with its changes (if any).
+              State of transmission frequencies
+              With respect to its operational use each sensor transmission frequency may be
+              \"enabled\" or \"disabled\", according to the relevant setting. On the other hand,
+              with respect to its health status, each transmission frequency may be \"available\"
+              or \"not available\" according to the presence of faults.
+              Note that a transmission frequency may be effectively selectable for the sensor
+              transmission if it is both \"enabled\" and not in fault.
+              Relationship to <i>Manage Transmission Sectors</i>
+              As well as the overall transmission mode, here specified, CMS may define sectors
+              where a devoted transmission mode is to be applied (see<i> Manage Transmission
+              Sectors</i>).
+              This struct contains zero to many \"available\" or \"not available\" frequencies
               which may be enabled/disabled by the CMS")
             struct all_frequencies_state_type
             {
               all_frequencies_state_reported_frequencies_type reported_frequencies;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -209,7 +209,7 @@ module org
             @doc("scenario state")
             struct test_target_scenario_state_type
             {
-              @doc("Indicates whether the CMS is enabling or disabling the execution of the test \
+              @doc("Indicates whether the CMS is enabling or disabling the execution of the test
                 target scenario.")
               boolean test_target_scenario_activated;
               @doc("A unique identifier for the test target scenario.")
@@ -219,7 +219,7 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<test_target_type> test_target_scenario_independent_target_targets_type;
 
-            @doc("The scenario is defined by a number of targets distributed in a defined \
+            @doc("The scenario is defined by a number of targets distributed in a defined
                 area/volume and having the same common parameters.")
             struct test_target_scenario_common_parameter_target_type
             {
@@ -227,7 +227,7 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::time_type initial_time;
               @doc("This is the number of the test targets composing the scenario.")
               unsigned short number_of_test_target;
-              @doc("Indicates whether the CMS is enabling or disabling the generation of a test \
+              @doc("Indicates whether the CMS is enabling or disabling the generation of a test
                 target scenario.")
               boolean test_target_scenario_activated;
               @doc("A unique identifier for the test target scenario.")
@@ -237,13 +237,13 @@ module org
               test_target_plus_scenario_type targets_parameter;
             };
 
-            @doc("The scenario is defined by a number of independent targets, with each target \
+            @doc("The scenario is defined by a number of independent targets, with each target
                 having own characteristic parameters.")
             struct test_target_scenario_independent_target_type
             {
               @doc("This is the number of the test targets composing the scenario.")
               unsigned short number_of_test_target;
-              @doc("Indicates whether the CMS is enabling or disabling the generation of a test \
+              @doc("Indicates whether the CMS is enabling or disabling the generation of a test
                 target scenario.")
               boolean test_target_scenario_activated;
               @doc("A unique identifier for the test target scenario.")
@@ -254,11 +254,11 @@ module org
             @doc("Scenario for test targets")
             union test_target_scenario_type switch (test_target_scenario_switch_type)
             {
-              @doc("This case is used when a test target scenario is constituted by a number of \
-                targets distributed in a defined area/volume and having the same common \
+              @doc("This case is used when a test target scenario is constituted by a number of
+                targets distributed in a defined area/volume and having the same common
                 parameters.")
               case test_target_scenario_type_scenario_common_parameter_target_kind : test_target_scenario_common_parameter_target_type scenario_common_parameter_target;
-              @doc("This case is used when a test target scenario is constituted by a number of \
+              @doc("This case is used when a test target scenario is constituted by a number of
                 independent targets.")
               case test_target_scenario_type_scenario_independent_target_kind : test_target_scenario_independent_target_type scenario_independent_target;
             };
@@ -274,7 +274,7 @@ module org
               short sector_id;
               @doc("This indicates the reference system of the transmission sector.")
               sector_reference_type sector_reference;
-              @doc("Note that the azimuth dimension of the sector shape (polar volume) applies to the \
+              @doc("Note that the azimuth dimension of the sector shape (polar volume) applies to the
                 horizon plane (i.e. elevation=0)")
               org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type sector_shape;
               @doc("Indicates the transmission mode used within the sector")
@@ -284,7 +284,7 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<transmission_sector_type> transmission_sector_set_sector_type;
 
-            @doc("This struct contains zero to many transmission sectors which must be set/reset by \
+            @doc("This struct contains zero to many transmission sectors which must be set/reset by
                 the CMS.")
             struct transmission_sector_set_type
             {

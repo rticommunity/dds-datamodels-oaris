@@ -24,7 +24,7 @@ module org
           module Recording_and_Replay
           {
 
-            @doc("Contains the interfaces controlling the replay of information; either using the \
+            @doc("Contains the interfaces controlling the replay of information; either using the
                 original interfaces or as a data dump for offline processing.")
             module Control_Replay
             {
@@ -33,28 +33,28 @@ module org
               struct end_of_recording_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The subsystem has reached the end of the recording before a stop command was \
-                received. \
-                This interface defines how the CMS controls the replay of information previously \
-                recorded using Control_Recording \
-                Replay is supported in two modes: REAL-TIME and RAW. REAL-TIME mode is used to \
-                replay in real time, or at a multiple of real-time, data that was visible on \
-                other OARIS interfaces via the interfaces used during recording. RAW mode is used \
-                to replay data that was visible on other OARIS interfaces and/or internal \
-                subsystem data that was not available on other OARIS interfaces. In this case the \
-                data is merely transferred to the CMS as a set of time-tagged values with no \
-                attempt made to reconstruct real-time behaviour. \
-                One or more recordings must have been made using Control_Recording. \
+              @doc("The subsystem has reached the end of the recording before a stop command was
+                received.
+                This interface defines how the CMS controls the replay of information previously
+                recorded using Control_Recording
+                Replay is supported in two modes: REAL-TIME and RAW. REAL-TIME mode is used to
+                replay in real time, or at a multiple of real-time, data that was visible on
+                other OARIS interfaces via the interfaces used during recording. RAW mode is used
+                to replay data that was visible on other OARIS interfaces and/or internal
+                subsystem data that was not available on other OARIS interfaces. In this case the
+                data is merely transferred to the CMS as a set of time-tagged values with no
+                attempt made to reconstruct real-time behaviour.
+                One or more recordings must have been made using Control_Recording.
                 For simplicity, concurrent recording and replay is not supported.")
               struct end_of_recording_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -63,27 +63,27 @@ module org
               struct receive_recording_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Used to transfer a raw recording to the CMS \
-                This interface defines how the CMS controls the replay of information previously \
-                recorded using Control_Recording \
-                Replay is supported in two modes: REAL-TIME and RAW. REAL-TIME mode is used to \
-                replay in real time, or at a multiple of real-time, data that was visible on \
-                other OARIS interfaces via the interfaces used during recording. RAW mode is used \
-                to replay data that was visible on other OARIS interfaces and/or internal \
-                subsystem data that was not available on other OARIS interfaces. In this case the \
-                data is merely transferred to the CMS as a set of time-tagged values with no \
-                attempt made to reconstruct real-time behaviour. \
-                One or more recordings must have been made using Control_Recording. \
+              @doc("Used to transfer a raw recording to the CMS
+                This interface defines how the CMS controls the replay of information previously
+                recorded using Control_Recording
+                Replay is supported in two modes: REAL-TIME and RAW. REAL-TIME mode is used to
+                replay in real time, or at a multiple of real-time, data that was visible on
+                other OARIS interfaces via the interfaces used during recording. RAW mode is used
+                to replay data that was visible on other OARIS interfaces and/or internal
+                subsystem data that was not available on other OARIS interfaces. In this case the
+                data is merely transferred to the CMS as a set of time-tagged values with no
+                attempt made to reconstruct real-time behaviour.
+                One or more recordings must have been made using Control_Recording.
                 For simplicity, concurrent recording and replay is not supported.")
               struct receive_recording_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The raw recording data.")
@@ -94,7 +94,7 @@ module org
               struct resume_replay_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -103,10 +103,10 @@ module org
               struct resume_replay_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
-                @doc("The current time (time of day) at which playback should start. This allows \
+                @doc("The current time (time of day) at which playback should start. This allows
                     synchronisation of playback from different subsystems.")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::actual_time_type actual_time;
                 @doc("Controls the replay speed. 1.0 represents real time.")
@@ -117,7 +117,7 @@ module org
               struct start_replay_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -126,13 +126,13 @@ module org
               struct start_replay_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::replay_set_type replay_parameters_list;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::recording_id_type id;
-                @doc("The current time (time of day) at which playback should start. This allows \
+                @doc("The current time (time of day) at which playback should start. This allows
                     synchronisation of playback from different subsystems.")
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::actual_time_type actual_time;
                 @doc("The time in the recording at which playback should start.")
@@ -145,7 +145,7 @@ module org
               struct stop_replay_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -154,7 +154,7 @@ module org
               struct stop_replay_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -163,7 +163,7 @@ module org
               struct upload_recording_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -172,7 +172,7 @@ module org
               struct upload_recording_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Recording_and_Replay::recording_id_type id;

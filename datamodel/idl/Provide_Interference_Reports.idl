@@ -33,38 +33,38 @@ module org
               struct interference_report_response_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Provides an updated set of interference reports to the CMS. \
-                This describes the process whereby the subsystem provides a set of reports on \
-                sources of interference, including jammers. The data shall, therefore, in \
-                general, be non-real-time but should, where appropriate, be time-tagged and shall \
-                be updated when any observed data changes. \
-                The sensor need not be radiating but shall at least be receiving. The subsystem \
-                VOI (volume of interest) or other filter mechanisms might be supplied in a \
-                request to the subsystem \
-                For a nominal effect assessment, the request might contain data on number, \
-                strength/Effective Radiated Power (ERP), type and deployment of jammers and other \
-                interferers affecting radar operations. For example, for each interferer \
-                <ul> \
-                 <li>Sensor time-tag</li> \
-                 <li>Interference type - active noise, self-screening jammer, standoff jammer \
-                etc</li> \
-                 <li>Strength/Effective Radiated Power</li> \
-                 <li>Locations - strobes etc.</li> \
-                </ul> \
-                <ul> \
-                 <li>Affected sectors</li> \
-                 <li>Frequency bands affected</li> \
+              @doc("Provides an updated set of interference reports to the CMS.
+                This describes the process whereby the subsystem provides a set of reports on
+                sources of interference, including jammers. The data shall, therefore, in
+                general, be non-real-time but should, where appropriate, be time-tagged and shall
+                be updated when any observed data changes.
+                The sensor need not be radiating but shall at least be receiving. The subsystem
+                VOI (volume of interest) or other filter mechanisms might be supplied in a
+                request to the subsystem
+                For a nominal effect assessment, the request might contain data on number,
+                strength/Effective Radiated Power (ERP), type and deployment of jammers and other
+                interferers affecting radar operations. For example, for each interferer
+                <ul>
+                 <li>Sensor time-tag</li>
+                 <li>Interference type - active noise, self-screening jammer, standoff jammer
+                etc</li>
+                 <li>Strength/Effective Radiated Power</li>
+                 <li>Locations - strobes etc.</li>
+                </ul>
+                <ul>
+                 <li>Affected sectors</li>
+                 <li>Frequency bands affected</li>
                 </ul>")
               struct interference_report_response_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The report on interference")
@@ -74,23 +74,23 @@ module org
               @doc("struct holding keys for class volume_for_interference_reports_type.")
               struct volume_for_interference_reports_key_type
               {
-                @doc("The unique identifier for this request. This is referenced in acknowledgement and \
+                @doc("The unique identifier for this request. This is referenced in acknowledgement and
                     any error reporting regarding this definition of the volume of interest.")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("This allows definition of the volume in space which is of interest with regard to \
+              @doc("This allows definition of the volume in space which is of interest with regard to
                 the provision of interference reports.")
               struct volume_for_interference_reports_type
               {
-                @doc("The unique identifier for this request. This is referenced in acknowledgement and \
+                @doc("The unique identifier for this request. This is referenced in acknowledgement and
                     any error reporting regarding this definition of the volume of interest.")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 

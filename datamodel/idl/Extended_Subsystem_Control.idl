@@ -22,28 +22,28 @@ module org
           module Extended_Subsystem_Control
           {
 
-            @doc("A string type \
+            @doc("A string type
                 String which provides a url location for configuration data.")
             typedef string<255> configuration_url_type;
 
-            @doc("A string type \
+            @doc("A string type
                 Subsystem specific detailed test results")
             typedef string<4096> offline_test_result_details_type;
 
             @doc("Used to return the test results: failed, partial_pass or failed")
             enum offline_test_result_type
             {
-              @doc("A number of tests were not successful, such that the subsystem exceeded its \
+              @doc("A number of tests were not successful, such that the subsystem exceeded its
                 failure threshold. Detailed information is available upon request.")
               FAILED,
-              @doc("A number of tests were not successful, but the subsystem did not exceed its \
+              @doc("A number of tests were not successful, but the subsystem did not exceed its
                 failure threshold. Detailed information is available upon request.")
               PARTIAL_PASS,
               @doc("All tests were successful.")
               PASSED
             };
 
-            @doc("A string type \
+            @doc("A string type
                 A subsystem specific string identifying the required test type.")
             typedef string<255> offline_test_type;
 

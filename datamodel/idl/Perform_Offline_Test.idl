@@ -32,20 +32,20 @@ module org
               struct receive_detailed_test_results_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Provides the CMS with subsystem specific information concerning offline test \
-                failures \
-                This is used to instruct the subsystem to perform offline test and return the \
+              @doc("Provides the CMS with subsystem specific information concerning offline test
+                failures
+                This is used to instruct the subsystem to perform offline test and return the
                 results to the CMS. The nature of the offline tests is subsystem specific")
               struct receive_detailed_test_results_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::offline_test_result_details_type offline_test_detailed_results;
@@ -55,19 +55,19 @@ module org
               struct receive_test_results_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Informs the CMS whether the offline tests passed, passed partially, or failed. \
-                This is used to instruct the subsystem to perform offline test and return the \
+              @doc("Informs the CMS whether the offline tests passed, passed partially, or failed.
+                This is used to instruct the subsystem to perform offline test and return the
                 results to the CMS. The nature of the offline tests is subsystem specific")
               struct receive_test_results_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Extended_Subsystem_Control::offline_test_result_type test_results;
@@ -77,7 +77,7 @@ module org
               struct perform_tests_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -87,7 +87,7 @@ module org
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
 
@@ -99,7 +99,7 @@ module org
               struct request_detailed_test_results_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -109,7 +109,7 @@ module org
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };

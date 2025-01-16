@@ -21,7 +21,7 @@ module org
           module Simulation_Support
           {
 
-            @doc("A string type \
+            @doc("A string type
                 Identifies a single fault script.")
             typedef string<6> fault_script_id_type;
 
@@ -39,25 +39,25 @@ module org
               boolean start_simulation_mode;
             };
 
-            @doc("A Simulation Management (SIMAN) request, sent from a Simulation Manager to \
-              request that one or more entities either \
-              a) pause their simulation session \
-              or \
+            @doc("A Simulation Management (SIMAN) request, sent from a Simulation Manager to
+              request that one or more entities either
+              a) pause their simulation session
+              or
               b) stop their simulation session.")
             struct stop_freeze_session_request_type
             {
-              @doc("Whether the entity or entities being stopped/frozen should continue to reflect \
+              @doc("Whether the entity or entities being stopped/frozen should continue to reflect
                 values when stopped/frozen.")
               boolean reflect_values;
-              @doc("Whether the entity or entities being stopped/frozen should continue to run their \
+              @doc("Whether the entity or entities being stopped/frozen should continue to run their
                 internal simulation clock when stopped/frozen.")
               boolean run_internal_simulation_clock;
-              @doc("Whether the entity or entities being stopped/frozen should continue to update \
+              @doc("Whether the entity or entities being stopped/frozen should continue to update
                 attributes when stopped/frozen.")
               boolean update_attributes;
             };
 
-            @doc("A string type \
+            @doc("A string type
                 Typdef for bounded string type for attribute details_of_fault of class fault_script_type.")
             typedef string<200> fault_script_details_of_fault_type;
 
@@ -70,8 +70,8 @@ module org
               fault_script_ids_script_id_type script_id;
             };
 
-            @doc("Definition of a fault script. The exact form of this is not yet defined, this \
-                class represents the essential attributes. It would probably be some form of \
+            @doc("Definition of a fault script. The exact form of this is not yet defined, this
+                class represents the essential attributes. It would probably be some form of
                 string, perhaps an XML document.")
             struct fault_script_type
             {

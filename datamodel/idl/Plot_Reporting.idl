@@ -24,60 +24,60 @@ module org
           module Plot_Reporting
           {
 
-            @doc("Identifier for a plot, unique within a given sensor. Such plot ids, should not be \
+            @doc("Identifier for a plot, unique within a given sensor. Such plot ids, should not be
                 reused between sensor subsystem restarts.")
             typedef unsigned long plot_id_type;
 
-            @doc("The set of plots \
-              This method receives a individual plot update from the sensor. It is expected to \
-              be called periodically from the sensor. \
-              Interface to the CMS for receiving plot updates. \
-              This interface provides sensor plots to the CMS (filterable to air, surface, land \
-              and space environments). The transfer of data is expected to take place \
-              asynchronously, although for certain classes of sensor it may appear periodic \
-              One plot from a sensor. \
-              The additional_information attribute is used for characteristics of the plot that \
-              are specific to certain sensors, and therefore not in the general plot type, for \
+            @doc("The set of plots
+              This method receives a individual plot update from the sensor. It is expected to
+              be called periodically from the sensor.
+              Interface to the CMS for receiving plot updates.
+              This interface provides sensor plots to the CMS (filterable to air, surface, land
+              and space environments). The transfer of data is expected to take place
+              asynchronously, although for certain classes of sensor it may appear periodic
+              One plot from a sensor.
+              The additional_information attribute is used for characteristics of the plot that
+              are specific to certain sensors, and therefore not in the general plot type, for
               example MTI or range rate.")
             struct sensor_plot_type
             {
-              @doc("A unique identifier for the plot within the scope of the sensor. This attribute \
+              @doc("A unique identifier for the plot within the scope of the sensor. This attribute
                 is optional as not all sensors need to provide such an identifier for each plot.")
               @optional plot_id_type plot_id;
-              @doc("The position of the plot. This is the mean, central position. Note the \
-                qualification attributes, which give information on accuracy and spread \
+              @doc("The position of the plot. This is the mean, central position. Note the
+                qualification attributes, which give information on accuracy and spread
                 estimates.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
               @doc("This attribute defines the characteristics of the coordinate system used")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type coordinate_specification;
-              @doc("A measure of the spread and accuracy of the plot in range. This is optional as \
+              @doc("A measure of the spread and accuracy of the plot in range. This is optional as
                 not all sensors measure range.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_qualification_type range_qualification;
               @doc("A measure of the spread and accuracy of the plot in azimuth.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_qualification_type azimuth_qualification;
-              @doc("A measure of the spread and accuracy of the plot in elevation. This is optional \
+              @doc("A measure of the spread and accuracy of the plot in elevation. This is optional
                 as not all sensors measure elevation.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_qualification_type elevation_qualification;
-              @doc("If true, the plot is simulated. See also simulation support services within this \
+              @doc("If true, the plot is simulated. See also simulation support services within this
                 standard.")
               boolean simulation_status;
-              @doc("The signal strength of the plot. This attribute is optional as not all sensors \
-                measure a quantity which has \
+              @doc("The signal strength of the plot. This attribute is optional as not all sensors
+                measure a quantity which has
                 equivalence to strength.")
               @optional org::omg::c4i::Domain_Model::Common_Types::strength_type strength;
               @doc("The time at which the plot was measured.")
               org::omg::c4i::Domain_Model::Common_Types::time_type time_of_plot;
-              @doc("Potentially classified information about the plot, which may be used in a system \
-                specific way to distribute information about a plot to other subsystems. Further \
-                information about this attribute, including layout semantics is outside of the \
+              @doc("Potentially classified information about the plot, which may be used in a system
+                specific way to distribute information about a plot to other subsystems. Further
+                information about this attribute, including layout semantics is outside of the
                 scope of this interface standard.")
               org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_information;
-              @doc("Indicates which splash spotting area the plot refers to - if any  - hence it is \
+              @doc("Indicates which splash spotting area the plot refers to - if any  - hence it is
                 optional.")
               @optional org::omg::c4i::Domain_Model::Radar_Domain::Surface_Engagement_Support::splash_spotting_area_id_type splash_spotting_area_id;
               @doc("Indication whether or not a plot is from a source of jamming.")
               boolean jammer_indication;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -85,64 +85,64 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<sensor_plot_type, 5000> sensor_plot_set_plots_type;
 
-            @doc("The set of plots \
-              This method receives a set of one or more plot updates from the sensor. It is \
-              expected to be called periodically from the sensor. \
-              Interface to the CMS for receiving plot updates. \
-              This interface provides sensor plots to the CMS (filterable to air, surface, land \
-              and space environments). The transfer of data is expected to take place \
-              asynchronously, although for certain classes of sensor it may appear periodic \
+            @doc("The set of plots
+              This method receives a set of one or more plot updates from the sensor. It is
+              expected to be called periodically from the sensor.
+              Interface to the CMS for receiving plot updates.
+              This interface provides sensor plots to the CMS (filterable to air, surface, land
+              and space environments). The transfer of data is expected to take place
+              asynchronously, although for certain classes of sensor it may appear periodic
               Set of one or more sensor plots.")
             struct sensor_plot_set_type
             {
               @doc("The plots in the sensor plot set")
               sensor_plot_set_plots_type plots;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("The orientation of the sensor \
-              Informs the CMS of the orientation of the sensor \
-              The interface to the CMS for receiving sensor orientation updates. \
-              The sensor provides its orientation in the case that it has movement that is \
-              independent of that for the overall platform. It is provided periodically with a \
-              frequency defined using the manage subsystem parameters use case. \
-              This class describes the orientation of the sensor at a particular moment in \
-              time. This is useful for plot processing functionality such as track extraction \
+            @doc("The orientation of the sensor
+              Informs the CMS of the orientation of the sensor
+              The interface to the CMS for receiving sensor orientation updates.
+              The sensor provides its orientation in the case that it has movement that is
+              independent of that for the overall platform. It is provided periodically with a
+              frequency defined using the manage subsystem parameters use case.
+              This class describes the orientation of the sensor at a particular moment in
+              time. This is useful for plot processing functionality such as track extraction
               as it allows instantaneous coverage of the sensor to be estimated.")
             struct sensor_orientation_type
             {
-              @doc("The (azimuth) direction of the head of the sensor (e.g. antenna, lens or \
+              @doc("The (azimuth) direction of the head of the sensor (e.g. antenna, lens or
                 hydro-phone)")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type azimuth;
-              @doc("The (elevation) direction of the head of the sensor (e.g. antenna, lens or \
-                hydro-phone). If not supplied either horizontal is assumed or a constant angle is \
+              @doc("The (elevation) direction of the head of the sensor (e.g. antenna, lens or
+                hydro-phone). If not supplied either horizontal is assumed or a constant angle is
                 defined through the Manage_Subsystem_Parameters use case.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type elevation;
               @doc("The time for which is sensor orientation is valid")
               org::omg::c4i::Domain_Model::Common_Types::time_type time_of_validity;
-              @doc("This attribute defines the interpretation of azimuth and elevation. \
-                Valid enumerates are: \
-                 NORTH_HORIZONTAL, \
-                 NORTH_DOWN, \
-                 STERN_KEEL, \
+              @doc("This attribute defines the interpretation of azimuth and elevation.
+                Valid enumerates are:
+                 NORTH_HORIZONTAL,
+                 NORTH_DOWN,
+                 STERN_KEEL,
                  STERN_DECK_LEVEL")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type sensor_coordinate_system;
               @doc("The position of the origin of the head of the sensor.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type origin;
-              @doc("The instantaneous extent of the coverage of the sensor in azimuth with respect \
+              @doc("The instantaneous extent of the coverage of the sensor in azimuth with respect
                 the origin of its head.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_interval_type azimuth_coverage;
-              @doc("The instantaneous extent of the coverage of the sensor in elevation with respect \
-                the origin of its head. It is only valid to set this when the elevation attribute \
+              @doc("The instantaneous extent of the coverage of the sensor in elevation with respect
+                the origin of its head. It is only valid to set this when the elevation attribute
                 is also specified.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_interval_type elevation_coverage;
-              @doc("This attribute defines the characteristics of the coordinate system used to \
-                define the origin. It is only valid to set this when origin attribute is also \
+              @doc("This attribute defines the characteristics of the coordinate system used to
+                define the origin. It is only valid to set this when origin attribute is also
                 specified.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type origin_coordinate_specification;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };

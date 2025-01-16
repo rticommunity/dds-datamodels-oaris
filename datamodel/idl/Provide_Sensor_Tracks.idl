@@ -27,64 +27,64 @@ module org
             module Provide_Sensor_Tracks
             {
 
-              @doc("The method represents a deletion of a single sensor track (air, land, space or \
-                surface) to the CMS. After a deletion, no further writes for that sensor track \
-                instance are made. Subsystems may subsequently use the same sensor_track_id to \
-                denote another sensor track instance possibly after a 'cooling off period'. Such \
-                behavior is implementation specific. \
-                This service allows the CMS to obtain an overview of (real and/or simulated) air \
-                / land / space / surface objects observed or simulated. Information may cover all \
-                aspects of a track such as kinematic and amplifying information. \
-                The service does not cover: \
-                <ul> \
-                 <li>additional track information provision dedicated for engagement \
-                support,</li> \
-                 <li>special search functions such as cued search, volume search and horizon \
-                search (however, if such a search function is initiated by means of another \
-                service, the tracks shall be provided by this service),</li> \
-                </ul> \
-                Although the service focuses on radar as an example of a sensor, the service also \
-                applies to other sensors, like IR/EO sensors and ECM/ESM sensors. \
-                The actor is the Combat Management System. \
-                The service starts when: \
-                <ul> \
-                 <li>if the service does provide registration capabilities: the service \"Register \
-                interest\" has completed successfully, or</li> \
-                 <li>if the service does not provide registration capabilities: the service \
-                \"Provide subsystem services\" has completed successfully for this service.</li> \
-                </ul> \
-                The sensor provides, periodically or on event, a set of sensor tracks observed by \
-                the sensor. These may be sensor point or bearing tracks. The set of sensor tracks \
-                includes: \
-                <ul> \
-                 <li>Track updates of existing and new sensor tracks. These are provided when \
-                there are sufficient measurements (e.g. plots) in the last observation cycle, \
-                which may be associated with the sensor track.</li> \
-                 <li>Dead-reckoned tracks. These are sensor track updates for which in the last \
-                observation cycle there are no measurements that may be associated with the \
-                sensor track. For dead-reckoned tracks, the sensor track information (e.g. \
-                kinematics) is extrapolated. The dead-reckoned tracks may become \"normal\" tracks \
-                again if, in the next scan, there are measurement(s) that may be associated with \
-                the track. Alternatively, dead-reckoned tracks (after n unsuccessful scans) may \
-                become lost tracks.</li> \
-                 <li>Lost tracks. These are sensor track updates that are reported once, if in \
-                the last n scans, there are no measurements that may be associated with the \
-                sensor track. The value of n is typically a sensor parameter that is managed by \
-                the service \"Manage subsystem parameters\".</li> \
-                </ul> \
-                Some sensors are not capable of reporting lost and/or dead-reckoned tracks. \
-                The sensor may also provide single sensor tracks periodically or on event. \
-                The service ends with success when: \
-                <ul> \
-                 <li>if the service does provide registration capabilities: the service \"Register \
-                interest\" has completed successfully for a deregistration request, or</li> \
-                 <li>if the service does not  provide registration capabilities: the sensor is \
-                shutdown using service \"Shut down\".</li> \
+              @doc("The method represents a deletion of a single sensor track (air, land, space or
+                surface) to the CMS. After a deletion, no further writes for that sensor track
+                instance are made. Subsystems may subsequently use the same sensor_track_id to
+                denote another sensor track instance possibly after a 'cooling off period'. Such
+                behavior is implementation specific.
+                This service allows the CMS to obtain an overview of (real and/or simulated) air
+                / land / space / surface objects observed or simulated. Information may cover all
+                aspects of a track such as kinematic and amplifying information.
+                The service does not cover:
+                <ul>
+                 <li>additional track information provision dedicated for engagement
+                support,</li>
+                 <li>special search functions such as cued search, volume search and horizon
+                search (however, if such a search function is initiated by means of another
+                service, the tracks shall be provided by this service),</li>
+                </ul>
+                Although the service focuses on radar as an example of a sensor, the service also
+                applies to other sensors, like IR/EO sensors and ECM/ESM sensors.
+                The actor is the Combat Management System.
+                The service starts when:
+                <ul>
+                 <li>if the service does provide registration capabilities: the service \"Register
+                interest\" has completed successfully, or</li>
+                 <li>if the service does not provide registration capabilities: the service
+                \"Provide subsystem services\" has completed successfully for this service.</li>
+                </ul>
+                The sensor provides, periodically or on event, a set of sensor tracks observed by
+                the sensor. These may be sensor point or bearing tracks. The set of sensor tracks
+                includes:
+                <ul>
+                 <li>Track updates of existing and new sensor tracks. These are provided when
+                there are sufficient measurements (e.g. plots) in the last observation cycle,
+                which may be associated with the sensor track.</li>
+                 <li>Dead-reckoned tracks. These are sensor track updates for which in the last
+                observation cycle there are no measurements that may be associated with the
+                sensor track. For dead-reckoned tracks, the sensor track information (e.g.
+                kinematics) is extrapolated. The dead-reckoned tracks may become \"normal\" tracks
+                again if, in the next scan, there are measurement(s) that may be associated with
+                the track. Alternatively, dead-reckoned tracks (after n unsuccessful scans) may
+                become lost tracks.</li>
+                 <li>Lost tracks. These are sensor track updates that are reported once, if in
+                the last n scans, there are no measurements that may be associated with the
+                sensor track. The value of n is typically a sensor parameter that is managed by
+                the service \"Manage subsystem parameters\".</li>
+                </ul>
+                Some sensors are not capable of reporting lost and/or dead-reckoned tracks.
+                The sensor may also provide single sensor tracks periodically or on event.
+                The service ends with success when:
+                <ul>
+                 <li>if the service does provide registration capabilities: the service \"Register
+                interest\" has completed successfully for a deregistration request, or</li>
+                 <li>if the service does not  provide registration capabilities: the sensor is
+                shutdown using service \"Shut down\".</li>
                 </ul>")
               struct delete_sensor_track_type
               {
                 org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type the_sensor_track_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -93,18 +93,18 @@ module org
               struct prioritize_track_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("CMS requests the subsystem to report the referenced sensor track with the stated \
+              @doc("CMS requests the subsystem to report the referenced sensor track with the stated
                 priority.")
               struct prioritize_track_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type sensor_track_id;
@@ -115,18 +115,18 @@ module org
               struct remove_track_priority_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The CMS requests the subsystem to report the track with the default priority for \
+              @doc("The CMS requests the subsystem to report the track with the default priority for
                 that subsystem.")
               struct remove_track_priority_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type sensor_track_id;

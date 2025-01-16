@@ -31,38 +31,38 @@ module org
               struct confirm_registration_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Confirm registration of interest \
-                This service allows the CMS to register (and deregister) interest in other \
-                services. It is explicitly meant to address the possibility of CMS \"subscribing\" \
-                to information supplied by the subsystem, with the understanding that the \
-                information shall be provided by the subsystem, without the need for further \
-                request. Such mode of operation may be applicable for those services, which have \
-                been reported as such in Provide subsystem services. This includes typically \
-                track and plot reporting services, but may involve other services as well. \
-                The service starts when the actor registers interest in information provided by a \
-                service. The registration shall include information on: \
-                <ul> \
-                 <li>The service for which the actor wants to register / deregister his \
-                interest</li> \
-                 <li>The information within the service for which the actor wants to register / \
-                deregister his interest</li> \
-                 <li>The intended (direct or indirect) recipient(s) of the information provided \
-                by the subsystem. </li> \
-                 <li>Any parameters of the provision needed such as Quality of Service \
-                parameters.</li> \
-                </ul> \
-                The service ends when the subsystem confirms registration / deregistration of \
+              @doc("Confirm registration of interest
+                This service allows the CMS to register (and deregister) interest in other
+                services. It is explicitly meant to address the possibility of CMS \"subscribing\"
+                to information supplied by the subsystem, with the understanding that the
+                information shall be provided by the subsystem, without the need for further
+                request. Such mode of operation may be applicable for those services, which have
+                been reported as such in Provide subsystem services. This includes typically
+                track and plot reporting services, but may involve other services as well.
+                The service starts when the actor registers interest in information provided by a
+                service. The registration shall include information on:
+                <ul>
+                 <li>The service for which the actor wants to register / deregister his
+                interest</li>
+                 <li>The information within the service for which the actor wants to register /
+                deregister his interest</li>
+                 <li>The intended (direct or indirect) recipient(s) of the information provided
+                by the subsystem. </li>
+                 <li>Any parameters of the provision needed such as Quality of Service
+                parameters.</li>
+                </ul>
+                The service ends when the subsystem confirms registration / deregistration of
                 interest.")
               struct confirm_registration_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -71,7 +71,7 @@ module org
               struct register_interest_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -81,7 +81,7 @@ module org
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::interest_list_type the_interest_list;

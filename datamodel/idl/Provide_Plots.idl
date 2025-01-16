@@ -19,12 +19,12 @@ module org {
 
             module Provide_Plots {
 
-              @doc("Topic type for operation write_sensor_plot_set. Interface to the CMS for \
-                receiving plot updates. \
-                This interface provides sensor plots to the CMS (filterable to air, \
-                surface, land and space environments). The transfer of data is expected to take \
-                place asynchronously, although for certain classes of sensor it may appear \
-                periodic. This method receives a set of one or more plot updates from the \
+              @doc("Topic type for operation write_sensor_plot_set. Interface to the CMS for
+                receiving plot updates.
+                This interface provides sensor plots to the CMS (filterable to air,
+                surface, land and space environments). The transfer of data is expected to take
+                place asynchronously, although for certain classes of sensor it may appear
+                periodic. This method receives a set of one or more plot updates from the
                 sensor. It is expected to be called periodically from the sensor.")
               struct write_sensor_plot_set_type
               {
@@ -34,12 +34,12 @@ module org {
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Topic type for operation write_sensor_plot. Interface to the CMS for receiving \
-                plot updates. \
-                This interface provides sensor plots to the CMS (filterable to air, \
-                surface, land and space environments). The transfer of data is expected to take \
-                place asynchronously, although for certain classes of sensor it may appear \
-                periodic. This method receives a individual plot update from the sensor. It is \
+              @doc("Topic type for operation write_sensor_plot. Interface to the CMS for receiving
+                plot updates.
+                This interface provides sensor plots to the CMS (filterable to air,
+                surface, land and space environments). The transfer of data is expected to take
+                place asynchronously, although for certain classes of sensor it may appear
+                periodic. This method receives a individual plot update from the sensor. It is
                 expected to be called periodically from the sensor.")
               struct write_sensor_plot_type
               {

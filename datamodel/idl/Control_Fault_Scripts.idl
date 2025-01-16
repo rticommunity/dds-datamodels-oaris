@@ -31,19 +31,19 @@ module org
               struct enable_fault_script_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Causes the subsystem to indicate the faults specified by the given fault scripts \
-                when appropriately stimulated. The faults remain in place until they are cleared \
-                either by a call to clear_fault or by an action on another interface that would \
+              @doc("Causes the subsystem to indicate the faults specified by the given fault scripts
+                when appropriately stimulated. The faults remain in place until they are cleared
+                either by a call to clear_fault or by an action on another interface that would
                 clear the equivalent non-simulated fault.")
               struct enable_fault_script_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The script ids to be enabled")
@@ -54,7 +54,7 @@ module org
               struct clear_faults_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -63,7 +63,7 @@ module org
               struct clear_faults_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The script ids to be cleared")

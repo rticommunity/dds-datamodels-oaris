@@ -31,35 +31,35 @@ module org
               struct report_illumination_completed_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("This service covers the control of target illumination to support a semi-active \
-                homing missile engagement. \
-                The actor is the Combat Management System. \
-                The service is triggered by the illumination request of the actor. Typically, \
-                illumination takes place during a specific period within the engagement sequence. \
-                The actor sends an illumination request to the radar. \
-                On the requested start time, the radar starts illuminating the target with \
-                specified parameters. \
-                During the illumination, the actor may provide updates of illumination \
-                parameters, e.g. to change the stop time. \
-                The service ends at stop time of the illumination. \
-                If the radar may not fulfil the illumination request, this is reported to the \
-                actor and the service stops. \
-                If during the illumination a radar fault takes place that prevents execution of \
-                illumination (e.g. illumination frequency not more available),  the health state \
-                of the Missile Guidance service (of which this service is part) becomes DEGRADED \
-                (if the Missile Guidance service is still capable of performing uplinks and/or \
-                downlinks) or NOT AVAILABLE, and the service stops. \
+              @doc("This service covers the control of target illumination to support a semi-active
+                homing missile engagement.
+                The actor is the Combat Management System.
+                The service is triggered by the illumination request of the actor. Typically,
+                illumination takes place during a specific period within the engagement sequence.
+                The actor sends an illumination request to the radar.
+                On the requested start time, the radar starts illuminating the target with
+                specified parameters.
+                During the illumination, the actor may provide updates of illumination
+                parameters, e.g. to change the stop time.
+                The service ends at stop time of the illumination.
+                If the radar may not fulfil the illumination request, this is reported to the
+                actor and the service stops.
+                If during the illumination a radar fault takes place that prevents execution of
+                illumination (e.g. illumination frequency not more available),  the health state
+                of the Missile Guidance service (of which this service is part) becomes DEGRADED
+                (if the Missile Guidance service is still capable of performing uplinks and/or
+                downlinks) or NOT AVAILABLE, and the service stops.
                 If the target track becomes lost during the illumination, the service stops.")
               struct report_illumination_completed_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -68,7 +68,7 @@ module org
               struct request_illumination_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -77,7 +77,7 @@ module org
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Missile_Guidance::illumination_request_type request;

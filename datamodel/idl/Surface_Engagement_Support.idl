@@ -26,8 +26,8 @@ module org
             @doc("the area ID assigned by the sensor.")
             typedef unsigned short splash_spotting_area_id_type;
 
-            @doc("The area definition from the User (CMS) when Splash Spotting is defined using the \
-              service \"activate splash spotting area by position\". The minimum and maximum \
+            @doc("The area definition from the User (CMS) when Splash Spotting is defined using the
+              service \"activate splash spotting area by position\". The minimum and maximum
               available sizes are defined in \"Manage Subsystem Parameters\".")
             struct splash_spotting_area_position_type
             {

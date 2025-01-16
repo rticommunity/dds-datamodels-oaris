@@ -30,14 +30,14 @@ module org
               area_2d_type_truncated_sector_kind
             };
 
-            @doc("A figure_ref_point specifies a reference point for a figure. \
-              This reference point is a mathematically meaningful point of the figure. For a \
-              circle it is the centre of the circle, for a polygon it is the centre of gravity \
-              of the polygon, etc. \
-              When rotating the figure, the figure_ref_point acts as the rotation point. \
-              When a figure is not slaved to a track its figure_ref_point shall be mapped on a \
-              (moving) geo point. \
-              When the figure is slaved to an object (track, point) its figure_ref_point shall \
+            @doc("A figure_ref_point specifies a reference point for a figure.
+              This reference point is a mathematically meaningful point of the figure. For a
+              circle it is the centre of the circle, for a polygon it is the centre of gravity
+              of the polygon, etc.
+              When rotating the figure, the figure_ref_point acts as the rotation point.
+              When a figure is not slaved to a track its figure_ref_point shall be mapped on a
+              (moving) geo point.
+              When the figure is slaved to an object (track, point) its figure_ref_point shall
               be mapped on an offset position which is relative to the master object.")
             struct figure_ref_point_type
             {
@@ -57,7 +57,7 @@ module org
             {
               @doc("distance along angle of orientation from the ref point to the next corner")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type length;
-              @doc("distance perpendicular to angle of orientation (clockwise) from ref point to the \
+              @doc("distance perpendicular to angle of orientation (clockwise) from ref point to the
                 next corner")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type width;
               @doc("angle of azimuth of the length sides of the rectangle")
@@ -74,103 +74,103 @@ module org
               polygon_point_type point;
             };
 
-            @doc("A polar_volume specifies a 3D volume based on a horizontal plane by means of its \
-                origin, its centre bearing and centre elevation, its bearing delta and elevation \
-                delta. \
+            @doc("A polar_volume specifies a 3D volume based on a horizontal plane by means of its
+                origin, its centre bearing and centre elevation, its bearing delta and elevation
+                delta.
                 The origin is the figure reference point of the Polar Volume.")
             struct polar_volume_type
             {
-              @doc("This attribute specifies the horizontal angle measured clockwise between the \
-                Y-axis of the relevant coordinate system (true north, heading/course) and the \
+              @doc("This attribute specifies the horizontal angle measured clockwise between the
+                Y-axis of the relevant coordinate system (true north, heading/course) and the
                 centre bearing line of the volume.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
 
-              @doc("This attribute specifies the bearing delta on each side of a specified centre \
+              @doc("This attribute specifies the bearing delta on each side of a specified centre
                 bearing line.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
 
-              @doc("This attribute specifies the vertical angle measured counterclockwise between the \
+              @doc("This attribute specifies the vertical angle measured counterclockwise between the
                 horizontal plane and the centre elevation line of the volume.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type centre_elevation;
-              @doc("This attribute specifies the elevation delta on each side of a specified centre \
+              @doc("This attribute specifies the elevation delta on each side of a specified centre
                 elevation line.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type delta_elevation;
               @optional figure_ref_point_type origin;
             };
 
-            @doc("A sector specifies a 2D area in a horizontal plane by means of its origin, its \
-                centre bearing with its bearing delta, that together define the sector. \
-                The origin is the figure reference point of the sector. \
-                In case the sector is north oriented, the centre bearing is specified with \
-                respect to true north; otherwise it is specified with respect to the object's \
+            @doc("A sector specifies a 2D area in a horizontal plane by means of its origin, its
+                centre bearing with its bearing delta, that together define the sector.
+                The origin is the figure reference point of the sector.
+                In case the sector is north oriented, the centre bearing is specified with
+                respect to true north; otherwise it is specified with respect to the object's
                 (own ship/other track, point) heading/course.")
             struct sector_type
             {
-              @doc("This attribute specifies the horizontal angle measured clockwise between the \
-                Y-axis of the relevant coordinate system (true north, heading/course) and the \
+              @doc("This attribute specifies the horizontal angle measured clockwise between the
+                Y-axis of the relevant coordinate system (true north, heading/course) and the
                 centre bearing line of the sector.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
 
-              @doc("This attribute specifies the bearing delta on each side of a specified centre \
+              @doc("This attribute specifies the bearing delta on each side of a specified centre
                 bearing line.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
               @optional figure_ref_point_type origin;
             };
 
-            @doc("A truncated_polar_volume specifies a 3D volume based on a horizontal plane by \
-                means of its origin, its centre bearing and centre elevation, its bearing delta \
+            @doc("A truncated_polar_volume specifies a 3D volume based on a horizontal plane by
+                means of its origin, its centre bearing and centre elevation, its bearing delta
                 and elevation delta, its inner range and outer range")
             struct truncated_polar_volume_type
             {
-              @doc("This attribute specifies the horizontal angle measured clockwise between the \
-                Y-axis of the relevant coordinate system (true north, heading/course) and the \
+              @doc("This attribute specifies the horizontal angle measured clockwise between the
+                Y-axis of the relevant coordinate system (true north, heading/course) and the
                 centre bearing line of the volume.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
 
-              @doc("This attribute specifies the bearing delta on each side of a specified centre \
+              @doc("This attribute specifies the bearing delta on each side of a specified centre
                 bearing line.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
 
-              @doc("This attribute specifies the vertical angle measured counterclockwise between the \
+              @doc("This attribute specifies the vertical angle measured counterclockwise between the
                 horizontal plane and the centre elevation line of the volume.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type centre_elevation;
 
-              @doc("This attribute specifies the elevation delta on each side of a specified centre \
+              @doc("This attribute specifies the elevation delta on each side of a specified centre
                 elevation line.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::elevation_coordinate_type delta_elevation;
 
-              @doc("This attribute specifies the range that limits a volume; i.e. the minimum \
+              @doc("This attribute specifies the range that limits a volume; i.e. the minimum
                 distance from the volume's origin.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type inner_range;
 
-              @doc("This attribute specifies the range that limits a volume; i.e. the maximum \
+              @doc("This attribute specifies the range that limits a volume; i.e. the maximum
                 distance from the volume's origin.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type outer_range;
               @optional figure_ref_point_type origin;
             };
 
-            @doc("A truncated_sector specifies a 2D area in a horizontal plane by means of its \
-              origin, its centre bearing with its bearing delta, and its inner range and outer \
-              range, that together define the truncated sector. \
-              The origin is the figure reference point of the truncated sector. \
-              In case the truncated sector is north oriented, the centre bearing is specified \
-              with respect to true north; otherwise (object oriented) it is specified with \
+            @doc("A truncated_sector specifies a 2D area in a horizontal plane by means of its
+              origin, its centre bearing with its bearing delta, and its inner range and outer
+              range, that together define the truncated sector.
+              The origin is the figure reference point of the truncated sector.
+              In case the truncated sector is north oriented, the centre bearing is specified
+              with respect to true north; otherwise (object oriented) it is specified with
               respect to the object's (own ship/other track, point) heading/course.")
             struct truncated_sector_type
             {
-              @doc("This attribute specifies the horizontal angle measured clockwise between the \
-                Y-axis of the relevant coordinate system (true north, heading/course) and the \
+              @doc("This attribute specifies the horizontal angle measured clockwise between the
+                Y-axis of the relevant coordinate system (true north, heading/course) and the
                 centre bearing line of the truncated sector.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type centre_bearing;
 
               @doc("This attribute specifies the bearing delta on each side of a centre bearing line.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::azimuth_coordinate_type delta_bearing;
 
-              @doc("This attribute specifies the range that limits a truncated sector; i.e. the \
+              @doc("This attribute specifies the range that limits a truncated sector; i.e. the
                 minimum distance from the truncated sector's origin.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type inner_range;
 
-              @doc("This attribute specifies the range that limits a truncated sector; i.e. the \
+              @doc("This attribute specifies the range that limits a truncated sector; i.e. the
                 maximum distance from the truncated sector's origin.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type outer_range;
               @optional figure_ref_point_type origin;
@@ -185,8 +185,8 @@ module org
               case area_2d_type_truncated_sector_kind : truncated_sector_type truncated_sector;
             };
 
-            @doc("This class allow definition of a volume in space, bounded by standard polar \
-                coordinates (azimuth, elevation and range). The different options allow the \
+            @doc("This class allow definition of a volume in space, bounded by standard polar
+                coordinates (azimuth, elevation and range). The different options allow the
                 dimension of either range, elevation or both to be omitted.")
             union general_polar_volume_type switch (general_polar_volume_switch_type)
             {

@@ -25,80 +25,80 @@ module org
             module Define_Simulation_Scenario
             {
 
-              @doc("Write emitter system data \
-                This describes how the contents of a simulation scenario are communicated between \
-                the CMS and the subsystem. \
-                The CMS provides the subsystem with a simulated environment which consists of \
-                simulated objects of different kinds. \
-                A subsystem with built-in simulation capability may participate in this \
-                simulation not only by being a consumer of the simulated environment but by \
-                contributing actively to it. \
-                Radar type subsystems shall typically build simulated plots or tracks from the \
-                simulated environment, while contributing simulated electromagnetic emissions to \
-                it. These simulated emissions may in turn be used and detected by other (ESM \
-                type) simulations. \
-                Weapon type subsystems when in simulation mode shall typically contribute \
-                simulated objects to the simulation that represent the launch/firing and movement \
-                of own missiles, bullets or torpedoes and their effect on other simulated \
-                objects. \
-                Thus CMS and subsystem both contribute to the simulated environment. Together \
-                they form a simulation federation. \
-                The actor is the Combat Management System. \
-                Relationship to 'control simulation' \
-                The definition of simulation mode and flow of commands to \
-                start/stop/freeze/resume a simulation scenario are defined in 'control \
-                simulation'. \
-                Relationship to provision of tracks \
-                A radar type subsystem shall provide tracks based on information from the \
-                simulated environment, as described above. The interfaces that deal with the \
-                provision of tracks indicate whether tracks are simulated or not under amplifying \
-                information. This indication should be set for all tracks that are reported in \
-                the context of this interface. \
-                Relationship to Receive geographic information \
+              @doc("Write emitter system data
+                This describes how the contents of a simulation scenario are communicated between
+                the CMS and the subsystem.
+                The CMS provides the subsystem with a simulated environment which consists of
+                simulated objects of different kinds.
+                A subsystem with built-in simulation capability may participate in this
+                simulation not only by being a consumer of the simulated environment but by
+                contributing actively to it.
+                Radar type subsystems shall typically build simulated plots or tracks from the
+                simulated environment, while contributing simulated electromagnetic emissions to
+                it. These simulated emissions may in turn be used and detected by other (ESM
+                type) simulations.
+                Weapon type subsystems when in simulation mode shall typically contribute
+                simulated objects to the simulation that represent the launch/firing and movement
+                of own missiles, bullets or torpedoes and their effect on other simulated
+                objects.
+                Thus CMS and subsystem both contribute to the simulated environment. Together
+                they form a simulation federation.
+                The actor is the Combat Management System.
+                Relationship to 'control simulation'
+                The definition of simulation mode and flow of commands to
+                start/stop/freeze/resume a simulation scenario are defined in 'control
+                simulation'.
+                Relationship to provision of tracks
+                A radar type subsystem shall provide tracks based on information from the
+                simulated environment, as described above. The interfaces that deal with the
+                provision of tracks indicate whether tracks are simulated or not under amplifying
+                information. This indication should be set for all tracks that are reported in
+                the context of this interface.
+                Relationship to Receive geographic information
                 Geographic information is received by using 'Receive geographic information'.")
               struct write_emitter_system_data_CMS_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type emitter_system_data;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Write radar beam data \
-               This describes how the contents of a simulation scenario are communicated between \
-               the CMS and the subsystem. \
-               The CMS provides the subsystem with a simulated environment which consists of \
-               simulated objects of different kinds. \
-               A subsystem with built-in simulation capability may participate in this \
-               simulation not only by being a consumer of the simulated environment but by \
-               contributing actively to it. \
-               Radar type subsystems shall typically build simulated plots or tracks from the \
-               simulated environment, while contributing simulated electromagnetic emissions to \
-               it. These simulated emissions may in turn be used and detected by other (ESM \
-               type) simulations. \
-               Weapon type subsystems when in simulation mode shall typically contribute \
-               simulated objects to the simulation that represent the launch/firing and movement \
-               of own missiles, bullets or torpedoes and their effect on other simulated \
-               objects. \
-               Thus CMS and subsystem both contribute to the simulated environment. Together \
-               they form a simulation federation. \
-               The actor is the Combat Management System. \
-               Relationship to 'control simulation' \
-               The definition of simulation mode and flow of commands to \
-               start/stop/freeze/resume a simulation scenario are defined in 'control \
-               simulation'. \
-               Relationship to provision of tracks \
-               A radar type subsystem shall provide tracks based on information from the \
-               simulated environment, as described above. The interfaces that deal with the \
-               provision of tracks indicate whether tracks are simulated or not under amplifying \
-               information. This indication should be set for all tracks that are reported in \
-               the context of this interface. \
-               Relationship to Receive geographic information \
+              @doc("Write radar beam data
+               This describes how the contents of a simulation scenario are communicated between
+               the CMS and the subsystem.
+               The CMS provides the subsystem with a simulated environment which consists of
+               simulated objects of different kinds.
+               A subsystem with built-in simulation capability may participate in this
+               simulation not only by being a consumer of the simulated environment but by
+               contributing actively to it.
+               Radar type subsystems shall typically build simulated plots or tracks from the
+               simulated environment, while contributing simulated electromagnetic emissions to
+               it. These simulated emissions may in turn be used and detected by other (ESM
+               type) simulations.
+               Weapon type subsystems when in simulation mode shall typically contribute
+               simulated objects to the simulation that represent the launch/firing and movement
+               of own missiles, bullets or torpedoes and their effect on other simulated
+               objects.
+               Thus CMS and subsystem both contribute to the simulated environment. Together
+               they form a simulation federation.
+               The actor is the Combat Management System.
+               Relationship to 'control simulation'
+               The definition of simulation mode and flow of commands to
+               start/stop/freeze/resume a simulation scenario are defined in 'control
+               simulation'.
+               Relationship to provision of tracks
+               A radar type subsystem shall provide tracks based on information from the
+               simulated environment, as described above. The interfaces that deal with the
+               provision of tracks indicate whether tracks are simulated or not under amplifying
+               information. This indication should be set for all tracks that are reported in
+               the context of this interface.
+               Relationship to Receive geographic information
                Geographic information is received by using 'Receive geographic information'.")
               struct write_radar_beam_data_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type radar_beam_data;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -107,7 +107,7 @@ module org
               struct write_emitter_system_data_Sub_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type emitter_system_data;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -116,7 +116,7 @@ module org
               struct write_environment_data_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type environmental_entity_data;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -125,7 +125,7 @@ module org
               struct write_jammer_beam_data_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type jammer_beam_data;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -134,7 +134,7 @@ module org
               struct write_platform_data_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type platform_data;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };

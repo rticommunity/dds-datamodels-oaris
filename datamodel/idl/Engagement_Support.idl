@@ -40,7 +40,7 @@ module org
               NO_RESULT
             };
 
-            @doc("Target position/kinematics for which a fire control channel is requested to \
+            @doc("Target position/kinematics for which a fire control channel is requested to
                 designate.")
             struct kinematics_type
             {

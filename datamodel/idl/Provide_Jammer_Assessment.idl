@@ -31,35 +31,35 @@ module org
               struct jammer_assessment_response_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("This interface describes the process whereby the subsystem provides a periodic \
-                assessment of the effects of actual jamming on the detection and tracking \
-                performance of the subsystem. The actual subsystem performance vs the nominal \
-                (see Provide Nominal Performance) shall be reported so that this data is current \
-                and real-time. This should include the effects on (spatial) coverage caused by \
-                any jamming. The impact on frequencies used e.g. operating band limitations is \
-                dealt with in Provide Interference Reports \
-                Mastership is not required. \
-                The radar need not be radiating in the ONLINE state but shall at least be \
-                receiving. The subsystem VOI (volume of interest) or other filter mechanisms \
-                might be supplied in a request to the subsystem. \
-                The kind of information which could be provided in the returned assessment, \
-                depending on any jamming mitigation strategy (frequency agility, moving target \
-                indication, low side-lobe levels, main beam or side-lobe cancellation, side-lobe \
-                blanking etc.) might then include: \
-                <ul> \
-                 <li>Noise floor pre-/post-jammer cancellation, as applicable</li> \
-                 <li>Degradation in detectability (compared with the nominal)</li> \
+              @doc("This interface describes the process whereby the subsystem provides a periodic
+                assessment of the effects of actual jamming on the detection and tracking
+                performance of the subsystem. The actual subsystem performance vs the nominal
+                (see Provide Nominal Performance) shall be reported so that this data is current
+                and real-time. This should include the effects on (spatial) coverage caused by
+                any jamming. The impact on frequencies used e.g. operating band limitations is
+                dealt with in Provide Interference Reports
+                Mastership is not required.
+                The radar need not be radiating in the ONLINE state but shall at least be
+                receiving. The subsystem VOI (volume of interest) or other filter mechanisms
+                might be supplied in a request to the subsystem.
+                The kind of information which could be provided in the returned assessment,
+                depending on any jamming mitigation strategy (frequency agility, moving target
+                indication, low side-lobe levels, main beam or side-lobe cancellation, side-lobe
+                blanking etc.) might then include:
+                <ul>
+                 <li>Noise floor pre-/post-jammer cancellation, as applicable</li>
+                 <li>Degradation in detectability (compared with the nominal)</li>
                 </ul>")
               struct jammer_assessment_response_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::performance_assessment_report_type report;
@@ -69,7 +69,7 @@ module org
               struct jammer_assessment_request_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -78,7 +78,7 @@ module org
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Sensor_Performance::performance_assessment_parameters_type jammer_assessment_request;

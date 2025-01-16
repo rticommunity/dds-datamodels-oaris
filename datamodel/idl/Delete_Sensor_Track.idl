@@ -31,19 +31,19 @@ module org
               @doc("struct holding keys for class delete_track_type.")
               struct delete_track_key_type
               {
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
 
-              @doc("Method used by the CMS to send a track deletion request, specifying the \
-                identification number of the track to be deleted. \
+              @doc("Method used by the CMS to send a track deletion request, specifying the
+                identification number of the track to be deleted.
                 This is the Subsystem interface for deleting sensor tracks.")
               struct delete_track_type
               {
                 org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type trackId;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;

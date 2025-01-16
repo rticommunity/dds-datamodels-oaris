@@ -30,27 +30,27 @@ module org
               @doc("struct holding keys for class report_miss_indication_type.")
               struct report_miss_indication_key_type
               {
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
               };
 
-              @doc("Via this message, the subsystem reports to the CMS the miss indication. \
-                Fire control radars suitable for Close-In-Weapon-Systems need the capability to \
-                observe the projectiles in flight, to measure at which distance they pass the \
-                target so that related shot corrections for the gun may be calculated, \
-                automatically. The measured distance in azimuth and elevation is called miss \
-                indication in the following. \
-                This capability may be available in a non-close-in-weapon-system environment, \
-                too. It may also be available for phased-array radars. \
-                Mastership of the subsystem must not have any impact upon the miss indication \
-                capability. \
+              @doc("Via this message, the subsystem reports to the CMS the miss indication.
+                Fire control radars suitable for Close-In-Weapon-Systems need the capability to
+                observe the projectiles in flight, to measure at which distance they pass the
+                target so that related shot corrections for the gun may be calculated,
+                automatically. The measured distance in azimuth and elevation is called miss
+                indication in the following.
+                This capability may be available in a non-close-in-weapon-system environment,
+                too. It may also be available for phased-array radars.
+                Mastership of the subsystem must not have any impact upon the miss indication
+                capability.
                 See also service 'Process Target Designation'.")
               struct report_miss_indication_type
               {
                 org::omg::c4i::Domain_Model::Radar_Domain::Air_Engagement_Support::miss_indication_data_type MissIndicationData;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
@@ -60,7 +60,7 @@ module org
               struct request_miss_indication_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -69,7 +69,7 @@ module org
               struct request_miss_indication_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Air_Engagement_Support::expected_hit_data_type ExpectedHitData;

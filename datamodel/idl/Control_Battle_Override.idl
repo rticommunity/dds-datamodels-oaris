@@ -32,31 +32,31 @@ module org
               struct battle_override_setting_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("This metod is used by the subsystem to return the current Battle Override state. \
-                The subsystem is requested to set/reset the Battle Override. When Battle Override \
-                is set the subsystem disregards warnings on circumstances which may cause damage \
-                to own equipment, typically the overtemperature protections. \
-                It is the CMS's responsibility to initiate the determination of initial state by \
-                making a request for information to the subsystem. \
-                Provision of the Battle Override state \
-                Subsystem shall keep CMS informed about the current Battle Override state and its \
-                changes (if any). \
-                Lack of mastership \
-                In the case where CMS does not have mastership of the subsystem, CMS shall be \
-                informed about the current Battle Override state and its changes (if any). \
-                Relationship to the subsystem health state \
-                As long as the Battle Override is set, the subsystem internal overtemperature \
-                indications shall not result in any heath state set to \"NOT AVAILABLE\" (see \
+              @doc("This metod is used by the subsystem to return the current Battle Override state.
+                The subsystem is requested to set/reset the Battle Override. When Battle Override
+                is set the subsystem disregards warnings on circumstances which may cause damage
+                to own equipment, typically the overtemperature protections.
+                It is the CMS's responsibility to initiate the determination of initial state by
+                making a request for information to the subsystem.
+                Provision of the Battle Override state
+                Subsystem shall keep CMS informed about the current Battle Override state and its
+                changes (if any).
+                Lack of mastership
+                In the case where CMS does not have mastership of the subsystem, CMS shall be
+                informed about the current Battle Override state and its changes (if any).
+                Relationship to the subsystem health state
+                As long as the Battle Override is set, the subsystem internal overtemperature
+                indications shall not result in any heath state set to \"NOT AVAILABLE\" (see
                 <i>Provide health state</i>).")
               struct battle_override_setting_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::battle_override_state_type battle_override_state;
@@ -66,17 +66,17 @@ module org
               struct set_battle_override_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("This method is used by the CMS to send a Battle Override set/reset request to the \
+              @doc("This method is used by the CMS to send a Battle Override set/reset request to the
                 subsystem.")
               struct set_battle_override_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::battle_override_state_type battle_override_state;

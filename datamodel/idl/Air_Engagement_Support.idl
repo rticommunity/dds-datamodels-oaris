@@ -44,7 +44,7 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_coordinate_type velocity_descriptor;
             };
 
-            @doc("Expected hit identifies the target and the time a hit is expected. This data is \
+            @doc("Expected hit identifies the target and the time a hit is expected. This data is
                 used to initiate the evaluation of a miss indication within the radar.")
             struct expected_hit_data_type
             {

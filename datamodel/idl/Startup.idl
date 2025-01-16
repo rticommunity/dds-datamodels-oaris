@@ -32,21 +32,21 @@ module org
               struct receive_startup_state_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Interface used by CMS to receive an indication from the subsystem that it has \
-                successfully performed startup. \
-                The purpose of this interface is to cause a normal transition from the STANDBY \
-                state to the READY state using the transitions defined in the Manage Technical \
+              @doc("Interface used by CMS to receive an indication from the subsystem that it has
+                successfully performed startup.
+                The purpose of this interface is to cause a normal transition from the STANDBY
+                state to the READY state using the transitions defined in the Manage Technical
                 State service.")
               struct receive_startup_state_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
@@ -56,18 +56,18 @@ module org
               struct perform_startup_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Interface used by the subsystem to receive a request from the CMS to execute \
+              @doc("Interface used by the subsystem to receive a request from the CMS to execute
                 startup.")
               struct perform_startup_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };

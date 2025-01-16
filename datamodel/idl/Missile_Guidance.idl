@@ -33,9 +33,9 @@ module org
               track_id_type_system_track_id_kind
             };
 
-            @doc("The track referred to by a missile guidance command may either be a system track \
-                (provided by the CMS) or a sensor track (if the object is already tracked by the \
-                sensor). Therefore, the track_id(s) in the missile guidance command may be a \
+            @doc("The track referred to by a missile guidance command may either be a system track
+                (provided by the CMS) or a sensor track (if the object is already tracked by the
+                sensor). Therefore, the track_id(s) in the missile guidance command may be a
                 sensor_track_id or a missile_track_id.")
             union track_id_type switch (track_id_switch_type)
             {

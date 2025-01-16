@@ -32,22 +32,22 @@ module org
               struct receive_shutdown_state_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Interface used by CMS to receive an indication from the subsystem that it has \
-                successfully performed shutdown. \
-                The purpose of this interface is to transition the sub-system to the STANDBY \
-                state from any other state as defined by Manage Technical State. Note: this shall \
-                cause the Subsystem to cease radiating if it is in an ONLINE state with emissions \
+              @doc("Interface used by CMS to receive an indication from the subsystem that it has
+                successfully performed shutdown.
+                The purpose of this interface is to transition the sub-system to the STANDBY
+                state from any other state as defined by Manage Technical State. Note: this shall
+                cause the Subsystem to cease radiating if it is in an ONLINE state with emissions
                 enabled.")
               struct receive_shutdown_state_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
@@ -57,18 +57,18 @@ module org
               struct perform_shutdown_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Interface used by the subsystem to receive a request from the CMS to execute a \
+              @doc("Interface used by the subsystem to receive a request from the CMS to execute a
                 shutdown.")
               struct perform_shutdown_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };

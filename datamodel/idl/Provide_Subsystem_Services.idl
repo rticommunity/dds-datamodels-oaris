@@ -27,50 +27,50 @@ module org
             module Provide_Subsystem_Services
             {
 
-              @doc("Receive services which are implemented by a subsystem \
-                Subsystems offer a number of services to a CMS. Some of the services are \
-                mandatory for the type of subsystem, others are optional. New services may be \
-                known to the CMS or may not be known. \
-                Consequently, the CMS needs to know which services are provided by a subsystem \
-                and the subsystem needs to know which services the CMS is able to interact with. \
-                The services considered here are the final versions of those that are specified \
-                and defined by the rest of this standard. Some of them are not necessarily \
-                implemented by each product of the type of subsystem but also not necessarily \
-                supported by each CMS. \
-                The service-related information provided by the subsystem to the CMS deals with \
-                both, the interfaces offered by the subsystem and the interfaces expected on CMS \
-                side which are necessary to use the service. \
-                Lack of mastership \
-                Mastership of the subsystem must not have an impact upon this interface. \
-                Plug-&amp;-Play aspect \
-                Both sides, subsystem and CMS, shall follow a technical evolution process which \
-                is not necessarily coordinated. Therefore, the latest subsystem version may \
-                provide a service which is not yet supported by the CMS or the CMS may be \
-                prepared to use a service which is not provided by the subsystem. \
-                This may also cause inconsistencies regarding the interfaces to be made available \
-                on both sides. As the subsystem may not have an own operator display, it is \
-                intended to use the health state of the subsystem if an indication at CMS is to \
-                be achieved saying that the interface to the CMS is not implemented properly. \
-                Configuration data of services \
-                The information to be provided to the CMS as information about the implemented \
-                services may include related configuration data and may include the information \
-                which parts of the service interfaces are supported. \
-                System integration test \
-                After installation of a subsystem on-board, connecting the hardware interfaces \
-                with the related CMS hardware interfaces and performing a setup process if \
-                applicable it is expected that an interface verification procedure shall be \
-                performed. This procedure shall apply all negotiated interfaces so that an \
-                improper implementation shall turn-up at that occasion, already. Insofar, the \
-                alternative flows should be considered as an integration aid, only. \
-                Spontaneous reporting \
-                Interfaces for which registration/de-registration is considered as an optional \
-                facility are written, accordingly. \
-                Registration/de-registration of recipients is done using standard registration \
+              @doc("Receive services which are implemented by a subsystem
+                Subsystems offer a number of services to a CMS. Some of the services are
+                mandatory for the type of subsystem, others are optional. New services may be
+                known to the CMS or may not be known.
+                Consequently, the CMS needs to know which services are provided by a subsystem
+                and the subsystem needs to know which services the CMS is able to interact with.
+                The services considered here are the final versions of those that are specified
+                and defined by the rest of this standard. Some of them are not necessarily
+                implemented by each product of the type of subsystem but also not necessarily
+                supported by each CMS.
+                The service-related information provided by the subsystem to the CMS deals with
+                both, the interfaces offered by the subsystem and the interfaces expected on CMS
+                side which are necessary to use the service.
+                Lack of mastership
+                Mastership of the subsystem must not have an impact upon this interface.
+                Plug-&amp;-Play aspect
+                Both sides, subsystem and CMS, shall follow a technical evolution process which
+                is not necessarily coordinated. Therefore, the latest subsystem version may
+                provide a service which is not yet supported by the CMS or the CMS may be
+                prepared to use a service which is not provided by the subsystem.
+                This may also cause inconsistencies regarding the interfaces to be made available
+                on both sides. As the subsystem may not have an own operator display, it is
+                intended to use the health state of the subsystem if an indication at CMS is to
+                be achieved saying that the interface to the CMS is not implemented properly.
+                Configuration data of services
+                The information to be provided to the CMS as information about the implemented
+                services may include related configuration data and may include the information
+                which parts of the service interfaces are supported.
+                System integration test
+                After installation of a subsystem on-board, connecting the hardware interfaces
+                with the related CMS hardware interfaces and performing a setup process if
+                applicable it is expected that an interface verification procedure shall be
+                performed. This procedure shall apply all negotiated interfaces so that an
+                improper implementation shall turn-up at that occasion, already. Insofar, the
+                alternative flows should be considered as an integration aid, only.
+                Spontaneous reporting
+                Interfaces for which registration/de-registration is considered as an optional
+                facility are written, accordingly.
+                Registration/de-registration of recipients is done using standard registration
                 mechanism (register interest)")
               struct receive_implemented_services_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type the_request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::service_indication_list_type service_indication_list;
@@ -81,7 +81,7 @@ module org
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type the_request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::service_list_type supported_service_list;

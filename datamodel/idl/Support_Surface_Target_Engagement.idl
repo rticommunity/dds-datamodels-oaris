@@ -32,33 +32,33 @@ module org
               struct report_availability_state_of_fire_control_channels_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Via this interface method, the number of available fire control channels are \
-                returned from the subsystem to the CMS. If no channel is available, the value '0' \
-                is returned. \
-                This service is intended for fire control radars, as well as surveillance radar \
-                systems that have facilities to perform surface target engagements by means of \
-                dedicated fire control channels. These fire control channels may need a \
-                differently parameterized or more elaborate track algorithm, and they may be \
-                combined with related splash spotting video. \
-                The CMS requests the surface track to be engaged. The maximum number of tracks \
-                that may be engaged simultaneously is determined by the radar. \
-                The functionality may also be available for land targets, provided they may be \
-                tracked by the radar. \
-                In the case where the CMS looses or releases mastership of the subsystem, a \
-                change of the availability of fire control channels shall be indicated to the \
-                CMS. Fire control radars shall cease all fire control activities. \
-                The set of operational modes that make fire control channels available, as well \
-                as the number of available channels shall be provided by means of service \"Manage \
+              @doc("Via this interface method, the number of available fire control channels are
+                returned from the subsystem to the CMS. If no channel is available, the value '0'
+                is returned.
+                This service is intended for fire control radars, as well as surveillance radar
+                systems that have facilities to perform surface target engagements by means of
+                dedicated fire control channels. These fire control channels may need a
+                differently parameterized or more elaborate track algorithm, and they may be
+                combined with related splash spotting video.
+                The CMS requests the surface track to be engaged. The maximum number of tracks
+                that may be engaged simultaneously is determined by the radar.
+                The functionality may also be available for land targets, provided they may be
+                tracked by the radar.
+                In the case where the CMS looses or releases mastership of the subsystem, a
+                change of the availability of fire control channels shall be indicated to the
+                CMS. Fire control radars shall cease all fire control activities.
+                The set of operational modes that make fire control channels available, as well
+                as the number of available channels shall be provided by means of service \"Manage
                 Subsystem Parameters\".")
               struct report_availability_state_of_fire_control_channels_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::available_fire_control_channels_type AvailableFireControlChannels;
@@ -68,32 +68,32 @@ module org
               struct report_available_fire_control_channel_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Via this interface method, the number of available fire control channels are \
-                returned from the subsystem to the CMS. \
-                This service is intended for fire control radars, as well as surveillance radar \
-                systems that have facilities to perform surface target engagements by means of \
-                dedicated fire control channels. These fire control channels may need a \
-                differently parameterized or more elaborate track algorithm, and they may be \
-                combined with related splash spotting video. \
-                The CMS requests the surface track to be engaged. The maximum number of tracks \
-                that may be engaged simultaneously is determined by the radar. \
-                The functionality may also be available for land targets, provided they may be \
-                tracked by the radar. \
-                In the case where the CMS looses or releases mastership of the subsystem, a \
-                change of the availability of fire control channels shall be indicated to the \
-                CMS. Fire control radars shall cease all fire control activities. \
-                The set of operational modes that make fire control channels available, as well \
-                as the number of available channels shall be provided by means of service \"Manage \
+              @doc("Via this interface method, the number of available fire control channels are
+                returned from the subsystem to the CMS.
+                This service is intended for fire control radars, as well as surveillance radar
+                systems that have facilities to perform surface target engagements by means of
+                dedicated fire control channels. These fire control channels may need a
+                differently parameterized or more elaborate track algorithm, and they may be
+                combined with related splash spotting video.
+                The CMS requests the surface track to be engaged. The maximum number of tracks
+                that may be engaged simultaneously is determined by the radar.
+                The functionality may also be available for land targets, provided they may be
+                tracked by the radar.
+                In the case where the CMS looses or releases mastership of the subsystem, a
+                change of the availability of fire control channels shall be indicated to the
+                CMS. Fire control radars shall cease all fire control activities.
+                The set of operational modes that make fire control channels available, as well
+                as the number of available channels shall be provided by means of service \"Manage
                 Subsystem Parameters\".")
               struct report_available_fire_control_channel_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
@@ -103,32 +103,32 @@ module org
               struct report_selected_fire_control_channel_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Via this interface method, the selected fire control channel is returned from the \
-                subsystem to the CMS. \
-                This service is intended for fire control radars, as well as surveillance radar \
-                systems that have facilities to perform surface target engagements by means of \
-                dedicated fire control channels. These fire control channels may need a \
-                differently parameterized or more elaborate track algorithm, and they may be \
-                combined with related splash spotting video. \
-                The CMS requests the surface track to be engaged. The maximum number of tracks \
-                that may be engaged simultaneously is determined by the radar. \
-                The functionality may also be available for land targets, provided they may be \
-                tracked by the radar. \
-                In the case where the CMS looses or releases mastership of the subsystem, a \
-                change of the availability of fire control channels shall be indicated to the \
-                CMS. Fire control radars shall cease all fire control activities. \
-                The set of operational modes that make fire control channels available, as well \
-                as the number of available channels shall be provided by means of service \"Manage \
+              @doc("Via this interface method, the selected fire control channel is returned from the
+                subsystem to the CMS.
+                This service is intended for fire control radars, as well as surveillance radar
+                systems that have facilities to perform surface target engagements by means of
+                dedicated fire control channels. These fire control channels may need a
+                differently parameterized or more elaborate track algorithm, and they may be
+                combined with related splash spotting video.
+                The CMS requests the surface track to be engaged. The maximum number of tracks
+                that may be engaged simultaneously is determined by the radar.
+                The functionality may also be available for land targets, provided they may be
+                tracked by the radar.
+                In the case where the CMS looses or releases mastership of the subsystem, a
+                change of the availability of fire control channels shall be indicated to the
+                CMS. Fire control radars shall cease all fire control activities.
+                The set of operational modes that make fire control channels available, as well
+                as the number of available channels shall be provided by means of service \"Manage
                 Subsystem Parameters\".")
               struct report_selected_fire_control_channel_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
@@ -139,7 +139,7 @@ module org
               struct dedesignate_fire_control_channel_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -148,7 +148,7 @@ module org
               struct dedesignate_fire_control_channel_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Engagement_Support::fire_control_channel_id_type FireControlChannelID;
@@ -158,7 +158,7 @@ module org
               struct designate_fire_control_channel_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -167,7 +167,7 @@ module org
               struct designate_fire_control_channel_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Track_Reporting::sensor_track_id_type track_id;
@@ -177,7 +177,7 @@ module org
               struct request_availability_of_fire_control_channels_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -186,7 +186,7 @@ module org
               struct request_availability_of_fire_control_channels_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                   subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };

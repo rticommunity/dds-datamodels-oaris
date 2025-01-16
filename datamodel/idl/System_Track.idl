@@ -27,12 +27,12 @@ module org
             struct system_track_key_type
             {
               org::omg::c4i::Domain_Model::Common_Types::system_track_id_type system_track_number;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("System track information is limited to information required by a subsystem for \
+            @doc("System track information is limited to information required by a subsystem for
               missile guidance.")
             struct system_track_type
             {
@@ -48,7 +48,7 @@ module org
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type velocity_accuracy_coordinate_system;
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_accuracy_coordinate_type velocity_accuracy;
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type max_range_limit;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };

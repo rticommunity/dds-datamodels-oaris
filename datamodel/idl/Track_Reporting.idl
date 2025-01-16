@@ -25,18 +25,18 @@ module org
           module Track_Reporting
           {
 
-            @doc("Unique identifier for the objects to which the sensor assessment is attempting to \
+            @doc("Unique identifier for the objects to which the sensor assessment is attempting to
               match the measurement parameters.")
             typedef long assessment_objective_id_type;
 
             @doc("Sensor Track Identification")
             typedef unsigned long sensor_track_id_type;
 
-            @doc("The representation of the track's priority with respect to the allocation of the \
+            @doc("The representation of the track's priority with respect to the allocation of the
               sensor's resources.")
             typedef unsigned short track_priority_type;
 
-            @doc("The representation of the quality of a track for the purposes of comparison \
+            @doc("The representation of the quality of a track for the purposes of comparison
               according to system specific criteria.")
             typedef float track_quality_type;
 
@@ -59,20 +59,20 @@ module org
               EXTERNAL_REQUEST
             };
 
-            @doc("The recognition type indicates the type of the real-world physical object being \
-              tracked. \
-              The numeric value is used to map to a system or implementation specific taxonomy \
+            @doc("The recognition type indicates the type of the real-world physical object being
+              tracked.
+              The numeric value is used to map to a system or implementation specific taxonomy
               of real-world physical objects that are of tactical interest.")
             typedef unsigned short recognition_type;
 
             @doc("struct holding keys for class sensor_track_type.")
             struct sensor_track_key_type
             {
-              @doc("The sensor's unique identifying reference for the track. Sensors may reuse \
-                identifiers after they have deleted the corresponding track. The scheme used for \
+              @doc("The sensor's unique identifying reference for the track. Sensors may reuse
+                identifiers after they have deleted the corresponding track. The scheme used for
                 identifier reallocation is system dependent.")
               sensor_track_id_type sensor_track_id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -86,8 +86,8 @@ module org
               LOST,
               @doc("Regular update of new and existing track")
               TRACKED,
-              @doc("No new measurements were available to contribute to this track at the last \
-                opportunity to do so. It is expected that should such measurements be made at the \
+              @doc("No new measurements were available to contribute to this track at the last
+                opportunity to do so. It is expected that should such measurements be made at the
                 next opportunity, these will successfully update the track.")
               INACTIVE
             };
@@ -98,65 +98,65 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type, 256> sensor_track_based_on_id_type;
 
-            @doc("The method represents a write of a single sensor track (air, land, space or \
-              surface) to the CMS. \
-              The write may be periodic or not. \
-              This service allows the CMS to obtain an overview of (real and/or simulated) air \
-              / land / space / surface objects observed or simulated. Information may cover all \
-              aspects of a track such as kinematic and amplifying information. \
-              The service does not cover: \
-              <ul> \
-               <li>additional track information provision dedicated for engagement \
-              support,</li> \
-               <li>special search functions such as cued search, volume search and horizon \
-              search (however, if such a search function is initiated by means of another \
-              service, the tracks shall be provided by this service),</li> \
-              </ul> \
-              Although the service focuses on radar as an example of a sensor, the service also \
-              applies to other sensors, like IR/EO sensors and ECM/ESM sensors. \
-              The actor is the Combat Management System. \
-              The service starts when: \
-              <ul> \
-               <li>if the service does provide registration capabilities: the service \"Register \
-              interest\" has completed successfully, or</li> \
-               <li>if the service does not provide registration capabilities: the service \
-              \"Provide subsystem services\" has completed successfully for this service.</li> \
-              </ul> \
-              The sensor provides, periodically or on event, a set of sensor tracks observed by \
-              the sensor. These may be sensor point or bearing tracks. The set of sensor tracks \
-              includes: \
-              <ul> \
-               <li>Track updates of existing and new sensor tracks. These are provided when \
-              there are sufficient measurements (e.g. plots) in the last observation cycle, \
-              which may be associated with the sensor track.</li> \
-               <li>Dead-reckoned tracks. These are sensor track updates for which in the last \
-              observation cycle there are no measurements that may be associated with the \
-              sensor track. For dead-reckoned tracks, the sensor track information (e.g. \
-              kinematics) is extrapolated. The dead-reckoned tracks may become \"normal\" tracks \
-              again if, in the next scan, there are measurement(s) that may be associated with \
-              the track. Alternatively, dead-reckoned tracks (after n unsuccessful scans) may \
-              become lost tracks.</li> \
-               <li>Lost tracks. These are sensor track updates that are reported once, if in \
-              the last n scans, there are no measurements that may be associated with the \
-              sensor track. The value of n is typically a sensor parameter that is managed by \
-              the service \"Manage subsystem parameters\".</li> \
-              </ul> \
-              Some sensors are not capable of reporting lost and/or dead-reckoned tracks. \
-              The sensor may also provide single sensor tracks periodically or on event. \
-              The service ends with success when: \
-              <ul> \
-               <li>if the service does provide registration capabilities: the service \"Register \
-              interest\" has completed successfully for a deregistration request, or</li> \
-               <li>if the service does not  provide registration capabilities: the sensor is \
-              shutdown using service \"Shut down\".</li> \
-              </ul> \
+            @doc("The method represents a write of a single sensor track (air, land, space or
+              surface) to the CMS.
+              The write may be periodic or not.
+              This service allows the CMS to obtain an overview of (real and/or simulated) air
+              / land / space / surface objects observed or simulated. Information may cover all
+              aspects of a track such as kinematic and amplifying information.
+              The service does not cover:
+              <ul>
+               <li>additional track information provision dedicated for engagement
+              support,</li>
+               <li>special search functions such as cued search, volume search and horizon
+              search (however, if such a search function is initiated by means of another
+              service, the tracks shall be provided by this service),</li>
+              </ul>
+              Although the service focuses on radar as an example of a sensor, the service also
+              applies to other sensors, like IR/EO sensors and ECM/ESM sensors.
+              The actor is the Combat Management System.
+              The service starts when:
+              <ul>
+               <li>if the service does provide registration capabilities: the service \"Register
+              interest\" has completed successfully, or</li>
+               <li>if the service does not provide registration capabilities: the service
+              \"Provide subsystem services\" has completed successfully for this service.</li>
+              </ul>
+              The sensor provides, periodically or on event, a set of sensor tracks observed by
+              the sensor. These may be sensor point or bearing tracks. The set of sensor tracks
+              includes:
+              <ul>
+               <li>Track updates of existing and new sensor tracks. These are provided when
+              there are sufficient measurements (e.g. plots) in the last observation cycle,
+              which may be associated with the sensor track.</li>
+               <li>Dead-reckoned tracks. These are sensor track updates for which in the last
+              observation cycle there are no measurements that may be associated with the
+              sensor track. For dead-reckoned tracks, the sensor track information (e.g.
+              kinematics) is extrapolated. The dead-reckoned tracks may become \"normal\" tracks
+              again if, in the next scan, there are measurement(s) that may be associated with
+              the track. Alternatively, dead-reckoned tracks (after n unsuccessful scans) may
+              become lost tracks.</li>
+               <li>Lost tracks. These are sensor track updates that are reported once, if in
+              the last n scans, there are no measurements that may be associated with the
+              sensor track. The value of n is typically a sensor parameter that is managed by
+              the service \"Manage subsystem parameters\".</li>
+              </ul>
+              Some sensors are not capable of reporting lost and/or dead-reckoned tracks.
+              The sensor may also provide single sensor tracks periodically or on event.
+              The service ends with success when:
+              <ul>
+               <li>if the service does provide registration capabilities: the service \"Register
+              interest\" has completed successfully for a deregistration request, or</li>
+               <li>if the service does not  provide registration capabilities: the sensor is
+              shutdown using service \"Shut down\".</li>
+              </ul>
               Encapsulation of a sensor track")
             struct sensor_track_type
             {
               @doc("Additional, vendor-specific information")
               org::omg::c4i::Domain_Model::Common_Types::anonymous_blob_type additional_information;
-              @doc("The number of elements in the covariance matrix is dependent on the sensor. When \
-                present, the position_accuracy and velocity_accuracy attributes should not be \
+              @doc("The number of elements in the covariance matrix is dependent on the sensor. When
+                present, the position_accuracy and velocity_accuracy attributes should not be
                 present.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::covariance_matrix_type covariance_matrix;
               @doc("Environment of the track (air, surface etc)")
@@ -167,38 +167,38 @@ module org
               boolean jammer_indication;
               @doc("Maximal range for a bearing track")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::range_coordinate_type max_range_limit;
-              @doc("The location of the track as calculated in the sensor's chosen coordinate system \
+              @doc("The location of the track as calculated in the sensor's chosen coordinate system
                 at the stated time.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_coordinate_type position;
-              @doc("The sensor's stated accuracy for its calculated position. \
+              @doc("The sensor's stated accuracy for its calculated position.
                 When present, the covariance_matrix attribute should not be present.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::position_accuracy_coordinate_type position_accuracy;
               @doc("The coordinate system chosen by the sensor for reporting accuracy.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_accuracy_coordinate_system;
               @doc("The coordinate system chosen by the sensor.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type position_coordinate_system;
-              @doc("The sensor's unique identifying reference for the track. Sensors may reuse \
-                identifiers after they have deleted the corresponding track. The scheme used for \
+              @doc("The sensor's unique identifying reference for the track. Sensors may reuse
+                identifiers after they have deleted the corresponding track. The scheme used for
                 identifier reallocation is system dependent.")
               @key sensor_track_id_type sensor_track_id;
               @doc("Identification information for the sensor track (if available)")
               @optional org::omg::c4i::Domain_Model::Common_Types::identity_type sensor_track_pre_identification;
               @doc("Recognition information for the sensor track (if available)")
               @optional recognition_type sensor_track_pre_recognition;
-              @doc("Whether the CMS should process the track as having been synthetically generated \
+              @doc("Whether the CMS should process the track as having been synthetically generated
                 as opposed to corresponding to an actual detection in the real world.")
               boolean simulated;
-              @doc("The time at which the information in this object is valid, in particular its \
+              @doc("The time at which the information in this object is valid, in particular its
                 position.")
               org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
               @doc("The time at which the sensor first determined the existence of this track.")
               @optional org::omg::c4i::Domain_Model::Common_Types::time_type time_of_initiation;
               @doc("Track phase (e.g. TRACKED, DELETED, LOST)")
               track_phase_type track_phase;
-              @doc("The velocity of the track as calculated in the sensor's chosen coordinate system \
+              @doc("The velocity of the track as calculated in the sensor's chosen coordinate system
                 at the stated time.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_coordinate_type velocity;
-              @doc("The sensor's stated accuracy for its calculated velocity. \
+              @doc("The sensor's stated accuracy for its calculated velocity.
                 When present, the covariance_matrix attribute should not be present.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::velocity_accuracy_coordinate_type velocity_accuracy;
               @doc("The coordinate system chosen by the sensor for reporting accuracy.")
@@ -207,8 +207,8 @@ module org
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_specification_type velocity_coordinate_system;
               @doc("The sensor specific quality of this track in comparison to its typical tracks.")
               @optional track_quality_type track_quality;
-              @doc("The time at which the sensor first made measurements leading to the detection of \
-                the existence of this track (as opposed to the time of initiation when there was \
+              @doc("The time at which the sensor first made measurements leading to the detection of
+                the existence of this track (as opposed to the time of initiation when there was
                 sufficient confidence in one or more detection to initiate a track).")
               @optional org::omg::c4i::Domain_Model::Common_Types::time_type time_of_first_detection;
               @doc("The time at which the sensor last detected the existence of this track.")
@@ -217,24 +217,24 @@ module org
               @optional track_priority_type priority;
               @doc("The amplitude or strength of the measurement(s) being tracked by the sensor")
               @optional org::omg::c4i::Domain_Model::Common_Types::strength_type amplitude;
-              @doc("The sensor's assessment of the activity being undertaken by the real world object \
+              @doc("The sensor's assessment of the activity being undertaken by the real world object
                 represented by the sensor track as observed by the sensor.")
               @optional assessment_objective_id_type activity_id;
               @doc("The sensor functions whose processing has contributed to the track's data.")
               sensor_track_sensor_function_id_type sensor_function_id;
-              @doc("The sensor's assessment of the function being undertaken by the equipment of real \
-                world object represented by the sensor track that has been observed by the \
+              @doc("The sensor's assessment of the function being undertaken by the equipment of real
+                world object represented by the sensor track that has been observed by the
                 sensor.")
               @optional assessment_objective_id_type observed_function_id;
-              @doc("The sensor's assessment of the equipment on the real world object represented by \
+              @doc("The sensor's assessment of the equipment on the real world object represented by
                 the sensor track that has been detected by the sensor.")
               @optional assessment_objective_id_type equipment_id;
-              @doc("The sensor's assessment of the name of the platform or class of platform of the \
+              @doc("The sensor's assessment of the name of the platform or class of platform of the
                 real world object.")
               @optional assessment_objective_id_type platform_id;
               @doc("The set of plots on which the sensor track is based")
               sensor_track_based_on_id_type based_on_id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -242,65 +242,65 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<sensor_track_type, 1000> sensor_track_set_element_type;
 
-            @doc("The method represents a single write of a set of sensor tracks to the CMS. The \
-              write may be: \
-              - periodic or not \
-              - include all tracks observed during a sensor scan \
-              - be an update of just one track (a set of 1) if this is how the sensor works \
-              This service allows the CMS to obtain an overview of (real and/or simulated) air \
-              / land / space / surface objects observed or simulated. Information may cover all \
-              aspects of a track such as kinematic and amplifying information. \
-              The service does not cover: \
-              <ul> \
-               <li>additional track information provision dedicated for engagement \
-              support,</li> \
-               <li>special search functions such as cued search, volume search and horizon \
-              search (however, if such a search function is initiated by means of another \
-              service, the tracks shall be provided by this service),</li> \
-              </ul> \
-              Although the service focuses on radar as an example of a sensor, the service also \
-              applies to other sensors, like IR/EO sensors and ECM/ESM sensors. \
-              The actor is the Combat Management System. \
-              The service starts when: \
-              <ul> \
-               <li>if the service does provide registration capabilities: the service \"Register \
-              interest\" has completed successfully, or</li> \
-               <li>if the service does not provide registration capabilities: the service \
-              \"Provide subsystem services\" has completed successfully for this service.</li> \
-              </ul> \
-              The sensor provides, periodically or on event, a set of sensor tracks observed by \
-              the sensor. These may be sensor point or bearing tracks. The set of sensor tracks \
-              includes: \
-              <ul> \
-               <li>Track updates of existing and new sensor tracks. These are provided when \
-              there are sufficient measurements (e.g. plots) in the last observation cycle, \
-              which may be associated with the sensor track.</li> \
-               <li>Dead-reckoned tracks. These are sensor track updates for which in the last \
-              observation cycle there are no measurements that may be associated with the \
-              sensor track. For dead-reckoned tracks, the sensor track information (e.g. \
-              kinematics) is extrapolated. The dead-reckoned tracks may become \"normal\" tracks \
-              again if, in the next scan, there are measurement(s) that may be associated with \
-              the track. Alternatively, dead-reckoned tracks (after n unsuccessful scans) may \
-              become lost tracks.</li> \
-               <li>Lost tracks. These are sensor track updates that are reported once, if in \
-              the last n scans, there are no measurements that may be associated with the \
-              sensor track. The value of n is typically a sensor parameter that is managed by \
-              the service \"Manage subsystem parameters\".</li> \
-              </ul> \
-              Some sensors are not capable of reporting lost and/or dead-reckoned tracks. \
-              The sensor may also provide single sensor tracks periodically or on event. \
-              The service ends with success when: \
-              <ul> \
-               <li>if the service does provide registration capabilities: the service \"Register \
-              interest\" has completed successfully for a deregistration request, or</li> \
-               <li>if the service does not  provide registration capabilities: the sensor is \
-              shutdown using service \"Shut down\".</li> \
-              </ul> \
+            @doc("The method represents a single write of a set of sensor tracks to the CMS. The
+              write may be:
+              - periodic or not
+              - include all tracks observed during a sensor scan
+              - be an update of just one track (a set of 1) if this is how the sensor works
+              This service allows the CMS to obtain an overview of (real and/or simulated) air
+              / land / space / surface objects observed or simulated. Information may cover all
+              aspects of a track such as kinematic and amplifying information.
+              The service does not cover:
+              <ul>
+               <li>additional track information provision dedicated for engagement
+              support,</li>
+               <li>special search functions such as cued search, volume search and horizon
+              search (however, if such a search function is initiated by means of another
+              service, the tracks shall be provided by this service),</li>
+              </ul>
+              Although the service focuses on radar as an example of a sensor, the service also
+              applies to other sensors, like IR/EO sensors and ECM/ESM sensors.
+              The actor is the Combat Management System.
+              The service starts when:
+              <ul>
+               <li>if the service does provide registration capabilities: the service \"Register
+              interest\" has completed successfully, or</li>
+               <li>if the service does not provide registration capabilities: the service
+              \"Provide subsystem services\" has completed successfully for this service.</li>
+              </ul>
+              The sensor provides, periodically or on event, a set of sensor tracks observed by
+              the sensor. These may be sensor point or bearing tracks. The set of sensor tracks
+              includes:
+              <ul>
+               <li>Track updates of existing and new sensor tracks. These are provided when
+              there are sufficient measurements (e.g. plots) in the last observation cycle,
+              which may be associated with the sensor track.</li>
+               <li>Dead-reckoned tracks. These are sensor track updates for which in the last
+              observation cycle there are no measurements that may be associated with the
+              sensor track. For dead-reckoned tracks, the sensor track information (e.g.
+              kinematics) is extrapolated. The dead-reckoned tracks may become \"normal\" tracks
+              again if, in the next scan, there are measurement(s) that may be associated with
+              the track. Alternatively, dead-reckoned tracks (after n unsuccessful scans) may
+              become lost tracks.</li>
+               <li>Lost tracks. These are sensor track updates that are reported once, if in
+              the last n scans, there are no measurements that may be associated with the
+              sensor track. The value of n is typically a sensor parameter that is managed by
+              the service \"Manage subsystem parameters\".</li>
+              </ul>
+              Some sensors are not capable of reporting lost and/or dead-reckoned tracks.
+              The sensor may also provide single sensor tracks periodically or on event.
+              The service ends with success when:
+              <ul>
+               <li>if the service does provide registration capabilities: the service \"Register
+              interest\" has completed successfully for a deregistration request, or</li>
+               <li>if the service does not  provide registration capabilities: the sensor is
+              shutdown using service \"Shut down\".</li>
+              </ul>
               A set of sensor tracks (to enable batch reporting)")
             struct sensor_track_set_type
             {
               sensor_track_set_element_type element;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };

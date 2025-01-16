@@ -32,33 +32,33 @@ module org
               {
                 @doc("The unique id from the request")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The subsystem responds to the previous nominal performance request with its \
-                determination of the requested aspect of nominal performance. \
-                This is incremental to <i>Register Interest</i>, which deals with the \
-                subscription to subsystem functions. It provides an indication of the expected \
-                performance of the available subsystem services such as those presented in \
-                Provide Subsystem Services, based upon the current environmental conditions (See \
-                Receive Meteorological Data - METOC). \
-                The subsystem need not be radiating to provide this assessment. This interface is \
-                more targeted towards a subsystem such as the complex MFR than the 2D \
-                surveillance radar. The most basic example of performance would be reporting of \
-                the nominal  coverage, in elevation, azimuth and range, given an assumed \
-                operating regime with no jamming and with default clutter conditions. Other \
-                examples might be that the actor requests the probability of detection for a \
-                specified target type or perhaps the probability of correct automatic \
-                classification of such a target within a specified sector of coverage under \
+              @doc("The subsystem responds to the previous nominal performance request with its
+                determination of the requested aspect of nominal performance.
+                This is incremental to <i>Register Interest</i>, which deals with the
+                subscription to subsystem functions. It provides an indication of the expected
+                performance of the available subsystem services such as those presented in
+                Provide Subsystem Services, based upon the current environmental conditions (See
+                Receive Meteorological Data - METOC).
+                The subsystem need not be radiating to provide this assessment. This interface is
+                more targeted towards a subsystem such as the complex MFR than the 2D
+                surveillance radar. The most basic example of performance would be reporting of
+                the nominal  coverage, in elevation, azimuth and range, given an assumed
+                operating regime with no jamming and with default clutter conditions. Other
+                examples might be that the actor requests the probability of detection for a
+                specified target type or perhaps the probability of correct automatic
+                classification of such a target within a specified sector of coverage under
                 current environmental conditions.")
               struct nominal_performance_response_type
               {
                 @doc("The unique id from the request")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The report on nominal performance")
@@ -68,25 +68,25 @@ module org
               @doc("struct holding keys for class nominal_performance_request_type.")
               struct nominal_performance_request_key_type
               {
-                @doc("The unique id which identifies this request. It is used to mark replies from the \
+                @doc("The unique id which identifies this request. It is used to mark replies from the
                     sensor relating to this request.")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The CMS requests nominal performance of the subsystem in the current \
-                environmental conditions. The aspect of performance requested is a parameter of \
-                the request. \
+              @doc("The CMS requests nominal performance of the subsystem in the current
+                environmental conditions. The aspect of performance requested is a parameter of
+                the request.
                 Subsystem interface for provision of nominal performance assessment.")
               struct nominal_performance_request_type
               {
-                @doc("The unique id which identifies this request. It is used to mark replies from the \
+                @doc("The unique id which identifies this request. It is used to mark replies from the
                     sensor relating to this request.")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The details of the performance request")

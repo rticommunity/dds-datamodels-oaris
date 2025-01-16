@@ -24,29 +24,29 @@ module org
           module Subsystem_Control
           {
 
-            @doc("Contains operations and sequence diagrams for the Manage Technical State \
+            @doc("Contains operations and sequence diagrams for the Manage Technical State
                 interface.")
             module Manage_Technical_State
             {
 
-              @doc("Interface used by CMS to receive periodic technical state reports from the \
-                subsystem. \
-                Manage Technical State causes the subsystem to provide or change its technical \
-                state. \
-                Special Requirements: \
-                Initialization: Upon initialization, reset or power-on, the sub-system shall \
-                transition to a pre-defined state and report the current state to the CMS. \
-                Additional Information: \
-                If a critical component of the subsystem becomes NOT AVAILABLE, the technical \
-                state shall transition to FAILED. \
-                All states may transition to OFFLINE, but the subsystem shall only do so in \
-                emergency situations or catastrophic damage, to indicate an uncontrolled shutdown \
-                <i>Startup</i>, <i>Shutdown</i>, and <i>Restart</i> explain the sequence of \
+              @doc("Interface used by CMS to receive periodic technical state reports from the
+                subsystem.
+                Manage Technical State causes the subsystem to provide or change its technical
+                state.
+                Special Requirements:
+                Initialization: Upon initialization, reset or power-on, the sub-system shall
+                transition to a pre-defined state and report the current state to the CMS.
+                Additional Information:
+                If a critical component of the subsystem becomes NOT AVAILABLE, the technical
+                state shall transition to FAILED.
+                All states may transition to OFFLINE, but the subsystem shall only do so in
+                emergency situations or catastrophic damage, to indicate an uncontrolled shutdown
+                <i>Startup</i>, <i>Shutdown</i>, and <i>Restart</i> explain the sequence of
                 actions for nominal progression through the technical states.")
               struct receive_periodic_technical_state_type
               {
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -55,29 +55,29 @@ module org
               struct receive_technical_state_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Interface used by CMS to receive technical state reports from the subsystem which \
-                were the result of a transition request from the CMS. \
-                Manage Technical State causes the subsystem to provide or change its technical \
-                state. \
-                Special Requirements: \
-                Initialization: Upon initialization, reset or power-on, the sub-system shall \
-                transition to a pre-defined state and report the current state to the CMS. \
-                Additional Information: \
-                If a critical component of the subsystem becomes NOT AVAILABLE, the technical \
-                state shall transition to FAILED. \
-                All states may transition to OFFLINE, but the subsystem shall only do so in \
-                emergency situations or catastrophic damage, to indicate an uncontrolled shutdown \
-                <i>Startup</i>, <i>Shutdown</i>, and <i>Restart</i> explain the sequence of \
+              @doc("Interface used by CMS to receive technical state reports from the subsystem which
+                were the result of a transition request from the CMS.
+                Manage Technical State causes the subsystem to provide or change its technical
+                state.
+                Special Requirements:
+                Initialization: Upon initialization, reset or power-on, the sub-system shall
+                transition to a pre-defined state and report the current state to the CMS.
+                Additional Information:
+                If a critical component of the subsystem becomes NOT AVAILABLE, the technical
+                state shall transition to FAILED.
+                All states may transition to OFFLINE, but the subsystem shall only do so in
+                emergency situations or catastrophic damage, to indicate an uncontrolled shutdown
+                <i>Startup</i>, <i>Shutdown</i>, and <i>Restart</i> explain the sequence of
                 actions for nominal progression through the technical states.")
               struct receive_technical_state_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
@@ -87,17 +87,17 @@ module org
               struct change_technical_state_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Interface used by the subsystem to receive requests from the CMS to change its \
+              @doc("Interface used by the subsystem to receive requests from the CMS to change its
                 technical state.")
               struct change_technical_state_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Subsystem_Domain::Subsystem_Control::technical_state_type technical_state;
@@ -107,17 +107,17 @@ module org
               struct provide_technical_state_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Interface used by the subsystem to receive requests from the CMS to provide its \
+              @doc("Interface used by the subsystem to receive requests from the CMS to provide its
                 current technical state.")
               struct provide_technical_state_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };

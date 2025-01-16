@@ -18,15 +18,15 @@ module org {
           module Plot_Reporting {
 
             module Provide_Sensor_Orientation {
-              @doc("Topic type for operation write_sensor_orientation. The interface to the CMS for \
-                receiving sensor orientation updates. \
-                The sensor provides its orientation in the case that it has movement that \
-                is independent of that for the overall platform. It is provided periodically \
-                with a frequency defined using the manage subsystem parameters use case. \
+              @doc("Topic type for operation write_sensor_orientation. The interface to the CMS for
+                receiving sensor orientation updates.
+                The sensor provides its orientation in the case that it has movement that
+                is independent of that for the overall platform. It is provided periodically
+                with a frequency defined using the manage subsystem parameters use case.
                 Informs the CMS of the orientation of the sensor")
               struct write_sensor_orientation_type
               {
-              	@doc("Field for interface operation parameter orientation. The orientation of the \
+              	@doc("Field for interface operation parameter orientation. The orientation of the
               	    sensor")
               	org::omg::c4i::Domain_Model::Sensor_Domain::Plot_Reporting::sensor_orientation_type orientation;
                 @doc("Indicates which subsystem published the data or is intended to read it as a subscriber")

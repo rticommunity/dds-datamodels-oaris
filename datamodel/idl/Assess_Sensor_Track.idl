@@ -32,22 +32,22 @@ module org
               {
                 @doc("The unique identifier of the request to select the match")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The CMS selects a particular equipment match as being the authoritative \
-                assessment for the sensor track with regard to the equipment it is a detection \
-                of. The Subsystem, thereafter reports the sensor track in accordance with this \
+              @doc("The CMS selects a particular equipment match as being the authoritative
+                assessment for the sensor track with regard to the equipment it is a detection
+                of. The Subsystem, thereafter reports the sensor track in accordance with this
                 assessment.\
-                The interface by which a CMS can control the sensor's assessment of the track \
+                The interface by which a CMS can control the sensor's assessment of the track
                 data.")
               struct select_equipment_assessment_type
               {
                 @doc("The unique identifier of the request to select the match")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The identifier of the match to be selected")
@@ -61,22 +61,22 @@ module org
               {
                 @doc("The unique identifier of the request to select the match")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The CMS selects a particular platform match as being the authoritative assessment \
-                for the sensor track with regard to the platform it is a detection of. The \
-                Subsystem, thereafter reports the sensor track in accordance with this \
-                assessment. \
-                The interface by which a CMS can control the sensor's assessment of the track \
+              @doc("The CMS selects a particular platform match as being the authoritative assessment
+                for the sensor track with regard to the platform it is a detection of. The
+                Subsystem, thereafter reports the sensor track in accordance with this
+                assessment.
+                The interface by which a CMS can control the sensor's assessment of the track
                 data.")
               struct select_platform_assessment_type
               {
                 @doc("The unique identifier of the request to select the match")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The identifier of the match to be selected")
@@ -90,22 +90,22 @@ module org
               {
                 @doc("The unique identifier of the request to select the match")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The CMS selects a particular mode match as being the authoritative assessment for \
-                the sensor track with regard to the equipment mode it is a detection of. The \
-                Subsystem, thereafter reports the sensor track in accordance with this \
-                assessment. \
-                The interface by which a CMS can control the sensor's assessment of the track \
+              @doc("The CMS selects a particular mode match as being the authoritative assessment for
+                the sensor track with regard to the equipment mode it is a detection of. The
+                Subsystem, thereafter reports the sensor track in accordance with this
+                assessment.
+                The interface by which a CMS can control the sensor's assessment of the track
                 data.")
               struct select_mode_assessment_type
               {
                 @doc("The unique identifier of the request to select the match")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The identifier of the match to be selected")
@@ -119,22 +119,22 @@ module org
               {
                 @doc("The unique identifier of the request to deselect matches")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The CMS deselects equipment match as being the authoritative assessment for the \
-                sensor track with regard to the equipment it is a detection of. The Subsystem, \
-                stops reporting the sensor track in accordance with the previously selected \
-                assessment. \
-                The interface by which a CMS can control the sensor's assessment of the track \
+              @doc("The CMS deselects equipment match as being the authoritative assessment for the
+                sensor track with regard to the equipment it is a detection of. The Subsystem,
+                stops reporting the sensor track in accordance with the previously selected
+                assessment.
+                The interface by which a CMS can control the sensor's assessment of the track
                 data.")
               struct deselect_equipment_assessment_type
               {
                 @doc("The unique identifier of the request to deselect matches")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The sensor track to which the assessment applies")
@@ -146,22 +146,22 @@ module org
               {
                 @doc("The unique identifier of the request to deselect matches")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The CMS deselects platform match as being the authoritative assessment for the \
-                sensor track with regard to the platform it is a detection of. The Subsystem, \
-                stops reporting the sensor track in accordance with the previously selected \
-                assessment. \
-                The interface by which a CMS can control the sensor's assessment of the track \
+              @doc("The CMS deselects platform match as being the authoritative assessment for the
+                sensor track with regard to the platform it is a detection of. The Subsystem,
+                stops reporting the sensor track in accordance with the previously selected
+                assessment.
+                The interface by which a CMS can control the sensor's assessment of the track
                 data.")
               struct deselect_platform_assessment_type
               {
                 @doc("The unique identifier of the request to deselect matches")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The sensor track to which the assessment applies")
@@ -173,21 +173,21 @@ module org
               {
                 @doc("The unique identifier of the request to deselect matches")
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The CMS deselects mode match as being the authoritative assessment for the sensor \
-                track with regard to the equipment it is a detection of. The Subsystem, stops \
-                reporting the sensor track in accordance with the previously selected assessment. \
-                The interface by which a CMS can control the sensor's assessment of the track \
+              @doc("The CMS deselects mode match as being the authoritative assessment for the sensor
+                track with regard to the equipment it is a detection of. The Subsystem, stops
+                reporting the sensor track in accordance with the previously selected assessment.
+                The interface by which a CMS can control the sensor's assessment of the track
                 data.")
               struct deselect_mode_assessment_type
               {
                 @doc("The unique identifier of the request to deselect matches")
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The sensor track to which the assessment applies")

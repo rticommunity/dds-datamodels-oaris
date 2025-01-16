@@ -32,54 +32,54 @@ module org
               struct tracking_zone_setting_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Method used by the CMS to send an enable/disable tracking zone request to the \
-                sensor. \
-                This controls the sensor tracking behaviour in selected zones, which may be 1D \
-                (delimited in azimuth only), 2D (have additional elevation bounds) or 3D (have \
-                further range bounds). Depending on the zone type the sensor may be requested to \
-                modify its normal tracking behaviour, such as enable/disable the capability to \
-                auto initiate new tracks, or the capability of managing Track-On-Jammer. A list \
-                of typical tracking zones is \
-                <ul> \
-                    <li>Automatic Track Initiation Zones</li> \
-                </ul> \
-                zones where the sensor is allowed to auto initiate new tracks. Depending on the \
-                sensor type and its capabilities, such a type of zones may be delimited in \
-                azimuth only, or both in azimuth and elevation, or may have further range bounds, \
-                and in some cases also additional constraints (such as target type, velocity \
-                bounds, etc.). \
-                • Track-On-Jammer Sectors \
-                sectors where the sensor is allowed to manage Track-On-Jammer. Depending on the \
-                sensor type and its capabilities, such a type of sectors may be delimited either \
-                in azimuth only or both in azimuth and elevation. \
-                • Multipath Devoted Tracking Sectors \
-                sectors where the sensor is required to use, for tracking activities, devoted \
-                waveforms to reduce the multipath effects. This capability is usually provided by \
-                multifunctional radars. Such a type of sectors is usually limited in azimuth \
-                only, below a defined elevation. \
-                The supported tracking zone types (names and characteristics) differ from sensor \
-                to sensor, so they shall be handled as configuration parameters. They shall be \
-                offered to the operator to enable him for a selection and then transferred to the \
-                sensor to achieve the intended response. \
-                Special Requirements \
-                Provision of the sensor tracking zones setting \
-                Sensor shall keep CMS informed about the actual setting of the tracking zones and \
-                its changes (if any). \
-                It is the CMS's responsibility to initiate the determination of initial state by \
-                making a request for information to the subsystem. \
-                Additional Information \
-                Lack of mastership \
-                In the case where CMS does not have mastership of the sensor, CMS shall be \
+              @doc("Method used by the CMS to send an enable/disable tracking zone request to the
+                sensor.
+                This controls the sensor tracking behaviour in selected zones, which may be 1D
+                (delimited in azimuth only), 2D (have additional elevation bounds) or 3D (have
+                further range bounds). Depending on the zone type the sensor may be requested to
+                modify its normal tracking behaviour, such as enable/disable the capability to
+                auto initiate new tracks, or the capability of managing Track-On-Jammer. A list
+                of typical tracking zones is
+                <ul>
+                    <li>Automatic Track Initiation Zones</li>
+                </ul>
+                zones where the sensor is allowed to auto initiate new tracks. Depending on the
+                sensor type and its capabilities, such a type of zones may be delimited in
+                azimuth only, or both in azimuth and elevation, or may have further range bounds,
+                and in some cases also additional constraints (such as target type, velocity
+                bounds, etc.).
+                • Track-On-Jammer Sectors
+                sectors where the sensor is allowed to manage Track-On-Jammer. Depending on the
+                sensor type and its capabilities, such a type of sectors may be delimited either
+                in azimuth only or both in azimuth and elevation.
+                • Multipath Devoted Tracking Sectors
+                sectors where the sensor is required to use, for tracking activities, devoted
+                waveforms to reduce the multipath effects. This capability is usually provided by
+                multifunctional radars. Such a type of sectors is usually limited in azimuth
+                only, below a defined elevation.
+                The supported tracking zone types (names and characteristics) differ from sensor
+                to sensor, so they shall be handled as configuration parameters. They shall be
+                offered to the operator to enable him for a selection and then transferred to the
+                sensor to achieve the intended response.
+                Special Requirements
+                Provision of the sensor tracking zones setting
+                Sensor shall keep CMS informed about the actual setting of the tracking zones and
+                its changes (if any).
+                It is the CMS's responsibility to initiate the determination of initial state by
+                making a request for information to the subsystem.
+                Additional Information
+                Lack of mastership
+                In the case where CMS does not have mastership of the sensor, CMS shall be
                 informed about the actual setting of the tracking zones and its changes (if any).")
               struct tracking_zone_setting_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Tracking_Control::tracking_zone_set_type setting_message;
@@ -89,18 +89,18 @@ module org
               struct set_tracking_zone_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Method used by the sensor to return the actual setting of the tracking zones \
-                modified according to the request. \
+              @doc("Method used by the sensor to return the actual setting of the tracking zones
+                modified according to the request.
                 This is the Subsystem interface for managing tracking zones.")
               struct set_tracking_zone_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Tracking_Control::tracking_zone_set_type zone;

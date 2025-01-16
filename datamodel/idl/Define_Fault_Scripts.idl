@@ -31,21 +31,21 @@ module org
               struct fault_script_summary_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("This provides a list of all fault scripts for a subsystem to the CMS for \
-                confirmation. \
-                This enables a maintainer trainer to script a set of subsystem faults, the \
-                effects of which would be simulated for training purposes. The faults may be \
-                scripted in relation to a specific simulation scenario. Each fault script shall \
+              @doc("This provides a list of all fault scripts for a subsystem to the CMS for
+                confirmation.
+                This enables a maintainer trainer to script a set of subsystem faults, the
+                effects of which would be simulated for training purposes. The faults may be
+                scripted in relation to a specific simulation scenario. Each fault script shall
                 include a unique identifier.")
               struct fault_script_summary_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The list of fault scripts")
@@ -56,7 +56,7 @@ module org
               struct add_fault_scripts_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -65,7 +65,7 @@ module org
               struct add_fault_scripts_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The fault scripts to be added")
@@ -76,7 +76,7 @@ module org
               struct remove_fault_scripts_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -85,7 +85,7 @@ module org
               struct remove_fault_scripts_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 @doc("The ids of the fault scripts to be removed")

@@ -20,13 +20,13 @@ module org
         module Sensor_Domain
         {
 
-          @doc("This package provides a data model to describe supplementary parameters that a \
-            sensor can provide about a sensor track. The approach is to be agnostic to any \
-            specific type of measurement that a sensor may make. Rather, classes are provided \
-            that allow the sensor to describe the parameters that it supports and then to \
-            describe the measurements that it has made of those parameters. Measurement can \
-            be treated as a single instance, a continuous range or a discrete set; the \
-            quantity can be scalar, vector, discrete or qualitative; and confidence values \
+          @doc("This package provides a data model to describe supplementary parameters that a
+            sensor can provide about a sensor track. The approach is to be agnostic to any
+            specific type of measurement that a sensor may make. Rather, classes are provided
+            that allow the sensor to describe the parameters that it supports and then to
+            describe the measurements that it has made of those parameters. Measurement can
+            be treated as a single instance, a continuous range or a discrete set; the
+            quantity can be scalar, vector, discrete or qualitative; and confidence values
             can be supplied where appropriate as can accuracy estimates.")
           module Supplementary_Measurement
           {
@@ -47,34 +47,34 @@ module org
             @doc("The ordering semantics of a set of measurements of a parameter.")
             enum discrete_order_type
             {
-              @doc("The measurements are ordered by increasing value such that the smallest value is \
+              @doc("The measurements are ordered by increasing value such that the smallest value is
                 first and the largest value is last.")
               ORDER_INCREASING_BY_VALUE,
-              @doc("The measurements are ordered by decreasing value such that the smallest value is \
+              @doc("The measurements are ordered by decreasing value such that the smallest value is
                 last and the largest value is first.")
               ORDER_DECREASING_BY_VALUE,
-              @doc("The measurements are ordered by age such that the value received first is first \
+              @doc("The measurements are ordered by age such that the value received first is first
                 and the latest value is last.")
               ORDER_OLDEST_FIRST,
-              @doc("The measurements are ordered by age such that the value received first is last \
+              @doc("The measurements are ordered by age such that the value received first is last
                 and the latest value is first.")
               ORDER_MOST_RECENT_FIRST,
               @doc("The ordering is not specified as it is not semantically meaningful.")
               ORDER_NOT_SPECIFIED
             };
 
-            @doc("A string type \
+            @doc("A string type
                 The name of a sensor defined probability density function.")
             typedef string<20> distribution_parameter_name_type;
 
             @doc("The unique identifier for describing kinds of measurements")
             typedef long measurement_kind_id_type;
 
-            @doc("A string type \
+            @doc("A string type
                 The name or label for a kind of measurement")
             typedef string<20> measurement_name_type;
 
-            @doc("A string type \
+            @doc("A string type
                 Names of sets of parameters for sensor tracks")
             typedef string<32> measurement_parameter_set_name_type;
 
@@ -87,7 +87,7 @@ module org
               MISSING,
               @doc("The parameter can no longer be measured for this sensor track")
               NOT_PRESENT,
-              @doc("No statement is available regarding the parameter's measurement status for this \
+              @doc("No statement is available regarding the parameter's measurement status for this
                 sensor track")
               NO_PARAMETER_STATUS
             };
@@ -117,13 +117,13 @@ module org
               RADIANS_PER_SECOND,
               @doc("Units are in seconds to measure time or intervals.")
               SECOND,
-              @doc("Units are in seconds per second to measure the change in regular intervals over \
+              @doc("Units are in seconds per second to measure the change in regular intervals over
                 time.")
               SECONDS_PER_SECOND
             };
 
-            @doc("A qualitative description of change in a parameter measurement value over time \
-              within a distribution. The characteristic quantitative values of the variation \
+            @doc("A qualitative description of change in a parameter measurement value over time
+              within a distribution. The characteristic quantitative values of the variation
               pattern can be represented by other related measurement parameters.")
             enum measurement_variation_kind_type
             {
@@ -131,7 +131,7 @@ module org
               DECREASING,
               @doc("The value is decreasing monotonically towards an asymptotic minimum value")
               DECREASING_ASYMPTOTICALLY,
-              @doc("The value decreases monotonically until it reaches a minimum value at which point \
+              @doc("The value decreases monotonically until it reaches a minimum value at which point
                 it wraps or resets to a maximum value.")
               DECREASING_WITH_WRAP,
               @doc("The drift behavior is not specified")
@@ -140,17 +140,17 @@ module org
               INCREASING,
               @doc("The is increasing monotonically towards a maximum asymptotic value.")
               INCREASING_ASYMPTOTICALLY,
-              @doc("The value increases monotonically until it reaches a maximum value at which point \
+              @doc("The value increases monotonically until it reaches a maximum value at which point
                 it wraps or resets to a minimum value.")
               INCREASING_WITH_WRAP,
-              @doc("The value alternately increases monotonically until it reaches a maximum value \
+              @doc("The value alternately increases monotonically until it reaches a maximum value
                 and decreases monotonically until it reaches a minimum value.")
               LINEAR_ALTERNATING,
               @doc("The change in value over time is considered to be random")
               RANDOM_VARIATION,
               @doc("The value of the measurement parameter value is sinusoidal over time.")
               SINE_WAVE_VARIATION,
-              @doc("The value of the measurement parameter alternates discontinuously between minimum \
+              @doc("The value of the measurement parameter alternates discontinuously between minimum
                 and maximum values over time.")
               SQUARE_WAVE_VARIATION,
               @doc("The drift pattern is unknown to (not recognized by) the sensor.")
@@ -182,7 +182,7 @@ module org
               SENSOR_DEFINED_PDF_MEASUREMENT_KIND
             };
 
-            @doc("A string type \
+            @doc("A string type
               The name of a sensor defined probability density function.")
             typedef string<20> pdf_name_type;
 
@@ -191,7 +191,7 @@ module org
             {
               @doc("The unique identifier for this kind of parameter.")
               measurement_kind_id_type id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -205,7 +205,7 @@ module org
               double max_value;
             };
 
-            @doc("A string type \
+            @doc("A string type
               To name a sequence")
             typedef string<32> sequence_name_type;
 
@@ -227,7 +227,7 @@ module org
             {
               @doc("The sensor track to which the measurement parameter relates.")
               long sensor_track_id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -243,7 +243,7 @@ module org
             {
               @doc("The name of the set of parameters")
               measurement_parameter_set_name_type name;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -254,20 +254,20 @@ module org
               @doc("The name of the set of parameters")
               measurement_parameter_set_name_type name;
               long sensor_track_id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("A kind of parameter supported by the sensor \
-              The configuration of measurement parameters allows integrated systems to specify \
-              the set of measurement types for which the installed equipment has a measurement \
-              capability and semantics associated with these measurement types. \
-              Measurement types have the potential to be classified and also the set of \
-              measurement types can be expected to grow as technology advances. Therefore the \
-              meaning of the associated identifiers are systems specific and determined from \
-              configuration data. \
-              Describes a kind of measurement parameters in terms of its meta-data (the \
+            @doc("A kind of parameter supported by the sensor
+              The configuration of measurement parameters allows integrated systems to specify
+              the set of measurement types for which the installed equipment has a measurement
+              capability and semantics associated with these measurement types.
+              Measurement types have the potential to be classified and also the set of
+              measurement types can be expected to grow as technology advances. Therefore the
+              meaning of the associated identifiers are systems specific and determined from
+              configuration data.
+              Describes a kind of measurement parameters in terms of its meta-data (the
               information that applies to all measurement_parameter_type instances)")
             struct measurement_parameter_kind_type
             {
@@ -277,7 +277,7 @@ module org
               @key measurement_kind_id_type id;
               @doc("The units of the measurement.")
               measurement_unit_type units;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -285,8 +285,8 @@ module org
             @doc("Struct of base attributes defined for class single_measurement_type.")
             struct single_measurement_base_type
             {
-              @doc("The confidence in the parameter measurement value; this is the probability that \
-                the value and accuracy represent the true distribution of the physical effect \
+              @doc("The confidence in the parameter measurement value; this is the probability that
+                the value and accuracy represent the true distribution of the physical effect
                 they are labelled as measuring in the real world.")
               @optional org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
             };
@@ -325,16 +325,16 @@ module org
             {
               @doc("Base attribute containing attributes from generalisation single_measurement_type")
               single_measurement_base_type base;
-              @doc("The covariance between the elements of the vector value in a 1-dimensional \
-                representation of the triangular matrix. The i,j element (i &gt;= j) of a \
-                covariance matrix for a vector of size N is at position sum(k=0..j-1, N - k) + (i \
+              @doc("The covariance between the elements of the vector value in a 1-dimensional
+                representation of the triangular matrix. The i,j element (i &gt;= j) of a
+                covariance matrix for a vector of size N is at position sum(k=0..j-1, N - k) + (i
                 - j). The covariance is zero length if not specified.")
               vector_measurement_covariance_type covariance;
               @doc("The vector values")
               vector_measurement_value_type value;
             };
 
-            @doc("The representation of parameter measurement values that are distributed within a \
+            @doc("The representation of parameter measurement values that are distributed within a
               bounded interval")
             struct modulation_type
             {
@@ -348,7 +348,7 @@ module org
               @optional scalar_measurement_type modulation_frequency;
             };
 
-            @doc("Union of the specialisations for class single_measurement_type. \
+            @doc("Union of the specialisations for class single_measurement_type.
               A single discrete representation of a parameter measurement value.")
             union single_measurement_type switch (single_measurement_kind_type)
             {
@@ -362,7 +362,7 @@ module org
               case VECTOR_MEASUREMENT_KIND : vector_measurement_type vector_measurement;
             };
 
-            @doc("The measurement estimation of a (sensor defined) parameter describing a \
+            @doc("The measurement estimation of a (sensor defined) parameter describing a
               measurement parameter's distribution")
             struct distribution_parameter_measurement_type
             {
@@ -375,10 +375,10 @@ module org
             @doc("The representation of an element within a discrete distribution")
             struct measurement_element_type
             {
-              @doc("The number of times the parameter measured has corresponded to this element in a \
+              @doc("The number of times the parameter measured has corresponded to this element in a
                 row. That is since another element was measured.")
               @optional short count;
-              @doc("The total number of times this element has been measured with the discrete \
+              @doc("The total number of times this element has been measured with the discrete
                 distribution for this parameter value for the sensor track.")
               @optional long total_count;
               @doc("The measurement of the element within the discrete distribution.")
@@ -395,14 +395,14 @@ module org
               @optional boolean repeating;
               @doc("The semantics of the ordering of the elements of the discrete distribution")
               discrete_order_type order;
-              @doc("Whether the elements within the discrete distribution correspond to a known set \
+              @doc("Whether the elements within the discrete distribution correspond to a known set
                 of measurement values")
               @optional boolean known_set;
               @doc("A discrete element within the discrete distribution")
               discrete_set_measurement_element_type element;
             };
 
-            @doc("Describes how a measurement varies with time (on a time-scale longer than that \
+            @doc("Describes how a measurement varies with time (on a time-scale longer than that
               described by modulation measurements).")
             struct measurement_drift_type
             {
@@ -410,18 +410,18 @@ module org
               measurement_variation_kind_type kind;
               @doc("The sensor's confidence in identifying the kind of drift.")
               @optional org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
-              @doc("Sample size independent measure of the closeness by which the measurement sample \
+              @doc("Sample size independent measure of the closeness by which the measurement sample
                 fit the model of the identified kind of drift.")
               @optional double fit;
               @doc("The time for the drift behavior to repeat itself.")
               @optional scalar_measurement_type repetition_period;
-              @doc("The maximum rate of change of the measurement detected (in the units of the \
+              @doc("The maximum rate of change of the measurement detected (in the units of the
                 measurement's kind per second).")
               @optional scalar_measurement_type max_rate;
-              @doc("The mean rate of change of the measurement detected (in the units of the \
+              @doc("The mean rate of change of the measurement detected (in the units of the
                 measurement's kind per second).")
               scalar_measurement_type mean_rate;
-              @doc("The minimum rate of change of the measurement detected (in the units of the \
+              @doc("The minimum rate of change of the measurement detected (in the units of the
                 measurement's kind per second).")
               @optional scalar_measurement_type min_rate;
             };
@@ -449,16 +449,16 @@ module org
               pdf_measurement_base_type base;
             };
 
-            @doc("The representation of parameter measurement values that are distributed within a \
+            @doc("The representation of parameter measurement values that are distributed within a
               bounded interval")
             struct measurement_interval_type
             {
               @doc("The measurement values are uniformly distributed within the bounded interval")
               boolean uniform;
-              @doc("The lower bound of the parameter measurements, which may be extrapolated from \
+              @doc("The lower bound of the parameter measurements, which may be extrapolated from
                 actual sample measurements received or processed.")
               scalar_measurement_type min_value;
-              @doc("The upper bound of the parameter measurements, which may be extrapolated from \
+              @doc("The upper bound of the parameter measurements, which may be extrapolated from
                 actual sample measurements received or processed.")
               scalar_measurement_type max_value;
               @doc("A qualitative description of how the parameter measurement changes over time")
@@ -469,7 +469,7 @@ module org
               scalar_measurement_type mean_value;
             };
 
-            @doc("The representation of a measurement of generalised probability density function \
+            @doc("The representation of a measurement of generalised probability density function
               whose definition can be instantiated by a sensor for extensibility.")
             struct sensor_defined_pdf_measurement_type
             {
@@ -477,13 +477,13 @@ module org
               pdf_measurement_base_type base;
               @doc("The name of the probability density function")
               pdf_name_type name;
-              @doc("The list of additional parameters required to describe the sensor defined \
+              @doc("The list of additional parameters required to describe the sensor defined
                 probability density function")
               distribution_parameter_measurement_type parameter;
             };
 
-            @doc("Union of the specialisations for class pdf_measurement_type. \
-              The values of the parameter measurement are distributed according to a \
+            @doc("Union of the specialisations for class pdf_measurement_type.
+              The values of the parameter measurement are distributed according to a
               probability density function.")
             union pdf_measurement_type switch (pdf_measurement_kind_type)
             {
@@ -495,11 +495,11 @@ module org
               case SENSOR_DEFINED_PDF_MEASUREMENT_KIND : sensor_defined_pdf_measurement_type sensor_defined_pdf_measurement;
             };
 
-            @doc("The distribution of one mode independently contributing to a multi-modal \
+            @doc("The distribution of one mode independently contributing to a multi-modal
               distribution.")
             struct distribution_mode_type
             {
-              @doc("The proportion that this mode contributes to the overall distribution. The sum of \
+              @doc("The proportion that this mode contributes to the overall distribution. The sum of
                 all the modes equals 1.")
               float proportion;
               @doc("The distribution for this mode.")
@@ -509,7 +509,7 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<distribution_mode_type> multi_modal_measurement_mode_type;
 
-            @doc("The representation of parameter measurement values that have a multi-modal \
+            @doc("The representation of parameter measurement values that have a multi-modal
               distribution")
             struct multi_modal_measurement_type
             {
@@ -517,7 +517,7 @@ module org
               multi_modal_measurement_mode_type mode;
             };
 
-            @doc("Union of the specialisations for class continuous_measurement_type. \
+            @doc("Union of the specialisations for class continuous_measurement_type.
               A continuous representation of a parameter measurement value.")
             union continuous_measurement_type switch (continuous_measurement_kind_type)
             {
@@ -531,7 +531,7 @@ module org
               case PDF_MEASUREMENT_KIND : pdf_measurement_type pdf_measurement;
             };
 
-            @doc("Union of the specialisations for class parameter_distribution_type. \
+            @doc("Union of the specialisations for class parameter_distribution_type.
               A representation of the statistical distribution of a parameter.")
             union parameter_distribution_type switch (parameter_distribution_kind_type)
             {
@@ -546,24 +546,24 @@ module org
             @doc("A measurement of a parameter by a sensor for a sensor track.")
             struct measurement_parameter_type
             {
-              @doc("The probability that the measurement corresponds to measure labelled for the \
+              @doc("The probability that the measurement corresponds to measure labelled for the
                 sensor track.")
               @optional org::omg::c4i::Domain_Model::Common_Types::confidence_type confidence;
-              @doc("Indicates that the phenomenon being measured is in an enduring steady state and \
-                hence that complementary/orthogonal measurements of more detailed time-varying \
+              @doc("Indicates that the phenomenon being measured is in an enduring steady state and
+                hence that complementary/orthogonal measurements of more detailed time-varying
                 characteristics/phenomena are not present for this track.")
               @optional boolean continuous;
-              @doc("The number of coherent discrete measurements of this quantity.If the sensor \
+              @doc("The number of coherent discrete measurements of this quantity.If the sensor
                 detects a qualitative change then the count is reset.")
               @optional long count;
               @doc("The measurement status of the parameter")
               measurement_parameter_status_type status;
               @doc("The time at which the parameter was measured")
               org::omg::c4i::Domain_Model::Common_Types::time_type time_of_information;
-              @doc("Whether or not the phenomenon being measured by this parameter is considered to \
+              @doc("Whether or not the phenomenon being measured by this parameter is considered to
                 be design feature of the equipment causing the phenomenon.")
               @optional boolean intentional;
-              @doc("The description of the parameter and the unique identifier (within the scope of a \
+              @doc("The description of the parameter and the unique identifier (within the scope of a
                 sensor track) of a measurement parameter instance.")
               @key long kind_id;
               @doc("The range in which samples contributing to the measurement have occurred.")
@@ -572,15 +572,15 @@ module org
               @optional parameter_distribution_type distribution;
             };
 
-            @doc("The sensor's measurement of a parameter \
-              For the sensor to report on the measurement of an individual parameter defined by \
-              configuration data. \
-              Interface for a sensor to provide its supplementary parametric data with respect \
-              to tracks to the CMS. A sensor can pass measurements to the CMS individually or \
-              as a set (relating to the same track). \
-              Sensors report a track to the CMS using the Track Reporting use case before \
-              reporting any of its supplementary measurements. Supplementary measurements are \
-              only reported for tracks whilst the sensor track is in the TRACKED track state. \
+            @doc("The sensor's measurement of a parameter
+              For the sensor to report on the measurement of an individual parameter defined by
+              configuration data.
+              Interface for a sensor to provide its supplementary parametric data with respect
+              to tracks to the CMS. A sensor can pass measurements to the CMS individually or
+              as a set (relating to the same track).
+              Sensors report a track to the CMS using the Track Reporting use case before
+              reporting any of its supplementary measurements. Supplementary measurements are
+              only reported for tracks whilst the sensor track is in the TRACKED track state.
               To represent parameter measurements for a sensor track reported individually")
             struct track_measurement_parameter_type
             {
@@ -588,7 +588,7 @@ module org
               @key long sensor_track_id;
               @doc("The individual parameter")
               measurement_parameter_type parameter;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -599,18 +599,18 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<measurement_parameter_type, 50> track_measurement_parameter_set_parameter_type;
 
-            @doc("The sensor's measurement of a set of parameters \
-              For the sensor to report on the measurement of a set of parameters with a plot \
-              defined by configuration data. \
-              Interface for a sensor to provide its supplementary parametric data with respect \
-              to plots to the CMS. A sensor can pass a set of measurements with plot data when \
-              reporting to the CMS. \
-              A set of the measurement parameters relating to a sensor track. Subsystems form \
-              measurement parameters into sets for efficient information transfer to the CMS. A \
-              subsystem may chose the number and composition of these sets. A subsystem may \
-              place all measurements into a single set per track, create multiple sets or \
-              create no sets and report measurement parameters individually instead. \
-              For a particular sensor track, measurement parameter names shall be unique across \
+            @doc("The sensor's measurement of a set of parameters
+              For the sensor to report on the measurement of a set of parameters with a plot
+              defined by configuration data.
+              Interface for a sensor to provide its supplementary parametric data with respect
+              to plots to the CMS. A sensor can pass a set of measurements with plot data when
+              reporting to the CMS.
+              A set of the measurement parameters relating to a sensor track. Subsystems form
+              measurement parameters into sets for efficient information transfer to the CMS. A
+              subsystem may chose the number and composition of these sets. A subsystem may
+              place all measurements into a single set per track, create multiple sets or
+              create no sets and report measurement parameters individually instead.
+              For a particular sensor track, measurement parameter names shall be unique across
               all measurement parameter set instances - i.e. sets shall be non-overlapping.")
             struct plot_measurement_parameter_set_type
             {
@@ -620,26 +620,26 @@ module org
               org::omg::c4i::Domain_Model::Sensor_Domain::Plot_Reporting::sensor_plot_type plot;
               @doc("The set of measurement parameters associated with the plot")
               plot_measurement_parameter_set_parameter_type parameter;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("The sensor's measurement of a set of parameters \
-              For the sensor to report on the measurement of a set of parameters for a track \
-              defined by configuration data. \
-              Interface for a sensor to provide its supplementary parametric data with respect \
-              to tracks to the CMS. A sensor can pass measurements to the CMS individually or \
-              as a set (relating to the same track). \
-              Sensors report a track to the CMS using the Track Reporting use case before \
-              reporting any of its supplementary measurements. Supplementary measurements are \
-              only reported for tracks whilst the sensor track is in the TRACKED track state. \
-              A set of the measurement parameters relating to a sensor track. Subsystems form \
-              measurement parameters into sets for efficient information transfer to the CMS. A \
-              subsystem may chose the number and composition of these sets. A subsystem may \
-              place all measurements into a single set per track, create multiple sets or \
-              create no sets and report measurement parameters individually instead. \
-              For a particular sensor track, measurement parameter names shall be unique across \
+            @doc("The sensor's measurement of a set of parameters
+              For the sensor to report on the measurement of a set of parameters for a track
+              defined by configuration data.
+              Interface for a sensor to provide its supplementary parametric data with respect
+              to tracks to the CMS. A sensor can pass measurements to the CMS individually or
+              as a set (relating to the same track).
+              Sensors report a track to the CMS using the Track Reporting use case before
+              reporting any of its supplementary measurements. Supplementary measurements are
+              only reported for tracks whilst the sensor track is in the TRACKED track state.
+              A set of the measurement parameters relating to a sensor track. Subsystems form
+              measurement parameters into sets for efficient information transfer to the CMS. A
+              subsystem may chose the number and composition of these sets. A subsystem may
+              place all measurements into a single set per track, create multiple sets or
+              create no sets and report measurement parameters individually instead.
+              For a particular sensor track, measurement parameter names shall be unique across
               all measurement parameter set instances - i.e. sets shall be non-overlapping.")
             struct track_measurement_parameter_set_type
             {
@@ -648,7 +648,7 @@ module org
               @key long sensor_track_id;
               @doc("The parameter measurement for the element")
               track_measurement_parameter_set_parameter_type parameter;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };

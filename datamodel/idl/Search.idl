@@ -25,21 +25,21 @@ module org
           module Search
           {
 
-            @doc("The types of search pattern that can be employed for search and surveillance \
+            @doc("The types of search pattern that can be employed for search and surveillance
                 tasks")
             enum search_pattern_type
             {
-              @doc("Coverage by alternating traversal of the area length-wise. Valid for rectangular \
+              @doc("Coverage by alternating traversal of the area length-wise. Valid for rectangular
                 areas.")
               LAWNMOWER_BY_LENGTH,
-              @doc("Coverage by alternating traversal of the area width-wise. Valid for rectangular \
+              @doc("Coverage by alternating traversal of the area width-wise. Valid for rectangular
                 areas.")
               LAWNMOWER_BY_WIDTH,
-              @doc("Coverage by traversing the perimeter and then progressively smaller traversals of \
+              @doc("Coverage by traversing the perimeter and then progressively smaller traversals of
                 the interior towards the center.")
               SPIRAL_IN,
-              @doc("Coverage by starting at the center and traversing through the interior on a path \
-                that is (approximately) tangential to the center and parallel to the perimeter \
+              @doc("Coverage by starting at the center and traversing through the interior on a path
+                that is (approximately) tangential to the center and parallel to the perimeter
                 until the perimeter has been traversed.")
               SPIRAL_OUT,
               @doc("Search by sensing subsets of the area selected at random.")
@@ -72,11 +72,11 @@ module org
             {
               @doc("The range of track-speed to search for from the cue.")
               @optional org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::speed_interval_type speed_interval;
-              @doc("The region in the environment, in which the cue to search for tracks is to be \
+              @doc("The region in the environment, in which the cue to search for tracks is to be
                 performed.")
               org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type volume;
-              @doc("The orientation of the polar coordinates used in this class. Note that the origin \
-                is always the sensor reference point and that the coordinate system is always \
+              @doc("The orientation of the polar coordinates used in this class. Note that the origin
+                is always the sensor reference point and that the coordinate system is always
                 polar.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type coordinate_orientation;
             };
@@ -101,14 +101,14 @@ module org
               search_repeat_type repeat;
             };
 
-            @doc("The parameters with which to task a sensor to concentrate its surveillance \
+            @doc("The parameters with which to task a sensor to concentrate its surveillance
                 efforts within a spatial and / or frequency band.")
             struct surveillance_search_type
             {
               @doc("The region of surveillance in the environment to be searched for tracks.")
               org::omg::c4i::Domain_Model::Common_Types::Shape_Model::general_polar_volume_type volume;
-              @doc("The orientation of the polar coordinates used in this class. Note that the origin \
-                is always the sensor reference point and that the coordinate system is always \
+              @doc("The orientation of the polar coordinates used in this class. Note that the origin
+                is always the sensor reference point and that the coordinate system is always
                 polar.")
               org::omg::c4i::Domain_Model::Common_Types::Coordinates_and_Positions::coordinate_orientation_type coordinate_orientation;
               @doc("The frequency band to be searched.")
@@ -118,12 +118,12 @@ module org
             @doc("A sequence type, to represent multiple values.")
             typedef sequence<surveillance_area_type, 20> surveillance_task_area_type;
 
-            @doc("The information for a CMS request to the subsystem (as appropriate to be a \
+            @doc("The information for a CMS request to the subsystem (as appropriate to be a
                 directional sensor that can be steered) to undertake a surveillance task.")
             struct surveillance_task_type
             {
-              @doc("The system tracks to keep under surveillance. The information regarding the \
-                system tracks is published using another interface standard, such as the TACSIT \
+              @doc("The system tracks to keep under surveillance. The information regarding the
+                system tracks is published using another interface standard, such as the TACSIT
                 Data Exchange specification (TEX), the choice of which may be system specific.")
               surveillance_task_system_track_type system_track;
               surveillance_task_area_type area;

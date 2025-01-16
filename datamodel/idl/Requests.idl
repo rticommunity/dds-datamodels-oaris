@@ -19,32 +19,32 @@ module org
         module Common_Types
         {
 
-          @doc("This package contains common operations and associated parameters which are used \
-            by multiple interfaces. This includes the operation to acknowledge a CMS request \
-            as accepted or denied, as well as an operation to report errors while processing \
+          @doc("This package contains common operations and associated parameters which are used
+            by multiple interfaces. This includes the operation to acknowledge a CMS request
+            as accepted or denied, as well as an operation to report errors while processing
             an accepted CMS request.")
           module Requests
           {
 
-            @doc("A string type \
-                String which indicates rationale for rejection of the request. Is not valid when \
+            @doc("A string type
+                String which indicates rationale for rejection of the request. Is not valid when
                 the request has been accepted.")
             typedef string<40> denial_reason_type;
 
-            @doc("A string type \
-                A string which gives an indication of the error associated with processing of the \
+            @doc("A string type
+                A string which gives an indication of the error associated with processing of the
                 request.")
             typedef string<40> error_reason_type;
 
-            @doc("A string type \
-                A string which refers to a parameter in a request using an implementation \
+            @doc("A string type
+                A string which refers to a parameter in a request using an implementation
                 specific notation.")
             typedef string<64> parameter_reference_type;
 
-            @doc("The purpose of the request_id is to uniquely relate responses of the subsystem \
-                (server) to requests of the CMS (client). The request_id is set by the client. It \
-                is the responsibility of the client to specify a system-wide unique request_id \
-                (e.g. based on a combination of client id and a sequence number / time of \
+            @doc("The purpose of the request_id is to uniquely relate responses of the subsystem
+                (server) to requests of the CMS (client). The request_id is set by the client. It
+                is the responsibility of the client to specify a system-wide unique request_id
+                (e.g. based on a combination of client id and a sequence number / time of
                 request).")
             typedef unsigned long request_id_type;
 
@@ -52,7 +52,7 @@ module org
             struct receive_acknowledgement_key_type
             {
               request_id_type request_id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
@@ -64,37 +64,37 @@ module org
             struct receive_error_key_type
             {
               request_id_type request_id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("Struct used within the receive_acknowledgement operation to provide information \
+            @doc("Struct used within the receive_acknowledgement operation to provide information
                 on (one of the reasons) why a request has been rejected.")
             struct denial_type
             {
               @doc("textual explanation of (one of) the reasons for rejection")
               denial_reason_type reason;
-              @doc("A reference to the parameter or parameters that relate to the reason for \
-                rejection. If no related_parameters are supplied the rejection relates to the \
+              @doc("A reference to the parameter or parameters that relate to the reason for
+                rejection. If no related_parameters are supplied the rejection relates to the
                 whole request.")
               denial_related_parameter_type related_parameter;
             };
 
-            @doc("This operation is used by the subsystem to indicate an error in processing a \
-                request. \
+            @doc("This operation is used by the subsystem to indicate an error in processing a
+                request.
                 Interface which includes operations common to all CMS interfaces.")
             struct receive_error_type
             {
               @key request_id_type request_id;
 
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               error_reason_type error_reason;
             };
 
-            @doc("Struct used within the receive_acknowledgement operation to indicate acceptance \
+            @doc("Struct used within the receive_acknowledgement operation to indicate acceptance
                 or rejection (which includes rationale).")
             struct request_ack_type
             {
@@ -103,14 +103,14 @@ module org
               @optional denial_type rejection;
             };
 
-            @doc("This operation is used by the subsystem to indicate whether it has accepted or \
-                rejected a request from the CMS. \
+            @doc("This operation is used by the subsystem to indicate whether it has accepted or
+                rejected a request from the CMS.
                 Interface which includes operations common to all CMS interfaces.")
             struct receive_acknowledgement_type
             {
               @key request_id_type request_id;
 
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               request_ack_type request_ack;

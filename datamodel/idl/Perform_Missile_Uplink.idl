@@ -31,54 +31,54 @@ module org
               struct report_uplink_completed_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("The service describes the execution of uplink of relevant information from the \
-                radar to the missile in flight during an engagement. \
-                Generally, a sequence of uplinks (of various types) must be transmitted to a \
-                missile during an engagement. However, the CMS (or a dedicated missile subsystem) \
-                is responsible for planning and requesting the correct sequence of uplinks. The \
-                radar subsystem only transmits an uplink on request of the CMS. Therefore, this \
-                service starts with the request of a single uplink and ends when the radar \
-                subsystem has transmitted the uplink. \
-                The actor is the Combat Management System. Although the uplink may be initiated \
-                by a missile subsystem (which is not part of the CMS), the uplink is assumed to \
-                be passed through the CMS to the radar subsystem. \
-                The service is triggered by the uplink request of the actor. \
-                The actor sends an uplink request to the radar. \
-                At the requested time, the radar sends the uplink to the missile in accordance \
-                with the provided uplink parameters. \
-                The information provided to the missile may vary depending on the applied missile \
-                fire control principle, and lies outside the scope of the OARIS standard. \
-                The service ends when the radar has confirmed the transmission of the uplink. \
-                If the radar may not fulfil the uplink request, this is reported to the actor and \
-                the service stops. \
-                If during the uplink a radar fault takes place that prevents execution of the \
-                uplink (e.g. uplink frequency not more available),  the health state of the \
-                Missile Guidance service (of which this service is part) becomes DEGRADED (if the \
-                Missile Guidance service is still capable of performing illumination and/or \
-                downlinks) or NOT AVAILABLE, and the service stops. \
-                If the missile track becomes lost during the uplink, the service stops. \
-                Network Centric engagements \
-                In Network-Centric or Network-Enabled systems, guidance of the missile may be \
-                transferred during the flight of the missile to another surface platform. As the \
-                related technologies are still being developed, it shall be too early to include \
-                specific NEC requirements here. However, care should be taken in the design of \
-                OARIS that such capabilities could be included at a later date. This means that \
-                there should be no built-in restrictions in the standard, which would prevent \
-                addition of such facilities in the future. \
-                Relationship to missile downlink \
-                For some missile types an uplink transmission may trigger the transmission of a \
-                downlink by the missile (e.g. an acknowledge of receipt). This relation depends \
+              @doc("The service describes the execution of uplink of relevant information from the
+                radar to the missile in flight during an engagement.
+                Generally, a sequence of uplinks (of various types) must be transmitted to a
+                missile during an engagement. However, the CMS (or a dedicated missile subsystem)
+                is responsible for planning and requesting the correct sequence of uplinks. The
+                radar subsystem only transmits an uplink on request of the CMS. Therefore, this
+                service starts with the request of a single uplink and ends when the radar
+                subsystem has transmitted the uplink.
+                The actor is the Combat Management System. Although the uplink may be initiated
+                by a missile subsystem (which is not part of the CMS), the uplink is assumed to
+                be passed through the CMS to the radar subsystem.
+                The service is triggered by the uplink request of the actor.
+                The actor sends an uplink request to the radar.
+                At the requested time, the radar sends the uplink to the missile in accordance
+                with the provided uplink parameters.
+                The information provided to the missile may vary depending on the applied missile
+                fire control principle, and lies outside the scope of the OARIS standard.
+                The service ends when the radar has confirmed the transmission of the uplink.
+                If the radar may not fulfil the uplink request, this is reported to the actor and
+                the service stops.
+                If during the uplink a radar fault takes place that prevents execution of the
+                uplink (e.g. uplink frequency not more available),  the health state of the
+                Missile Guidance service (of which this service is part) becomes DEGRADED (if the
+                Missile Guidance service is still capable of performing illumination and/or
+                downlinks) or NOT AVAILABLE, and the service stops.
+                If the missile track becomes lost during the uplink, the service stops.
+                Network Centric engagements
+                In Network-Centric or Network-Enabled systems, guidance of the missile may be
+                transferred during the flight of the missile to another surface platform. As the
+                related technologies are still being developed, it shall be too early to include
+                specific NEC requirements here. However, care should be taken in the design of
+                OARIS that such capabilities could be included at a later date. This means that
+                there should be no built-in restrictions in the standard, which would prevent
+                addition of such facilities in the future.
+                Relationship to missile downlink
+                For some missile types an uplink transmission may trigger the transmission of a
+                downlink by the missile (e.g. an acknowledge of receipt). This relation depends
                 heavily on the missile type and lies outside the scope of the OARIS standard.")
               struct report_uplink_completed_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Missile_Guidance::uplink_report_type report;
@@ -88,7 +88,7 @@ module org
               struct request_uplink_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
@@ -97,7 +97,7 @@ module org
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Radar_Domain::Missile_Guidance::uplink_request_type request;

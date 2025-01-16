@@ -21,12 +21,12 @@ module org
         module Sensor_Domain
         {
 
-          @doc("This package provides a data model for describing the metadata associated with a \
+          @doc("This package provides a data model for describing the metadata associated with a
             sensor's media streams.")
           module Media_Streaming
           {
 
-            @doc("A string type \
+            @doc("A string type
                 The representation of the codec associated with the stream")
             typedef string<20> codec_type;
 
@@ -41,7 +41,7 @@ module org
               OTHER_MEDIA
             };
 
-            @doc("A string type \
+            @doc("A string type
                 The representation for the identifying name of a media stream")
             typedef string<32> media_name_type;
 
@@ -55,15 +55,15 @@ module org
             struct media_stream_metadata_key_type
             {
               media_stream_id_type media_id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("The allocation of sensor tracks to a media stream \
-                For a sensor to report on the allocation of tracks to one of its media streams \
-                This service allows the CMS to receive the allocation of sensor tracks to media \
-                streams \
+            @doc("The allocation of sensor tracks to a media stream
+                For a sensor to report on the allocation of tracks to one of its media streams
+                This service allows the CMS to receive the allocation of sensor tracks to media
+                streams
                 To represent the allocation of sensor tracks to media streams.")
             struct media_allocation_type
             {
@@ -71,14 +71,14 @@ module org
               media_allocation_sensor_track_id_type sensor_track_id;
               @doc("The media stream relating to this allocation of tracks")
               media_stream_metadata_key_type media_stream_id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };
 
-            @doc("The metadata for the stream \
-                This service allows the CMS to be informed about the configuration of media \
-                streams provided by the sensor. \
+            @doc("The metadata for the stream
+                This service allows the CMS to be informed about the configuration of media
+                streams provided by the sensor.
                 The representation of a media stream such as video or audio")
             struct media_stream_metadata_type
             {
@@ -91,7 +91,7 @@ module org
               @doc("The identifying name for the media stream")
               media_name_type media_name;
               @key media_stream_id_type media_id;
-              @doc("Indicates which subsystem published the data or is intended to read it as a \
+              @doc("Indicates which subsystem published the data or is intended to read it as a
                 subscriber")
               @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
             };

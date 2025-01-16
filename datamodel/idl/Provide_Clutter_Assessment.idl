@@ -24,7 +24,7 @@ module org
           module Clutter_Reporting
           {
 
-            @doc("Contains operations and sequence diagrams for the Provide Clutter Assessment \
+            @doc("Contains operations and sequence diagrams for the Provide Clutter Assessment
                 interface.")
             module Provide_Clutter_Assessment
             {
@@ -33,28 +33,28 @@ module org
               struct receive_clutter_assessment_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Interface used by the CMS to receive a requested clutter assessment report from \
-                the subsystem. \
-                The radar reports visible clutter to the combat management system. The report \
-                shall include a map (collection of cells) with information on range, azimuth, \
-                elevation and intensity in platform relative coordinates. Clutter may be \
-                classified by type, Land, Sea, Weather (optional), etc.. Intensity may be \
-                indicated by linear signal-to-noise ratio (SNR), log-linear SNR, linear power \
-                received, log-linear power received (e.g. dBm, dBW), linear Radar Cross Section \
-                (square meters), or log-linear RCS (dbsm). \
-                For radars which report clutter assessment without a CMS request, the CMS shall \
-                begin to receive reports upon registration of the Provide Clutter Assessment \
+              @doc("Interface used by the CMS to receive a requested clutter assessment report from
+                the subsystem.
+                The radar reports visible clutter to the combat management system. The report
+                shall include a map (collection of cells) with information on range, azimuth,
+                elevation and intensity in platform relative coordinates. Clutter may be
+                classified by type, Land, Sea, Weather (optional), etc.. Intensity may be
+                indicated by linear signal-to-noise ratio (SNR), log-linear SNR, linear power
+                received, log-linear power received (e.g. dBm, dBW), linear Radar Cross Section
+                (square meters), or log-linear RCS (dbsm).
+                For radars which report clutter assessment without a CMS request, the CMS shall
+                begin to receive reports upon registration of the Provide Clutter Assessment
                 interface.")
               struct receive_clutter_assessment_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::clutter_report_type clutter_report;
@@ -64,18 +64,18 @@ module org
               struct provide_clutter_assessment_key_type
               {
                 org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
               };
 
-              @doc("Interface used by the subsystem to receive a clutter assessment request from the \
+              @doc("Interface used by the subsystem to receive a clutter assessment request from the
                 CMS.")
               struct provide_clutter_assessment_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
 
-                @doc("Indicates which subsystem published the data or is intended to read it as a \
+                @doc("Indicates which subsystem published the data or is intended to read it as a
                     subscriber")
                 @key org::omg::c4i::Domain_Model::Common_Types::subsystem_id_type subsystem_id;
                 org::omg::c4i::Domain_Model::Sensor_Domain::Clutter_Reporting::clutter_assessment_request_type clutter_request;
