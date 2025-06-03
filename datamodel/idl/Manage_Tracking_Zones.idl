@@ -53,11 +53,11 @@ module org
                 azimuth only, or both in azimuth and elevation, or may have further range bounds,
                 and in some cases also additional constraints (such as target type, velocity
                 bounds, etc.).
-                • Track-On-Jammer Sectors
+                - Track-On-Jammer Sectors
                 sectors where the sensor is allowed to manage Track-On-Jammer. Depending on the
                 sensor type and its capabilities, such a type of sectors may be delimited either
                 in azimuth only or both in azimuth and elevation.
-                • Multipath Devoted Tracking Sectors
+                - Multipath Devoted Tracking Sectors
                 sectors where the sensor is required to use, for tracking activities, devoted
                 waveforms to reduce the multipath effects. This capability is usually provided by
                 multifunctional radars. Such a type of sectors is usually limited in azimuth
