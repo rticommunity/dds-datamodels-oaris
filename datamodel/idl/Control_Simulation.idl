@@ -46,8 +46,8 @@ module org
                 \"ON\" the subsystem shall strictly avoid any impact on the environment that could
                  be the result if simulation mode was \"OFF\".
                 The actor is the Combat Management System.
-                Basic Flow – Control simulation mode
-                Start event – command of simulation-mode
+                Basic Flow - Control simulation mode
+                Start event - command of simulation-mode
                 The service is triggered by the actor. The actor commands the simulation mode
                 which may be one of the following:
                 <ul>
@@ -65,7 +65,7 @@ module org
                   <li>OFF: This indicates that the subsystem is not operating in simulation mode
                 </li>
                 </ul>
-                Basic Flow – Control Simulation (Start/Resume, Stop/Freeze)
+                Basic Flow - Control Simulation (Start/Resume, Stop/Freeze)
                 START/RESUME simulation scenario
                 Only when in simulation mode ON:
                 Upon provision of the START/RESUME command by the actor the simulation scenario

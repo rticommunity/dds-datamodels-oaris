@@ -50,11 +50,11 @@ module org
                 Data reported in the \"externally designated track initiation request\"
                 The provided information depends on the sensor type and its capabilities,
                 typically they are:
-                • Identification number of the designation (mandatory)
-                • Position and time (mandatory)
-                • Accuracy of the provided positional data (optional)
-                • Velocity and relevant accuracy (optional)
-                • Track characteristics (optional)
+                - Identification number of the designation (mandatory)
+                - Position and time (mandatory)
+                - Accuracy of the provided positional data (optional)
+                - Velocity and relevant accuracy (optional)
+                - Track characteristics (optional)
                 Data reported in the \"externally designated track initiation report\"
                 The purpose is this report is to inform CMS about the final result of the track
                 initiation request, i.e. it reports to CMS if the track has been successfully
@@ -62,10 +62,10 @@ module org
                 formed track.
                 The provided information depends on the sensor type and its capabilities,
                 typically they are:
-                • Identification number of the designation (mandatory)
-                • Initiation result (mandatory)
-                • Identification number of the initiated track, if any (mandatory)
-                • other info (optional).")
+                - Identification number of the designation (mandatory)
+                - Initiation result (mandatory)
+                - Identification number of the initiated track, if any (mandatory)
+                - other info (optional).")
               struct report_track_type
               {
                 @key org::omg::c4i::Domain_Model::Common_Types::Requests::request_id_type request_id;
